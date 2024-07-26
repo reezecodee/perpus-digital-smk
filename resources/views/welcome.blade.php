@@ -7,10 +7,10 @@
                     class="max-w-2xl mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white">
                     Bangun Generasi Emas, <br>Dengan Membaca Buku</h1>
                 <p class="max-w-2xl mb-6 font-medium text-gray-500 lg:mb-8 md:text-lg lg:text-lg dark:text-gray-400">Selamat datang di e-perpus SMK Digital Sistem Informatika. Kami
-                    berkomitmen menyediakan e-perpus online bagi para siswa dan membantu mereka meningkatkan pengetahuan
+                    berkomitmen menyediakan e-perpus bagi para siswa dan membantu mereka meningkatkan pengetahuan
                     dan kenyamanan dalam proses peminjaman buku perpustakaan.</p>
                 <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
-                    <a href="/"
+                    <a href="{{ route('auth.login') }}"
                         class="inline-flex items-center justify-center w-full px-5 py-3 text-sm text-center text-white font-semibold border rounded-full sm:w-auto hover:bg-red-500 bg-red-primary">
                         Jelajahi E-perpus
                     </a>
@@ -29,16 +29,16 @@
                 <div class="text-gray-500 sm:text-lg dark:text-gray-400">
                     <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">Membangun
                         Jiwa Siswa yang Bermanfaat dan Berdampak</h2>
-                    <p class="mb-5 font-medium lg:text-lg">Menjadi perusahaan terdepan yang memberikan manfaat nyata dan
+                    <p class="mb-5 font-medium lg:text-lg">Membentuk siswa terdepan yang memberikan manfaat nyata dan
                         dampak positif bagi masyarakat, lingkungan, dan seluruh pemangku kepentingan melalui inovasi,
                         keberlanjutan, dan tanggung jawab sosial.</p>
                     <p class="font-medium lg:text-lg">Untuk mencapai hal tersebut dibutuhkan tindakan nyata seperti
                     </p>
                     <ul class="list-disc mb-8 font-medium lg:text-lg ml-9">
-                        <li>Memberdayakan Masyarakat</li>
-                        <li>Kolaborasi dan Kemitraan Strategis</li>
-                        <li>Menciptakan lingkungan dagang yang adil dan aman</li>
-                        <li>Menjunjung Tinggi Etika dan Integritas</li>
+                        <li>Memberdayakan siswa dengan literasi membaca</li>
+                        <li>Menyediakan platform e-perpus sebagai sarana peminjaman</li>
+                        <li>Menciptakan lingkungan perpustakaan yang tenang dan aman</li>
+                        <li>Menjunjung tinggi etika dan integritas</li>
                     </ul>
                 </div>
                 <img class="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex"
@@ -54,11 +54,11 @@
                     <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">Komitmen Terhadap
                         Kualitas dan Layanan</h2>
                     <p class="mb-5 font-medium lg:text-lg">Kami menerapkan standar kualitas yang ketat dalam setiap aspek
-                        operasional kami, mulai dari pemfilteran produk dijual sampai pengiriman produk. Tim kami yang
+                        operasional kami, mulai dari peminjaman sampai pengembalian buku. Pustakawan kami yang
                         berpengalaman dan berdedikasi bekerja tanpa henti untuk memantau setiap aktivitas dan memenuhi
-                        harapan pelanggan kami.</p>
-                    <p class="font-medium lg:text-lg">Kami menyadari bahwa pelayanan pelanggan yang unggul sama pentingnya
-                        dengan produk berkualitas. <b>Your satisfaction is our top priority!</b></p>
+                        harapan instansi sekolah dalam mencetak siswa yang unggul.</p>
+                    <p class="font-medium lg:text-lg">Kami menyadari bahwa pelayanan yang unggul sama pentingnya
+                        dengan profesi berkualitas. <b>Your satisfaction is our top priority!</b></p>
                 </div>
             </div>
         </div>
@@ -82,8 +82,7 @@
                     <img class="w-6 h-6 rounded-full" src="/img/atyla_profile.png" alt="profile picture">
                     <div class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
                         <div class="pr-3 font-medium text-gray-900 dark:text-white">Atyla A. Al Harits</div>
-                        <div class="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">Founder at Codereeze
-                            Indomatika</div>
+                        <div class="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">Kepala Perpustakaan SMK Digital Sistem Informatika</div>
                     </div>
                 </figcaption>
             </figure>

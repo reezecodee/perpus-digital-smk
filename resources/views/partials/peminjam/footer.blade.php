@@ -5,25 +5,19 @@
                 <div class="flex items-center gap-2">
                     <img src="/assets/codereeze.png" width="60" alt="" srcset="">
                     <div>
-                        <p class="text-sm font-bold">PT. Codereeze Indomatika</p>
+                        <p class="text-sm font-bold">SMK Digital Sistem Informatika</p>
                         <p class="text-xs w-64">Jl. Tanuwijaya, Tawang, Kota Tasikmalaya, Jawa Barat 46385</p>
                     </div>
                 </div>
-                <p class="text-sm mt-6 max-w-xs text-justify">Nikmati berbelanja seperti di mall penuh dengan baju keren. Kami selalu memprioritaskan kenyamanan pengguna dan seller dalam bertransaksi.</p>
+                <p class="text-sm mt-6 max-w-xs text-justify">Nikmati membaca seperti di toko buku yang penuh dengan buku keren. Kami selalu memprioritaskan kenyamanan siswa dan pustakawan dalam berinteraksi.</p>
             </div>
             <div>
                 <h3 class="font-bold text-xl mb-4">Menu Website</h3>
                 <div class="mb-3">
-                    <a href="/keranjang" class="inline-block font-medium">Keranjang</a>
-                </div>
-                <div class="mb-3">
-                    <a href="/transaksi" class="inline-block font-medium">Transaksi</a>
-                </div>
-                <div class="mb-3">
                     <a href="/notifikasi" class="inline-block font-medium">Notifikasi</a>
                 </div>
                 <div class="mb-3">
-                    <a href="/chat-penjual" class="inline-block font-medium">Chat Penjual</a>
+                    <a href="/chat-pustakawan" class="inline-block font-medium">Chat Pustakawan</a>
                 </div>
                 <div class="mb-3">
                     <a href="/profile" class="inline-block font-medium">Profile</a>
@@ -68,6 +62,6 @@
         </div>
     </div>
     <div class="flex justify-center py-2 text-xs font-bold">
-        ©️Copyright 2024 by SMK Digital Sistem Informasi
+        ©️Copyright 2024 by SMK Digital Sistem Informatika
     </div>
 </footer>
