@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Peminjam\BookController;
 use App\Http\Controllers\Peminjam\DashboardController;
 use App\Http\Controllers\Peminjam\NotificationContrroller;
 use App\Http\Controllers\Profile\ProfileController;
@@ -21,14 +22,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('auth')->group(function(){
+Route::prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'show_login_page'])->name('auth.login');
 });
 
-Route::prefix('peminjam')->group(function(){
-    Route::get('/dashboard', [DashboardController::class, 'show_dashboard_page'])->name('peminjam.dashboard');
-    Route::get('/notifikasi', [NotificationContrroller::class, 'show_notification_page'])->name('peminjam.notification');
-    Route::get('/notifikasi/baca', [NotificationContrroller::class, 'show_read_notif_page'])->name('peminjam.read_notif');
-    Route::get('/overview-profile', [ProfileController::class, 'show_overview_page'])->name('peminjam.overview');
-    Route::get('/ganti-password', [ProfileController::class, 'show_ch_password_page'])->name('peminjam.ch_password');
-});
+Route::get('/dashboard', [DashboardController::class, 'show_dashboard_page'])->name('peminjam.dashboard');
+Route::get('/notifikasi', [NotificationContrroller::class, 'show_notification_page'])->name('peminjam.notification');
+Route::get('/notifikasi/baca', [NotificationContrroller::class, 'show_read_notif_page'])->name('peminjam.read_notif');
+Route::get('/overview-profile', [ProfileController::class, 'show_overview_page'])->name('peminjam.overview');
+Route::get('/riwayat-peminjaman', [ProfileController::class, 'show_history_page'])->name('peminjam.history');
+Route::get('/ganti-password', [ProfileController::class, 'show_ch_password_page'])->name('peminjam.ch_password');
+Route::get('/buku', [BookController::class, 'show_book_page'])->name('peminjam.book');
+Route::get('/konfirmasi-peminjaman', [BookController::class, 'show_confirm_page'])->name('peminjam.confirm');

@@ -13,6 +13,13 @@ class ProfileController extends Controller
             'title' => 'Overview Profile'
         ]);
     }
+    
+    public function show_history_page()
+    {
+        return view('peminjam_views.profile.riwayat', [
+            'title' => 'Riwayat Peminjaman Buku'
+        ]);
+    }
 
     public function show_ch_password_page()
     {

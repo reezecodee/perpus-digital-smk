@@ -2,38 +2,106 @@
 @section('content')
     <section>
         <div class="pt-20 mx-auto">
-            <div class="flex justify-center py-7 mb-1">
-                <div class="w-full bg-gray-secondary py-2">
-                    <div class="swiper" style="width: 1200px;">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <img src="/assets/carousel-1.jpg" alt="" srcset="" class="w-full rounded-lg">
+            <div class="flex justify-center mb-1">
+                <div class="w-full py-2 px-24">
+                    <div id="default-carousel" class="relative w-full" data-carousel="slide">
+                        <!-- Carousel wrapper -->
+                        <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                            <!-- Item 1 -->
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="/img/carousel/banner.jpg"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg"
+                                    alt="...">
                             </div>
-                            <div class="swiper-slide">
-                                <img src="/assets/carousel-2.jpg" alt="" srcset="" class="w-full rounded-lg">
+                            <!-- Item 2 -->
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="/img/carousel/banner.jpg"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg"
+                                    alt="...">
+                            </div>
+                            <!-- Item 3 -->
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="/img/carousel/banner.jpg"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg"
+                                    alt="...">
+                            </div>
+                            <!-- Item 4 -->
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="/img/carousel/banner.jpg"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg"
+                                    alt="...">
+                            </div>
+                            <!-- Item 5 -->
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="/img/carousel/banner.jpg"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg"
+                                    alt="...">
                             </div>
                         </div>
-                        <div class="swiper-pagination"></div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-scrollbar"></div>
+                        <!-- Slider indicators -->
+                        <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1"
+                                data-carousel-slide-to="0"></button>
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2"
+                                data-carousel-slide-to="1"></button>
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
+                                data-carousel-slide-to="2"></button>
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4"
+                                data-carousel-slide-to="3"></button>
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5"
+                                data-carousel-slide-to="4"></button>
+                        </div>
+                        <!-- Slider controls -->
+                        <button type="button"
+                            class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                            data-carousel-prev>
+                            <span
+                                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+                                <svg class="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M5 1 1 5l4 4" />
+                                </svg>
+                                <span class="sr-only">Previous</span>
+                            </span>
+                        </button>
+                        <button type="button"
+                            class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                            data-carousel-next>
+                            <span
+                                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+                                <svg class="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 9 4-4-4-4" />
+                                </svg>
+                                <span class="sr-only">Next</span>
+                            </span>
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="px-8 mx-auto">
+            <div class="px-24 mx-auto">
                 <h1 class="text-2xl mb-4 font-bold">Rekomendasi untuk mu</h1>
-                <div class="grid grid-cols-7 gap-3">
-                    <div class="w-40">
+                <div class="grid grid-cols-6 gap-10">
+                    <div class="w-40 pr-7">
                         <a href="">
-                            <img src="https://preyash2047.github.io/assets/img/no-preview-available.png?h=824917b166935ea4772542bec6e8f636"
+                            <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
                                 alt="" srcset="" class="rounded-lg mb-2">
-                            <p class="text-sm font-semibold">Jujutsu Kaisen: Shibuya Incident</p>
-                            {{-- <p class="text-lg font-bold text-red-primary">Rp</p> --}}
-                            <p class="text-xs font-medium">Kategori: Komik
-                            </p>
-                            <p class="text-xs font-medium"><i class="fas fa-star text-yellow-500"></i>
-                                5 | Tersedia 10
-                            </p>
+                            <p class="text-sm font-bold">Jujutsu Kaisen: Shibuya Incident</p>
+                            <!-- <p class="text-lg font-bold text-red-primary">Rp</p> -->
+                            <p class="text-xs font-medium">Kategori: Komik</p>
+                            <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i> 5 | Tersedia 10</p>
+                        </a>
+                    </div>
+                    <div class="w-40 pr-7">
+                        <a href="">
+                            <img src="https://ebooks.gramedia.com/ebook-covers/40678/general_small_covers/ID_KPG2017MTH10LBER_S.jpg"
+                                alt="" srcset="" class="rounded-lg mb-2">
+                            <p class="text-sm font-bold">Jujutsu Kaisen: Shibuya Incident</p>
+                            <!-- <p class="text-lg font-bold text-red-primary">Rp</p> -->
+                            <p class="text-xs font-medium">Kategori: Komik</p>
+                            <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i> 5 | Tersedia 10</p>
                         </a>
                     </div>
                 </div>
