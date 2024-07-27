@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', ['title' => 'Selamat datang di E-perpustakaan SITIKA']);
 });
 
 Route::prefix('auth')->group(function () {
@@ -34,3 +34,4 @@ Route::get('/riwayat-peminjaman', [ProfileController::class, 'show_history_page'
 Route::get('/ganti-password', [ProfileController::class, 'show_ch_password_page'])->name('peminjam.ch_password');
 Route::get('/buku', [BookController::class, 'show_book_page'])->name('peminjam.book');
 Route::get('/konfirmasi-peminjaman', [BookController::class, 'show_confirm_page'])->name('peminjam.confirm');
+Route::get('/peminjaman-sukses', [BookController::class, 'show_success_page'])->name('peminjam.success');

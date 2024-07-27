@@ -20,4 +20,11 @@ class BookController extends Controller
             'title' => 'Konfirmasi Peminjaman'
         ]);
     }
+
+    public function show_success_page()
+    {
+        return view('peminjam_views.buku.sukses', [
+            'title' => 'Peminjaman Sukses'
+        ]);
+    }
 }

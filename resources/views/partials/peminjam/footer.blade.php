@@ -62,6 +62,6 @@
         </div>
     </div>
     <div class="flex justify-center py-2 text-xs font-bold">
-        ©️Copyright 2024 by SMK Digital Sistem Informatika
+        ©️2024 Copyright by SMK Digital Sistem Informatika
     </div>
 </footer>
