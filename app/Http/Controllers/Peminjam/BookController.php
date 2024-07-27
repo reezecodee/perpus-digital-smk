@@ -27,4 +27,18 @@ class BookController extends Controller
             'title' => 'Peminjaman Sukses'
         ]);
     }
+
+    public function show_book_shelf_page()
+    {
+        return view('peminjam_views.rak_buku', [
+            'title' => 'Rak Buku Saya'
+        ]);
+    }
+
+    public function show_detail_rent_page()
+    {
+        return view('peminjam_views.detail_peminjaman', [
+            'title' => 'Detail Peminjaman'
+        ]);
+    }
 }
