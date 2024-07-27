@@ -41,4 +41,11 @@ class BookController extends Controller
             'title' => 'Detail Peminjaman'
         ]);
     }
+
+    public function show_liked_book_page()
+    {
+        return view('peminjam_views.buku_disukai', [
+            'title' => 'Buku yang Anda Sukai'
+        ]);
+    }
 }

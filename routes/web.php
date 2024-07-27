@@ -37,3 +37,4 @@ Route::get('/konfirmasi-peminjaman', [BookController::class, 'show_confirm_page'
 Route::get('/peminjaman-sukses', [BookController::class, 'show_success_page'])->name('peminjam.success');
 Route::get('/rak-buku-saya', [BookController::class, 'show_book_shelf_page'])->name('peminjam.book_shelf');
 Route::get('/detail-peminjaman', [BookController::class, 'show_detail_rent_page'])->name('peminjam.detail_rent');
+Route::get('/buku-disukai', [BookController::class, 'show_liked_book_page'])->name('peminjam.liked_book');

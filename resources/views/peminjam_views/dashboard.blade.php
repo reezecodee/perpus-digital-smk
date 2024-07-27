@@ -82,6 +82,43 @@
                 </div>
             </div>
             <div class="px-24 mx-auto">
+                <div class="flex justify-between items-center">
+                    <div
+                        class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-5">
+                        <span class="text-3xl font-semibold"><i class="fas fa-book text-red-primary"></i> Lihat semua
+                            buku</span>
+                        <p class="mb-3 mt-3 font-normal text-gray-500 dark:text-gray-400">Lihat semua buku yang tersedia di
+                            perpustakaan</p>
+                        <a href="#" class="inline-flex font-medium items-center text-blue-600 hover:underline">
+                            Lihat rak perpustakaan
+                            <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-book-open text-5xl text-red-primary"></i>
+                        <p class="text-2xl font-bold">Welcome</p>
+                    </div>
+                    <div
+                        class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-5">
+                        <span class="text-3xl font-semibold"><i class="fas fa-book-reader text-red-primary"></i> Baca via
+                            E-book</span>
+                        <p class="mb-3 mt-3 font-normal text-gray-500 dark:text-gray-400">Kamu bisa baca secara online
+                            dengan E-book</p>
+                        <a href="#" class="inline-flex font-medium items-center text-blue-600 hover:underline">
+                            Lihat rak E-book
+                            <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
                 <h1 class="text-2xl mb-4 font-bold">Rekomendasi untuk mu</h1>
                 <div class="grid grid-cols-6 gap-10">
                     <div class="w-40 pr-7">
