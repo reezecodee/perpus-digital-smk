@@ -1,24 +1,24 @@
 @extends('layouts.peminjam_layout')
 @section('content')
-    <section class="mx-auto px-12 text-gray-600">
-        <div class="pt-36">
+    <section class="mx-auto px-3 lg:px-12 text-gray-600">
+        <div class="pt-24 lg:pt-36">
             <div class="border p-4 mb-5">
                 <h3 class="text-lg font-bold mb-5">Status peminjaman</h3>
-                <div class="flex justify-around items-center">
-                    <div class="flex flex-col items-center">
+                <div class="flex justify-between lg:justify-around items-center">
+                    <div class="flex flex-col items-center text-center lg:text-left">
                         <div class="bg-red-primary text-white rounded-full h-16 w-16 flex justify-center items-center mb-3">
                             <i class="fas fa-hourglass-start text-lg"></i>
                         </div>
-                        <div class="text-sm">Masa pinjam</div>
+                        <div class="text-sm">Masa peminjaman</div>
                     </div>
-                    <div class="flex flex-col items-center">
+                    <div class="flex flex-col items-center text-center lg:text-left">
                         <div
                             class="border-4 border-red-primary text-red-primary rounded-full h-16 w-16 flex justify-center items-center mb-3">
                             <i class="fas fa-receipt text-lg"></i>
                         </div>
                         <div class="text-sm">Masa pengembalian</div>
                     </div>
-                    <div class="flex flex-col items-center">
+                    <div class="flex flex-col items-center text-center lg:text-left">
                         <div
                             class="border-4 border-red-primary text-red-primary rounded-full h-16 w-16 flex justify-center items-center mb-3">
                             <i class="fas fa-thumbs-up text-lg"></i>
@@ -32,10 +32,10 @@
             </div>
             <div class="border p-4 mb-5">
                 <h3 class="text-lg font-bold mb-5">Detail buku</h3>
-                <div class="flex gap-5 mb-4">
+                <div class="flex justify-center lg:justify-normal gap-5 mb-4">
                     <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
-                        alt="" srcset="" width="200" class="rounded-md">
-                    <div>
+                        alt="" srcset="" class="rounded-md w-52 self-start">
+                    <div class="hidden lg:block">
                         <h1 class="text-xl font-bold mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                             Fugit,
                             nulla.</h1>
@@ -72,6 +72,43 @@
                             </tr>
                         </table>
                     </div>
+                </div>
+                <div class="block lg:hidden mb-5 lg:mb-0">
+                    <h1 class="text-xl font-bold mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Fugit,
+                        nulla.</h1>
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                        <tr class="border-none lg:border">
+                            <th scope="row" class="px-3 lg:px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                Pengarang
+                            </th>
+                            <td class="px-4 lg:px-6 py-4 whitespace-nowrap">Lorem ipsum dolor sit amet</td>
+                        </tr>
+                        <tr class="border-none lg:border">
+                            <th scope="row" class="px-3 lg:px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                Penerbit
+                            </th>
+                            <td class="px-4 lg:px-6 py-4 whitespace-nowrap">Lorem ipsum dolor sit amet</td>
+                        </tr>
+                        <tr class="border-none lg:border">
+                            <th scope="row" class="px-3 lg:px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                ISBN
+                            </th>
+                            <td class="px-4 lg:px-6 py-4 whitespace-nowrap">93294828934234</td>
+                        </tr>
+                        <tr class="border-none lg:border">
+                            <th scope="row" class="px-3 lg:px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                Jumlah halaman
+                            </th>
+                            <td class="px-4 lg:px-6 py-4 whitespace-nowrap">200</td>
+                        </tr>
+                        <tr class="border-none lg:border">
+                            <th scope="row" class="px-3 lg:px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                Barcode
+                            </th>
+                            <td class="px-4 lg:px-6 py-4 whitespace-nowrap">192831232</td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="relative overflow-x-auto sm:rounded-lg">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500">

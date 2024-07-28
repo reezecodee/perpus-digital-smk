@@ -1,6 +1,6 @@
 @extends('layouts.auth_layout')
 @section('content')
-    <div class="self-center">
+    <div class="self-center hidden lg:block">
         <img src="https://img.freepik.com/free-vector/sign-concept-illustration_114360-5267.jpg?t=st=1718806418~exp=1718810018~hmac=b65b6b709f7d3ec81cacb521a3676093348e181772a3ba64829862d779c3aea9&w=740"
             width="400" alt="" srcset="">
     </div>

@@ -1,13 +1,13 @@
 <header class="xl:container xl:mx-auto">
     <nav class="bg-red-primary w-full text-white fixed z-50 shadow-lg xl:container xl:mx-auto">
-        <div class="flex justify-between items-center py-3 px-7">
+        <div class="flex justify-between items-center py-3 px-2 lg:px-7">
             <div class="flex gap-5 items-center">
-                <a href="/">
+                <a href="/" class="hidden lg:inline">
                     <img src="/assets/logo.svg" width="145" alt="" srcset="">
                 </a>
-                <form action="/hasil-pencarian" method="get" class="relative">
+                <form action="" method="get" class="relative">
                     <input type="text" name="q" value=""
-                        class="bg-white py-2.5 px-3 rounded-md w-[24rem] text-sm placeholder:text-black text-black font-semibold outline-none border-none"
+                        class="bg-white py-2.5 px-3 rounded-md w-[17rem] lg:w-[24rem] text-sm placeholder:text-black text-black font-semibold outline-none border-none"
                         placeholder="Cari buku yang kamu sukai..." autocomplete="off">
                     <div class="absolute right-0 top-0" style="margin-top: 4px; margin-right: 8px;">
                         <button type="submit" class="bg-red-primary hover:bg-red-500 rounded-full p-1 w-8 text-center">
@@ -15,19 +15,19 @@
                         </button>
                     </div>
                 </form>
-                <a href="/">
+                <a href="/" class="hidden lg:inline">
                     <div
                         class="bg-red-primary rounded-full p-1 w-9 text-center border-2 border-white hover:border-red-primary duration-500 cursor-pointer">
                         <i class="fas fa-bell text-white text-sm"></i>
                     </div>
                 </a>
-                <a href="/">
+                <a href="/" class="hidden lg:inline">
                     <div
                         class="bg-red-primary rounded-full p-1 w-9 text-center border-2 border-white hover:border-red-primary duration-500 cursor-pointer">
                         <i class="fa-solid fa-heart text-white text-sm"></i>
                     </div>
                 </a>
-                <a href="/">
+                <a href="/" class="hidden lg:inline">
                     <div
                         class="bg-red-primary rounded-full p-1 w-9 text-center border-2 border-white hover:border-red-primary duration-500 cursor-pointer">
                         <i class="fa-solid fa-book-bookmark text-white text-sm"></i>
@@ -77,14 +77,14 @@
                         class="bg-white border-2 border-white hover:bg-transparent hover:text-white duration-300 rounded-lg py-1.5 px-4 text-red-primary text-sm font-bold"><i
                             class="fas fa-sign-in-alt"></i> Login</button>
                 </a>
-                <a href="/register">
+                <a href="/register" class="hidden lg:inline">
                     <button
                         class="border-2 border-white hover:bg-white hover:text-red-primary duration-300 text-white rounded-lg py-1.5 px-4 text-sm font-bold">Register</button>
                 </a>
             </div>
             {{-- <php endif; ?> --}}
         </div>
-        <div class="flex justify-between items-center text-black font-semibold text-sm">
+        <div class="lg:flex justify-between items-center text-black font-semibold text-sm hidden">
             <div class="bg-white p-2 rounded-tr-md">
                 {{-- <php if (isset($_SESSION['user_id']) && $dataUser['role'] !== 'Admin') : ?> --}}
                 {{-- <a href="/atur_alamat">
@@ -97,7 +97,7 @@
                 </div>
                 {{-- <php endif; ?> --}}
             </div>
-            <div class="flex gap-7 text-white">
+            <div class="lg:flex gap-7 text-white hidden">
                 <a href="/hasil-pencarian?q=novel" class="hover:text-red-200 duration-150">Novel</a>|
                 <a href="/hasil-pencarian?q=komik" class="hover:text-red-200 duration-150">Komik</a>|
                 <a href="/hasil-pencarian?q=tutorial" class="hover:text-red-200 duration-150">Tutorial</a>|

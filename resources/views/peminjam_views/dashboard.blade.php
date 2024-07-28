@@ -1,55 +1,42 @@
 @extends('layouts.peminjam_layout')
 @section('content')
     <section>
-        <div class="pt-20 mx-auto">
+        <div class="pt-7 lg:pt-20 mx-auto">
             <div class="flex justify-center mb-1">
-                <div class="w-full py-2 px-24">
+                <div class="w-full py-2 px-3 lg:px-24">
                     <div id="default-carousel" class="relative w-full" data-carousel="slide">
                         <!-- Carousel wrapper -->
                         <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                             <!-- Item 1 -->
                             <div class="hidden duration-700 ease-in-out" data-carousel-item>
                                 <img src="/img/carousel/banner.jpg"
-                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-56"
                                     alt="...">
                             </div>
                             <!-- Item 2 -->
                             <div class="hidden duration-700 ease-in-out" data-carousel-item>
                                 <img src="/img/carousel/banner.jpg"
-                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-56"
                                     alt="...">
                             </div>
                             <!-- Item 3 -->
                             <div class="hidden duration-700 ease-in-out" data-carousel-item>
                                 <img src="/img/carousel/banner.jpg"
-                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-56"
                                     alt="...">
                             </div>
                             <!-- Item 4 -->
                             <div class="hidden duration-700 ease-in-out" data-carousel-item>
                                 <img src="/img/carousel/banner.jpg"
-                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-56"
                                     alt="...">
                             </div>
                             <!-- Item 5 -->
                             <div class="hidden duration-700 ease-in-out" data-carousel-item>
                                 <img src="/img/carousel/banner.jpg"
-                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-56"
                                     alt="...">
                             </div>
-                        </div>
-                        <!-- Slider indicators -->
-                        <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-                            <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1"
-                                data-carousel-slide-to="0"></button>
-                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2"
-                                data-carousel-slide-to="1"></button>
-                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
-                                data-carousel-slide-to="2"></button>
-                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4"
-                                data-carousel-slide-to="3"></button>
-                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5"
-                                data-carousel-slide-to="4"></button>
                         </div>
                         <!-- Slider controls -->
                         <button type="button"
@@ -81,11 +68,11 @@
                     </div>
                 </div>
             </div>
-            <div class="px-24 mx-auto">
-                <div class="flex justify-between items-center">
+            <div class="px-3 lg:px-24 mx-auto">
+                <div class="flex flex-col lg:flex-row justify-between items-center">
                     <div
                         class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-5">
-                        <span class="text-3xl font-semibold"><i class="fas fa-book text-red-primary"></i> Lihat semua
+                        <span class="text-xl lg:text-3xl font-semibold"><i class="fas fa-book text-red-primary"></i> Lihat semua
                             buku</span>
                         <p class="mb-3 mt-3 font-normal text-gray-500 dark:text-gray-400">Lihat semua buku yang tersedia di
                             perpustakaan</p>
@@ -98,13 +85,13 @@
                             </svg>
                         </a>
                     </div>
-                    <div class="text-center">
+                    <div class="text-center hidden lg:block">
                         <i class="fas fa-book-open text-5xl text-red-primary"></i>
                         <p class="text-2xl font-bold">Welcome</p>
                     </div>
                     <div
                         class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-5">
-                        <span class="text-3xl font-semibold"><i class="fas fa-book-reader text-red-primary"></i> Baca via
+                        <span class="text-xl lg:text-3xl font-semibold"><i class="fas fa-book-reader text-red-primary"></i> Baca via
                             E-book</span>
                         <p class="mb-3 mt-3 font-normal text-gray-500 dark:text-gray-400">Kamu bisa baca secara online
                             dengan E-book</p>
@@ -120,13 +107,12 @@
                     </div>
                 </div>
                 <h1 class="text-2xl mb-4 font-bold">Rekomendasi untuk mu</h1>
-                <div class="grid grid-cols-6 gap-10">
+                {{-- <div class="grid grid-cols-6 gap-10">
                     <div class="w-40 pr-7">
                         <a href="">
                             <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
                                 alt="" srcset="" class="rounded-lg mb-2">
                             <p class="text-sm font-bold">Jujutsu Kaisen: Shibuya Incident</p>
-                            <!-- <p class="text-lg font-bold text-red-primary">Rp</p> -->
                             <p class="text-xs font-medium">Kategori: Komik</p>
                             <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i> 5 | Tersedia 10</p>
                         </a>
@@ -136,10 +122,32 @@
                             <img src="https://ebooks.gramedia.com/ebook-covers/40678/general_small_covers/ID_KPG2017MTH10LBER_S.jpg"
                                 alt="" srcset="" class="rounded-lg mb-2">
                             <p class="text-sm font-bold">Jujutsu Kaisen: Shibuya Incident</p>
-                            <!-- <p class="text-lg font-bold text-red-primary">Rp</p> -->
                             <p class="text-xs font-medium">Kategori: Komik</p>
                             <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i> 5 | Tersedia 10</p>
                         </a>
+                    </div>
+                </div> --}}
+                <div class="overflow-x-auto whitespace-nowrap">
+                    <div class="inline-flex gap-10">
+                        <div class="w-40 pr-7 inline-block">
+                            <a href="">
+                                <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
+                                    alt="" srcset="" class="rounded-lg mb-2">
+                                <p class="text-sm font-bold">Jujutsu Kaisen: Shibuya Incident</p>
+                                <p class="text-xs font-medium">Kategori: Komik</p>
+                                <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i> 5 | Tersedia 10</p>
+                            </a>
+                        </div>
+                        <div class="w-40 pr-7 inline-block">
+                            <a href="">
+                                <img src="https://ebooks.gramedia.com/ebook-covers/40678/general_small_covers/ID_KPG2017MTH10LBER_S.jpg"
+                                    alt="" srcset="" class="rounded-lg mb-2">
+                                <p class="text-sm font-bold">Jujutsu Kaisen: Shibuya Incident</p>
+                                <p class="text-xs font-medium">Kategori: Komik</p>
+                                <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i> 5 | Tersedia 10</p>
+                            </a>
+                        </div>
+                        <!-- Tambahkan lebih banyak item di sini jika diperlukan -->
                     </div>
                 </div>
             </div>

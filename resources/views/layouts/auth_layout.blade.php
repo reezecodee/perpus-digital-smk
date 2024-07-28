@@ -16,7 +16,7 @@
 
 <body class="font-quicksand font-semibold">
     <section>
-        <div class="container mx-auto">
+        <div class="container mx-auto px-3 lg:px-0">
             <div class="flex flex-wrap gap-24 justify-center items-center h-screen">
                 @yield('content')
             </div>

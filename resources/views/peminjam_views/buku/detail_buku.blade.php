@@ -1,7 +1,7 @@
 @extends('layouts.peminjam_layout')
 @section('content')
-    <section class="mx-auto px-24 text-gray-600">
-        <div class="pt-36">
+    <section class="mx-auto px-3 lg:px-24 text-gray-600">
+        <div class="pt-24 lg:pt-36">
             <div class="flex gap-12 mb-7">
                 <div class="self-start">
                     <img src="https://ebooks.gramedia.com/ebook-covers/94048/image_highres/BLK_EST1721993497003.jpg"
@@ -13,7 +13,7 @@
                             numquam.</h1>
                         <p class="text-sm font-semibold"><i class="fas fa-star text-yellow-300"></i> 5.0 Rating | Stock 10 |
                             10 Ulasan</p>
-                        <div class="mt-7">
+                        <div class="mt-7 hidden lg:block">
                             <div class="font-medium">
                                 <ul>
                                     <li>- Kategori: Komik</li>
@@ -33,6 +33,22 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="font-medium block lg:hidden mb-4 lg:mb-0">
+                <ul>
+                    <li>- Kategori: Komik</li>
+                    <li class="mb-3">- Penerbit: Gramedia</li>
+                    <li class="font-bold text-lg">Deskripsi: </li>
+                    <li class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Possimus, consequuntur
+                        amet maxime vero quod tempora necessitatibus doloremque, quaerat veniam commodi
+                        aliquam soluta
+                        beatae unde magnam corrupti voluptate aperiam ut, sed temporibus fugiat ex vitae.
+                        Iste rem accusamus
+                        placeat obcaecati ad aliquam commodi, asperiores nihil. Dolore vitae similique
+                        impedit libero iste.
+                    </li>
+                </ul>
             </div>
         </div>
         <div>
@@ -87,16 +103,6 @@
                     </div>
                     <h1 class="text-black text-center text-lg font-semibold">Belum ada komentar terkait buku ini</h1>
                     <?php endif; ?>
-                </div>
-                <div class="max-w-md w-full self-start">
-                    <div class="border border-gray-400 rounded-xl p-3">
-                        <h1 class="font-semibold text-lg mb-2 mt-2">Tulis ulasan anda</h1>
-                        <textarea id="message" rows="4"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 mb-5"
-                            placeholder="Masukkan komentar disini..."></textarea>
-                        <button class="bg-red-primary p-2 rounded-md text-white font-semibold text-sm">Kirim
-                            ulasan</button>
-                    </div>
                 </div>
             </div>
         </div>

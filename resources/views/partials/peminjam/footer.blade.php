@@ -1,6 +1,6 @@
 <footer class="mt-10">
-    <div class="bg-red-primary px-12 py-10 text-white">
-        <div class="flex justify-between">
+    <div class="bg-red-primary px-3 lg:px-12 py-10 text-white">
+        <div class="flex flex-col lg:flex-row justify-between gap-6 lg:gap-0">
             <div>
                 <div class="flex items-center gap-2">
                     <img src="/assets/codereeze.png" width="60" alt="" srcset="">
@@ -9,7 +9,7 @@
                         <p class="text-xs w-64">Jl. Tanuwijaya, Tawang, Kota Tasikmalaya, Jawa Barat 46385</p>
                     </div>
                 </div>
-                <p class="text-sm mt-6 max-w-xs text-justify">Nikmati membaca seperti di toko buku yang penuh dengan buku keren. Kami selalu memprioritaskan kenyamanan siswa dan pustakawan dalam berinteraksi.</p>
+                <p class="text-base lg:text-sm mt-6 max-w-full lg:max-w-xs text-justify">Nikmati membaca seperti di toko buku yang penuh dengan buku keren. Kami selalu memprioritaskan kenyamanan siswa dan pustakawan dalam berinteraksi.</p>
             </div>
             <div>
                 <h3 class="font-bold text-xl mb-4">Menu Website</h3>

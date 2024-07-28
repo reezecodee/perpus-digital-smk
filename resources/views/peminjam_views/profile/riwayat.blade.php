@@ -1,8 +1,8 @@
 @extends('layouts.peminjam_layout')
 @section('content')
-    <section class="mx-auto px-12 text-gray-600">
-        <div class="pt-36">
-            <div class="flex gap-3">
+    <section class="mx-auto px-3 lg:px-12 text-gray-600">
+        <div class="pt-24 lg:pt-36">
+            <div class="flex flex-col lg:flex-row gap-3">
                 @include('partials.peminjam.sidebar')
                 <div class="self-start w-full border shadow-md rounded-md p-4">
                     <h1 class="text-xl font-bold mb-1">History peminjaman buku</h1>
@@ -19,12 +19,11 @@
                         <div class="flex justify-between items-center border p-3 rounded-md mb-3">
                             <div>
                                 <a href="">
-                                    <h4 class="text-lg font-bold">Nama penerima: Acumalaka</h4>
+                                    <h4 class="text-base lg:text-lg font-bold leading-5 lg:leading-none">Laut bercerita</h4>
                                 </a>
-                                <p class="text-xs">Telepon: 081298897305</p>
                                 <p class="text-xs">Status: Sudah dikembalikan</p>
                             </div>
-                            <div class="py-1 px-3 rounded-lg text-sm font-semibold text-white bg-red-primary">
+                            <div class="py-1 px-3 rounded-lg lg:text-sm font-semibold text-white bg-red-primary text-xs">
                                 20 Juni 2024
                             </div>
                         </div>

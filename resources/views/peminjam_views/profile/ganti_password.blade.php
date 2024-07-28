@@ -1,8 +1,8 @@
 @extends('layouts.peminjam_layout')
 @section('content')
-    <section class="mx-auto px-12 text-gray-600">
-        <div class="pt-36">
-            <div class="flex gap-3">
+    <section class="mx-auto px-3 lg:px-12 text-gray-600">
+        <div class="pt-24 lg:pt-36">
+            <div class="flex flex-col lg:flex-row gap-3">
                 @include('partials.peminjam.sidebar')
                 <div class="self-start w-full border shadow-md rounded-md p-4">
                     <h1 class="text-xl font-bold mb-1">Ganti password</h1>

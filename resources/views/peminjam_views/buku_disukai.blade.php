@@ -1,22 +1,36 @@
 @extends('layouts.peminjam_layout')
 @section('content')
-    <section class="mx-auto px-12 text-gray-600">
-        <div class="pt-36">
-            <h1 class="font-extrabold text-3xl mb-2"><i class="fa-solid fa-heart"></i> Buku yang Disukai</h1>
+    <section class="mx-auto px-3 lg:px-12 text-gray-600">
+        <div class="pt-24 lg:pt-36">
+            <h1 class="font-extrabold text-3xl mb-2"><i class="fa-solid fa-heart text-red-primary"></i> Buku yang Disukai</h1>
             <hr class="mb-5">
             <?php if (true) : ?>
             <div class="flex items-center max-w-full w-full mb-4">
                 <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
-                    class="rounded-md" width="130" alt="">
-                <div class="text-xs ml-5 mr-16 self-center">
-                    <h1 class="text-lg font-bold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, ipsum!</h1>
+                    class="rounded-md self-start" width="130" alt="">
+                <div class="text-xs ml-5 mr-0 lg:mr-16 self-start">
+                    <h1 class="text-lg lg:text-xl max-w-xl font-bold">Lorem ipsum dolor,</h1>
+                    <div class="mb-3 font-medium grid grid-cols-1 lg:grid-cols-2 gap-x-5">
+                        <p><span class="font-bold text-red-primary">Author:</span> Prof. Lil Ambatukam S.jmk</p>
+                        <p><span class="font-bold text-red-primary">Penerbit:</span> Ambamedia</p>
+                        <p><span class="font-bold text-red-primary">ISBN:</span> 99234238493282</p>
+                        <p><span class="font-bold text-red-primary">Halaman:</span> 200 halaman</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="">
+                            <button
+                                class="p-2 mr-1 lg:mr-2 rounded-md bg-red-primary hover:bg-red-500 text-white font-semibold text-xs lg:text-base text-end self-center">
+                                Batalkan suka
+                            </button>
+                        </a>
+                        <a href="">
+                            <button
+                                class="p-2 mr-1 lg:mr-2 rounded-md border border-red-primary text-red-primary hover:bg-red-primary hover:text-white font-semibold text-xs lg:text-base text-end self-center">
+                                Pinjam buku
+                            </button>
+                        </a>
+                    </div>
                 </div>
-                <a href="">
-                    <button
-                        class="p-2 mr-2 rounded-md bg-red-primary hover:bg-red-500 text-white font-semibold text-base text-end self-center">
-                        Batalkan suka
-                    </button>
-                </a>
             </div>
             <?php else : ?>
             <div class="flex justify-center">

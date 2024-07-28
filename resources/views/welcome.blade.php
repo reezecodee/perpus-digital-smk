@@ -1,12 +1,12 @@
 @extends('layouts.peminjam_layout')
 @section('content')
     <section class="bg-white dark:bg-gray-900">
-        <div class="grid max-w-screen-xl px-4 pt-20 mx-auto lg:gap-8 xl:gap-0 lg:py-14 lg:grid-cols-12 lg:pt-44">
+        <div class="grid max-w-screen-xl px-4 pt-24 mx-auto lg:gap-8 xl:gap-0 lg:py-14 lg:grid-cols-12 lg:pt-44">
             <div class="mr-auto place-self-center lg:col-span-7">
                 <h1
                     class="max-w-2xl mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white">
-                    Bangun Generasi Emas, <br>Dengan Membaca Buku</h1>
-                <p class="max-w-2xl mb-6 font-medium text-gray-500 lg:mb-8 md:text-lg lg:text-lg dark:text-gray-400">Selamat datang di e-perpus SMK Digital Sistem Informatika. Kami
+                    Bangun Generasi Emas, <br class="hidden lg:block">Dengan Membaca Buku</h1>
+                <p class="max-w-2xl mb-6 font-medium text-gray-500 lg:mb-8 md:text-lg lg:text-lg dark:text-gray-400 text-justify lg:text-left">Selamat datang di e-perpus SMK Digital Sistem Informatika. Kami
                     berkomitmen menyediakan e-perpus bagi para siswa dan membantu mereka meningkatkan pengetahuan
                     dan kenyamanan dalam proses peminjaman buku perpustakaan.</p>
                 <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
@@ -26,7 +26,7 @@
         <div class="max-w-screen-xl px-4 py-8 mx-auto space-y-12 lg:space-y-20 lg:py-12 lg:px-6">
             <!-- Row -->
             <div class="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16">
-                <div class="text-gray-500 sm:text-lg dark:text-gray-400">
+                <div class="text-gray-500 sm:text-lg dark:text-gray-400 text-justify lg:text-left">
                     <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">Membangun
                         Jiwa Siswa yang Bermanfaat dan Berdampak</h2>
                     <p class="mb-5 font-medium lg:text-lg">Membentuk siswa terdepan yang memberikan manfaat nyata dan
@@ -53,11 +53,11 @@
                 <div class="text-gray-500 sm:text-lg dark:text-gray-400">
                     <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">Komitmen Terhadap
                         Kualitas dan Layanan</h2>
-                    <p class="mb-5 font-medium lg:text-lg">Kami menerapkan standar kualitas yang ketat dalam setiap aspek
+                    <p class="mb-5 font-medium lg:text-lg text-justify lg:text-left">Kami menerapkan standar kualitas yang ketat dalam setiap aspek
                         operasional kami, mulai dari peminjaman sampai pengembalian buku. Pustakawan kami yang
                         berpengalaman dan berdedikasi bekerja tanpa henti untuk memantau setiap aktivitas dan memenuhi
                         harapan instansi sekolah dalam mencetak siswa yang unggul.</p>
-                    <p class="font-medium lg:text-lg">Kami menyadari bahwa pelayanan yang unggul sama pentingnya
+                    <p class="font-medium lg:text-lg text-justify lg:text-left">Kami menyadari bahwa pelayanan yang unggul sama pentingnya
                         dengan profesi berkualitas. <b>Your satisfaction is our top priority!</b></p>
                 </div>
             </div>
@@ -73,13 +73,10 @@
                         fill="currentColor" />
                 </svg>
                 <blockquote>
-                    <p class="text-xl font-medium text-gray-900 md:text-2xl dark:text-white">"Setiap perjalanan menuju
-                        kesuksesan bukanlah hal yang mudah ditempuh. Dibutuhkan kepercayaan dan konsistensi yang tinggi
-                        untuk terus bergerak maju, layaknya roda yang terus berputar tak peduli sebarapa kasarnya aspal dan
-                        berat yang ditanggung untuk mencapai tujuan"</p>
+                    <p class="text-xl font-medium text-gray-900 md:text-2xl">"Semakin banyak kamu membaca, semakin banyak hal yang kamu ketahui. Semakin banyak kamu belajar, semakin banyak tempat yang akan kamu datangi."</p>
                 </blockquote>
                 <figcaption class="flex items-center justify-center mt-6 space-x-3">
-                    <img class="w-6 h-6 rounded-full" src="/img/atyla_profile.png" alt="profile picture">
+                    <img class="w-10 h-10 lg:w-6 lg:h-6 rounded-full" src="/img/atyla_profile.png" alt="profile picture">
                     <div class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
                         <div class="pr-3 font-medium text-gray-900 dark:text-white">Atyla A. Al Harits</div>
                         <div class="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">Kepala Perpustakaan SMK Digital Sistem Informatika</div>

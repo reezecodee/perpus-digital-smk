@@ -1,7 +1,7 @@
 @extends('layouts.peminjam_layout')
 @section('content')
-    <section class="mx-auto px-12 text-gray-600">
-        <div class="pt-36">
+    <section class="mx-auto px-3 lg:px-12 text-gray-600">
+        <div class="pt-24 lg:pt-36">
             <form method="post">
                 <div class="flex flex-wrap justify-between">
                     <div class="self-start max-w-2xl w-full">
@@ -25,7 +25,7 @@
                             <h2 class="text-xl font-bold mb-1.5">Buku yang dipinjam <i
                                     class="fas fa-book text-red-primary"></i></h2>
                             <hr class="mb-4">
-                            <div class="flex gap-7 mb-3">
+                            <div class="flex gap-7 mb-0 lg:mb-3">
                                 <img src="https://ebooks.gramedia.com/ebook-covers/94048/image_highres/BLK_EST1721993497003.jpg"
                                     alt="" width="100" class="rounded-md self-start">
                                 <div class="self-start">
@@ -38,7 +38,7 @@
                                             <p class="text-xs font-medium">Tgl kembali: 20 Juni 2023</p>
                                         </div>
                                         <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
-                                            class="text-white bg-red-primary hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mt-6"
+                                            class="text-white bg-red-primary hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center mt-6 hidden lg:inline-flex"
                                             type="button">Biaya denda <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -72,9 +72,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+                                class="text-white w-full bg-red-primary hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center mt-6 inline-flex lg:hidden"
+                                type="button">Biaya denda <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 4 4 4-4" />
+                                </svg>
+                            </button>
                         </div>
                     </div>
-                    <div class="self-start max-w-md w-full">
+                    <div class="self-start max-w-full lg:max-w-md w-full">
                         <div class="w-full rounded-xl border p-4 mb-5">
                             <h2 class="text-xl font-bold mb-1"><i class="fas fa-wallet text-red-primary"></i> Biaya denda
                             </h2>
@@ -87,7 +95,7 @@
                                 <img src="https://cdn-icons-png.flaticon.com/128/3982/3982575.png" alt=""
                                     width="50">
                                 <div class="flex items-center">
-                                    <p class="text-sm font-semibold mr-40">Denda buku rusak <br><span class="text-base">Rp.
+                                    <p class="text-sm font-semibold mr-0 lg:mr-40">Denda buku rusak <br><span class="text-base">Rp.
                                             20.000</span></p>
                                 </div>
                             </div>
@@ -95,7 +103,7 @@
                                 <img src="https://cdn-icons-png.flaticon.com/128/12376/12376575.png" alt=""
                                     width="50">
                                 <div class="flex items-center">
-                                    <p class="text-sm font-semibold mr-40">Denda buku hilang <br><span class="text-base">Rp.
+                                    <p class="text-sm font-semibold mr-0 lg:mr-40">Denda buku hilang <br><span class="text-base">Rp.
                                             20.000</span></p>
                                 </div>
                             </div>
@@ -103,7 +111,7 @@
                                 <img src="https://cdn-icons-png.flaticon.com/128/1407/1407089.png" alt=""
                                     width="50">
                                 <div class="flex items-center">
-                                    <p class="text-sm font-semibold mr-40">Denda buku terlambat <br><span
+                                    <p class="text-sm font-semibold mr-0 lg:mr-40">Denda buku terlambat <br><span
                                             class="text-base">Rp.
                                             20.000</span></p>
                                 </div>
@@ -129,12 +137,17 @@
                             <hr class="border-2 bg-gray-400 mb-3">
                             <div class="flex items-center mb-4">
                                 <input id="default-checkbox" type="checkbox" value=""
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" required>
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                    required>
                                 <label for="default-checkbox"
-                                    class="ms-4 text-sm font-medium text-gray-900 dark:text-gray-300 text-justify">Saya Atyla Azfa Al Harits, bersedia ditindak jalur hukum apabila saya dengan sengaja tidak membayar denda jika saya menghilangkan, merusak, dan terlambat mengembalikan buku.</label>
+                                    class="ms-4 text-sm font-medium text-gray-900 dark:text-gray-300 text-justify">Saya
+                                    Atyla Azfa Al Harits, bersedia ditindak jalur hukum apabila saya dengan sengaja tidak
+                                    membayar denda jika saya menghilangkan, merusak, dan terlambat mengembalikan
+                                    buku.</label>
                             </div>
                             <button type="submit"
-                                class="bg-red-primary hover:bg-red-500 p-2.5 text-white w-full font-bold rounded-lg">Konfirmasi peminjaman</button>
+                                class="bg-red-primary hover:bg-red-500 p-2.5 text-white w-full font-bold rounded-lg">Konfirmasi
+                                peminjaman</button>
                         </div>
                     </div>
                 </div>
