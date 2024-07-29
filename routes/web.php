@@ -6,6 +6,7 @@ use App\Http\Controllers\Peminjam\ChatController;
 use App\Http\Controllers\Peminjam\DashboardController;
 use App\Http\Controllers\Peminjam\NotificationContrroller;
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Pustakawan\PustakawanDashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,3 +43,8 @@ Route::get('/buku-disukai', [BookController::class, 'show_liked_book_page'])->na
 Route::get('/semua-buku', [BookController::class, 'show_all_books_page'])->name('peminjam.all_books');
 Route::get('/hasil-pencarian', [BookController::class, 'show_search_result_page'])->name('peminjam.search_result');
 Route::get('/chat', [ChatController::class, 'show_chat_page'])->name('peminjam.chat');
+
+
+
+
+Route::get('/dashboard-pustakawan', [PustakawanDashboardController::class, 'show_dashboard_page'])->name('pustakawan.dashboard');

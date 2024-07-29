@@ -1,105 +1,114 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Atmin</title>
-    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
-    <!-- Fonts and icons -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Dashboard</title>
 
-    <script src="/assets/js/plugin/webfont/webfont.min.js"></script>
-    <script>
-        WebFont.load({
-            google: {
-                "families": ["Public Sans:300,400,500,600,700"]
-            },
-            custom: {
-                "families": ["Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
-                urls: ['/assets/css/fonts.min.css']
-            },
-            active: function() {
-                sessionStorage.fonts = true;
-            }
-        });
-    </script>
-
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/plugins.min.css">
-    <link rel="stylesheet" href="/assets/css/kaiadmin.min.css">
-    <link href="/css/input.css" rel="stylesheet" type="text/css">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="/assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="/assets/plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="/assets/plugins/summernote/summernote-bs4.min.css">
 </head>
 
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-        <!-- Sidebar -->
-        {{-- <php include_once 'partials/sidebar_admin.php' ?> --}}
-        <!-- End Sidebar -->
 
-        <div class="main-panel">
-            {{-- <php include_once 'partials/navbar_admin.php' ?> --}}
-            <div class="container">
-                {{-- {{ content }} --}}
+        @include('partials.pustakawan.navbar')
+
+        @include('partials.pustakawan.sidebar')
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Dashboard</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Dashboard v1</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
             </div>
-            {{-- <php include_once 'partials/footer_admin.php' ?> --}}
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    @yield('content')
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
         </div>
+        <!-- /.content-wrapper -->
+        @include('partials.pustakawan.footer')
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
     </div>
-    <!--   Core JS Files   -->
-    <script src="/assets/js/core/jquery-3.7.1.min.js"></script>
-    <script src="/assets/js/core/popper.min.js"></script>
-    <script src="/assets/js/core/bootstrap.min.js"></script>
+    <!-- ./wrapper -->
 
-    <!-- jQuery Scrollbar -->
-    <script src="/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-
-    <!-- jQuery Sparkline -->
-    <script src="/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
-
-    <!-- Datatables -->
-    <script src="/assets/js/plugin/datatables/datatables.min.js"></script>
-
-    <!-- Sweet Alert -->
-    <script src="/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
-
-    <!-- Kaiadmin JS -->
-    <script src="/assets/js/kaiadmin.min.js"></script>
-
-    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
-    <script src="/assets/js/setting-demo.js"></script>
-    <script src="/assets/js/demo.js"></script>
+    <!-- jQuery -->
+    <script src="/assets/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $('#lineChart').sparkline([102, 109, 120, 99, 110, 105, 115], {
-            type: 'line',
-            height: '70',
-            width: '100%',
-            lineWidth: '2',
-            lineColor: '#177dff',
-            fillColor: 'rgba(23, 125, 255, 0.14)'
-        });
-
-        $('#lineChart2').sparkline([99, 125, 122, 105, 110, 124, 115], {
-            type: 'line',
-            height: '70',
-            width: '100%',
-            lineWidth: '2',
-            lineColor: '#f3545d',
-            fillColor: 'rgba(243, 84, 93, .14)'
-        });
-
-        $('#lineChart3').sparkline([105, 103, 123, 100, 95, 105, 115], {
-            type: 'line',
-            height: '70',
-            width: '100%',
-            lineWidth: '2',
-            lineColor: '#ffa534',
-            fillColor: 'rgba(255, 165, 52, .14)'
-        });
+        $.widget.bridge('uibutton', $.ui.button)
     </script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-    <script>
-        let table = new DataTable('#data-table');
-    </script>
+    <!-- Bootstrap 4 -->
+    <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="/assets/plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="/assets/plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="/assets/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="/assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="/assets/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="/assets/plugins/moment/moment.min.js"></script>
+    <script src="/assets/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="/assets/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/assets/dist/js/adminlte.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="/assets/dist/js/demo.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="/assets/dist/js/pages/dashboard.js"></script>
 </body>
 
 </html>
