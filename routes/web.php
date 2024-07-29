@@ -6,6 +6,10 @@ use App\Http\Controllers\Peminjam\ChatController;
 use App\Http\Controllers\Peminjam\DashboardController;
 use App\Http\Controllers\Peminjam\NotificationContrroller;
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Pustakawan\ChatMasukController;
+use App\Http\Controllers\Pustakawan\DataAdminController;
+use App\Http\Controllers\Pustakawan\DataPeminjamController;
+use App\Http\Controllers\Pustakawan\DataPustakawanController;
 use App\Http\Controllers\Pustakawan\PustakawanDashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,3 +52,10 @@ Route::get('/chat', [ChatController::class, 'show_chat_page'])->name('peminjam.c
 
 
 Route::get('/dashboard-pustakawan', [PustakawanDashboardController::class, 'show_dashboard_page'])->name('pustakawan.dashboard');
+Route::get('/chat-masuk', [ChatMasukController::class, 'show_chat_page'])->name('pustakawan.chat');
+
+// Route::resource('/data-admin', [DataAdminController::class]);
+// Route::resource('/data-pustakawan', [DataPustakawanController::class]);
+// Route::resource('/data-peminjam', [DataPeminjamController::class]);
+
+// Route::
