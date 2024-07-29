@@ -48,4 +48,18 @@ class BookController extends Controller
             'title' => 'Buku yang Anda Sukai'
         ]);
     }
+
+    public function show_all_books_page()
+    {
+        return view('peminjam_views.buku.semua_buku', [
+            'title' => 'Semua Buku Perpustakaan'
+        ]);
+    }
+
+    public function show_search_result_page()
+    {
+        return view('peminjam_views.hasil_pencarian', [
+            'title' => 'Hasil Pencarian Buku'
+        ]);
+    }
 }

@@ -107,26 +107,6 @@
                     </div>
                 </div>
                 <h1 class="text-2xl mb-4 font-bold">Rekomendasi untuk mu</h1>
-                {{-- <div class="grid grid-cols-6 gap-10">
-                    <div class="w-40 pr-7">
-                        <a href="">
-                            <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
-                                alt="" srcset="" class="rounded-lg mb-2">
-                            <p class="text-sm font-bold">Jujutsu Kaisen: Shibuya Incident</p>
-                            <p class="text-xs font-medium">Kategori: Komik</p>
-                            <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i> 5 | Tersedia 10</p>
-                        </a>
-                    </div>
-                    <div class="w-40 pr-7">
-                        <a href="">
-                            <img src="https://ebooks.gramedia.com/ebook-covers/40678/general_small_covers/ID_KPG2017MTH10LBER_S.jpg"
-                                alt="" srcset="" class="rounded-lg mb-2">
-                            <p class="text-sm font-bold">Jujutsu Kaisen: Shibuya Incident</p>
-                            <p class="text-xs font-medium">Kategori: Komik</p>
-                            <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i> 5 | Tersedia 10</p>
-                        </a>
-                    </div>
-                </div> --}}
                 <div class="overflow-x-auto whitespace-nowrap">
                     <div class="inline-flex gap-10">
                         <div class="w-40 pr-7 inline-block">

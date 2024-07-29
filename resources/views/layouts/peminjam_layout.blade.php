@@ -25,6 +25,7 @@
 <body class="font-quicksand">
     @include('partials.peminjam.navbar')
     @yield('content')
+    @if($chat_bubble == true)
     <div class="fixed bottom-3 right-3 lg:bottom-10 lg:right-10">
         <a href="" class="flex flex-col justify-center items-center">
             <div
@@ -34,6 +35,7 @@
             <span class="mt-1 text-center text-black font-semibold">Hubungi kami</span>
         </a>
     </div>
+    @endif
     @include('partials.peminjam.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

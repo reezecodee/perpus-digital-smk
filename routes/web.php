@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Peminjam\BookController;
+use App\Http\Controllers\Peminjam\ChatController;
 use App\Http\Controllers\Peminjam\DashboardController;
 use App\Http\Controllers\Peminjam\NotificationContrroller;
 use App\Http\Controllers\Profile\ProfileController;
@@ -38,3 +39,6 @@ Route::get('/peminjaman-sukses', [BookController::class, 'show_success_page'])->
 Route::get('/rak-buku-saya', [BookController::class, 'show_book_shelf_page'])->name('peminjam.book_shelf');
 Route::get('/detail-peminjaman', [BookController::class, 'show_detail_rent_page'])->name('peminjam.detail_rent');
 Route::get('/buku-disukai', [BookController::class, 'show_liked_book_page'])->name('peminjam.liked_book');
+Route::get('/semua-buku', [BookController::class, 'show_all_books_page'])->name('peminjam.all_books');
+Route::get('/hasil-pencarian', [BookController::class, 'show_search_result_page'])->name('peminjam.search_result');
+Route::get('/chat', [ChatController::class, 'show_chat_page'])->name('peminjam.chat');
