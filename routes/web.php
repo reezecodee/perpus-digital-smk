@@ -7,9 +7,10 @@ use App\Http\Controllers\Peminjam\DashboardController;
 use App\Http\Controllers\Peminjam\NotificationContrroller;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Pustakawan\ChatMasukController;
-use App\Http\Controllers\Pustakawan\DataAdminController;
-use App\Http\Controllers\Pustakawan\DataPeminjamController;
-use App\Http\Controllers\Pustakawan\DataPustakawanController;
+use App\Http\Controllers\Pustakawan\MasterDataBuku\ViewBukuController;
+use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\ViewPeminjamanController;
+use App\Http\Controllers\Pustakawan\MasterDataPengguna\ViewPenggunaController;
+use App\Http\Controllers\Pustakawan\MasterDataPerpustakaan\ViewPerpustakaanController;
 use App\Http\Controllers\Pustakawan\PustakawanDashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,8 +55,21 @@ Route::get('/chat', [ChatController::class, 'show_chat_page'])->name('peminjam.c
 Route::get('/dashboard-pustakawan', [PustakawanDashboardController::class, 'show_dashboard_page'])->name('pustakawan.dashboard');
 Route::get('/chat-masuk', [ChatMasukController::class, 'show_chat_page'])->name('pustakawan.chat');
 
-// Route::resource('/data-admin', [DataAdminController::class]);
-// Route::resource('/data-pustakawan', [DataPustakawanController::class]);
-// Route::resource('/data-peminjam', [DataPeminjamController::class]);
+Route::prefix('master-data')->group(function (){
+    Route::get('/admin', [ViewPenggunaController::class, 'show_data_admin_page'])->name('data-admin.index');
+    Route::get('/pustakawan', [ViewPenggunaController::class, 'show_data_pustakawan_page'])->name('data-pustakawan.index');
+    Route::get('/peminjam', [ViewPenggunaController::class, 'show_data_peminjam_page'])->name('data-peminjam.index');
 
-// Route::
+    Route::get('/rak-buku', [ViewBukuController::class, 'show_data_rak_buku_page'])->name('data-buku.shelf');
+    Route::get('/kategori', [ViewBukuController::class, 'show_data_kategori_page'])->name('data-buku.category');
+    Route::get('/buku', [ViewBukuController::class, 'show_data_buku_page'])->name('data-buku.book');
+    Route::get('/e-buku', [ViewBukuController::class, 'show_data_ebook_page'])->name('data-buku.ebook');
+
+    Route::get('/peminjaman', [ViewPeminjamanController::class, 'show_data_peminjam_page'])->name('data-peminjam.index');
+    Route::get('/pengembalian', [ViewPeminjamanController::class, 'show_data_pengembali_page'])->name('data-pengembali.index');
+    Route::get('/kunjungan', [ViewPeminjamanController::class, 'show_data_kunjungan_page'])->name('data-kunjungan.index');
+    Route::get('/denda', [ViewPeminjamanController::class, 'show_data_denda_page'])->name('data-denda.index');
+
+    Route::get('/aplikasi', [ViewPerpustakaanController::class, 'show_data_aplikasi_page'])->name('data-aplikasi.index');
+    Route::get('/perpustakaan', [ViewPerpustakaanController::class, 'show_data_perpustakaan_page'])->name('data-perpustakaan.index');
+});

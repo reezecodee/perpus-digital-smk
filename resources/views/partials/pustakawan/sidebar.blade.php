@@ -23,7 +23,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-comments"></i>
                         <p>
                             Chat Masuk
                             <span class="right badge badge-danger">New</span>
@@ -33,7 +33,7 @@
                 <li class="nav-header">Master Data</li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <i class="nav-icon fas fa-users"></i>
                         <p>
                             Data Pengguna
                             <i class="right fas fa-angle-left"></i>
@@ -62,7 +62,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <i class="nav-icon fas fa-book"></i>
                         <p>
                             Data Buku
                             <i class="right fas fa-angle-left"></i>
@@ -97,7 +97,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <i class="nav-icon fas fa-calendar-day"></i>
                         <p>
                             Data Peminjaman
                             <i class="right fas fa-angle-left"></i>
@@ -132,7 +132,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <i class="nav-icon fas fa-hotel"></i>
                         <p>
                             Data Perpustakaan
                             <i class="right fas fa-angle-left"></i>
@@ -156,7 +156,7 @@
                 <li class="nav-header">Informasi</li>
                 <li class="nav-item">
                     <a href="" class="nav-link">
-                        <i class="nav-icon fas fa-chart-line"></i>
+                        <i class="nav-icon fas fa-bell"></i>
                         <p>
                             Notifikasi
                         </p>
@@ -164,7 +164,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="" class="nav-link">
-                        <i class="nav-icon fas fa-chart-line"></i>
+                        <i class="nav-icon fas fa-envelope"></i>
                         <p>
                             Kirim Email
                         </p>
@@ -172,7 +172,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="" class="nav-link">
-                        <i class="nav-icon fas fa-chart-line"></i>
+                        <i class="nav-icon fas fa-paste"></i>
                         <p>
                             Buat Artikel
                         </p>
@@ -180,7 +180,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="" class="nav-link">
-                        <i class="nav-icon fas fa-chart-line"></i>
+                        <i class="nav-icon far fa-calendar-alt"></i>
                         <p>
                             Kalender
                         </p>
@@ -189,7 +189,7 @@
                 <li class="nav-header">Generate</li>
                 <li class="nav-item">
                     <a href="pages/calendar.html" class="nav-link">
-                        <i class="nav-icon far fa-calendar-alt"></i>
+                        <i class="nav-icon fas fa-credit-card"></i>
                         <p>
                             Kartu Buku
                         </p>
@@ -197,7 +197,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="pages/gallery.html" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
+                        <i class="nav-icon fas fa-file-alt"></i>
                         <p>
                             Laporan Peminjaman
                         </p>
@@ -205,7 +205,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="pages/gallery.html" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
+                        <i class="nav-icon fas fa-file-alt"></i>
                         <p>
                             Laporan Buku
                         </p>

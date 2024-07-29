@@ -11,6 +11,7 @@ class ChatMasukController extends Controller
     {
         return view('pustakawan_views.chat_masuk', [
             'title' => 'Chat Masuk E-Perpustakaan',
+            'heading' => 'Chat Masuk',
         ]);
     }
 }
