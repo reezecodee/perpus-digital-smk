@@ -25,7 +25,7 @@
 <body class="font-quicksand">
     @include('partials.peminjam.navbar')
     @yield('content')
-    @if($chat_bubble == true)
+    @if($chat_bubble ?? true)
     <div class="fixed bottom-3 right-3 lg:bottom-10 lg:right-10">
         <a href="" class="flex flex-col justify-center items-center">
             <div
