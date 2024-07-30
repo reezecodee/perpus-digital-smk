@@ -98,3 +98,6 @@ Route::prefix('informasi')->group(function () {
     Route::get('/buat-artikel', [ViewInformationController::class, 'show_create_article_page'])->name('pustakawan.buat_artikel');
     Route::get('/atur-kalender', [ViewInformationController::class, 'show_set_calendar_page'])->name('pustakawan.atur_kalender');
 });
+
+Route::get('/overview-profile-pustakawan', [ProfileController::class, 'show_overview_pustakawan_page'])->name('pustakawan.overview');
+

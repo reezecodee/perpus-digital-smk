@@ -188,14 +188,6 @@
                 </li>
                 <li class="nav-header">Generate</li>
                 <li class="nav-item">
-                    <a href="pages/calendar.html" class="nav-link">
-                        <i class="nav-icon fas fa-credit-card"></i>
-                        <p>
-                            Kartu Buku
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="pages/gallery.html" class="nav-link">
                         <i class="nav-icon fas fa-file-alt"></i>
                         <p>

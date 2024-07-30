@@ -35,6 +35,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.7/css/froala_editor.pkgd.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
+    <link rel="stylesheet" href="/assets/plugins/fullcalendar/main.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -97,7 +98,7 @@
     <script src="/assets/plugins/jquery-knob/jquery.knob.min.js"></script>
     <!-- daterangepicker -->
     <script src="/assets/plugins/moment/moment.min.js"></script>
-    <script src="/assets/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="/assets/plugins/fullcalendar/main.js"></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- Summernote -->
@@ -128,6 +129,8 @@
             });
         });
     </script>
+
+    <script src="/js/calendar.js"></script>
 </body>
 
 </html>

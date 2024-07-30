@@ -1,6 +1,6 @@
 @extends('layouts.pustakawan_layout')
 @section('content')
-    <form id="save-form" action="" method="POST">
+    <form id="save-form" action="" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="card">
             <div class="card-body">
@@ -17,9 +17,40 @@
         </div>
         <div class="card">
             <div class="card-body">
+                <h5>Metadata</h5>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Title</label>
+                            <input type="text" name="title" placeholder="Judul artikel" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Author</label>
+                            <input type="text" name="author" placeholder="Author artikel" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Keyword</label>
+                            <input type="text" name="keyword" placeholder="Kata kunci" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="">Description</label>
+                            <textarea name="deskripsi" class="form-control" cols="30" rows="3" placeholder="Deskripsi artikel" required></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
                 <h5>Content artikel</h5>
                 <textarea id="editor" name="pesan"></textarea>
-                <button type="submit" class="btn btn-primary mt-4">Kirim email</button>
+                <button type="submit" class="btn btn-primary mt-4">Publikasikan</button>
             </div>
         </div>
     </form>

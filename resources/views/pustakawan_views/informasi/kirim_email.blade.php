@@ -16,6 +16,10 @@
                         <option value="Jane Doe">Jane Doe</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="">Subject</label>
+                    <input type="text" name="subject" class="form-control" placeholder="Subject:">
+                </div>
                 <textarea id="editor" name="pesan"></textarea>
                 <button type="submit" class="btn btn-primary mt-4">Kirim email</button>
             </form>

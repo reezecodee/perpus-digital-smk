@@ -27,4 +27,20 @@ class ProfileController extends Controller
             'title' => 'Ganti Password'
         ]);
     }
+
+    public function show_overview_pustakawan_page()
+    {
+        return view('pustakawan_views.profile.overview', [
+            'title' => 'Overview Profile Pustakawan',
+            'heading' => 'Overview Profile',
+        ]);
+    }
+
+    public function show_ch_pustakawan_pw_page()
+    {
+        return view('pustakawan_views.profile.ganti_password', [
+            'title' => 'Ganti Password',
+            'heading' => 'Ganti Password',
+        ]);
+    }
 }
