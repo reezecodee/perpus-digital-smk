@@ -56,6 +56,7 @@ Route::get('/dashboard-pustakawan', [PustakawanDashboardController::class, 'show
 Route::get('/chat-masuk', [ChatMasukController::class, 'show_chat_page'])->name('pustakawan.chat');
 
 Route::prefix('master-data')->group(function (){
+    // read
     Route::get('/admin', [ViewPenggunaController::class, 'show_data_admin_page'])->name('data-admin.index');
     Route::get('/pustakawan', [ViewPenggunaController::class, 'show_data_pustakawan_page'])->name('data-pustakawan.index');
     Route::get('/peminjam', [ViewPenggunaController::class, 'show_data_peminjam_page'])->name('data-peminjam.index');
@@ -63,7 +64,7 @@ Route::prefix('master-data')->group(function (){
     Route::get('/rak-buku', [ViewBukuController::class, 'show_data_rak_buku_page'])->name('data-buku.shelf');
     Route::get('/kategori', [ViewBukuController::class, 'show_data_kategori_page'])->name('data-buku.category');
     Route::get('/buku', [ViewBukuController::class, 'show_data_buku_page'])->name('data-buku.book');
-    Route::get('/e-buku', [ViewBukuController::class, 'show_data_ebook_page'])->name('data-buku.ebook');
+    Route::get('/e-book', [ViewBukuController::class, 'show_data_ebook_page'])->name('data-buku.ebook');
 
     Route::get('/peminjaman', [ViewPeminjamanController::class, 'show_data_peminjam_page'])->name('data-peminjam.index');
     Route::get('/pengembalian', [ViewPeminjamanController::class, 'show_data_pengembali_page'])->name('data-pengembali.index');
@@ -72,4 +73,20 @@ Route::prefix('master-data')->group(function (){
 
     Route::get('/aplikasi', [ViewPerpustakaanController::class, 'show_data_aplikasi_page'])->name('data-aplikasi.index');
     Route::get('/perpustakaan', [ViewPerpustakaanController::class, 'show_data_perpustakaan_page'])->name('data-perpustakaan.index');
+    
+    Route::prefix('admin')->group(function (){
+        Route::get('/tambah', [ViewPenggunaController::class, 'show_tambah_admin_page'])->name('admin.add');
+        Route::get('/perbarui', [ViewPenggunaController::class, 'show_perbarui_admin_page'])->name('admin.update');
+        Route::get('/detail', [ViewPenggunaController::class, 'show_detail_admin_page'])->name('admin.detail');
+    });
+    Route::prefix('pustakawan')->group(function () {
+        Route::get('/tambah', [ViewPenggunaController::class, 'show_tambah_pustakawan_page'])->name('pustakawan.add');
+        Route::get('/perbarui', [ViewPenggunaController::class, 'show_perbarui_pustakawan_page'])->name('pustakawan.update');
+        Route::get('/detail', [ViewPenggunaController::class, 'show_detail_pustakawan_page'])->name('pustakawan.detail');
+    });
+    Route::prefix('peminjam')->group(function () {
+        Route::get('/tambah', [ViewPenggunaController::class, 'show_tambah_peminjam_page'])->name('peminjam.add');
+        Route::get('/perbarui', [ViewPenggunaController::class, 'show_perbarui_peminjam_page'])->name('peminjam.update');
+        Route::get('/detail', [ViewPenggunaController::class, 'show_detail_peminjam_page'])->name('peminjam.detail');
+    });
 });

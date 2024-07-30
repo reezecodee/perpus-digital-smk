@@ -2,41 +2,35 @@
 @section('content')
     <div class="card">
         <div class="card-body">
+            <div class="d-flex justify-content-end">
+                <a href="">
+                    <button class="btn btn-primary"><i class="fas fa-plus"></i> Tambah buku baru</button>
+                </a>
+            </div>
             <table id="data-table" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Nama</th>
-                        <th>NIP</th>
-                        <th>Jabatan</th>
-                        <th>Telepon</th>
-                        <th>Email</th>
+                        <th>ISBN</th>
+                        <th>Judul</th>
+                        <th>Author</th>
+                        <th>Penerbit</th>
+                        <th>Kategori</th>
+                        <th>Lokasi rak</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 4.0
+                        <td>02304923232</td>
+                        <td>Kisah Ambarawa vs Ambadu</td>
+                        <td>Ambatukam</td>
+                        <td>Ambamedia</td>
+                        <td>Ambagore</td>
+                        <td>Ambasatu</td>
+                        <td>
+                            <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
+                            <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
                         </td>
-                        <td>Internet
-                            Explorer 4.0
-                        </td>
-                        <td>Win 95+</td>
-                        <td>4</td>
-                        <td>X</td>
-                    </tr>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 5.0
-                        </td>
-                        <td>Internet
-                            Explorer 5.0
-                        </td>
-                        <td>Win 95+</td>
-                        <td>5</td>
-                        <td>C</td>
                     </tr>
                 </tbody>
             </table>

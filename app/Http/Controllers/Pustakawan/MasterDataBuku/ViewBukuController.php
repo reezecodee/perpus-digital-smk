@@ -10,32 +10,32 @@ class ViewBukuController extends Controller
     public function show_data_rak_buku_page()
     {
         return view('pustakawan_views.master_data.buku.CRUD_rak_buku.index', [
-            'title' => 'Data Rak Buku',
-            'heading' => 'Rak Buku'
+            'title' => 'Daftar Data Rak Buku',
+            'heading' => 'Daftar Rak Buku'
         ]);
     }
 
     public function show_data_kategori_page()
     {
         return view('pustakawan_views.master_data.buku.CRUD_kategori.index', [
-            'title' => 'Data Kategori',
-            'heading' => 'Kategori'
+            'title' => 'Daftar Data Kategori',
+            'heading' => 'Daftar Kategori'
         ]);
     }
 
     public function show_data_ebook_page()
     {
         return view('pustakawan_views.master_data.buku.CRUD_e-book.index', [
-            'title' => 'Data E-book',
-            'heading' => 'E-book'
+            'title' => 'Daftar Data E-book',
+            'heading' => 'Daftar E-book'
         ]);
     }
 
     public function show_data_buku_page()
     {
         return view('pustakawan_views.master_data.buku.CRUD_buku.index', [
-            'title' => 'Data Buku',
-            'heading' => 'Buku'
+            'title' => 'Daftar Data Buku',
+            'heading' => 'Daftar Buku'
         ]);
     }
 }
