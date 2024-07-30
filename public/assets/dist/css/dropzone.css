@@ -1,0 +1,29 @@
+.dropzone {
+    border: 2px dashed #686b6f;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.dropzone.dragover {
+    background-color: #f0f8ff;
+}
+
+.preview-container {
+    margin-top: 20px;
+}
+
+.preview-container img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.preview-container .remove {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+    cursor: pointer;
+    color: #dc3545;
+}

@@ -7,6 +7,7 @@ use App\Http\Controllers\Peminjam\DashboardController;
 use App\Http\Controllers\Peminjam\NotificationContrroller;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Pustakawan\ChatMasukController;
+use App\Http\Controllers\Pustakawan\Information\ViewInformationController;
 use App\Http\Controllers\Pustakawan\MasterDataBuku\ViewBukuController;
 use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\ViewPeminjamanController;
 use App\Http\Controllers\Pustakawan\MasterDataPengguna\ViewPenggunaController;
@@ -55,7 +56,7 @@ Route::get('/chat', [ChatController::class, 'show_chat_page'])->name('peminjam.c
 Route::get('/dashboard-pustakawan', [PustakawanDashboardController::class, 'show_dashboard_page'])->name('pustakawan.dashboard');
 Route::get('/chat-masuk', [ChatMasukController::class, 'show_chat_page'])->name('pustakawan.chat');
 
-Route::prefix('master-data')->group(function (){
+Route::prefix('master-data')->group(function () {
     // read
     Route::get('/admin', [ViewPenggunaController::class, 'show_data_admin_page'])->name('data-admin.index');
     Route::get('/pustakawan', [ViewPenggunaController::class, 'show_data_pustakawan_page'])->name('data-pustakawan.index');
@@ -73,8 +74,8 @@ Route::prefix('master-data')->group(function (){
 
     Route::get('/aplikasi', [ViewPerpustakaanController::class, 'show_data_aplikasi_page'])->name('data-aplikasi.index');
     Route::get('/perpustakaan', [ViewPerpustakaanController::class, 'show_data_perpustakaan_page'])->name('data-perpustakaan.index');
-    
-    Route::prefix('admin')->group(function (){
+
+    Route::prefix('admin')->group(function () {
         Route::get('/tambah', [ViewPenggunaController::class, 'show_tambah_admin_page'])->name('admin.add');
         Route::get('/perbarui', [ViewPenggunaController::class, 'show_perbarui_admin_page'])->name('admin.update');
         Route::get('/detail', [ViewPenggunaController::class, 'show_detail_admin_page'])->name('admin.detail');
@@ -89,4 +90,11 @@ Route::prefix('master-data')->group(function (){
         Route::get('/perbarui', [ViewPenggunaController::class, 'show_perbarui_peminjam_page'])->name('peminjam.update');
         Route::get('/detail', [ViewPenggunaController::class, 'show_detail_peminjam_page'])->name('peminjam.detail');
     });
+});
+
+Route::prefix('informasi')->group(function () {
+    Route::get('/buat-notifikasi', [ViewInformationController::class, 'show_create_notif_page'])->name('pustakawan.buat_notifikasi');
+    Route::get('/kirim-email', [ViewInformationController::class, 'show_send_email_page'])->name('pustakawan.kirim_email');
+    Route::get('/buat-artikel', [ViewInformationController::class, 'show_create_article_page'])->name('pustakawan.buat_artikel');
+    Route::get('/atur-kalender', [ViewInformationController::class, 'show_set_calendar_page'])->name('pustakawan.atur_kalender');
 });

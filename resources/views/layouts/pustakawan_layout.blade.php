@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="/assets/plugins/jqvmap/jqvmap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="/assets/dist/css/dropzone.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Daterange picker -->
@@ -29,6 +30,11 @@
     <link rel="stylesheet" href="/assets/plugins/summernote/summernote-bs4.min.css">
     <!-- datatable -->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.min.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.7/css/froala_editor.pkgd.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -108,6 +114,19 @@
     <script src="https://cdn.datatables.net/2.1.2/js/dataTables.min.js"></script>
     <script>
         let table = new DataTable('#data-table');
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.7/js/froala_editor.pkgd.min.js"></script>
+    <script>
+        new FroalaEditor('#editor');
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder: '--Pilih penerima--'
+            });
+        });
     </script>
 </body>
 
