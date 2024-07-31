@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ViewPerpustakaanController extends Controller
 {
-    public function show_data_aplikasi_page()
+    public function show_data_aplikasi()
     {
         return view('pustakawan_views.master_data.perpustakaan.data_aplikasi.index', [
             'title' => 'Data Aplikasi',
@@ -15,7 +15,7 @@ class ViewPerpustakaanController extends Controller
         ]);
     }
 
-    public function show_data_perpustakaan_page()
+    public function show_data_perpustakaan()
     {
         return view('pustakawan_views.master_data.perpustakaan.data_perpustakaan.index', [
             'title' => 'Data Perpustakaan',

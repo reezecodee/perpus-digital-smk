@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ViewInformationController extends Controller
 {
-    public function show_create_notif_page()
+    public function show_create_notif()
     {
         return view('pustakawan_views.informasi.buat_notifikasi', [
             'title' => 'Buat Notifikasi',
@@ -15,7 +15,7 @@ class ViewInformationController extends Controller
         ]);
     }
 
-    public function show_send_email_page()
+    public function show_send_email()
     {
         return view('pustakawan_views.informasi.kirim_email', [
             'title' => 'Kirim Email',
@@ -23,14 +23,14 @@ class ViewInformationController extends Controller
         ]);
     }
 
-    public function show_create_article_page()
+    public function show_create_article()
     {
         return view('pustakawan_views.informasi.buat_artikel', [
             'title' => 'Buat Artikel',
             'heading' => 'Buat Artikel'
         ]);
     }
-    public function show_set_calendar_page()
+    public function show_set_calendar()
     {
         return view('pustakawan_views.informasi.atur_kalender', [
             'title' => 'Atur Kalender',            

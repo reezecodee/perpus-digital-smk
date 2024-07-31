@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class PustakawanDashboardController extends Controller
 {
-    public function show_dashboard_page()
+    public function show_dashboard()
     {
         return view('pustakawan_views.dashboard', [
             'title' => 'Dashboard E-Perpustakaan',

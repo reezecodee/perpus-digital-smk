@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ChatMasukController extends Controller
 {
-    public function show_chat_page()
+    public function show_chat()
     {
         return view('pustakawan_views.chat_masuk', [
             'title' => 'Chat Masuk E-Perpustakaan',

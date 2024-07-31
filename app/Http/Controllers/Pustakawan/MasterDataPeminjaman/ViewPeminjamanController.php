@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ViewPeminjamanController extends Controller
 {
-    public function show_data_peminjam_page()
+    public function show_data_peminjam()
     {
         return view('pustakawan_views.master_data.peminjaman.CRUD_peminjaman.index', [
             'title' => 'Data Peminjaman',
@@ -15,7 +15,7 @@ class ViewPeminjamanController extends Controller
         ]);
     }
 
-    public function show_data_pengembali_page()
+    public function show_data_pengembali()
     {
         return view('pustakawan_views.master_data.peminjaman.CRUD_pengembalian.index', [
             'title' => 'Data Pengembalian',
@@ -23,7 +23,7 @@ class ViewPeminjamanController extends Controller
         ]);
     }
 
-    public function show_data_kunjungan_page()
+    public function show_data_kunjungan()
     {
         return view('pustakawan_views.master_data.peminjaman.kunjungan.index', [
             'title' => 'Data Kunjungan',
@@ -31,7 +31,7 @@ class ViewPeminjamanController extends Controller
         ]);
     }
 
-    public function show_data_denda_page()
+    public function show_data_denda()
     {
         return view('pustakawan_views.master_data.peminjaman.CRUD_denda.index', [
             'title' => 'Data Denda',
