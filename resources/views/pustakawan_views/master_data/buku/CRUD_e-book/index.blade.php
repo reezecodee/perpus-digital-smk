@@ -10,26 +10,36 @@
             <table id="data-table" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>ISBN</th>
+                        <th>Kode buku</th>
                         <th>Judul</th>
                         <th>Author</th>
                         <th>Penerbit</th>
+                        <th>ISBN</th>
+                        <th>Jumlah halaman</th>
+                        <th>Bahasa</th>
                         <th>Kategori</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>02304923232</td>
-                        <td>Kisah Ambarawa vs Ambadu</td>
-                        <td>Ambatukam</td>
-                        <td>Ambamedia</td>
-                        <td>Ambagore</td>
-                        <td>
-                            <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
-                            <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                        </td>
-                    </tr>
+                    @foreach ($e_books as $item)
+                        <tr>
+                            <td>{{ $item->kode_buku }}</td>
+                            <td>{{ $item->judul }}</td>
+                            <td>{{ $item->author }}</td>
+                            <td>{{ $item->penerbit }}</td>
+                            <td>{{ $item->isbn }}</td>
+                            <td>{{ $item->Jml_halaman }}</td>
+                            <td>{{ $item->bahasa }}</td>
+                            <td>{{ $item->category->nama_kategori }}</td>
+                            <td>{{ $item->status }}</td>
+                            <td>
+                                <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
+                                <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

@@ -10,11 +10,13 @@
                         @csrf
                         <div class="form-group">
                             <label for="kode_kategori">Kode kategori</label>
-                            <input type="text" name="kode_kategori" id="kode_kategori" class="form-control" placeholder="Masukkan kode kategori" required>
+                            <input type="text" name="kode_kategori" id="kode_kategori" class="form-control"
+                                placeholder="Masukkan kode kategori" required>
                         </div>
                         <div class="form-group">
                             <label for="kategori">Kategori</label>
-                            <input type="text" name="kategori" id="kategori" class="form-control" placeholder="Masukkan nama kategori" required>
+                            <input type="text" name="kategori" id="kategori" class="form-control"
+                                placeholder="Masukkan nama kategori" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Tambahkan</button>
                     </form>
@@ -34,14 +36,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>2342342</td>
-                                <td>Ambagori</td>
-                                <td>
-                                    <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
-                                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
+                            @foreach ($categories as $item)
+                                <tr>
+                                    <td>{{ $item->nama_kategori }}</td>
+                                    <td>{{ $item->keterangan }}</td>
+                                    <td>
+                                        <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
+                                        <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

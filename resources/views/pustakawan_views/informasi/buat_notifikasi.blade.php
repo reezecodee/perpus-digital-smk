@@ -35,24 +35,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Ambasingh</td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla neque quasi, perferendis
-                            doloremque qui doloribus facilis tenetur fugiat possimus ullam.</td>
-                        <td>20-Juni-2024</td>
-                        <td>
-                            <div class="dropdown-center">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <i class="fas fa-list"></i>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Hapus</a></li>
-                                    <li><a class="dropdown-item" href="#">Detail</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
+                    @foreach ($notifications as $item)
+                        <tr>
+                            <td>{{ $item->receiver->nama }}</td>
+                            <td>{{ $item->judul }}</td>
+                            <td>{{ $item->pesan }}</td>
+                            <td>{{ $item->tgl_pengiriman }}</td>
+                            <td>
+                                <div class="dropdown-center">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"
+                                        aria-expanded="false">
+                                        <i class="fas fa-list"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Hapus</a></li>
+                                        <li><a class="dropdown-item" href="#">Detail</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+
                 </tbody>
             </table>
         </div>

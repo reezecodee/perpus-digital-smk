@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pustakawan\Information;
 
 use App\Http\Controllers\Controller;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class ViewInformationController extends Controller
@@ -11,7 +12,8 @@ class ViewInformationController extends Controller
     {
         return view('pustakawan_views.informasi.buat_notifikasi', [
             'title' => 'Buat Notifikasi',
-            'heading' => 'Buat Notifikasi'
+            'heading' => 'Buat Notifikasi',
+            'notifications' => Notification::where('pengirim_id', auth()->user()->id)->get(),
         ]);
     }
 

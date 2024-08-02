@@ -5,32 +5,35 @@
             <table id="data-table" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Nama</th>
-                        <th>NIP</th>
-                        <th>Telepon</th>
-                        <th>Email</th>
+                        <th>Judul buku</th>
+                        <th>Denda terlambat</th>
+                        <th>Denda buku rusak</th>
+                        <th>Denda buku hilang</th>
+                        <th>Denda buku tidak dikembalikan</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 4.0
-                        </td>
-                        <td>Win 95+</td>
-                        <td>4</td>
-                        <td>X</td>
-                    </tr>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 5.0
-                        </td>
-                        <td>Win 95+</td>
-                        <td>5</td>
-                        <td>C</td>
-                    </tr>
+                    @foreach ($fines as $item)
+                        <tr>
+                            <td>{{ $item->book->judul }}</td>
+                            <td>{{ $item->denda_terlambat }}</td>
+                            <td>{{ $item->denda_rusak }}</td>
+                            <td>{{ $item->denda_hilang }}</td>
+                            <td>{{ $item->denda_tidak_dikembalikan }}</td>
+                            <td>
+                                <a href="">
+                                    <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
+                                </a>
+                                <a href="">
+                                    <button class="btn btn-success"><i class="fas fa-scroll"></i></button>
+                                </a>
+                                <a href="">
+                                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

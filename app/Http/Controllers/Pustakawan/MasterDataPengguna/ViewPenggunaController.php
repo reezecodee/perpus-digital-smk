@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pustakawan\MasterDataPengguna;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ViewPenggunaController extends Controller
@@ -11,7 +12,8 @@ class ViewPenggunaController extends Controller
     {
         return view('pustakawan_views.master_data.pengguna.CRUD_admin.index', [
             'title' => 'Daftar Data Admin',
-            'heading' => 'Daftar Admin'
+            'heading' => 'Daftar Admin',
+            'admins' => User::role('Admin')->get()
         ]);
     }
 
@@ -19,7 +21,8 @@ class ViewPenggunaController extends Controller
     {
         return view('pustakawan_views.master_data.pengguna.CRUD_pustakawan.index', [
             'title' => 'Daftar Data Pustakawan',
-            'heading' => 'Daftar Pustakawan'
+            'heading' => 'Daftar Pustakawan',
+            'librarians' => User::role('Pustakawan')->get()
         ]);
     }
 
@@ -27,7 +30,8 @@ class ViewPenggunaController extends Controller
     {
         return view('pustakawan_views.master_data.pengguna.CRUD_peminjam.index', [
             'title' => 'Daftar Data Peminjam',
-            'heading' => 'Daftar Peminjam'
+            'heading' => 'Daftar Peminjam',
+            'borrowers' => User::role('Peminjam')->get()
         ]);
     }
 

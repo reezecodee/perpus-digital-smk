@@ -15,7 +15,7 @@
                 data-accordion="false">
                 <li class="nav-item">
                     <a href="{{ route('pustakawan.dashboard') }}"
-                        class="nav-link {{ Request::is(route('pustakawan.dashboard')) ? 'active' : '' }}">
+                        class="nav-link {{ Request::is('dashboard-pustakawan*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-chart-line"></i>
                         <p>
                             Dashboard
@@ -107,7 +107,8 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link {{ Request::is('master-data/perpinjaman*', 'master-data/pengembalian*', 'master-data/kunjungan*', 'master-data/denda*') ? 'active' : '' }}">
+                    <a href="#"
+                        class="nav-link {{ Request::is('master-data/perpinjaman*', 'master-data/pengembalian*', 'master-data/kunjungan*', 'master-data/denda*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-calendar-day"></i>
                         <p>
                             Data Peminjaman
@@ -116,7 +117,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('data-peminjam.index') }}"
+                            <a href="{{ route('data-perpinjaman.index') }}"
                                 class="nav-link {{ Request::is('master-data/perpinjaman*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Perminjaman</p>
@@ -145,31 +146,34 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link {{ Request::is('master-data/perpustakaan*', 'master-data/aplikasi*',) ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-hotel"></i>
-                        <p>
-                            Data Perpustakaan
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('data-perpustakaan.index') }}"
-                                class="nav-link {{ Request::is('master-data/perpustakaan*') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Perpustakaan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('data-aplikasi.index') }}"
-                                class="nav-link {{ Request::is('master-data/aplikasi*') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Aplikasi</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                @role('Admin')
+                    <li class="nav-item">
+                        <a href="#"
+                            class="nav-link {{ Request::is('master-data/perpustakaan*', 'master-data/aplikasi*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-hotel"></i>
+                            <p>
+                                Data Perpustakaan
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('data-perpustakaan.index') }}"
+                                    class="nav-link {{ Request::is('master-data/perpustakaan*') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Perpustakaan</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('data-aplikasi.index') }}"
+                                    class="nav-link {{ Request::is('master-data/aplikasi*') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Aplikasi</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endrole
                 <li class="nav-header">Informasi</li>
                 <li class="nav-item">
                     <a href="{{ route('buat_notifikasi') }}"

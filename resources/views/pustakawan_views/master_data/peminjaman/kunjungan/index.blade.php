@@ -5,32 +5,31 @@
             <table id="data-table" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Nama</th>
-                        <th>NIP</th>
-                        <th>Telepon</th>
-                        <th>Email</th>
+                        <th>Nama pengunjung</th>
+                        <th>Keterangan kunjungan</th>
+                        <th>Tanggal</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 4.0
-                        </td>
-                        <td>Win 95+</td>
-                        <td>4</td>
-                        <td>X</td>
-                    </tr>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 5.0
-                        </td>
-                        <td>Win 95+</td>
-                        <td>5</td>
-                        <td>C</td>
-                    </tr>
+                    @foreach ($visits as $item)
+                        <tr>
+                            <td>{{ $item->peminjam->nama }}</td>
+                            <td>{{ $item->keterangan }}</td>
+                            <td>{{ $item->created_at }}</td>
+                            <td>
+                                <a href="">
+                                    <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
+                                </a>
+                                <a href="">
+                                    <button class="btn btn-success"><i class="fas fa-scroll"></i></button>
+                                </a>
+                                <a href="">
+                                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

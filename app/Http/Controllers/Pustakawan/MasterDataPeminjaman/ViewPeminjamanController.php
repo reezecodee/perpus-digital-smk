@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Pustakawan\MasterDataPeminjaman;
 
 use App\Http\Controllers\Controller;
+use App\Models\Borrower;
+use App\Models\Fine;
+use App\Models\Visit;
 use Illuminate\Http\Request;
 
 class ViewPeminjamanController extends Controller
@@ -11,7 +14,8 @@ class ViewPeminjamanController extends Controller
     {
         return view('pustakawan_views.master_data.peminjaman.CRUD_peminjaman.index', [
             'title' => 'Data Peminjaman',
-            'heading' => 'Peminjaman'
+            'heading' => 'Peminjaman',
+            'borrowers' => Borrower::all(),
         ]);
     }
 
@@ -19,7 +23,8 @@ class ViewPeminjamanController extends Controller
     {
         return view('pustakawan_views.master_data.peminjaman.CRUD_pengembalian.index', [
             'title' => 'Data Pengembalian',
-            'heading' => 'Pengembalian'
+            'heading' => 'Pengembalian',
+            'borrowers' => Borrower::all(),
         ]);
     }
 
@@ -27,7 +32,8 @@ class ViewPeminjamanController extends Controller
     {
         return view('pustakawan_views.master_data.peminjaman.kunjungan.index', [
             'title' => 'Data Kunjungan',
-            'heading' => 'Kunjungan'
+            'heading' => 'Kunjungan',
+            'visits' => Visit::orderBy('created_at', 'desc')->get(),
         ]);
     }
 
@@ -35,7 +41,8 @@ class ViewPeminjamanController extends Controller
     {
         return view('pustakawan_views.master_data.peminjaman.CRUD_denda.index', [
             'title' => 'Data Denda',
-            'heading' => 'Denda'
+            'heading' => 'Denda',
+            'fines' => Fine::all(),
         ]);
     }
 }

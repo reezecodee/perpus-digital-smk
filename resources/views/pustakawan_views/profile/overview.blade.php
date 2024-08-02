@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <input type="text" class="form-control" name="nip"
-                                            placeholder="Masukkan Nomor Induk Pegawai" value="{{ auth()->user()->nip_nim }}"
+                                            placeholder="Masukkan Nomor Induk Pegawai" value="{{ auth()->user()->nip_nis }}"
                                             required>
                                     </div>
                                 </div>
