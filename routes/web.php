@@ -39,7 +39,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth', 'role:Peminjam'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'show_dashboard'])->name('peminjam.dashboard');
     Route::get('/notifikasi', [NotificationContrroller::class, 'show_notification'])->name('peminjam.notif');
-    Route::get('/notifikasi/baca', [NotificationContrroller::class, 'show_read_notif'])->name('peminjam.read');
+    Route::get('/notifikasi/baca/{id}', [NotificationContrroller::class, 'show_read_notif'])->name('peminjam.read_notif');
     Route::get('/overview-profile', [ProfileController::class, 'show_overview'])->name('peminjam.overview');
     Route::get('/riwayat-peminjaman', [ProfileController::class, 'show_history'])->name('peminjam.history');
     Route::get('/ganti-password', [ProfileController::class, 'show_ch_password'])->name('peminjam.ch_password');
