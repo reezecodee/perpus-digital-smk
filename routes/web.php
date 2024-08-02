@@ -42,7 +42,7 @@ Route::middleware(['auth', 'role:Peminjam'])->group(function () {
     Route::get('/notifikasi/baca', [NotificationContrroller::class, 'show_read_notif'])->name('peminjam.read');
     Route::get('/overview-profile', [ProfileController::class, 'show_overview'])->name('peminjam.overview');
     Route::get('/riwayat-peminjaman', [ProfileController::class, 'show_history'])->name('peminjam.history');
-    Route::get('/ganti-password', [ProfileController::class, 'show_ch_password'])->name('peminjam.password');
+    Route::get('/ganti-password', [ProfileController::class, 'show_ch_password'])->name('peminjam.ch_password');
     Route::get('/buku', [BookController::class, 'show_book'])->name('peminjam.book');
     Route::get('/konfirmasi-peminjaman', [BookController::class, 'show_confirm'])->name('peminjam.confirm');
     Route::get('/peminjaman-sukses', [BookController::class, 'show_success'])->name('peminjam.success');

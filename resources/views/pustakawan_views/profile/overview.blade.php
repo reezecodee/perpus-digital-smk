@@ -32,8 +32,12 @@
                                         <h6 class="mb-0">Nama lengkap</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" class="form-control" name="nama"
-                                            placeholder="Masukkan nama lengkap" value="{{ auth()->user()->nama }}" required>
+                                        <input type="text" class="form-control @error('nama') is-invalid @enderror"
+                                            name="nama" placeholder="Masukkan nama lengkap"
+                                            value="{{ auth()->user()->nama }}" required>
+                                        @error('nama')
+                                            <span class="invalid-feedback">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -41,9 +45,12 @@
                                         <h6 class="mb-0">NIP</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" class="form-control" name="nip"
-                                            placeholder="Masukkan Nomor Induk Pegawai" value="{{ auth()->user()->nip_nis }}"
-                                            required>
+                                        <input type="text" class="form-control @error('nip_nis') is-invalid @enderror"
+                                            name="nip_nis" placeholder="Masukkan Nomor Induk Pegawai"
+                                            value="{{ auth()->user()->nip_nis }}" required>
+                                        @error('nip_nis')
+                                            <span class="invalid-feedback">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -51,9 +58,12 @@
                                         <h6 class="mb-0">No. telepon</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="number" class="form-control" name="telepon"
-                                            placeholder="Masukkan no. telepon" value="{{ auth()->user()->telepon }}"
-                                            required>
+                                        <input type="number" class="form-control @error('telepon') is-invalid @enderror"
+                                            name="telepon" placeholder="Masukkan no. telepon"
+                                            value="{{ auth()->user()->telepon }}" required>
+                                        @error('telepon')
+                                            <span class="invalid-feedback">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -61,8 +71,12 @@
                                         <h6 class="mb-0">Email</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="email" class="form-control" name="email"
-                                            placeholder="Masukkan email" value="{{ auth()->user()->email }}" required>
+                                        <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                            name="email" placeholder="Masukkan email" value="{{ auth()->user()->email }}"
+                                            required>
+                                        @error('email')
+                                            <span class="invalid-feedback">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -70,7 +84,11 @@
                                         <h6 class="mb-0">Alamat</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <textarea name="alamat" class="form-control" cols="30" rows="3" placeholder="Masukkan alamat">{{ auth()->user()->alamat }}</textarea>
+                                        <textarea name="alamat" class="form-control @error('alamat') is-invalid @enderror" cols="30" rows="3"
+                                            placeholder="Masukkan alamat">{{ auth()->user()->alamat }}</textarea>
+                                        @error('email')
+                                            <span class="invalid-feedback">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row">
@@ -94,8 +112,12 @@
                                 <h6 class="mb-0">Password saat ini</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" name="password"
-                                    placeholder="Masukkan password saat ini" required>
+                                <input type="text" class="form-control @error('password') is-invalid @enderror"
+                                    name="password" value="{{ old('password') }}" placeholder="Masukkan password saat ini"
+                                    required>
+                                @error('password')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -103,8 +125,11 @@
                                 <h6 class="mb-0">Password baru</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="password" class="form-control" name="new_password"
-                                    placeholder="Masukkan Password Baru" required>
+                                <input type="password" class="form-control @error('new_password') is-invalid @enderror"
+                                    name="new_password" placeholder="Masukkan Password Baru" required>
+                                @error('new_password')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -112,8 +137,12 @@
                                 <h6 class="mb-0">Konfirmasi password</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="password" class="form-control" name="confirm_password"
-                                    placeholder="Masukkan ulang password" required>
+                                <input type="password"
+                                    class="form-control @error('confirm_password') is-invalid @enderror"
+                                    name="confirm_password" placeholder="Masukkan ulang password" required>
+                                @error('confirm_password')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row">
