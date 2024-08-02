@@ -9,16 +9,31 @@
             <h2 class="text-xl font-bold">Login to Application</h2>
             <span class="font-medium mb-4 block">Masukkan data akun kamu untuk melanjutkan</span>
         </div>
+        @if (session('error'))
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                role="alert">
+                <span class="font-medium">{{ session('error') }}</span>
+            </div>
+        @endif
         <form action="" method="post">
-            <label for="" class="font-semibold text-sm mb-1 block">NIP Guru/NIS Siswa</label>
-            <input type="email" name="email" id="" class="border border-gray-400 rounded-sm w-full p-1.5 mb-3"
-                required>
+            @csrf
+            <label for="" class="font-semibold text-sm mb-1 block">Email</label>
+            <input type="email" name="email"
+                class="border border-gray-400 @error('email') border-red-primary @enderror rounded-sm w-full p-1.5 mb-3"
+                value="{{ old('email') }}" required>
+            @error('email')
+                <div class="text-red-primary text-sm -mt-3 mb-3">{{ $message }}</div>
+            @enderror
             <label for="" class="font-semibold text-sm mb-1 block">Password</label>
-            <input type="password" name="password" id=""
-                class="border border-gray-400 rounded-sm w-full p-1.5 mb-3" required>
+            <input type="password" name="password"
+                class="border border-gray-400 @error('password') border-red-primary @enderror rounded-sm w-full p-1.5 mb-3"
+                value="{{ old('password') }}" required>
+            @error('password')
+                <div class="text-red-primary text-sm -mt-3 mb-3">{{ $message }}</div>
+            @enderror
             <div class="flex justify-between mb-3 text-sm">
                 <div class="flex items-center gap-2">
-                    <input type="checkbox" class="cursor-pointer" name="" id="">
+                    <input type="checkbox" class="cursor-pointer" name="">
                     <label for="">Ingat saya</label>
                 </div>
                 <a href="/lupa-password" class="hover:text-red-primary hover:underline">Lupa password?</a>

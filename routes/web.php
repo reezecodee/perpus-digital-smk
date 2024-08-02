@@ -31,7 +31,9 @@ Route::get('/', function () {
 });
 
 Route::prefix('auth')->group(function () {
-    Route::get('/login', [AuthController::class, 'show_login'])->name('auth.login');
+    Route::get('/login', [AuthController::class, 'show_login'])->name('show_login');
+    Route::post('/login', [AuthController::class, 'logic_login'])->name('logic_login');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'show_dashboard'])->name('peminjam.dashboard');
@@ -67,7 +69,7 @@ Route::prefix('master-data')->group(function () {
     Route::get('/buku', [ViewBukuController::class, 'show_data_buku'])->name('data-buku.book');
     Route::get('/e-book', [ViewBukuController::class, 'show_data_ebook'])->name('data-buku.ebook');
 
-    Route::get('/peminjaman', [ViewPeminjamanController::class, 'show_data_peminjam'])->name('data-peminjam.index');
+    Route::get('/perpinjaman', [ViewPeminjamanController::class, 'show_data_peminjam'])->name('data-peminjam.index');
     Route::get('/pengembalian', [ViewPeminjamanController::class, 'show_data_pengembali'])->name('data-pengembali.index');
     Route::get('/kunjungan', [ViewPeminjamanController::class, 'show_data_kunjungan'])->name('data-kunjungan.index');
     Route::get('/denda', [ViewPeminjamanController::class, 'show_data_denda'])->name('data-denda.index');

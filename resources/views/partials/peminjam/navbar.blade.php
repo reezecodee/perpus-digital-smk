@@ -72,7 +72,7 @@
                 </div> --}}
             {{-- <php else : ?> --}}
             <div class="flex items-center gap-2">
-                <a href="{{ route('auth.login') }}">
+                <a href="{{ route('show_login') }}">
                     <button
                         class="bg-white border-2 border-white hover:bg-transparent hover:text-white duration-300 rounded-lg py-1.5 px-4 text-red-primary text-sm font-bold"><i
                             class="fas fa-sign-in-alt"></i> Login</button>

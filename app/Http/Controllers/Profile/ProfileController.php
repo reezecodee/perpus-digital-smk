@@ -28,7 +28,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function show_overview_pustakawan_page()
+    public function show_overview_pustakawan()
     {
         return view('pustakawan_views.profile.overview', [
             'title' => 'Overview Profile Pustakawan',
@@ -36,7 +36,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function show_ch_pustakawan_pw_page()
+    public function show_ch_pustakawan_pw()
     {
         return view('pustakawan_views.profile.ganti_password', [
             'title' => 'Ganti Password',
