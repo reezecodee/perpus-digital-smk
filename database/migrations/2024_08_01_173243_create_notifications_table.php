@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('penerima_id')->constrained()->onDelete('cascade'); // Foreign key UUID
-            $table->foreignUuid('pengirim_id')->constrained()->onDelete('cascade'); // Foreign key UUID
+            $table->uuid('penerima_id');
+            $table->uuid('pengirim_id');
             $table->string('judul');
             $table->text('pesan');
             $table->timestamp('tgl_pengiriman');
             $table->timestamps();
+
+            $table->foreign('penerima_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('pengirim_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('kategori_id')->constrained()->onDelete('cascade'); // Foreign key UUID
+            $table->uuid('kategori_id');
             $table->string('judul');
             $table->string('kode_buku')->unique();
             $table->string('author');
@@ -28,6 +28,8 @@ return new class extends Migration
             $table->enum('format', ['Fisik', 'Elektronik']);
             $table->enum('status', ['Tersedia', 'Tidak tersedia']);
             $table->timestamps();
+
+            $table->foreign('kategori_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

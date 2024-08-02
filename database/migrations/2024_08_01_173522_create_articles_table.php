@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('penulis_id')->constrained()->onDelete('cascade'); // Foreign key UUID
+            $table->uuid('author_id');
             $table->text('thumbnail');
             $table->string('judul');
             $table->string('penulis');
@@ -22,6 +22,8 @@ return new class extends Migration
             $table->text('konten_artikel');
             $table->enum('visibilitas', ['Publik', 'Privasi']);
             $table->timestamps();
+
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('username')->unique();
             $table->string('nip_nis')->unique();
+            $table->string('nisn')->unique()->nullable();
             $table->string('nama');
             $table->string('email')->unique();
             $table->string('telepon')->unique();

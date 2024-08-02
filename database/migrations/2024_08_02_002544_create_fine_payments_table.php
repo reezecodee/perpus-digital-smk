@@ -13,12 +13,17 @@ return new class extends Migration
     {
         Schema::create('fine_payments', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('peminjam_id')->constrained()->onDelete('cascade'); // Foreign key UUID
-            $table->foreignUuid('buku_id')->constrained()->onDelete('cascade'); // Foreign key UUID
-            $table->foreignUuid('denda_id')->constrained()->onDelete('cascade'); // Foreign key UUID
+            $table->uuid('peminjam_id');
+            $table->uuid('buku_id');
+            $table->uuid('denda_id');
             $table->enum('status_bayar', ['Belum dibayar', 'Sudah dibayar']);
             $table->enum('alasan_denda', ['Tidak dikembalikan', 'Terlambat', 'Buku rusak', 'Buku hilang']);
+            $table->text('bukti_pembayaran')->nullable();
             $table->timestamps();
+
+            $table->foreign('peminjam_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('buku_id')->references('id')->on('books')->onDelete('cascade');
+            $table->foreign('denda_id')->references('id')->on('fines')->onDelete('cascade');
         });
     }
 

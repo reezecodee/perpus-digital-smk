@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('fines', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('buku_id')->constrained()->onDelete('cascade'); // Foreign key UUID
+            $table->uuid('buku_id'); // Foreign key UUID
             $table->string('denda_terlambat');
             $table->string('denda_rusak');
             $table->string('denda_hilang');
             $table->string('denda_tidak_dikembalikan');
             $table->timestamps();
+
+            $table->foreign('buku_id')->references('id')->on('books')->onDelete('cascade');
         });
     }
 

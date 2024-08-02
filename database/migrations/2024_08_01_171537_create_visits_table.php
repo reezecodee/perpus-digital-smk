@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('visits', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('pengunjung_id')->constrained()->onDelete('cascade'); // Foreign key UUID
+            $table->uuid('pengunjung_id');
             $table->text('keterangan_kunjungan');
             $table->timestamps();
+
+            $table->foreign('pengunjung_id')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 

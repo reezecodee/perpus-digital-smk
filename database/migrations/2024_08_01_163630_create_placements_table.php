@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('placements', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('rak_id')->constrained()->onDelete('cascade'); // Foreign key UUID
-            $table->foreignUuid('buku_id')->constrained()->onDelete('cascade'); // Foreign key UUID
+            $table->uuid('rak_id');
+            $table->uuid('buku_id');
             $table->integer('jumlah_buku');
             $table->timestamps();
+
+            $table->foreign('rak_id')->references('id')->on('shelves')->onDelete('cascade');
+            $table->foreign('buku_id')->references('id')->on('books')->onDelete('cascade');
+
         });
     }
 

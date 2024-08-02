@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('chats', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('kode_chat');
-            $table->foreignUuid('pengirim_id')->constrained()->onDelete('cascade'); // Foreign key UUID
-            $table->foreignUuid('penerima_id')->constrained()->onDelete('cascade'); // Foreign key UUID
+            $table->uuid('pengirim_id');
+            $table->uuid('penerima_id');
             $table->text('pesan');
             $table->timestamps();
+
+            $table->foreign('pengirim_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('penerima_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

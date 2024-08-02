@@ -13,14 +13,18 @@ return new class extends Migration
     {
         Schema::create('borrowers', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('peminjam_id')->constrained()->onDelete('cascade'); // Foreign key UUID
-            $table->foreignUuid('buku_id')->constrained()->onDelete('cascade'); // Foreign key UUID
-            $table->foreignUuid('denda_id')->constrained()->onDelete('cascade'); // Foreign key UUID
+            $table->uuid('peminjam_id');
+            $table->uuid('buku_id');
+            $table->uuid('denda_id');
             $table->timestamp('peminjaman');
             $table->timestamp('pengembalian')->nullable();
             $table->date('jatuh_tempo');
             $table->text('keterangan')->nullable();
             $table->timestamps();
+
+            $table->foreign('peminjam_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('buku_id')->references('id')->on('books')->onDelete('cascade');
+            $table->foreign('denda_id')->references('id')->on('fines')->onDelete('cascade');
         });
     }
 
