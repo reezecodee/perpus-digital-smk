@@ -17,212 +17,223 @@
                     diulas</p>
             </div>
             <div id="slide-display1" class="block">
-                <?php if (true) : ?>
-                <div class="border p-5 rounded-md shadow-md w-full mb-7 relative overflow-hidden">
-                    <div class="flex justify-end">
-                        <div
-                            class="bg-red-primary text-white text-xs p-1 absolute right-0 w-40 top-0 text-center font-medium">
-                            Masa
-                            pinjam</div>
-                    </div>
-                    <div class="flex w-full mb-4">
-                        <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
-                            class="rounded-md w-28 self-start">
-                        <div class="text-xs ml-5 self-start w-full">
-                            <h1 class="text-base lg:text-lg font-bold mb-1">Kisah sang kancil</h1>
-                            <div class="mb-3 font-medium grid grid-cols-1 lg:grid-cols-4 gap-x-3">
-                                <p><span class="font-bold text-red-primary">Kode buku: </span> 23423423423</p>
-                                <p><span class="font-bold text-red-primary">Author: </span> Ambatukam</p>
-                                <p><span class="font-bold text-red-primary">Penerbit:</span> Ambamedia</p>
-                                <p><span class="font-bold text-red-primary">Tgl pinjam:</span> 20 Juli 2024</p>
-                                <p><span class="font-bold text-red-primary">Kode rak: </span> 42342323423</p>
-                                <p><span class="font-bold text-red-primary">ISBN:</span> 13123432424</p>
-                                <p><span class="font-bold text-red-primary">Halaman:</span> 20
-                                    halaman</p>
-                                <p><span class="font-bold text-red-primary">Jatuh tempo:</span> 20 Agustus 2024</p>
-                            </div>
-                            <div class="flex justify-between mt-4">
-                                <div>
-                                    <a href="/detail-peminjaman">
-                                        <button
-                                            class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2.5 font-bold mr-2">Lihat
-                                            detail</button>
-                                    </a>
-                                    <a href="">
-                                        <button
-                                            class="border border-red-primary text-red-primary hover:bg-red-primary hover:text-white duration-300 rounded-md text-sm p-2.5 font-bold">Kembalikan
-                                            buku</button>
-                                    </a>
+                @forelse ($books as $item)
+                    <div class="border p-5 rounded-md shadow-md w-full mb-7 relative overflow-hidden">
+                        <div class="flex justify-end">
+                            <div
+                                class="bg-red-primary text-white text-xs p-1 absolute right-0 w-40 top-0 text-center font-medium">
+                                {{ $item->status }}</div>
+                        </div>
+                        <div class="flex w-full mb-4">
+                            <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
+                                class="rounded-md w-28 self-start">
+                            <div class="text-xs ml-5 self-start w-full">
+                                <h1 class="text-base lg:text-lg font-bold mb-1">{{ $item->book->judul }}</h1>
+                                <div class="mb-3 font-medium grid grid-cols-1 lg:grid-cols-4 gap-x-3">
+                                    <p><span class="font-bold text-red-primary">Kode buku: </span>
+                                        {{ $item->book->kode_buku }}</p>
+                                    <p><span class="font-bold text-red-primary">Author: </span> {{ $item->book->author }}
+                                    </p>
+                                    <p><span class="font-bold text-red-primary">Penerbit:</span> {{ $item->book->penerbit }}
+                                    </p>
+                                    <p><span class="font-bold text-red-primary">Tgl pinjam:</span> {{ $item->peminjaman }}
+                                    </p>
+                                    <p><span class="font-bold text-red-primary">Kode rak:</span> 131231231</p>
+                                    <p><span class="font-bold text-red-primary">ISBN:</span> {{ $item->book->isbn }}</p>
+                                    <p><span class="font-bold text-red-primary">Halaman:</span>
+                                        {{ $item->book->jml_halaman }}
+                                        halaman</p>
+                                    <p><span class="font-bold text-red-primary">Jatuh tempo: </span>
+                                        {{ $item->jatuh_tempo }}</p>
                                 </div>
-                                <div class="flex justify-end text-center">
-                                    <div class="text-center">
-                                        <p>{!! $barcode(23874823472, 1, 40) !!}</p>
-                                        <p class="font-medium">23874823472</p>
+                                <div class="flex justify-between mt-4">
+                                    <div>
+                                        <a href="/detail-peminjaman">
+                                            <button
+                                                class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2.5 font-bold mr-2">Lihat
+                                                detail</button>
+                                        </a>
+                                        <a href="">
+                                            <button
+                                                class="border border-red-primary text-red-primary hover:bg-red-primary hover:text-white duration-300 rounded-md text-sm p-2.5 font-bold">Kembalikan
+                                                buku</button>
+                                        </a>
+                                    </div>
+                                    <div class="flex justify-end text-center">
+                                        <div class="text-center">
+                                            <p>{!! $barcode($item->kode_peminjaman, 1, 40) !!}</p>
+                                            <p class="font-medium">{{ $item->kode_peminjaman }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <?php else : ?>
-                <div class="flex justify-center">
-                    <img src="https://img.freepik.com/free-vector/ecommerce-web-page-concept-illustration_114360-8204.jpg?t=st=1718598345~exp=1718601945~hmac=c43c1f2d9c8c3f1dd252459a0d9d12ccc479a0a4d0c007e33521db51a41f363e&w=826"
-                        alt="" srcset="" width="300" class="block">
-                </div>
-                <h1 class="text-black text-center text-lg font-semibold">Belum ada produk yang masuk ke antrian</h1>
-                <?php endif; ?>
+                @empty
+                    <div class="flex justify-center">
+                        <img src="https://img.freepik.com/free-vector/ecommerce-web-page-concept-illustration_114360-8204.jpg?t=st=1718598345~exp=1718601945~hmac=c43c1f2d9c8c3f1dd252459a0d9d12ccc479a0a4d0c007e33521db51a41f363e&w=826"
+                            alt="" srcset="" width="300" class="block">
+                    </div>
+                    <h1 class="text-black text-center text-lg font-semibold">Belum ada produk yang masuk ke antrian</h1>
+                @endforelse
             </div>
             <div id="slide-display2" class="hidden">
-                <?php if (true) : ?>
-                <div class="border p-5 rounded-md shadow-md w-full mb-7">
-                    <div class="flex w-full mb-4">
-                        <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
-                            class="rounded-md w-28 self-start">
-                        <div class="text-xs ml-5 self-start w-full">
-                            <h1 class="text-base lg:text-lg font-bold mb-1">Kisah sang kancil</h1>
-                            <div class="mb-3 font-medium grid grid-cols-1 lg:grid-cols-3 gap-x-3">
-                                <p><span class="font-bold text-red-primary">Kode buku: </span> 23423423423</p>
-                                <p><span class="font-bold text-red-primary">Author: </span> Ambatukam</p>
-                                <p><span class="font-bold text-red-primary">Penerbit:</span> Ambamedia</p>
-                                <p><span class="font-bold text-red-primary">ISBN:</span> 13123432424</p>
-                                <p><span class="font-bold text-red-primary">Halaman:</span> 20 halaman</p>
-                                <p><span class="font-bold text-red-primary">Format:</span>
-                                    E-book
-                                </p>
+                @forelse ($e_books as $item)
+                    <div class="border p-5 rounded-md shadow-md w-full mb-7">
+                        <div class="flex w-full mb-4">
+                            <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
+                                class="rounded-md w-28 self-start">
+                            <div class="text-xs ml-5 self-start w-full">
+                                <h1 class="text-base lg:text-lg font-bold mb-1">{{ $item->book->judul }}</h1>
+                                <div class="mb-3 font-medium grid grid-cols-1 lg:grid-cols-3 gap-x-3">
+                                    <p><span class="font-bold text-red-primary">Kode buku: </span>
+                                        {{ $item->book->kode_buku }}</p>
+                                    <p><span class="font-bold text-red-primary">Author: </span> {{ $item->book->author }}
+                                    </p>
+                                    <p><span class="font-bold text-red-primary">Penerbit:</span>
+                                        {{ $item->book->penerbit }}
+                                    </p>
+                                    <p><span class="font-bold text-red-primary">ISBN:</span> {{ $item->book->isbn }}</p>
+                                    <p><span class="font-bold text-red-primary">Halaman:</span>
+                                        {{ $item->book->jml_halaman }} halaman</p>
+                                    <p><span class="font-bold text-red-primary">Format:</span>
+                                        {{-- {{ $item->book->format }} --}}
+                                    </p>
 
-                            </div>
-                            <div class="flex justify-between mt-4">
-                                <div>
-                                    <a href="">
-                                        <button
-                                            class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2.5 font-bold mr-2">Lanjutkan membaca</button>
-                                    </a>
                                 </div>
-                                <div class="flex justify-end text-center">
-                                    <div class="text-center">
-                                        <p>{!! $barcode(23874823472, 1, 40) !!}</p>
-                                        <p class="font-medium">23874823472</p>
+                                <div class="flex justify-between mt-4">
+                                    <div>
+                                        <a href="">
+                                            <button
+                                                class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2.5 font-bold mr-2">Lanjutkan
+                                                membaca</button>
+                                        </a>
+                                    </div>
+                                    <div class="flex justify-end text-center">
+                                        <div class="text-center">
+                                            <p>{!! $barcode(23874823472, 1, 40) !!}</p>
+                                            <p class="font-medium">23874823472</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <?php else : ?>
-                <div class="flex justify-center">
-                    <img src="https://img.freepik.com/free-vector/ecommerce-web-page-concept-illustration_114360-8204.jpg?t=st=1718598345~exp=1718601945~hmac=c43c1f2d9c8c3f1dd252459a0d9d12ccc479a0a4d0c007e33521db51a41f363e&w=826"
-                        alt="" srcset="" width="300" class="block">
-                </div>
-                <h1 class="text-black text-center text-lg font-semibold">Belum ada produk yang dikirim penjual</h1>
-                <?php endif; ?>
+                @empty
+                    <div class="flex justify-center">
+                        <img src="https://img.freepik.com/free-vector/ecommerce-web-page-concept-illustration_114360-8204.jpg?t=st=1718598345~exp=1718601945~hmac=c43c1f2d9c8c3f1dd252459a0d9d12ccc479a0a4d0c007e33521db51a41f363e&w=826"
+                            alt="" srcset="" width="300" class="block">
+                    </div>
+                    <h1 class="text-black text-center text-lg font-semibold">Belum ada produk yang dikirim penjual</h1>
+                @endforelse
             </div>
             <div id="slide-display3" class="hidden">
-                <?php if (true) : ?>
-                <div class="w-full border p-5 rounded-md shadow-md mb-7">
-                    <div>
-                        <div class="flex items-center mb-1 lg:mb-4">
-                            <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
-                                class="rounded-md self-start w-28">
-                            <div class="text-xs ml-5 mr-0 lg:mr-16 self-start">
-                                <a href="" class="inline-block">
-                                    <h1 class="text-base lg:text-lg font-bold">Lorem ipsum dolor sit amet consectetur
-                                        adipisicing elit.
-                                        Aliquam, mollitia? </h1>
-                                </a>
-                                <div>
-                                    <p class="text-base font-semibold">Berikan ulasanmu</p>
-                                    <form action="" method="post" enctype="multipart/form-data">
-                                        <div class="rate">
-                                            <input type="radio" id="star5" name="rating" value="5" required />
-                                            <label for="star5" title="5">5 stars</label>
-                                            <input type="radio" id="star4" name="rating" value="4" required />
-                                            <label for="star4" title="4">4 stars</label>
-                                            <input type="radio" id="star3" name="rating" value="3"
-                                                required />
-                                            <label for="star3" title="3">3 stars</label>
-                                            <input type="radio" id="star2" name="rating" value="2"
-                                                required />
-                                            <label for="star2" title="2">2 stars</label>
-                                            <input type="radio" id="star1" name="rating" value="1"
-                                                required />
-                                            <label for="star1" title="1">1 star</label>
-                                        </div>
-                                        <div class="hidden lg:block">
-                                            <textarea id="message" name="komentar" rows="3"
-                                                class="block p-2.5 max-w-xl w-full text-sm bg-gray-50 rounded-lg border focus:ring-red-500 focus:border-red-500 outline-none"
-                                                placeholder="Tulis komentar disini..." required></textarea>
-                                            <button type="submit"
-                                                class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-3 font-bold mt-2">Berikan
-                                                ulasan</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="block lg:hidden">
-                            <textarea id="message" name="komentar" rows="3"
-                                class="block p-2.5 max-w-xl w-full text-sm bg-gray-50 rounded-lg border focus:ring-red-500 focus:border-red-500 outline-none"
-                                placeholder="Tulis komentar disini..." required></textarea>
-                            <button type="submit"
-                                class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-3 font-bold mt-2">Berikan
-                                ulasan</button>
-                        </div>
-                    </div>
-                </div>
-                <?php else : ?>
-                <div class="flex justify-center">
-                    <img src="https://img.freepik.com/free-vector/ecommerce-web-page-concept-illustration_114360-8204.jpg?t=st=1718598345~exp=1718601945~hmac=c43c1f2d9c8c3f1dd252459a0d9d12ccc479a0a4d0c007e33521db51a41f363e&w=826"
-                        alt="" srcset="" width="300" class="block">
-                </div>
-                <h1 class="text-black text-center text-lg font-semibold">Belum ada produk yang selesai diproses</h1>
-                <?php endif; ?>
-            </div>
-            <div id="slide-display4" class="hidden">
-                <?php if (true) : ?>
-                <div class="w-full border p-5 rounded-md shadow-md mb-7">
-                    <div>
-                        <div class="flex items-center mb-4">
-                            <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
-                                class="rounded-md self-start w-28">
-                            <div class="text-xs ml-5 mr-0 lg:mr-16 self-center">
-                                <a href="" class="inline-block">
-                                    <h1 class="text-base lg:text-lg font-bold">Lorem ipsum dolor sit amet consectetur,
-                                        adipisicing elit.</h1>
-                                </a>
-                                <p class="text-lg font-semibold">Ulasan Anda</p>
-                                <div class="flex gap-6 w-full">
-                                    <div class="w-full">
-                                        <div class="rated">
-                                            <input type="radio" id="star5" checked disabled />
-                                            <label for="star5" title="5">5 stars</label>
-                                            <input type="radio" id="star4" checked disabled />
-                                            <label for="star4" title="4">4 stars</label>
-                                            <input type="radio" id="star3" checked disabled />
-                                            <label for="star3" title="3">3 stars</label>
-                                            <input type="radio" id="star2" checked disabled />
-                                            <label for="star2" title="2">2 stars</label>
-                                            <input type="radio" id="star1" checked"cked" disabled />
-                                            <label for="star1" title="1">1 star</label>
-                                        </div>
-                                        <textarea id="message" rows="3"
-                                            class="lg:block p-2.5 w-full text-sm bg-gray-50 rounded-lg border focus:ring-red-500 focus:border-red-500 outline-none hidden"
-                                            disabled>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit dolor sunt autem pariatur ut molestias odit deleniti fugit impedit atque?</textarea>
+                @forelse ($for_reviews as $item)
+                    <div class="w-full border p-5 rounded-md shadow-md mb-7">
+                        <div>
+                            <div class="flex items-center mb-1 lg:mb-4">
+                                <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
+                                    class="rounded-md self-start w-28">
+                                <div class="text-xs ml-5 mr-0 lg:mr-16 self-start">
+                                    <a href="" class="inline-block">
+                                        <h1 class="text-base lg:text-lg font-bold">{{ $item->judul }}</h1>
+                                    </a>
+                                    <div>
+                                        <p class="text-base font-semibold">Berikan ulasanmu</p>
+                                        <form action="" method="post">
+                                            @csrf
+                                            <div class="rate">
+                                                <input type="radio" id="star5" name="rating" value="5"
+                                                    required />
+                                                <label for="star5" title="5">5 stars</label>
+                                                <input type="radio" id="star4" name="rating" value="4"
+                                                    required />
+                                                <label for="star4" title="4">4 stars</label>
+                                                <input type="radio" id="star3" name="rating" value="3"
+                                                    required />
+                                                <label for="star3" title="3">3 stars</label>
+                                                <input type="radio" id="star2" name="rating" value="2"
+                                                    required />
+                                                <label for="star2" title="2">2 stars</label>
+                                                <input type="radio" id="star1" name="rating" value="1"
+                                                    required />
+                                                <label for="star1" title="1">1 star</label>
+                                            </div>
+                                            <div class="hidden lg:block">
+                                                <textarea id="message" name="komentar" rows="3"
+                                                    class="block p-2.5 max-w-xl w-full text-sm bg-gray-50 rounded-lg border focus:ring-red-500 focus:border-red-500 outline-none"
+                                                    placeholder="Tulis komentar disini..." required></textarea>
+                                                <button type="submit"
+                                                    class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-3 font-bold mt-2">Berikan
+                                                    ulasan</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
+                            <div class="block lg:hidden">
+                                <textarea id="message" name="komentar" rows="3"
+                                    class="block p-2.5 max-w-xl w-full text-sm bg-gray-50 rounded-lg border focus:ring-red-500 focus:border-red-500 outline-none"
+                                    placeholder="Tulis komentar disini..." required></textarea>
+                                <button type="submit"
+                                    class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-3 font-bold mt-2">Berikan
+                                    ulasan</button>
+                            </div>
                         </div>
-                        <textarea id="message" rows="3"
-                            class="block p-2.5 w-full text-sm bg-gray-50 rounded-lg border focus:ring-red-500 focus:border-red-500 outline-none lg:hidden"
-                            disabled>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit dolor sunt autem pariatur ut molestias odit deleniti fugit impedit atque?</textarea>
                     </div>
-                </div>
-                <?php else : ?>
-                <div class="flex justify-center">
-                    <img src="https://img.freepik.com/free-vector/status-update-concept-illustration_114360-1567.jpg?w=826&t=st=1718601041~exp=1718601641~hmac=6f6bb3f9c3ee3f3bd06712581820c04a984cbf09f413d2d646fbc93cddcac274"
-                        alt="" srcset="" width="300" class="block">
-                </div>
-                <h1 class="text-black text-center text-lg font-semibold">Belum ada produk yang kamu berikan ulasan</h1>
-                <?php endif; ?>
+                @empty
+                    <div class="flex justify-center">
+                        <img src="https://img.freepik.com/free-vector/ecommerce-web-page-concept-illustration_114360-8204.jpg?t=st=1718598345~exp=1718601945~hmac=c43c1f2d9c8c3f1dd252459a0d9d12ccc479a0a4d0c007e33521db51a41f363e&w=826"
+                            alt="" srcset="" width="300" class="block">
+                    </div>
+                    <h1 class="text-black text-center text-lg font-semibold">Belum ada produk yang selesai diproses</h1>
+                @endforelse
+            </div>
+            <div id="slide-display4" class="hidden">
+                @forelse ($reviews as $item)
+                    <div class="w-full border p-5 rounded-md shadow-md mb-7">
+                        <div>
+                            <div class="flex items-center mb-4">
+                                <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
+                                    class="rounded-md self-start w-28">
+                                <div class="text-xs ml-5 mr-0 lg:mr-16 self-center">
+                                    <a href="" class="inline-block">
+                                        <h1 class="text-base lg:text-lg font-bold">{{ $item->book->judul }}</h1>
+                                    </a>
+                                    <p class="text-lg font-semibold">Ulasan Anda</p>
+                                    <div class="flex gap-6 w-full">
+                                        <div class="w-full">
+                                            <div class="rated">
+                                                <input type="radio" id="star5" checked disabled />
+                                                <label for="star5" title="5">5 stars</label>
+                                                <input type="radio" id="star4" checked disabled />
+                                                <label for="star4" title="4">4 stars</label>
+                                                <input type="radio" id="star3" checked disabled />
+                                                <label for="star3" title="3">3 stars</label>
+                                                <input type="radio" id="star2" checked disabled />
+                                                <label for="star2" title="2">2 stars</label>
+                                                <input type="radio" id="star1" checked"cked" disabled />
+                                                <label for="star1" title="1">1 star</label>
+                                            </div>
+                                            <textarea id="message" rows="3"
+                                                class="lg:block p-2.5 w-full text-sm bg-gray-50 rounded-lg border focus:ring-red-500 focus:border-red-500 outline-none hidden"
+                                                disabled>{{ $item->komentar }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <textarea id="message" rows="3"
+                                class="block p-2.5 w-full text-sm bg-gray-50 rounded-lg border focus:ring-red-500 focus:border-red-500 outline-none lg:hidden"
+                                disabled>{{ $item->komentar }}</textarea>
+                        </div>
+                    </div>
+                @empty
+                    <div class="flex justify-center">
+                        <img src="https://img.freepik.com/free-vector/status-update-concept-illustration_114360-1567.jpg?w=826&t=st=1718601041~exp=1718601641~hmac=6f6bb3f9c3ee3f3bd06712581820c04a984cbf09f413d2d646fbc93cddcac274"
+                            alt="" srcset="" width="300" class="block">
+                    </div>
+                    <h1 class="text-black text-center text-lg font-semibold">Belum ada produk yang kamu berikan ulasan</h1>
+                @endforelse
             </div>
         </div>
     </section>

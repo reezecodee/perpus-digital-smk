@@ -14,4 +14,9 @@ class Book extends Model
     {
         return $this->hasMany(LikedBook::class, 'buku_id', 'id');
     }
+
+    public function borrower()
+    {
+        return $this->hasMany(Borrower::class, 'buku_id', 'id');
+    }
 }

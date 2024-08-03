@@ -16,10 +16,12 @@ return new class extends Migration
             $table->uuid('peminjam_id');
             $table->uuid('buku_id');
             $table->uuid('denda_id');
+            $table->string('kode_peminjaman')->unique();
             $table->timestamp('peminjaman');
             $table->timestamp('pengembalian')->nullable();
             $table->date('jatuh_tempo');
             $table->text('keterangan')->nullable();
+            $table->enum('status', ['Masa pinjam', 'Masa pengembalian', 'Terkena denda', 'Sudah dikembalikan']);
             $table->timestamps();
 
             $table->foreign('peminjam_id')->references('id')->on('users')->onDelete('cascade');

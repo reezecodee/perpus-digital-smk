@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Peminjam;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\Borrower;
 use App\Models\LikedBook;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Picqer\Barcode\BarcodeGeneratorHTML;
 
@@ -35,6 +37,17 @@ class BookController extends Controller
     {
         return view('peminjam_views.rak_buku', [
             'title' => 'Rak Buku Saya',
+            'books' => Borrower::where('peminjam_id', auth()->user()->id)
+                ->where('status', '!=', 'Sudah dikembalikan')
+                ->whereHas('book', function ($query) {
+                    $query->where('format', 'Fisik');
+                })->with('book')->get(),
+            'e_books' => Borrower::where('peminjam_id', auth()->user()->id)
+                ->whereHas('book', function ($query) {
+                    $query->where('format', 'Elektronik');
+                })->with('book')->get(),
+            'for_reviews' => Borrower::where('peminjam_id', auth()->user()->id)->where('status', 'Sudah dikembalikan')->get(),
+            'reviews' => Review::where('peminjam_id', auth()->user()->id)->get(),
             'barcode' => function ($number, $widthFactor = 2, $height = 30) {
                 $generatorHTML = new BarcodeGeneratorHTML();
                 return $generatorHTML->getBarcode("$number", $generatorHTML::TYPE_CODE_128, $widthFactor, $height);

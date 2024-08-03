@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(LikedBook::class, 'peminjam_id', 'id');
     }
+
+    public function borrower()
+    {
+        return $this->hasMany(Borrower::class, 'peminjam_id', 'id');
+    }
 }

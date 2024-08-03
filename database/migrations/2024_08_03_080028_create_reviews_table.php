@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fines', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('buku_id'); // Foreign key UUID
-            $table->string('denda_terlambat');
-            $table->string('denda_rusak');
-            $table->string('denda_tidak_kembali');
+            $table->uuid('buku_id');
+            $table->uuid('peminjam_id');
+            $table->char('rating', 1);
+            $table->text('komentar');
             $table->timestamps();
 
             $table->foreign('buku_id')->references('id')->on('books')->onDelete('cascade');
+            $table->foreign('peminjam_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fines');
+        Schema::dropIfExists('reviews');
     }
 };
