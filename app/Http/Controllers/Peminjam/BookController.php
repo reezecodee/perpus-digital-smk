@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\LikedBook;
 use Illuminate\Http\Request;
+use Picqer\Barcode\BarcodeGeneratorHTML;
 
 class BookController extends Controller
 {
@@ -33,7 +34,11 @@ class BookController extends Controller
     public function show_my_shelf()
     {
         return view('peminjam_views.rak_buku', [
-            'title' => 'Rak Buku Saya'
+            'title' => 'Rak Buku Saya',
+            'barcode' => function ($number, $widthFactor = 2, $height = 30) {
+                $generatorHTML = new BarcodeGeneratorHTML();
+                return $generatorHTML->getBarcode("$number", $generatorHTML::TYPE_CODE_128, $widthFactor, $height);
+            },
         ]);
     }
 
