@@ -12,7 +12,7 @@ class NotificationContrroller extends Controller
     {
         return view('peminjam_views.notifikasi', [
             'title' => 'Notifikasi Masuk',
-            'notifications' => Notification::where('penerima_id', auth()->user()->id)
+            'notifications' => Notification::where('penerima_id', auth()->user()->id)->get()
         ]);
     }
 

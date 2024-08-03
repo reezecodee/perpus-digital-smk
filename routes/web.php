@@ -29,6 +29,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome', ['title' => 'Selamat datang di E-perpustakaan SITIKA']);
 });
+Route::get('/test', function () {
+    return view('test', ['title' => 'Test only']);
+});
 
 Route::prefix('auth')->middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'show_login'])->name('show_login');

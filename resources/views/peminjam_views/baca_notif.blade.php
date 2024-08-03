@@ -16,7 +16,7 @@
                         </div>
                         <hr class="my-4">
                         <p class="text-justify mb-6">{{ $data->pesan }}</p>
-                        <a href="/notifikasi" class="inline-block">
+                        <a href="{{ route('peminjam.notif') }}" class="inline-block">
                             <button
                                 class="bg-red-primary p-2 text-sm font-semibold rounded-md text-white hover:bg-red-500 text-end">Kembali</button>
                         </a>

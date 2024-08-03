@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class Notification extends Model
 {
     use HasFactory, HasUuids;
+
+    public function sender()
+    {
+        return $this->belongsTo(User::class, 'pengirim_id', 'id');
+    }
 }

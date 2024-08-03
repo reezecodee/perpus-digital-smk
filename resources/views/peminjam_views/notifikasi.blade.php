@@ -7,14 +7,14 @@
                     <h1 class="text-xl font-bold mb-1">Notifikasi</h1>
                     <hr class="mb-3">
                     @forelse ($notifications as $item)
-                        <div class="border rounded-lg p-2 mb-3">
-                            <div>
-                                <a href="{{ route('peminjam.read_notif') }}/{{ $item->id }}">
-                                    <h1 class="text-lg font-bold leading-5 lg:leading-none">{{ $item->judul }}</h1>
-                                </a>
+                        <div class="border rounded-lg p-3 mb-3 group">
+                            <a href="/notifikasi/baca/{{ $item->id }}" class="block">
+                                <p class="text-end text-xs font-medium">3 menit yang lalu</p>
+                                <h1 class="text-lg font-bold leading-5 lg:leading-none mb-2 group-hover:text-red-primary">
+                                    {{ $item->judul }}</h1>
                                 <p class="text-xs lg:text-sm">{{ $item->pesan }}</p>
                                 <p class="text-xs font-bold">Pengirim: {{ $item->sender->nama }}</p>
-                            </div>
+                            </a>
                         </div>
                     @empty
                         <div class="flex justify-center">

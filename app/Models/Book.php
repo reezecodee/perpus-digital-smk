@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory, HasUuids;
+
+    public function liked_book()
+    {
+        return $this->hasMany(LikedBook::class, 'buku_id', 'id');
+    }
 }

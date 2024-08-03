@@ -9,7 +9,8 @@
                 <p id="queue"
                     class="text-red-primary hover:text-red-primary font-bold p-1 border-b-2 border-red-primary cursor-pointer text-xs lg:text-base">
                     Pinjaman</p>
-                <p id="send" class="font-bold p-1 hover:text-red-primary cursor-pointer text-xs lg:text-base">E-book</p>
+                <p id="send" class="font-bold p-1 hover:text-red-primary cursor-pointer text-xs lg:text-base">E-book
+                </p>
                 <p id="finish" class="font-bold p-1 hover:text-red-primary cursor-pointer text-xs lg:text-base">Beri
                     ulasan</p>
                 <p id="comment" class="font-bold p-1 hover:text-red-primary cursor-pointer text-xs lg:text-base">Sudah
@@ -17,7 +18,7 @@
             </div>
             <div id="slide-display1" class="block">
                 <?php if (true) : ?>
-                <a href="" class="inline-block">
+                <a href="" class="inline-block border p-5 rounded-md shadow-md w-full mb-7">
                     <div class="flex max-w-full w-full mb-4">
                         <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
                             class="rounded-md w-28">
@@ -40,7 +41,7 @@
             </div>
             <div id="slide-display2" class="hidden">
                 <?php if (true) : ?>
-                <a href="" class="inline-block">
+                <a href="" class="inline-block border p-5 rounded-md shadow-md w-full mb-7">
                     <div class="flex max-w-full w-full mb-4">
                         <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
                             class="rounded-md w-28">

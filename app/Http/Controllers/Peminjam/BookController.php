@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Peminjam;
 
 use App\Http\Controllers\Controller;
+use App\Models\Book;
+use App\Models\LikedBook;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -45,7 +47,8 @@ class BookController extends Controller
     public function show_liked_book()
     {
         return view('peminjam_views.buku_disukai', [
-            'title' => 'Buku yang Anda Sukai'
+            'title' => 'Buku yang Anda Sukai',
+            'liked_books' => LikedBook::where('peminjam_id', auth()->user()->id)->get()
         ]);
     }
 
