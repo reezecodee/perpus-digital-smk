@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class Fine extends Model
 {
     use HasFactory, HasUuids;
+
+    public function borrower()
+    {
+        return $this->hasMany(Borrower::class, 'denda_id', 'id');
+    }
 }

@@ -35,30 +35,41 @@ class BookController extends Controller
 
     public function show_my_shelf()
     {
+        $books = Borrower::where('peminjam_id', auth()->user()->id)->where(
+            'status',
+            '!=',
+            'Sudah dikembalikan'
+        )->whereHas('book', function ($query) {
+            $query->where('format', 'Fisik');
+        })->with('book')->get();
+
+        $e_books = Borrower::where('peminjam_id', auth()->user()->id)
+            ->whereHas('book', function ($query) {
+                $query->where('format', 'Elektronik');
+            })->with('book')->get();
+
+        $for_reviews = Borrower::where('peminjam_id', auth()->user()->id)->where('status', 'Sudah dikembalikan')->get();
+
         return view('peminjam_views.rak_buku', [
             'title' => 'Rak Buku Saya',
-            'books' => Borrower::where('peminjam_id', auth()->user()->id)
-                ->where('status', '!=', 'Sudah dikembalikan')
-                ->whereHas('book', function ($query) {
-                    $query->where('format', 'Fisik');
-                })->with('book')->get(),
-            'e_books' => Borrower::where('peminjam_id', auth()->user()->id)
-                ->whereHas('book', function ($query) {
-                    $query->where('format', 'Elektronik');
-                })->with('book')->get(),
-            'for_reviews' => Borrower::where('peminjam_id', auth()->user()->id)->where('status', 'Sudah dikembalikan')->get(),
+            'books' => $books,
+            'e_books' => $e_books,
+            'for_reviews' => $for_reviews,
             'reviews' => Review::where('peminjam_id', auth()->user()->id)->get(),
-            'barcode' => function ($number, $widthFactor = 2, $height = 30) {
-                $generatorHTML = new BarcodeGeneratorHTML();
-                return $generatorHTML->getBarcode("$number", $generatorHTML::TYPE_CODE_128, $widthFactor, $height);
+            'barcode' => function ($data, $widthFactor = 2, $height = 30) {
+                return $this->get_barcode($data, $widthFactor, $height);
             },
         ]);
     }
 
-    public function show_detail_rent()
+    public function show_detail_rent($id)
     {
         return view('peminjam_views.detail_peminjaman', [
-            'title' => 'Detail Peminjaman'
+            'title' => 'Detail Peminjaman',
+            'data' => Borrower::find($id),
+            'barcode' => function ($data, $widthFactor = 2, $height = 30) {
+                return $this->get_barcode($data, $widthFactor, $height);
+            }
         ]);
     }
 
@@ -82,5 +93,11 @@ class BookController extends Controller
         return view('peminjam_views.hasil_pencarian', [
             'title' => 'Hasil Pencarian Buku'
         ]);
+    }
+
+    private function get_barcode($data, $widthFactor = 2, $height = 30)
+    {
+        $generatorHTML = new BarcodeGeneratorHTML();
+        return $generatorHTML->getBarcode("$data", $generatorHTML::TYPE_CODE_128, $widthFactor, $height);
     }
 }

@@ -18,7 +18,7 @@
             </div>
             <div id="slide-display1" class="block">
                 @forelse ($books as $item)
-                    <div class="border p-5 rounded-md shadow-md w-full mb-7 relative overflow-hidden">
+                    <div class="border p-5 rounded-md @if($item->status == 'Masa pengembalian') bg-yellow-50 @elseif($item->status == 'Terkena denda') bg-red-100 @endif shadow-md w-full mb-7 relative overflow-hidden">
                         <div class="flex justify-end">
                             <div
                                 class="bg-red-primary text-white text-xs p-1 absolute right-0 w-40 top-0 text-center font-medium">
@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="flex justify-between mt-4">
                                     <div>
-                                        <a href="/detail-peminjaman">
+                                        <a href="/detail-peminjaman/{{ $item->id }}">
                                             <button
                                                 class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2.5 font-bold mr-2">Lihat
                                                 detail</button>
@@ -97,7 +97,7 @@
                                     <p><span class="font-bold text-red-primary">Halaman:</span>
                                         {{ $item->book->jml_halaman }} halaman</p>
                                     <p><span class="font-bold text-red-primary">Format:</span>
-                                        {{-- {{ $item->book->format }} --}}
+                                        {{ $item->book->format }}
                                     </p>
 
                                 </div>

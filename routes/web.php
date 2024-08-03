@@ -50,7 +50,7 @@ Route::middleware(['auth', 'role:Peminjam'])->group(function () {
     Route::get('/konfirmasi-peminjaman', [BookController::class, 'show_confirm'])->name('peminjam.confirm');
     Route::get('/peminjaman-sukses', [BookController::class, 'show_success'])->name('peminjam.success');
     Route::get('/rak-buku-saya', [BookController::class, 'show_my_shelf'])->name('peminjam.shelf');
-    Route::get('/detail-peminjaman', [BookController::class, 'show_detail_rent'])->name('peminjam.detail');
+    Route::get('/detail-peminjaman/{id}', [BookController::class, 'show_detail_rent'])->name('peminjam.detail');
     Route::get('/buku-disukai', [BookController::class, 'show_liked_book'])->name('peminjam.liked');
     Route::get('/semua-buku', [BookController::class, 'show_all_books'])->name('peminjam.all_books');
     Route::get('/hasil-pencarian', [BookController::class, 'show_search_result'])->name('peminjam.search');
