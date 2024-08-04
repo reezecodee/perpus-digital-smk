@@ -3,6 +3,7 @@
     <section class="mx-auto px-3 lg:px-12 text-gray-600">
         <div class="pt-24 lg:pt-36">
             <form method="post">
+                @csrf
                 <div class="flex flex-wrap justify-between">
                     <div class="self-start max-w-2xl w-full">
                         <div class="w-full rounded-xl border p-4 mb-5">
@@ -10,12 +11,11 @@
                             </h2>
                             <hr class="mb-4">
                             <div class="flex justify-between items-center">
-                                <p class="font-semibold text-base">Penerima : Ambatukam |
-                                    081298897305</p>
+                                <p class="font-semibold text-base">Peminjam : {{ auth()->user()->nama }} |
+                                    {{ auth()->user()->telepon }}</p>
                             </div>
                             <p class="text-sm mb-2 font-medium"><i class="fas fa-map-marker-alt text-red-primary"></i>
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur sed unde repudiandae
-                                fugit suscipit velit!
+                                {{ auth()->user()->alamat }}
                             </p>
                             <textarea id="message" name="catatan_kurir" rows="3"
                                 class="block p-2.5 w-full text-sm bg-gray-50 rounded-lg border focus:ring-red-500 focus:border-red-500 outline-none"
@@ -29,57 +29,38 @@
                                 <img src="https://ebooks.gramedia.com/ebook-covers/94048/image_highres/BLK_EST1721993497003.jpg"
                                     alt="" width="100" class="rounded-md self-start">
                                 <div class="self-start">
-                                    <h3 class="font-bold text-lg mb-2">Lorem ipsum dolor sit amet consectetur adipisicing
-                                        elit. Aliquid, culpa.</h3>
-                                    <div class="flex justify-between items-center">
-                                        <div>
-                                            <p class="text-xs font-medium">Jumlah pinjam: 1</p>
-                                            <p class="text-xs font-medium">Stok tersisa: 1</p>
-                                            <p class="text-xs font-medium">Tgl kembali: 20 Juni 2023</p>
-                                        </div>
-                                        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
-                                            class="text-white bg-red-primary hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center mt-6 hidden lg:inline-flex"
-                                            type="button">Biaya denda <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2" d="m1 1 4 4 4-4" />
-                                            </svg>
-                                        </button>
+                                    <h3 class="font-bold text-lg mb-2">{{ $data->judul }}</h3>
+                                    <p class="text-xs font-medium">Tgl pinjam: 20 Juni 2023</p>
+                                    <p class="text-xs font-medium">Jatuh tempo: 20 Juni 2023</p>
+                                    <div class="p-4 mb-4 mt-4 text-sm text-blue-800 rounded-lg bg-blue-50 font-medium"
+                                        role="alert">
+                                        Anda bisa mengajukan durasi peminjaman,
+                                        namun durasi peminjaman harus menunggu izin dari pustakawan
                                     </div>
-                                    <!-- Dropdown menu -->
-                                    <div id="dropdown"
-                                        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                            aria-labelledby="dropdownDefaultButton">
-                                            <li>
-                                                <a href="#"
-                                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign
-                                                    out</a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <p class="font-semibold text-sm mb-1">Durasi pinjam (opsional)</p>
+                                    <input type="date" min="{{ date('Y-m-d') }}"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-primary focus:border-red-500 block w-full p-2.5">
                                 </div>
                             </div>
-                            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
-                                class="text-white w-full bg-red-primary hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center mt-6 inline-flex lg:hidden"
-                                type="button">Biaya denda <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m1 1 4 4 4-4" />
-                                </svg>
-                            </button>
+                        </div>
+                        <div class="w-full rounded-xl border p-4 mb-5">
+                            <h2 class="text-xl font-bold mb-1.5">Lokasi rak buku <i
+                                    class="fas fa-table text-red-primary"></i></h2>
+                            <hr class="mb-4">
+                            <div class="p-4 mb-4 mt-4 text-sm text-blue-800 rounded-lg bg-blue-50 font-medium"
+                                role="alert">
+                                Pastikan Anda mengambil buku di lokasi yang sudah ditentukan
+                            </div>
+                            <div class="flex items-center gap-4 mb-3">
+                                <img src="https://www.svgrepo.com/show/19065/shelves.svg" alt="" srcset=""
+                                    class="w-20">
+                                <div class="text-sm">
+                                    <p class="font-semibold"><span class="text-red-primary">Nama rak:</span> Ambaturak</p>
+                                    <p class="font-semibold"><span class="text-red-primary">Kode rak:</span> 19327831</p>
+                                    <p class="font-semibold"><span class="text-red-primary">Salinan serupa:</span> 20 buku
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="self-start max-w-full lg:max-w-md w-full">
@@ -88,23 +69,25 @@
                             </h2>
                             <p class="mb-2 text-sm font-semibold text-red-primary">Total denda yang harus kamu bayarkan jika
                                 buku
-                                rusak, hilang, dan terlambat.
+                                rusak, tidak kembali, dan terlambat.
                             </p>
                             <hr class="mb-4">
                             <div class="flex items-center gap-4 mb-3">
                                 <img src="https://cdn-icons-png.flaticon.com/128/3982/3982575.png" alt=""
                                     width="50">
                                 <div class="flex items-center">
-                                    <p class="text-sm font-semibold mr-0 lg:mr-40">Denda buku rusak <br><span class="text-base">Rp.
-                                            20.000</span></p>
+                                    <p class="text-sm font-semibold mr-0 lg:mr-40">Denda buku rusak <br><span
+                                            class="text-base">Rp.
+                                            {{ number_format($data->fine->denda_rusak, 0, ',', '.') }}</span></p>
                                 </div>
                             </div>
                             <div class="flex items-center gap-4 mb-3">
                                 <img src="https://cdn-icons-png.flaticon.com/128/12376/12376575.png" alt=""
                                     width="50">
                                 <div class="flex items-center">
-                                    <p class="text-sm font-semibold mr-0 lg:mr-40">Denda buku hilang <br><span class="text-base">Rp.
-                                            20.000</span></p>
+                                    <p class="text-sm font-semibold mr-0 lg:mr-40">Denda buku tidak kembali <br><span
+                                            class="text-base">Rp.
+                                            {{ number_format($data->fine->denda_tidak_kembali, 0, ',', '.') }}</span></p>
                                 </div>
                             </div>
                             <div class="flex items-center gap-4 mb-3">
@@ -112,8 +95,7 @@
                                     width="50">
                                 <div class="flex items-center">
                                     <p class="text-sm font-semibold mr-0 lg:mr-40">Denda buku terlambat <br><span
-                                            class="text-base">Rp.
-                                            20.000</span></p>
+                                            class="text-base">Rp. {{ number_format($data->fine->denda_terlambat, 0, ',', '.') }}</span></p>
                                 </div>
                             </div>
                         </div>
@@ -141,13 +123,37 @@
                                     required>
                                 <label for="default-checkbox"
                                     class="ms-4 text-sm font-medium text-gray-900 dark:text-gray-300 text-justify">Saya
-                                    Atyla Azfa Al Harits, bersedia ditindak jalur hukum apabila saya dengan sengaja tidak
+                                    <b>{{ auth()->user()->nama }}</b>, bersedia ditindak jalur hukum apabila saya dengan
+                                    sengaja tidak
                                     membayar denda jika saya menghilangkan, merusak, dan terlambat mengembalikan
                                     buku.</label>
                             </div>
-                            <button type="submit"
+                            <button type="button" data-modal-target="popup-modal" data-modal-toggle="popup-modal"
                                 class="bg-red-primary hover:bg-red-500 p-2.5 text-white w-full font-bold rounded-lg">Konfirmasi
                                 peminjaman</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <div class="relative p-4 w-full max-w-md max-h-full">
+                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center " data-modal-hide="popup-modal">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                            <div class="p-4 md:p-5 text-center">
+                                <svg class="mx-auto mb-4 text-red-primary w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                </svg>
+                                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Anda akan meminjam buku ini? pastikan semuanya sudah benar</h3>
+                                <button data-modal-hide="popup-modal" type="submit" class="text-white bg-red-primary hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                    Ya, sudah benar
+                                </button>
+                                <button data-modal-hide="popup-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Belum, batalkan</button>
+                            </div>
                         </div>
                     </div>
                 </div>

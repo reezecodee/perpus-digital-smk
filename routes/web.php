@@ -46,10 +46,11 @@ Route::middleware(['auth', 'role:Peminjam'])->group(function () {
     Route::get('/overview-profile', [ProfileController::class, 'show_overview'])->name('peminjam.overview');
     Route::get('/riwayat-peminjaman', [ProfileController::class, 'show_history'])->name('peminjam.history');
     Route::get('/ganti-password', [ProfileController::class, 'show_ch_password'])->name('peminjam.ch_password');
-    Route::get('/buku', [BookController::class, 'show_book'])->name('peminjam.book');
-    Route::get('/konfirmasi-peminjaman', [BookController::class, 'show_confirm'])->name('peminjam.confirm');
+    Route::get('/buku/{id}', [BookController::class, 'show_book'])->name('peminjam.book');
+    Route::get('/konfirmasi-peminjaman/{id}', [BookController::class, 'show_confirm'])->name('peminjam.confirm');
     Route::get('/peminjaman-sukses', [BookController::class, 'show_success'])->name('peminjam.success');
     Route::get('/rak-buku-saya', [BookController::class, 'show_my_shelf'])->name('peminjam.shelf');
+    Route::get('/baca-e-book', [BookController::class, 'show_read_e_book'])->name('peminjam.read_e_book');
     Route::get('/detail-peminjaman/{id}', [BookController::class, 'show_detail_rent'])->name('peminjam.detail');
     Route::get('/buku-disukai', [BookController::class, 'show_liked_book'])->name('peminjam.liked');
     Route::get('/semua-buku', [BookController::class, 'show_all_books'])->name('peminjam.all_books');

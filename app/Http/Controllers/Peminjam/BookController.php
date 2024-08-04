@@ -12,17 +12,21 @@ use Picqer\Barcode\BarcodeGeneratorHTML;
 
 class BookController extends Controller
 {
-    public function show_book()
+    public function show_book($id)
     {
         return view('peminjam_views.buku.detail_buku', [
-            'title' => 'Detail Buku'
+            'title' => 'Detail Buku',
+            'data' => Book::find($id),
+            'likes' => count(LikedBook::where('buku_id', $id)->get()),
+            'reviews' => Review::where('buku_id', $id)->get(),
+            'rating' => number_format((float)Review::where('buku_id', $id)->avg('rating'), 1, '.', '')
         ]);
     }
-
-    public function show_confirm()
+    public function show_confirm($id)
     {
         return view('peminjam_views.buku.konfirmasi_peminjaman', [
-            'title' => 'Konfirmasi Peminjaman'
+            'title' => 'Konfirmasi Peminjaman',
+            'data' => Book::with('fine')->find($id),
         ]);
     }
 
@@ -59,6 +63,13 @@ class BookController extends Controller
             'barcode' => function ($data, $widthFactor = 2, $height = 30) {
                 return $this->get_barcode($data, $widthFactor, $height);
             },
+        ]);
+    }
+
+    public function show_read_e_book()
+    {
+        return view('peminjam_views.buku.baca_e_book', [
+            'title' => 'Baca E-Book'
         ]);
     }
 

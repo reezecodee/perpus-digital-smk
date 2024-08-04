@@ -24,4 +24,14 @@ class Book extends Model
     {
         return $this->belongsTo(Category::class, 'kategori_id', 'id');
     }
+
+    public function review()
+    {
+        return $this->hasMany(Review::class, 'buku_id', 'id');
+    }
+
+    public function fine()
+    {
+        return $this->hasOne(Fine::class, 'buku_id', 'id');
+    }
 }
