@@ -66,10 +66,10 @@ class BookController extends Controller
         ]);
     }
 
-    public function show_read_e_book()
+    public function show_read_e_book($id)
     {
         return view('peminjam_views.buku.baca_e_book', [
-            'title' => 'Baca E-Book'
+            'title' => 'Baca E-Book',
         ]);
     }
 

@@ -228,13 +228,13 @@
                                     @endif
                                 </th>
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ $data->fine->denda_terlambat }}
+                                    {{ formatRupiah($data->fine->denda_terlambat) }}
                                 </th>
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ $data->fine->denda_rusak }}
+                                    {{ formatRupiah($data->fine->denda_rusak) }}
                                 </th>
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ $data->fine->denda_tidak_kembali }}
+                                    {{ formatRupiah($data->fine->denda_tidak_kembali) }}
                                 </th>
                             </tr>
                         </tbody>

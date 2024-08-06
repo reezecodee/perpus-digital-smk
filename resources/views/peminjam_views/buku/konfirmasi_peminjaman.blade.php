@@ -77,8 +77,8 @@
                                     width="50">
                                 <div class="flex items-center">
                                     <p class="text-sm font-semibold mr-0 lg:mr-40">Denda buku rusak <br><span
-                                            class="text-base">Rp.
-                                            {{ number_format($data->fine->denda_rusak, 0, ',', '.') }}</span></p>
+                                            class="text-base">
+                                            {{ formatRupiah($data->fine->denda_rusak) }}</span></p>
                                 </div>
                             </div>
                             <div class="flex items-center gap-4 mb-3">
@@ -86,8 +86,8 @@
                                     width="50">
                                 <div class="flex items-center">
                                     <p class="text-sm font-semibold mr-0 lg:mr-40">Denda buku tidak kembali <br><span
-                                            class="text-base">Rp.
-                                            {{ number_format($data->fine->denda_tidak_kembali, 0, ',', '.') }}</span></p>
+                                            class="text-base">
+                                            {{ formatRupiah($data->fine->denda_tidak_kembali) }}</span></p>
                                 </div>
                             </div>
                             <div class="flex items-center gap-4 mb-3">
@@ -95,7 +95,7 @@
                                     width="50">
                                 <div class="flex items-center">
                                     <p class="text-sm font-semibold mr-0 lg:mr-40">Denda buku terlambat <br><span
-                                            class="text-base">Rp. {{ number_format($data->fine->denda_terlambat, 0, ',', '.') }}</span></p>
+                                            class="text-base">{{ formatRupiah($data->fine->denda_terlambat) }}</span></p>
                                 </div>
                             </div>
                         </div>
