@@ -5,9 +5,9 @@
                 <a href="{{ route('peminjam.dashboard') }}" class="hidden lg:inline">
                     <img src="/assets/logo.svg" width="145" alt="" srcset="">
                 </a>
-                <form action="" method="get" class="relative">
+                <form action="/hasil-pencarian" method="get" class="relative">
                     @csrf
-                    <input type="text" name="q" value=""
+                    <input type="text" name="q" value="{{ request()->query('q') }}"
                         class="bg-white py-2.5 px-3 rounded-md w-[17rem] lg:w-[24rem] text-sm placeholder:text-black text-black font-semibold focus:border-none focus:outline-none"
                         placeholder="Cari buku yang kamu sukai..." autocomplete="off">
                     <div class="absolute right-0 top-0" style="margin-top: 4px; margin-right: 8px;">

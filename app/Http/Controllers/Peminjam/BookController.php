@@ -70,6 +70,7 @@ class BookController extends Controller
     {
         return view('peminjam_views.buku.baca_e_book', [
             'title' => 'Baca E-Book',
+            'book' => Book::find($id),
         ]);
     }
 
@@ -92,17 +93,72 @@ class BookController extends Controller
         ]);
     }
 
-    public function show_all_books()
+    public function show_all_books(Request $request)
     {
+        $format = $request->query('format');
+        $filter = $request->query('filter');
+        $query = $request->query('q') ?? '';
+
+        $booksQuery = Book::where('format', $format);
+
+        if (!$request->has('_token')) {
+            return view('peminjam_views.buku.semua_buku', [
+                'title' => 'Semua Buku Perpustakaan',
+                'books' => $booksQuery->paginate(10),
+                'format' => $format
+            ]);
+        }
+
+        $booksQuery = Book::where('format', $format);
+
+        if (!empty($query)) {
+            $booksQuery->where('judul', 'like', '%' . $query . '%');
+        }
+
+        if ($filter == 'judul') {
+            $booksQuery->orderBy('judul', 'asc');
+        } elseif ($filter == 'terbaru') {
+            $booksQuery->orderBy('created_at', 'desc');
+        } elseif ($filter == 'terdahulu') {
+            $booksQuery->orderBy('created_at', 'asc');
+        }
+
+        $get_books = $booksQuery->paginate(10);
+
         return view('peminjam_views.buku.semua_buku', [
-            'title' => 'Semua Buku Perpustakaan'
+            'title' => 'Semua Buku Perpustakaan',
+            'books' => $get_books,
+            'format' => $format
         ]);
     }
 
-    public function show_search_result()
+    public function show_search_result(Request $request)
     {
+        $query = $request->query('q') ?? '';
+
+        $booksQuery = Book::query()
+        ->join('categories', 'books.kategori_id', '=', 'categories.id')
+        ->select('books.*');
+
+        if (!empty($query)) {
+            $booksQuery->where(function ($q) use ($query) {
+                $q->where('books.judul', 'like', '%' . $query . '%')
+                  ->orWhere('categories.nama_kategori', 'like', '%' . $query . '%');
+            });
+
+            $booksQuery->orWhere('books.format', 'like', '%' . $query . '%');
+        }
+
+        if (!$request->has('_token')) {
+            return view('peminjam_views.hasil_pencarian', [
+                'title' => 'Hasil Pencarian Buku',
+                'books' => $booksQuery->get() 
+            ]);
+        }
+
         return view('peminjam_views.hasil_pencarian', [
-            'title' => 'Hasil Pencarian Buku'
+            'title' => 'Hasil Pencarian Buku',
+            'books' => $booksQuery->paginate(10)
         ]);
     }
 

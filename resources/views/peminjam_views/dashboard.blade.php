@@ -76,7 +76,7 @@
                             buku</span>
                         <p class="mb-3 mt-3 font-normal text-gray-500 dark:text-gray-400">Lihat semua buku yang tersedia di
                             perpustakaan</p>
-                        <a href="#" class="inline-flex font-medium items-center text-blue-600 hover:underline">
+                        <a href="/semua-buku?format=fisik" class="inline-flex font-medium items-center text-blue-600 hover:underline">
                             Lihat rak perpustakaan
                             <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
@@ -95,7 +95,7 @@
                             E-book</span>
                         <p class="mb-3 mt-3 font-normal text-gray-500 dark:text-gray-400">Kamu bisa baca secara online
                             dengan E-book</p>
-                        <a href="#" class="inline-flex font-medium items-center text-blue-600 hover:underline">
+                        <a href="/semua-buku?format=elektronik" class="inline-flex font-medium items-center text-blue-600 hover:underline">
                             Lihat rak E-book
                             <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">

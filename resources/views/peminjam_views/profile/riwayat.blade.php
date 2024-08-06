@@ -28,10 +28,23 @@
                             </div>
                         </div>
                     </div>
+                    <div id="slide-display2" class="hidden">
+                        <div class="flex justify-between items-center border p-3 rounded-md mb-3">
+                            <div>
+                                <a href="">
+                                    <h4 class="text-base lg:text-lg font-bold leading-5 lg:leading-none">Laut bercerita</h4>
+                                </a>
+                                <p class="text-xs">Status: Sudah dimakan</p>
+                            </div>
+                            <div class="py-1 px-3 rounded-lg lg:text-sm font-semibold text-white bg-red-primary text-xs">
+                                20 Juni 2024
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <script src="/js/atur_alamat.js"></script>
+    <script src="/js/riwayat.js"></script>
 @endsection
