@@ -5,6 +5,7 @@ use App\Http\Controllers\Peminjam\BookController;
 use App\Http\Controllers\Peminjam\ChatController;
 use App\Http\Controllers\Peminjam\DashboardController;
 use App\Http\Controllers\Peminjam\NotificationContrroller;
+use App\Http\Controllers\Profile\LogicProfileController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Pustakawan\ChatMasukController;
 use App\Http\Controllers\Pustakawan\Information\ViewInformationController;
@@ -56,6 +57,8 @@ Route::middleware(['auth', 'role:Peminjam'])->group(function () {
     Route::get('/semua-buku', [BookController::class, 'show_all_books'])->name('peminjam.all_books');
     Route::get('/hasil-pencarian', [BookController::class, 'show_search_result'])->name('peminjam.search');
     Route::get('/chat', [ChatController::class, 'show_chat'])->name('peminjam.chat');
+
+    Route::post('/overview-profile', [LogicProfileController::class, 'logic_profile_peminjam']);
 });
 
 

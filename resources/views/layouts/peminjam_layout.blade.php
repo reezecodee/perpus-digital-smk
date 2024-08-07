@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="_token" content="{{ csrf_token() }}">
+    <meta name="url" content="{{ request()->path() }}">
     <title>{{ $title }}</title>
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,6 +20,7 @@
     <!-- CDN CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" />
     <!-- css & js -->
     <link href="/css/rating.css" rel="stylesheet" type="text/css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -26,16 +29,16 @@
 <body class="font-quicksand">
     @include('partials.peminjam.navbar')
     @yield('content')
-    @if($chat_bubble ?? true)
-    <div class="fixed bottom-3 right-3 lg:bottom-10 lg:right-10">
-        <a href="{{ route('peminjam.chat') }}" class="flex flex-col justify-center items-center">
-            <div
-                class="bg-red-primary hover:bg-red-500 flex items-center justify-center border-2 border-white w-14 h-14 rounded-full">
-                <i class="fas fa-comments text-xl text-white text-center"></i>
-            </div>
-            <span class="mt-1 text-center text-black font-semibold">Hubungi kami</span>
-        </a>
-    </div>
+    @if ($chat_bubble ?? true)
+        <div class="fixed bottom-3 right-3 lg:bottom-10 lg:right-10">
+            <a href="{{ route('peminjam.chat') }}" class="flex flex-col justify-center items-center">
+                <div
+                    class="bg-red-primary hover:bg-red-500 flex items-center justify-center border-2 border-white w-14 h-14 rounded-full">
+                    <i class="fas fa-comments text-xl text-white text-center"></i>
+                </div>
+                <span class="mt-1 text-center text-black font-semibold">Hubungi kami</span>
+            </a>
+        </div>
     @endif
     @include('partials.peminjam.footer')
 
@@ -44,7 +47,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
     <script src="/assets/js/plugin/datatables/datatables.min.js"></script>
-    
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+
     <!-- JavaScript -->
     <script src="/js/swiper.js"></script>
     <script>

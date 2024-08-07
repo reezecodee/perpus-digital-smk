@@ -8,5 +8,4 @@
             </div>
         </div>
     </section>
-    <script src="/js/profile.js"></script>
 @endsection
