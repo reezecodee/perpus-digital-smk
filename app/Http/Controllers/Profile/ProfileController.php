@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Models\Borrower;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -16,8 +17,13 @@ class ProfileController extends Controller
     
     public function show_history()
     {
+        $histories = Borrower::where('peminjam_id', auth()->user()->id)->whereNotIn('status', ['Terkena denda', 'Sudah dibayarkan'])->get();
+        $fine_histories = Borrower::where('peminjam_id', auth()->user()->id)->whereIn('status', ['terkena denda', 'sudah dibayarkan'])->get();
+
         return view('peminjam_views.profile.riwayat', [
-            'title' => 'Riwayat Peminjaman Buku'
+            'title' => 'Riwayat Peminjaman Buku',
+            'histories' => $histories,
+            'fine_histories' => $fine_histories,
         ]);
     }
 
