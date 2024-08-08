@@ -39,7 +39,7 @@
                 <div class="flex items-center gap-3 cursor-pointer group" id="dropdownDelayButton"
                     data-dropdown-toggle="dropdownDelay" data-dropdown-delay="100" data-dropdown-trigger="hover">
                     <span class="font-semibold group-hover:text-red-200 duration-200">{{ auth()->user()->username }}</span>
-                    <img src="/img/unknown_profile.jpg"
+                    <img src="{{ asset('storage/img/profile/' . (auth()->user()->photo ?? 'unknown.jpg')) }}"
                         class="rounded-full p-0.5 border-2 border-white" width="45" alt="" srcset="">
                 </div>
                 <div id="dropdownDelay"

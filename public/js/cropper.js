@@ -86,6 +86,11 @@ function download() {
 
 function upload() {
     var base64data = $('#cropped_image_result img').attr('src');
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $.ajax({
             type: "POST",
             dataType: "json",
@@ -96,7 +101,11 @@ function upload() {
             },
             success: function(data) {
                 console.log(data);
-                alert("Crop image successfully uploaded");
+                alert("Gambar berhasil di upload");
+                window.location.href = $('meta[name="url"]').attr('content');
+            },
+            error: function(xhr) {
+                alert(xhr.responseJSON.message);
             }
         });
 }

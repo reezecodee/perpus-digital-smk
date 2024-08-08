@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\StoreImageRequest;
+use App\Http\Requests\Profile\UpdatePeminjamRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,19 +20,71 @@ class LogicProfileController extends Controller
         $image_type = $image_type_aux[1];
         $image_base64 = base64_decode($image_parts[1]);
 
-        // Menentukan nama unik untuk file image
+        $imageSize = strlen($image_base64);
+
+        $maxSizeInBytes = 2 * 1024 * 1024;
+
+        if ($imageSize > $maxSizeInBytes) {
+            return [
+                'success' => false,
+                'message' => 'Ukuran gambar tidak boleh lebih dari 2MB.'
+            ];
+        }
+
         $imageName = uniqid() . '.' . $image_type;
 
-        // Menyimpan image menggunakan Storage Laravel
         $imageFullPath = $folderPath . $imageName;
         Storage::put($imageFullPath, $image_base64);
 
-        return $imageName;
+        return [
+            'success' => true,
+            'name' => $imageName
+        ];
     }
 
-    public function logic_profile_peminjam(StoreImageRequest $request)
+    public function upload_profile_image(StoreImageRequest $image_request)
     {
-        $imageName = $this->store_image($request);
-        return back()->withSuccess('Gambar berhasil diunggah: ' . $imageName);
+        $validated_data = $image_request->validated();
+        $user = auth()->user();
+
+        $image_result = $this->store_image($image_request);
+
+        if (!$image_result['success']) {
+            return response()->json([
+                'message' => $image_result['message']
+            ], 422); 
+        }
+
+        if ($user->photo) {
+            Storage::delete('public/img/profile/' . $user->photo);
+        }
+
+        $user->update(['photo' => $image_result['name']]);
+
+        return response()->json([
+            'message' => 'Data profil berhasil diperbarui'
+        ]);
+    }
+
+    public function update_profile(UpdatePeminjamRequest $update_request)
+    {
+        $update_data = $update_request->validated();
+        $user = auth()->user();
+
+        // Memeriksa apakah ada perubahan dalam data profil
+        $has_changes = false;
+        foreach ($update_data as $key => $value) {
+            if ($user->$key != $value) {
+                $has_changes = true;
+                break;
+            }
+        }
+
+        if ($has_changes) {
+            $user->update($update_data);
+            return back()->with('success', 'Data profil berhasil diperbarui');
+        }
+
+        return back()->with('success', 'Tidak ada perubahan pada data profil');
     }
 }

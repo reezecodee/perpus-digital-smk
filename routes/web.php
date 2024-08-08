@@ -58,7 +58,9 @@ Route::middleware(['auth', 'role:Peminjam'])->group(function () {
     Route::get('/hasil-pencarian', [BookController::class, 'show_search_result'])->name('peminjam.search');
     Route::get('/chat', [ChatController::class, 'show_chat'])->name('peminjam.chat');
 
-    Route::post('/overview-profile', [LogicProfileController::class, 'logic_profile_peminjam']);
+    Route::post('/overview-profile', [LogicProfileController::class, 'upload_profile_image']);
+
+    Route::put('/update-profile', [LogicProfileController::class, 'update_profile'])->name('peminjam.update_profile');
 });
 
 

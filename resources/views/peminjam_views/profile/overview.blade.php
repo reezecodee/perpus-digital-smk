@@ -5,11 +5,14 @@
         <hr class="mb-3">
         <p class="font-semibold mb-2">Foto profile</p>
         <div class="flex gap-4 items-center mb-1">
-            <img src="/img/unknown_profile.jpg" width="90" id="preview-profile" class="rounded-full">
-            <button type="button" data-modal-target="static-modal" data-modal-toggle="static-modal"
-                class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2 font-bold"><i
-                    class="fas fa-upload"></i> Upload
-                foto</button>
+            <img src="{{ asset('storage/img/profile/' . (auth()->user()->photo ?? 'unknown.jpg')) }}" width="90"
+                id="preview-profile" class="rounded-full">
+            <div>
+                <button type="button" data-modal-target="static-modal" data-modal-toggle="static-modal"
+                    class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2 font-bold"><i
+                        class="fas fa-upload"></i> Upload
+                    foto</button>
+            </div>
         </div>
         <div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -19,7 +22,7 @@
                     <!-- Modal header -->
                     <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                            Static modal
+                            Upload foto
                         </h3>
                     </div>
                     <!-- Modal body -->
@@ -41,7 +44,7 @@
                     </div>
                     <!-- Modal footer -->
                     <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b">
-                        <button data-modal-hide="static-modal" id="crop_button" type="button"
+                        <button data-modal-hide="static-modal" id="crop_button" type="submit"
                             class="text-white bg-red-primary hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Simpan</button>
                         <a href="">
                             <button data-modal-hide="static-modal" type="button"
@@ -51,49 +54,53 @@
                 </div>
             </div>
         </div>
-        <p class="text-sm mb-3">Ukuran foto maksimal sebesar 5MB dan harus berformat jpg, jpeg, atau png.
+        <p class="text-sm mb-3">Ukuran foto maksimal sebesar 2MB dan harus berformat jpg, jpeg, atau png.
         </p>
-        <form action="" method="post" enctype="multipart/form-data">
-
+        <form action="{{ route('peminjam.update_profile', auth()->user()->id) }}" method="post">
+            @csrf
+            @method('PUT')
             <div class="grid grid-cols-2 gap-3">
                 <div>
                     <p class="font-semibold mb-1">Username</p>
                     <input type="text"
                         class="p-2 rounded-md border @error('username') border-red-primary @enderror w-full font-medium"
-                        value="{{ auth()->user()->username }}" name="username" autocomplete="off">
+                        value="{{ old('username', auth()->user()->username) }}" name="username" autocomplete="off">
+                    @error('username')
+                        <span class="text-red-primary font-medium">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div>
                     <p class="font-semibold mb-1">Nama lengkap</p>
                     <input type="text"
                         class="p-2 rounded-md border @error('nama') border-red-primary @enderror w-full font-medium"
-                        value="{{ auth()->user()->nama }}" name="nama" autocomplete="off">
+                        value="{{ old('nama', auth()->user()->nama) }}" name="nama" autocomplete="off">
                     @error('nama')
-                        <span class="text-red-primary">{{ $message }}</span>
+                        <span class="text-red-primary font-medium">{{ $message }}</span>
                     @enderror
                 </div>
                 <div>
                     <p class="font-semibold mb-1">NIS</p>
                     <input type="number"
                         class="p-2 rounded-md border @error('nip_nis') border-red-primary @enderror w-full font-medium"
-                        value="{{ auth()->user()->nip_nis }}" name="nip_nis" autocomplete="off">
+                        value="{{ old('nip_nis', auth()->user()->nip_nis) }}" name="nip_nis" autocomplete="off">
                     @error('nip_nis')
-                        <span class="text-red-primary">{{ $message }}</span>
+                        <span class="text-red-primary font-medium">{{ $message }}</span>
                     @enderror
                 </div>
                 <div>
                     <p class="font-semibold mb-1">NISN</p>
                     <input type="number"
-                        class="p-2 rounded-md border @error('nip_nis') border-red-primary @enderror w-full font-medium"
-                        value="{{ auth()->user()->nisn }}" name="nisn" autocomplete="off">
+                        class="p-2 rounded-md border @error('nisn') border-red-primary @enderror w-full font-medium"
+                        value="{{ old('nisn', auth()->user()->nisn) }}" name="nisn" autocomplete="off">
                     @error('nisn')
-                        <span class="text-red-primary">{{ $message }}</span>
+                        <span class="text-red-primary font-medium">{{ $message }}</span>
                     @enderror
                 </div>
                 <div>
                     <p class="font-semibold mb-1">Email</p>
                     <input type="email"
                         class="p-2 rounded-md border @error('email') border-red-primary @enderror w-full font-medium"
-                        value="{{ auth()->user()->email }}" name="email" autocomplete="off">
+                        value="{{ old('email', auth()->user()->email) }}" name="email" autocomplete="off">
                     @error('email')
                         <span class="text-red-primary">{{ $message }}</span>
                     @enderror
@@ -102,27 +109,24 @@
                     <p class="font-semibold mb-1">Telepon</p>
                     <input type="number"
                         class="p-2 rounded-md border @error('telepon') border-red-primary @enderror w-full font-medium"
-                        value="{{ auth()->user()->telepon }}" name="telepon" autocomplete="off">
+                        value="{{ old('telepon', auth()->user()->telepon) }}" name="telepon" autocomplete="off">
                     @error('telepon')
-                        <span class="text-red-primary">{{ $message }}</span>
+                        <span class="text-red-primary font-medium">{{ $message }}</span>
                     @enderror
                 </div>
                 <div>
                     <p class="font-semibold mb-1">Jenis kelamin</p>
-                    <input type="text"
-                        class="p-2 rounded-md border @error('jk') border-red-primary @enderror w-full font-medium"
-                        value="{{ auth()->user()->jk }}" name="jk" autocomplete="off">
+                    <select
+                        class="p-2 rounded-md cursor-pointer border @error('jk') border-red-primary @enderror w-full font-medium"
+                        name="jk" autocomplete="off">
+                        <option value="{{ auth()->user()->jk }}" selected>
+                            {{ auth()->user()->jk }}
+                        </option>
+                        <option value="Laki-laki">Laki-laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                    </select>
                     @error('jk')
-                        <span class="text-red-primary">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div>
-                    <p class="font-semibold mb-1">Status</p>
-                    <input type="text"
-                        class="p-2 rounded-md border @error('status') border-red-primary @enderror w-full font-medium"
-                        value="{{ auth()->user()->status }}" name="status" autocomplete="off">
-                    @error('status')
-                        <span class="text-red-primary">{{ $message }}</span>
+                        <span class="text-red-primary font-medium">{{ $message }}</span>
                     @enderror
                 </div>
             </div>
