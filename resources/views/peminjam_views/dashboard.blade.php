@@ -121,7 +121,7 @@
                                 <p class="text-sm font-semibold truncate-text">{{ $item->judul }}</p>
                                 <p class="text-xs font-medium">Kategori: {{ $item->category->nama_kategori }}
                                 </p>
-                                <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i> 5.0 | Tersedia 5
+                                <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i> {{ $rating($item->id) }} | Tersedia 5
                                 </p>
                             </div>
                         @empty

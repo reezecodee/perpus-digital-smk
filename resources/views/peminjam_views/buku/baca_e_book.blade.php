@@ -27,7 +27,7 @@
             id="df_manual_book">
             <div
                 class="bg-white rounded-bl-md absolute top-0 right-0 p-3 font-quicksand font-semibold text-red-primary z-50 pointer-events-auto">
-                <a class="cursor-pointer" href="{{ route('peminjam.shelf') }}"><i class="fas fa-times"></i> Kembali</a>
+                <a class="cursor-pointer" href="{{ url()->previous() }}"><i class="fas fa-times"></i> Kembali</a>
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Peminjam\Book\BookLogicController;
 use App\Http\Controllers\Peminjam\BookController;
 use App\Http\Controllers\Peminjam\ChatController;
 use App\Http\Controllers\Peminjam\DashboardController;
@@ -68,6 +69,7 @@ Route::middleware(['auth', 'role:Peminjam'])->group(function () {
 
     Route::post('/overview-profile', [LogicProfileController::class, 'upload_profile_image']);
     Route::post('/ganti-password', [LogicProfileController::class, 'update_password'])->name('peminjam.update_password');
+    Route::post('/sukai-buku/{id}', [BookLogicController::class, 'update_like'])->name('peminjam.update_like');
 
     Route::put('/update-profile', [LogicProfileController::class, 'update_profile'])->name('peminjam.update_profile');
 });

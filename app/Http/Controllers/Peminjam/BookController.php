@@ -14,16 +14,29 @@ class BookController extends Controller
 {
     public function show_book($id)
     {
+        $data = Book::find($id);
+
+        $is_liked = LikedBook::where('peminjam_id', auth()->user()->id)->where('buku_id', $id)->exists();
+
+        $recomendations = Book::where('format', $data->format)->where('status', 'Tersedia')->with('category')->latest()->get();
+
         return view('peminjam_views.buku.detail_buku', [
             'title' => 'Detail Buku',
-            'data' => Book::find($id),
+            'data' => $data,
             'likes' => count(LikedBook::where('buku_id', $id)->get()),
             'reviews' => Review::where('buku_id', $id)->get(),
-            'rating' => number_format((float)Review::where('buku_id', $id)->avg('rating'), 1, '.', '')
+            'rating' => number_format((float)Review::where('buku_id', $id)->avg('rating'), 1, '.', ''),
+            'is_liked' => $is_liked,
+            'recomendations' => $recomendations
         ]);
     }
     public function show_confirm($id)
     {
+        $book = Book::with('fine')->find($id);
+        if($book->format == 'Elektronik'){
+            return back();
+        }
+
         return view('peminjam_views.buku.konfirmasi_peminjaman', [
             'title' => 'Konfirmasi Peminjaman',
             'data' => Book::with('fine')->find($id),

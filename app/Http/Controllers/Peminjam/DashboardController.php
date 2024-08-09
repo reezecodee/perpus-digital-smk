@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Peminjam;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -19,9 +20,14 @@ class DashboardController extends Controller
         ->limit(12)
         ->get();
 
+        $rating = function($id){
+            return number_format((float)Review::where('buku_id', $id)->avg('rating'), 1, '.', '');
+        };
+
         return view('peminjam_views.dashboard', [
             'title' => 'Dashboard E-Perpustakaan',
-            'recomendations' => $recommendedBooks
+            'recomendations' => $recommendedBooks,
+            'rating' => $rating,
         ]);
     }
 }

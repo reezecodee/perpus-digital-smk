@@ -27,23 +27,43 @@
                                     {{ $data->category->nama_kategori }}</p>
                                 <p class="text-base font-semibold"><span class="text-red-primary">Bahasa:</span>
                                     {{ $data->bahasa }}</p>
-                                <p class="text-base font-semibold"><span class="text-red-primary">Kode buku:</span>
+                                <p class="text-base font-semibold"><span class="text-red-primary">Format:</span>
                                     {{ $data->format }}</p>
                                 <p class="text-base font-semibold"><span class="text-red-primary">Status:</span>
                                     {{ $data->status }}</p>
                             </div>
                         </div>
-                        <p class="font-bold mt-3">{{ $likes }} Orang menyukai buku ini</p>
+                        <p class="font-bold mt-3">{{ $likes }} Orang menyukai
+                            {{ $data->format == 'Fisik' ? 'Buku' : 'E-book' }} ini</p>
                         <div class="mt-2 flex gap-3">
-                            <a href="/konfirmasi-peminjaman/{{ $data->id }}">
-                                <button class="bg-red-primary hover:bg-red-500 rounded-md text-white p-2.5 font-bold">Pinjam
-                                    buku</button>
-                            </a>
-                            <a href="">
-                                <button
-                                    class="border border-red-primary text-red-primary hover:bg-red-primary hover:text-white duration-300 rounded-md p-2.5 font-bold"><i
-                                        class="fas fa-heart"></i> Tambah ke daftar suka</button>
-                            </a>
+                            @if ($data->format == 'Fisik')
+                                <a href="/konfirmasi-peminjaman/{{ $data->id }}">
+                                    <button
+                                        class="bg-red-primary hover:bg-red-500 rounded-md text-white p-2.5 font-bold">Pinjam
+                                        buku</button>
+                                </a>
+                            @elseif($data->format == 'Elektronik')
+                                <a href="/baca-e-book/{{ $data->id }}">
+                                    <button
+                                        class="bg-red-primary hover:bg-red-500 rounded-md text-white p-2.5 font-bold">Baca
+                                        E-book</button>
+                                </a>
+                            @endif
+                            @if ($is_liked)
+                                <form action="{{ route('peminjam.update_like', $data->id) }}" method="post">
+                                    @csrf
+                                    <button value="batal" name="like" type="submit"
+                                        class="border bg-red-primary text-white hover:bg-red-500 duration-300 rounded-md p-2.5 font-bold"><i
+                                            class="fas fa-heart"></i> Batalkan suka</button>
+                                </form>
+                            @else
+                                <form action="{{ route('peminjam.update_like', $data->id) }}" method="post">
+                                    @csrf
+                                    <button value="suka" name="like" type="submit"
+                                        class="border border-red-primary text-red-primary hover:bg-red-primary hover:text-white duration-300 rounded-md p-2.5 font-bold"><i
+                                            class="fas fa-heart"></i> Tambah ke daftar suka</button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -130,27 +150,23 @@
         </div>
         <div class="mt-7">
             <h1 class="font-extrabold text-2xl mb-4">Rekomendasi serupa</h1>
-            <div class="overflow-x-auto whitespace-nowrap">
-                <div class="inline-flex gap-10">
-                    <div class="w-40 pr-7 inline-block">
-                        <a href="">
-                            <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
-                                alt="" srcset="" class="rounded-lg mb-2">
-                            <p class="text-sm font-bold">Jujutsu Kaisen: Shibuya Incident</p>
-                            <p class="text-xs font-medium">Kategori: Komik</p>
-                            <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i> 5 | Tersedia 10</p>
-                        </a>
-                    </div>
-                    <div class="w-40 pr-7 inline-block">
-                        <a href="">
-                            <img src="https://ebooks.gramedia.com/ebook-covers/40678/general_small_covers/ID_KPG2017MTH10LBER_S.jpg"
-                                alt="" srcset="" class="rounded-lg mb-2">
-                            <p class="text-sm font-bold">Jujutsu Kaisen: Shibuya Incident</p>
-                            <p class="text-xs font-medium">Kategori: Komik</p>
-                            <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i> 5 | Tersedia 10</p>
-                        </a>
-                    </div>
-                    <!-- Tambahkan lebih banyak item di sini jika diperlukan -->
+            <div class="flex lg:block justify-center lg:justify-normal">
+                <div class="grid grid-cols-2 lg:grid-cols-5 gap-9 lg:gap-3">
+                    @forelse ($recomendations as $item)
+                        <div class="w-36">
+                            <a href="/buku/{{ $item->id }}">
+                                <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
+                                    alt="" srcset="" class="rounded-lg mb-2">
+                            </a>
+                            <p class="text-sm font-semibold truncate-text">{{ $item->judul }}</p>
+                            <p class="text-xs font-medium">Kategori: {{ $item->category->nama_kategori }}
+                            </p>
+                            <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i> {{ $rating }} | Tersedia 5
+                            </p>
+                        </div>
+                    @empty
+                    Kosong
+                    @endforelse
                 </div>
             </div>
         </div>
