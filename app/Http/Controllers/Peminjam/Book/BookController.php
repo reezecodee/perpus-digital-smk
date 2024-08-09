@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Peminjam;
+namespace App\Http\Controllers\Peminjam\Book;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
@@ -67,7 +67,7 @@ class BookController extends Controller
 
         $for_reviews = Borrower::where('peminjam_id', auth()->user()->id)->where('status', 'Sudah dikembalikan')->get();
 
-        return view('peminjam_views.rak_buku', [
+        return view('peminjam_views.buku.rak_buku', [
             'title' => 'Rak Buku Saya',
             'books' => $books,
             'e_books' => $e_books,
@@ -89,7 +89,7 @@ class BookController extends Controller
 
     public function show_detail_rent($id)
     {
-        return view('peminjam_views.detail_peminjaman', [
+        return view('peminjam_views.buku.detail_peminjaman', [
             'title' => 'Detail Peminjaman',
             'data' => Borrower::find($id),
             'barcode' => function ($data, $widthFactor = 2, $height = 30) {
@@ -100,7 +100,7 @@ class BookController extends Controller
 
     public function show_liked_book()
     {
-        return view('peminjam_views.buku_disukai', [
+        return view('peminjam_views.buku.buku_disukai', [
             'title' => 'Buku yang Anda Sukai',
             'liked_books' => LikedBook::where('peminjam_id', auth()->user()->id)->get()
         ]);
@@ -163,13 +163,13 @@ class BookController extends Controller
         }
 
         if (!$request->has('_token')) {
-            return view('peminjam_views.hasil_pencarian', [
+            return view('peminjam_views.buku.hasil_pencarian', [
                 'title' => 'Hasil Pencarian Buku',
                 'books' => $booksQuery->get() 
             ]);
         }
 
-        return view('peminjam_views.hasil_pencarian', [
+        return view('peminjam_views.buku.hasil_pencarian', [
             'title' => 'Hasil Pencarian Buku',
             'books' => $booksQuery->paginate(10)
         ]);

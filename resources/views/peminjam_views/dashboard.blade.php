@@ -77,7 +77,7 @@
                             buku</span>
                         <p class="mb-3 mt-3 font-normal text-gray-500 dark:text-gray-400">Lihat semua buku yang tersedia di
                             perpustakaan</p>
-                        <a href="/semua-buku?format=fisik"
+                        <a href="{{ route('all_books') }}?format=fisik"
                             class="inline-flex font-medium items-center text-blue-600 hover:underline">
                             Lihat rak perpustakaan
                             <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true"
@@ -98,7 +98,7 @@
                             E-book</span>
                         <p class="mb-3 mt-3 font-normal text-gray-500 dark:text-gray-400">Kamu bisa baca secara online
                             dengan E-book</p>
-                        <a href="/semua-buku?format=elektronik"
+                        <a href="{{ route('all_books') }}?format=elektronik"
                             class="inline-flex font-medium items-center text-blue-600 hover:underline">
                             Lihat rak E-book
                             <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true"
@@ -114,7 +114,7 @@
                     <div class="grid grid-cols-2 lg:grid-cols-6 gap-9 lg:gap-3">
                         @forelse ($recomendations as $item)
                             <div class="w-36">
-                                <a href="/buku/{{ $item->id }}">
+                                <a href="{{ route('detail_buku', $item->id) }}">
                                     <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
                                         alt="" srcset="" class="rounded-lg mb-2">
                                 </a>

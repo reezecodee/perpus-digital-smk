@@ -7,7 +7,7 @@
                 <div class="grid grid-cols-2 lg:grid-cols-6 gap-9 lg:gap-3">
                     @foreach ($books as $item)
                         <div class="w-36">
-                            <a href="/buku/{{ $item->id }}">
+                            <a href="{{ route('detail_buku', $item->id) }}">
                                 <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
                                     alt="" srcset="" class="rounded-lg mb-2">
                             </a>

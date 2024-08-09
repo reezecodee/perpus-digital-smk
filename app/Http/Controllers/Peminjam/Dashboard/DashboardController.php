@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Peminjam;
+namespace App\Http\Controllers\Peminjam\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;

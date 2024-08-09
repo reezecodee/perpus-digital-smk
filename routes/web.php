@@ -1,14 +1,14 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Peminjam\Book\BookLogicController;
-use App\Http\Controllers\Peminjam\BookController;
-use App\Http\Controllers\Peminjam\ChatController;
-use App\Http\Controllers\Peminjam\DashboardController;
-use App\Http\Controllers\Peminjam\NotificationContrroller;
-use App\Http\Controllers\Peminjam\PaymentOfFineController;
-use App\Http\Controllers\Profile\LogicProfileController;
-use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Peminjam\Book\BookController;
+use App\Http\Controllers\Peminjam\Book\LogicBookController;
+use App\Http\Controllers\Peminjam\Chat\ChatController;
+use App\Http\Controllers\Peminjam\Dashboard\DashboardController;
+use App\Http\Controllers\Peminjam\Notification\NotificationController;
+use App\Http\Controllers\Peminjam\Payment\PaymentFineController;
+use App\Http\Controllers\Peminjam\Profile\LogicPeminjamProfileController;
+use App\Http\Controllers\Peminjam\Profile\PeminjamProfileController;
 use App\Http\Controllers\Pustakawan\ChatMasukController;
 use App\Http\Controllers\Pustakawan\Information\ViewInformationController;
 use App\Http\Controllers\Pustakawan\MasterDataBuku\ViewBukuController;
@@ -39,46 +39,96 @@ Route::get('/test', function () {
     return view('test', ['title' => 'Test only']);
 });
 
-Route::prefix('auth')->middleware('guest')->group(function () {
-    Route::get('/login', [AuthController::class, 'show_login'])->name('show_login');
-    Route::post('/login', [AuthController::class, 'logic_login'])->name('logic_login');
-    Route::get('/register', [AuthController::class, 'show_register'])->name('show_register');
+Route::controller(AuthController::class)->group(function () {
+    Route::prefix('auth')->middleware('guest')->group(function () {
+        Route::get('/login', 'show_login')->name('show_login');
+        Route::get('/register', 'show_register')->name('show_register');
+
+        Route::post('/login', 'logic_login')->name('logic_login');
+    });
+
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/hasil-pencarian', [BookController::class, 'show_search_result'])->name('peminjam.search');
-Route::get('/buku/{id}', [BookController::class, 'show_book'])->name('peminjam.book');
+Route::controller(BookController::class)->group(function () {
+    Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+        Route::get('/peminjaman-sukses', 'show_success')->name('success');
+        Route::get('/rak-buku-saya', 'show_my_shelf')->name('my_shelf');
+        Route::get('/baca-e-book/{id}', 'show_read_e_book')->name('read_e_book');
+        Route::get('/detail-peminjaman/{id}', 'show_detail_rent')->name('detail_rent');
+        Route::get('/buku-disukai', 'show_liked_book')->name('liked');
+        Route::get('/semua-buku', 'show_all_books')->name('all_books');
+        Route::get('/konfirmasi-peminjaman/{id}', 'show_confirm')->name('confirm');
+    });
 
-
-Route::middleware(['auth', 'role:Peminjam'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'show_dashboard'])->name('peminjam.dashboard');
-    Route::get('/notifikasi', [NotificationContrroller::class, 'show_notification'])->name('peminjam.notif');
-    Route::get('/notifikasi/baca/{id}', [NotificationContrroller::class, 'show_read_notif'])->name('peminjam.read_notif');
-    Route::get('/overview-profile', [ProfileController::class, 'show_overview'])->name('peminjam.overview');
-    Route::get('/riwayat-peminjaman', [ProfileController::class, 'show_history'])->name('peminjam.history');
-    Route::get('/ganti-password', [ProfileController::class, 'show_ch_password'])->name('peminjam.ch_password');
-    Route::get('/konfirmasi-peminjaman/{id}', [BookController::class, 'show_confirm'])->name('peminjam.confirm');
-    Route::get('/peminjaman-sukses', [BookController::class, 'show_success'])->name('peminjam.success');
-    Route::get('/rak-buku-saya', [BookController::class, 'show_my_shelf'])->name('peminjam.shelf');
-    Route::get('/baca-e-book/{id}', [BookController::class, 'show_read_e_book'])->name('peminjam.read_e_book');
-    Route::get('/detail-peminjaman/{id}', [BookController::class, 'show_detail_rent'])->name('peminjam.detail');
-    Route::get('/buku-disukai', [BookController::class, 'show_liked_book'])->name('peminjam.liked');
-    Route::get('/semua-buku', [BookController::class, 'show_all_books'])->name('peminjam.all_books');
-    Route::get('/chat', [ChatController::class, 'show_chat'])->name('peminjam.chat');
-    Route::get('/pembayaran-denda/{id}', [PaymentOfFineController::class, 'show_payment'])->name('peminjam.payment');
-
-    Route::post('/overview-profile', [LogicProfileController::class, 'upload_profile_image']);
-    Route::post('/ganti-password', [LogicProfileController::class, 'update_password'])->name('peminjam.update_password');
-    Route::post('/sukai-buku/{id}', [BookLogicController::class, 'update_like'])->name('peminjam.update_like');
-
-    Route::put('/update-profile', [LogicProfileController::class, 'update_profile'])->name('peminjam.update_profile');
+    Route::get('/hasil-pencarian', 'show_search_result')->name('search_result');
+    Route::get('/buku/{id}', 'show_book')->name('book')->name('detail_buku');
 });
 
 
+Route::controller(DashboardController::class)->group(function () {
+    Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+        Route::get('/dashboard', 'show_dashboard')->name('dashboard');
+    });
+});
+
+
+Route::controller(NotificationController::class)->group(function () {
+    Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+        Route::get('/notifikasi', 'show_notification')->name('notification');
+        Route::get('/notifikasi/baca/{id}', 'show_read_notif')->name('read_notif');
+    });
+});
+
+
+Route::controller(PeminjamProfileController::class)->group(function () {
+    Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+        Route::get('/overview-profile', 'show_overview')->name('overview');
+        Route::get('/riwayat-peminjaman', 'show_history')->name('history');
+        Route::get('/ganti-password', 'show_ch_password')->name('ch_password');
+    });
+});
+
+
+Route::controller(ChatController::class)->group(function () {
+    Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+        Route::get('/chat', 'show_chat_index')->name('chat_index');
+        Route::get('/chat{id}', 'show_chat')->name('chat');
+    });
+});
+
+
+Route::controller(PaymentFineController::class)->group(function () {
+    Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+        Route::get('/pembayaran-denda/{id}', 'show_payment')->name('payment');
+    });
+});
+
+
+Route::controller(LogicPeminjamProfileController::class)->group(function(){
+    Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+        Route::post('/overview-profile', 'upload_profile_image');
+        Route::post('/ganti-password', 'update_password')->name('update_password');
+
+        Route::put('/update-profile', 'update_profile_peminjam')->name('update_profile');
+    });
+});
+
+
+Route::controller(LogicBookController::class)->group(function(){
+    Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+        Route::post('/sukai-buku/{id}', 'update_like')->name('update_like');
+    });
+});
+
+
+
+
+// 
 Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
     Route::get('/dashboard-pustakawan', [PustakawanDashboardController::class, 'show_dashboard'])->name('pustakawan.dashboard');
     Route::get('/chat-masuk', [ChatMasukController::class, 'show_chat'])->name('chat_masuk');
-    Route::get('/overview-profile-pustakawan', [ProfileController::class, 'show_overview_pustakawan'])->name('profile.overview');
+    // Route::get('/overview-profile-pustakawan', [ProfileController::class, 'show_overview_pustakawan'])->name('profile.overview');
 });
 
 

@@ -29,7 +29,7 @@
                             <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
                                 class="rounded-md w-28 self-start">
                             <div class="text-xs ml-5 self-start w-full">
-                                <a href="/buku/{{ $item->book->id }}">
+                                <a href="{{ route('detail_buku', $item->book->id) }}">
                                     <h1 class="text-base lg:text-lg font-bold mb-1">{{ $item->book->judul }}</h1>
                                 </a>
                                 <div class="mb-3 font-medium grid grid-cols-1 lg:grid-cols-4 gap-x-3">
@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="flex justify-between mt-4">
                                     <div>
-                                        <a href="/detail-peminjaman/{{ $item->id }}">
+                                        <a href="{{ route('detail_rent', $item->id) }}">
                                             <button
                                                 class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2.5 font-bold mr-2">Lihat
                                                 detail</button>
@@ -118,7 +118,7 @@
                             <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
                                 class="rounded-md w-28 self-start">
                             <div class="text-xs ml-5 self-start w-full">
-                                <a href="/buku/{{ $item->book->id }}">
+                                <a href="{{ route('detail_buku', $item->book->id) }}">
                                     <h1 class="text-base lg:text-lg font-bold mb-1">{{ $item->book->judul }}</h1>
                                 </a>
                                 <div class="mb-3 font-medium grid grid-cols-1 lg:grid-cols-3 gap-x-3">
@@ -139,7 +139,7 @@
                                 </div>
                                 <div class="flex justify-between mt-4">
                                     <div>
-                                        <a href="/baca-e-book/{{ $item->book->id }}">
+                                        <a href="{{ route('read_e_book', $item->book->id) }}">
                                             <button
                                                 class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2.5 font-bold mr-2">Baca
                                                 e-book</button>
@@ -207,7 +207,7 @@
                                 <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
                                     class="rounded-md self-start w-28">
                                 <div class="text-xs ml-5 mr-0 lg:mr-16 self-start">
-                                    <a href="/buku/{{ $item->book->id }}" class="inline-block">
+                                    <a href="{{ route('detail_buku', $item->book->id) }}" class="inline-block">
                                         <h1 class="text-base lg:text-lg font-bold">{{ $item->judul }}</h1>
                                     </a>
                                     <div>
@@ -269,7 +269,7 @@
                                 <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
                                     class="rounded-md self-start w-28">
                                 <div class="text-xs ml-5 mr-0 lg:mr-16 self-center">
-                                    <a href="/buku/{{ $item->book->id }}" class="inline-block">
+                                    <a href="{{ route('detail_buku', $item->book->id) }}" class="inline-block">
                                         <h1 class="text-base lg:text-lg font-bold">{{ $item->book->judul }}</h1>
                                     </a>
                                     <p class="text-lg font-semibold">Ulasan Anda</p>

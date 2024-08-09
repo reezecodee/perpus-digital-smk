@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Profile;
+namespace App\Http\Controllers\Peminjam\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Models\Borrower;
 use Illuminate\Http\Request;
 
-class ProfileController extends Controller
+class PeminjamProfileController extends Controller
 {
     public function show_overview()
     {
@@ -31,22 +31,6 @@ class ProfileController extends Controller
     {
         return view('peminjam_views.profile.ganti_password', [
             'title' => 'Ganti Password'
-        ]);
-    }
-
-    public function show_overview_pustakawan()
-    {
-        return view('pustakawan_views.profile.overview', [
-            'title' => 'Overview Profile Pustakawan',
-            'heading' => 'Overview Profile',
-        ]);
-    }
-
-    public function show_ch_pustakawan_pw()
-    {
-        return view('pustakawan_views.profile.ganti_password', [
-            'title' => 'Ganti Password',
-            'heading' => 'Ganti Password',
         ]);
     }
 }

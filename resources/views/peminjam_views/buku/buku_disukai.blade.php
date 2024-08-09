@@ -31,7 +31,7 @@
                                         <button
                                             class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2.5 font-bold mr-2">Batalkan suka</button>
                                     </a>
-                                    <a href="/buku/{{ $item->book->id }}">
+                                    <a href="{{ route('detail_buku', $item->id) }}">
                                         <button
                                             class="border border-red-primary text-red-primary hover:bg-red-primary hover:text-white duration-300 rounded-md text-sm p-2.5 font-bold">Pinjam buku</button>
                                     </a>

@@ -8,7 +8,7 @@
                     <hr class="mb-3">
                     @forelse ($notifications as $item)
                         <div class="border rounded-lg p-3 mb-3 group">
-                            <a href="/notifikasi/baca/{{ $item->id }}" class="block">
+                            <a href="{{ route('read_notif', $item->id) }}" class="block">
                                 <p class="text-end text-xs font-medium">3 menit yang lalu</p>
                                 <h1 class="text-lg font-bold leading-5 lg:leading-none mb-2 group-hover:text-red-primary">
                                     {{ $item->judul }}</h1>

@@ -36,7 +36,7 @@
                                 d="m1 1 4 4 4-4" />
                         </svg>
                     </button>
-                    <a href="/semua-buku?format={{ $format }}">
+                    <a href="{{ route('all_book') }}?format={{ $format }}">
                         <button
                             class="text-red-primary hover:text-white border-2 border-red-primary hover:bg-red-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center lg:justify-normal justify-center h-full"
                             type="submit" title="Reset pencarian"><i class="fas fa-repeat"></i>
@@ -97,7 +97,7 @@
                 <div class="grid grid-cols-2 lg:grid-cols-6 gap-9 lg:gap-3">
                     @foreach ($books as $item)
                         <div class="w-36">
-                            <a href="/buku/{{ $item->id }}">
+                            <a href="{{ route('detail_buku', $item->id) }}">
                                 <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
                                     alt="" srcset="" class="rounded-lg mb-2">
                             </a>

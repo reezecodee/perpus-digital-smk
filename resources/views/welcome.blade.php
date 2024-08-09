@@ -10,7 +10,7 @@
                     berkomitmen menyediakan e-perpus bagi para siswa dan membantu mereka meningkatkan pengetahuan
                     dan kenyamanan dalam proses peminjaman buku perpustakaan.</p>
                 <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
-                    <a href="{{ route('show_login') }}"
+                    <a href="@auth {{ route('dashboard') }} @else{{ route('show_login') }}@endauth"
                         class="inline-flex items-center justify-center w-full px-5 py-3 text-sm text-center text-white font-semibold border rounded-full sm:w-auto hover:bg-red-500 bg-red-primary">
                         Jelajahi E-perpus
                     </a>

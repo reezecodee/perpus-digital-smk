@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Profile;
+namespace App\Http\Controllers\Peminjam\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\StoreImageRequest;
@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
-class LogicProfileController extends Controller
+class LogicPeminjamProfileController extends Controller
 {
     private function store_image($request)
     {
@@ -68,7 +68,7 @@ class LogicProfileController extends Controller
         ]);
     }
 
-    public function update_profile(UpdatePeminjamRequest $update_request)
+    public function update_profile_peminjam(UpdatePeminjamRequest $update_request)
     {
         $update_data = $update_request->validated();
         $user = auth()->user();

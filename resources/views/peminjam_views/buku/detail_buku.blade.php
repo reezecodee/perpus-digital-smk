@@ -37,27 +37,27 @@
                             {{ $data->format == 'Fisik' ? 'Buku' : 'E-book' }} ini</p>
                         <div class="mt-2 flex gap-3">
                             @if ($data->format == 'Fisik')
-                                <a href="/konfirmasi-peminjaman/{{ $data->id }}">
+                                <a href="{{ route('confirm', $data->id) }}">
                                     <button
                                         class="bg-red-primary hover:bg-red-500 rounded-md text-white p-2.5 font-bold">Pinjam
                                         buku</button>
                                 </a>
                             @elseif($data->format == 'Elektronik')
-                                <a href="/baca-e-book/{{ $data->id }}">
+                                <a href="{{ route('read_e_book', $data->id) }}">
                                     <button
                                         class="bg-red-primary hover:bg-red-500 rounded-md text-white p-2.5 font-bold">Baca
                                         E-book</button>
                                 </a>
                             @endif
                             @if ($is_liked)
-                                <form action="{{ route('peminjam.update_like', $data->id) }}" method="post">
+                                <form action="{{ route('update_like', $data->id) }}" method="post">
                                     @csrf
                                     <button value="batal" name="like" type="submit"
                                         class="border bg-red-primary text-white hover:bg-red-500 duration-300 rounded-md p-2.5 font-bold"><i
                                             class="fas fa-heart"></i> Batalkan suka</button>
                                 </form>
                             @else
-                                <form action="{{ route('peminjam.update_like', $data->id) }}" method="post">
+                                <form action="{{ route('update_like', $data->id) }}" method="post">
                                     @csrf
                                     <button value="suka" name="like" type="submit"
                                         class="border border-red-primary text-red-primary hover:bg-red-primary hover:text-white duration-300 rounded-md p-2.5 font-bold"><i
@@ -154,23 +154,22 @@
                 <div class="grid grid-cols-2 lg:grid-cols-5 gap-9 lg:gap-3">
                     @forelse ($recomendations as $item)
                         <div class="w-36">
-                            <a href="/buku/{{ $item->id }}">
+                            <a href="{{ route('detail_buku', $item->id) }}">
                                 <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
                                     alt="" srcset="" class="rounded-lg mb-2">
                             </a>
                             <p class="text-sm font-semibold truncate-text">{{ $item->judul }}</p>
                             <p class="text-xs font-medium">Kategori: {{ $item->category->nama_kategori }}
                             </p>
-                            <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i> {{ $rating }} | Tersedia 5
+                            <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i>
+                                {{ $rating }} | Tersedia 5
                             </p>
                         </div>
                     @empty
-                    Kosong
+                        Kosong
                     @endforelse
                 </div>
             </div>
         </div>
     </section>
-
-    <script src="/js/checkoutOrCart.js"></script>
 @endsection

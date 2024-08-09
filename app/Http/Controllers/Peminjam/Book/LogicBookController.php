@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\LikedBook;
 use Illuminate\Http\Request;
 
-class BookLogicController extends Controller
+class LogicBookController extends Controller
 {
     public function update_like(Request $request, $id)
     {

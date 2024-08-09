@@ -30,7 +30,7 @@
                 <div class="flex gap-2 lg:gap-5 h-72">
                     <div class="overflow-y-scroll p-1 lg:p-3 border rounded-md max-w-xs w-full">
                         @foreach ($librarians as $item)
-                            <a href="/chat/">
+                            <a href="{{ route('chat', $item->id) }}">
                                 <button class="border rounded-md p-3 mr-5 mb-3 block w-full"
                                     id="contactDropdown{{ $loop->iteration }}"
                                     data-dropdown-toggle="dropdownContactDelay{{ $loop->iteration }}"
