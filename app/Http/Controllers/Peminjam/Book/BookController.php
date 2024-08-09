@@ -102,7 +102,7 @@ class BookController extends Controller
     {
         return view('peminjam_views.buku.buku_disukai', [
             'title' => 'Buku yang Anda Sukai',
-            'liked_books' => LikedBook::where('peminjam_id', auth()->user()->id)->get()
+            'liked_books' => LikedBook::where('peminjam_id', auth()->user()->id)->latest()->get()
         ]);
     }
 

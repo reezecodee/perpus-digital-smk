@@ -27,13 +27,14 @@
                             </div>
                             <div class="flex justify-between mt-4">
                                 <div>
-                                    <a href="">
-                                        <button
+                                    <form action="{{ route('update_like', $item->book->id) }}" method="post" class="inline">
+                                        @csrf
+                                        <button value="batal" name="like" type="submit" 
                                             class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2.5 font-bold mr-2">Batalkan suka</button>
-                                    </a>
-                                    <a href="{{ route('detail_buku', $item->id) }}">
+                                    </form>
+                                    <a href="{{ route('detail_buku', $item->book->id) }}">
                                         <button
-                                            class="border border-red-primary text-red-primary hover:bg-red-primary hover:text-white duration-300 rounded-md text-sm p-2.5 font-bold">Pinjam buku</button>
+                                            class="border border-red-primary text-red-primary hover:bg-red-primary hover:text-white duration-300 rounded-md text-sm p-2.5 font-bold">Lihat buku</button>
                                     </a>
                                 </div>
                             </div>
