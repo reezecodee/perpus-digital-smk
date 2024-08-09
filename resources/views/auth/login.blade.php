@@ -32,8 +32,9 @@
             @enderror
             <div class="flex justify-between mb-3 text-sm">
                 <div class="flex items-center gap-2">
-                    <input type="checkbox" class="cursor-pointer" name="">
-                    <label for="">Ingat saya</label>
+                    <input id="default-checkbox" type="checkbox" value=""
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer">
+                    <label for="default-checkbox" class="cursor-pointer">Ingat saya</label>
                 </div>
                 <a href="/lupa-password" class="hover:text-red-primary hover:underline">Lupa password?</a>
             </div>

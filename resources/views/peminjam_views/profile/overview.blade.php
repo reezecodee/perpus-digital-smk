@@ -61,7 +61,7 @@
         </div>
         <p class="text-sm mb-3">Ukuran foto maksimal sebesar 2MB dan harus berformat jpg, jpeg, atau png.
         </p>
-        <form action="{{ route('peminjam.update_profile', auth()->user()->id) }}" method="post">
+        <form action="{{ route('update_profile', auth()->user()->id) }}" method="post">
             @csrf
             @method('PUT')
             <div class="grid grid-cols-2 gap-3">

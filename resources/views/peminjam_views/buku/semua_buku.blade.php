@@ -36,7 +36,7 @@
                                 d="m1 1 4 4 4-4" />
                         </svg>
                     </button>
-                    <a href="{{ route('all_book') }}?format={{ $format }}">
+                    <a href="{{ route('all_books') }}?format={{ $format }}">
                         <button
                             class="text-red-primary hover:text-white border-2 border-red-primary hover:bg-red-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center lg:justify-normal justify-center h-full"
                             type="submit" title="Reset pencarian"><i class="fas fa-repeat"></i>
@@ -115,8 +115,7 @@
                             <img src="https://img.freepik.com/free-vector/alone-concept-illustration_114360-2393.jpg?t=st=1719286782~exp=1719290382~hmac=042a32bef22cd657a15a387dde3026df755b0f782287c13c50ead0fe2c6d2ebf&w=900"
                                 alt="" srcset="" width="300" class="block">
                         </div>
-                        <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan pencarian, silahkan
-                            kembali dan masuk dengan link yang benar</h1>
+                        <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan pencarian</h1>
                     </div>
                 @endif
             </div>

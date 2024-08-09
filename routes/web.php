@@ -62,7 +62,7 @@ Route::controller(BookController::class)->group(function () {
     });
 
     Route::get('/hasil-pencarian', 'show_search_result')->name('search_result');
-    Route::get('/buku/{id}', 'show_book')->name('book')->name('detail_buku');
+    Route::get('/buku/{id}', 'show_book')->name('detail_buku');
 });
 
 
