@@ -16,6 +16,13 @@ class AuthController extends Controller
         ]);
     }
 
+    public function show_register()
+    {
+        return view('auth.register', [
+            'title' => 'Register ke E-Perpustakaan'
+        ]);
+    }
+
     public function logic_login(LoginRequest $request)
     {
         $validatedData = $request->validated();
@@ -34,11 +41,11 @@ class AuthController extends Controller
                 $request->session()->invalidate();
                 $request->session()->regenerateToken();
 
-                return redirect()->route('show_login')->with(['error', 'Mohon maaf role user tidak terdaftar di sistem kami']);
+                return back()->with(['error', 'Mohon maaf role user tidak terdaftar di sistem kami'])->withInput();
             }
         }
 
-        return back()->with('error', 'Email atau password yang Anda masukkan salah');
+        return back()->with('error', 'Email atau password yang Anda masukkan salah')->withInput();
     }
 
     public function logout(Request $request)

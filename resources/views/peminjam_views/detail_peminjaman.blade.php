@@ -38,7 +38,7 @@
                         denda keterlambatan,
                     </div>
                 @else
-                    <div class="p-4 mt-5 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+                    <div class="p-4 mt-5 text-sm text-green-800 rounded-lg bg-green-100" role="alert">
                         Terimakasih sudah mengembalikan bukumu, semoga apa yang kamu baca menjadi ilmu yang bermanfaat.
                     </div>
                 @endif

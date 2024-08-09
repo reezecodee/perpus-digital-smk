@@ -3,6 +3,11 @@
     <div class="self-start w-full border shadow-md rounded-md p-4">
         <h1 class="text-xl font-bold mb-1">Profile saya</h1>
         <hr class="mb-3">
+        @session('success')
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100" role="alert">
+            <span class="font-medium">{{ session('success') }}</span>
+        </div>
+        @endsession
         <p class="font-semibold mb-2">Foto profile</p>
         <div class="flex gap-4 items-center mb-1">
             <img src="{{ asset('storage/img/profile/' . (auth()->user()->photo ?? 'unknown.jpg')) }}" width="90"

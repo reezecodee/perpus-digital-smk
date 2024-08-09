@@ -29,7 +29,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome', ['title' => 'Selamat datang di E-perpustakaan SITIKA']);
+    return view('welcome', [
+        'title' => 'Selamat datang di E-perpustakaan SITIKA',
+        'chat_bubble' => false,
+    ]);
 });
 Route::get('/test', function () {
     return view('test', ['title' => 'Test only']);
@@ -38,8 +41,13 @@ Route::get('/test', function () {
 Route::prefix('auth')->middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'show_login'])->name('show_login');
     Route::post('/login', [AuthController::class, 'logic_login'])->name('logic_login');
+    Route::get('/register', [AuthController::class, 'show_register'])->name('show_register');
 });
+
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/hasil-pencarian', [BookController::class, 'show_search_result'])->name('peminjam.search');
+Route::get('/buku/{id}', [BookController::class, 'show_book'])->name('peminjam.book');
+
 
 Route::middleware(['auth', 'role:Peminjam'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'show_dashboard'])->name('peminjam.dashboard');
@@ -48,7 +56,6 @@ Route::middleware(['auth', 'role:Peminjam'])->group(function () {
     Route::get('/overview-profile', [ProfileController::class, 'show_overview'])->name('peminjam.overview');
     Route::get('/riwayat-peminjaman', [ProfileController::class, 'show_history'])->name('peminjam.history');
     Route::get('/ganti-password', [ProfileController::class, 'show_ch_password'])->name('peminjam.ch_password');
-    Route::get('/buku/{id}', [BookController::class, 'show_book'])->name('peminjam.book');
     Route::get('/konfirmasi-peminjaman/{id}', [BookController::class, 'show_confirm'])->name('peminjam.confirm');
     Route::get('/peminjaman-sukses', [BookController::class, 'show_success'])->name('peminjam.success');
     Route::get('/rak-buku-saya', [BookController::class, 'show_my_shelf'])->name('peminjam.shelf');
@@ -56,11 +63,11 @@ Route::middleware(['auth', 'role:Peminjam'])->group(function () {
     Route::get('/detail-peminjaman/{id}', [BookController::class, 'show_detail_rent'])->name('peminjam.detail');
     Route::get('/buku-disukai', [BookController::class, 'show_liked_book'])->name('peminjam.liked');
     Route::get('/semua-buku', [BookController::class, 'show_all_books'])->name('peminjam.all_books');
-    Route::get('/hasil-pencarian', [BookController::class, 'show_search_result'])->name('peminjam.search');
     Route::get('/chat', [ChatController::class, 'show_chat'])->name('peminjam.chat');
     Route::get('/pembayaran-denda/{id}', [PaymentOfFineController::class, 'show_payment'])->name('peminjam.payment');
 
     Route::post('/overview-profile', [LogicProfileController::class, 'upload_profile_image']);
+    Route::post('/ganti-password', [LogicProfileController::class, 'update_password'])->name('peminjam.update_password');
 
     Route::put('/update-profile', [LogicProfileController::class, 'update_profile'])->name('peminjam.update_profile');
 });

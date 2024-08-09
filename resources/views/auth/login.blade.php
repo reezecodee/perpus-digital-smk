@@ -9,12 +9,11 @@
             <h2 class="text-xl font-bold">Login to Application</h2>
             <span class="font-medium mb-4 block">Masukkan data akun kamu untuk melanjutkan</span>
         </div>
-        @if (session('error'))
-            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
-                role="alert">
+        @session('error')
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
                 <span class="font-medium">{{ session('error') }}</span>
             </div>
-        @endif
+        @endsession
         <form action="" method="post">
             @csrf
             <label for="" class="font-semibold text-sm mb-1 block">Email</label>

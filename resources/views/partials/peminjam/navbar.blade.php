@@ -2,7 +2,7 @@
     <nav class="bg-red-primary w-full text-white fixed z-50 shadow-lg xl:container xl:mx-auto">
         <div class="flex justify-between items-center py-3 px-2 lg:px-7">
             <div class="flex gap-5 items-center">
-                <a href="{{ route('peminjam.dashboard') }}" class="hidden lg:inline">
+                <a href="@auth {{ route('peminjam.dashboard') }} @else / @endauth" class="hidden lg:inline">
                     <img src="/assets/logo.svg" width="145" alt="" srcset="">
                 </a>
                 <form action="/hasil-pencarian" method="get" class="relative">

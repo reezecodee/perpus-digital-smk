@@ -100,12 +100,12 @@
                             <a href="/buku/{{ $item->id }}">
                                 <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
                                     alt="" srcset="" class="rounded-lg mb-2">
-                                <p class="text-sm font-semibold">{{ $item->judul }}</p>
-                                <p class="text-xs font-medium">Kategori: {{ $item->category->nama_kategori }}
-                                </p>
-                                <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i> 5.0 | Tersedia 5
-                                </p>
                             </a>
+                            <p class="text-sm font-semibold truncate-text">{{ $item->judul }}</p>
+                            <p class="text-xs font-medium">Kategori: {{ $item->category->nama_kategori }}
+                            </p>
+                            <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i> 5.0 | Tersedia 5
+                            </p>
                         </div>
                     @endforeach
                 </div>
@@ -115,7 +115,8 @@
                             <img src="https://img.freepik.com/free-vector/alone-concept-illustration_114360-2393.jpg?t=st=1719286782~exp=1719290382~hmac=042a32bef22cd657a15a387dde3026df755b0f782287c13c50ead0fe2c6d2ebf&w=900"
                                 alt="" srcset="" width="300" class="block">
                         </div>
-                        <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan pencarian, silahkan kembali dan masuk dengan link yang benar</h1>
+                        <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan pencarian, silahkan
+                            kembali dan masuk dengan link yang benar</h1>
                     </div>
                 @endif
             </div>

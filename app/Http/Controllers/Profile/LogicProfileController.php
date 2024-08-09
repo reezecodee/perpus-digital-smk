@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\StoreImageRequest;
+use App\Http\Requests\Profile\UpdatePasswordRequest;
 use App\Http\Requests\Profile\UpdatePeminjamRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class LogicProfileController extends Controller
@@ -52,7 +54,7 @@ class LogicProfileController extends Controller
         if (!$image_result['success']) {
             return response()->json([
                 'message' => $image_result['message']
-            ], 422); 
+            ], 422);
         }
 
         if ($user->photo) {
@@ -71,7 +73,6 @@ class LogicProfileController extends Controller
         $update_data = $update_request->validated();
         $user = auth()->user();
 
-        // Memeriksa apakah ada perubahan dalam data profil
         $has_changes = false;
         foreach ($update_data as $key => $value) {
             if ($user->$key != $value) {
@@ -82,9 +83,21 @@ class LogicProfileController extends Controller
 
         if ($has_changes) {
             $user->update($update_data);
-            return back()->with('success', 'Data profil berhasil diperbarui');
+            return redirect()->back()->withSuccess('Data profil berhasil diperbarui');
         }
 
-        return back()->with('success', 'Tidak ada perubahan pada data profil');
+        return redirect()->back()->withSuccess('Tidak ada perubahan pada data profil');
+    }
+
+    public function update_password(UpdatePasswordRequest $request)
+    {
+        $validatedData = $request->validated();
+
+        $user = auth()->user();
+        $user->update([
+            'password' => Hash::make($validatedData['new_password']),
+        ]);
+
+        return redirect()->back()->withSuccess('Password berhasil diperbarui.');
     }
 }

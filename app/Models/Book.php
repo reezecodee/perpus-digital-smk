@@ -34,4 +34,14 @@ class Book extends Model
     {
         return $this->hasOne(Fine::class, 'buku_id', 'id');
     }
+
+    public function scopeAvailable($query)
+    {
+        return $query->where('status', 'tersedia');
+    }
+
+    public function scopePhysical($query)
+    {
+        return $query->where('format', 'Fisik');
+    }
 }
