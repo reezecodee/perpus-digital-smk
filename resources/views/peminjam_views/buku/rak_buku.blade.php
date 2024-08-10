@@ -105,10 +105,10 @@
                     </div>
                 @empty
                     <div class="flex justify-center">
-                        <img src="https://img.freepik.com/free-vector/ecommerce-web-page-concept-illustration_114360-8204.jpg?t=st=1718598345~exp=1718601945~hmac=c43c1f2d9c8c3f1dd252459a0d9d12ccc479a0a4d0c007e33521db51a41f363e&w=826"
+                        <img src="/img/assets/oh_no.webp"
                             alt="" srcset="" width="300" class="block">
                     </div>
-                    <h1 class="text-black text-center text-lg font-semibold">Belum ada produk yang masuk ke antrian</h1>
+                    <h1 class="text-black text-center text-lg font-semibold">Belum ada buku yang dipinjam</h1>
                 @endforelse
             </div>
             <div id="slide-display2" class="hidden">
@@ -146,8 +146,8 @@
                                         </a>
                                         <button type="button"
                                             class="border border-red-primary text-red-primary hover:bg-red-primary hover:text-white duration-300 rounded-md text-sm p-2.5 font-bold"
-                                            data-modal-target="popup-modal2"
-                                            data-modal-toggle="popup-modal2">Hapus</button>
+                                            data-modal-target="popup-modal2{{ $loop->iteration }}"
+                                            data-modal-toggle="popup-modal2{{ $loop->iteration }}">Hapus</button>
                                     </div>
                                     <div class="flex justify-end text-center">
                                         <div class="text-center">
@@ -159,13 +159,13 @@
                             </div>
                         </div>
                     </div>
-                    <div id="popup-modal2" tabindex="-1"
+                    <div id="popup-modal2{{ $loop->iteration }}" tabindex="-1"
                         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="relative p-4 w-full max-w-md max-h-full">
-                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            <div class="relative bg-white rounded-lg shadow">
                                 <button type="button"
                                     class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center "
-                                    data-modal-hide="popup-modal2">
+                                    data-modal-hide="popup-modal2{{ $loop->iteration }}">
                                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         fill="none" viewBox="0 0 14 14">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -181,11 +181,15 @@
                                     </svg>
                                     <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Anda ingin
                                         menghapus e-book ini dari daftar baca Anda</h3>
-                                    <button data-modal-hide="popup-modal" type="submit"
-                                        class="text-white bg-red-primary hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-                                        Ya, hapus
-                                    </button>
-                                    <button data-modal-hide="popup-modal2" type="button"
+                                    <form action="{{ route('delete_e_book', $item->book->id) }}" method="post" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button data-modal-hide="popup-modal2{{ $loop->iteration }}" type="submit"
+                                            class="text-white bg-red-primary hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                            Ya, hapus
+                                        </button>
+                                    </form>
+                                    <button data-modal-hide="popup-modal2{{ $loop->iteration }}" type="button"
                                         class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Batal</button>
                                 </div>
                             </div>
@@ -193,10 +197,10 @@
                     </div>
                 @empty
                     <div class="flex justify-center">
-                        <img src="https://img.freepik.com/free-vector/ecommerce-web-page-concept-illustration_114360-8204.jpg?t=st=1718598345~exp=1718601945~hmac=c43c1f2d9c8c3f1dd252459a0d9d12ccc479a0a4d0c007e33521db51a41f363e&w=826"
+                        <img src="/img/assets/oh_no.webp"
                             alt="" srcset="" width="300" class="block">
                     </div>
-                    <h1 class="text-black text-center text-lg font-semibold">Belum ada produk yang dikirim penjual</h1>
+                    <h1 class="text-black text-center text-lg font-semibold">Belum ada e-book yang dibaca</h1>
                 @endforelse
             </div>
             <div id="slide-display3" class="hidden">
@@ -255,7 +259,7 @@
                     </div>
                 @empty
                     <div class="flex justify-center">
-                        <img src="https://img.freepik.com/free-vector/ecommerce-web-page-concept-illustration_114360-8204.jpg?t=st=1718598345~exp=1718601945~hmac=c43c1f2d9c8c3f1dd252459a0d9d12ccc479a0a4d0c007e33521db51a41f363e&w=826"
+                        <img src="/img/assets/no_review.webp"
                             alt="" srcset="" width="300" class="block">
                     </div>
                     <h1 class="text-black text-center text-lg font-semibold">Belum ada produk yang selesai diproses</h1>
@@ -301,7 +305,7 @@
                     </div>
                 @empty
                     <div class="flex justify-center">
-                        <img src="https://img.freepik.com/free-vector/status-update-concept-illustration_114360-1567.jpg?w=826&t=st=1718601041~exp=1718601641~hmac=6f6bb3f9c3ee3f3bd06712581820c04a984cbf09f413d2d646fbc93cddcac274"
+                        <img src="/img/assets/no_review.webp"
                             alt="" srcset="" width="300" class="block">
                     </div>
                     <h1 class="text-black text-center text-lg font-semibold">Belum ada produk yang kamu berikan ulasan</h1>

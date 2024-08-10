@@ -18,7 +18,7 @@
                         </div>
                     @empty
                         <div class="flex justify-center">
-                            <img src="https://img.freepik.com/free-vector/reminders-concept-illustration_114360-4278.jpg?t=st=1718678017~exp=1718681617~hmac=03486e2c7f75d0a8659aa431896b5c439d94d0784da90ee0cd92183f3a4b9b10&w=740"
+                            <img src="/img/assets/notification.webp"
                                 alt="" srcset="" width="300" class="block">
                         </div>
                         <h1 class="text-black text-center text-lg font-semibold">Belum ada notifikasi yang masuk</h1>

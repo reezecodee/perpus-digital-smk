@@ -22,7 +22,7 @@
                 @if ($books->isEmpty())
                     <div class="text-center w-full">
                         <div class="flex justify-center">
-                            <img src="https://img.freepik.com/free-vector/alone-concept-illustration_114360-2393.jpg?t=st=1719286782~exp=1719290382~hmac=042a32bef22cd657a15a387dde3026df755b0f782287c13c50ead0fe2c6d2ebf&w=900"
+                            <img src="/img/assets/search_result_not_found.webp"
                                 alt="" srcset="" width="300" class="block">
                         </div>
                         <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan pencarian

@@ -140,7 +140,7 @@
                         </div>
                     @empty
                         <div class="flex justify-center">
-                            <img src="https://img.freepik.com/free-vector/hidden-person-concept-illustration_114360-8814.jpg?t=st=1718434515~exp=1718438115~hmac=62a428c6b62ee81638d60bff20d55f64fb9d8f27f0691d84cc1310b25fbbbd68&w=826"
+                            <img src="/img/assets/no_comment.webp"
                                 alt="" srcset="" width="300">
                         </div>
                         <h1 class="text-black text-center text-lg font-semibold">Belum ada komentar terkait buku ini</h1>

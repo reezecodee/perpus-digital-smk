@@ -34,7 +34,7 @@
                         @empty
                             <div class="text-center">
                                 <div class="flex justify-center">
-                                    <img src="https://img.freepik.com/free-vector/empty-concept-illustration_114360-1188.jpg?t=st=1723128546~exp=1723132146~hmac=60f5517bd220ee398300f74c63467166b1b04b98955b12b4f5a4e0fe1f565540&w=740"
+                                    <img src="/img/assets/history.webp"
                                         class="w-40" alt="" srcset="">
                                 </div>
                                 <p class="text-base font-semibold text-red-primary">Belum ada riwayat peminjaman</p>
@@ -60,7 +60,7 @@
                         @empty
                             <div class="text-center">
                                 <div class="flex justify-center">
-                                    <img src="https://img.freepik.com/free-vector/graduated-lawyer-concept-illustration_114360-16442.jpg?t=st=1723128770~exp=1723132370~hmac=9ac73f85d25206773b8f0176c293fb1b9f3385b6a9cd0674698acbd55d0c9894&w=740"
+                                    <img src="/img/assets/no_fine.webp"
                                         class="w-40" alt="" srcset="">
                                 </div>
                                 <p class="text-base font-semibold text-red-primary">Belum ada riwayat denda</p>

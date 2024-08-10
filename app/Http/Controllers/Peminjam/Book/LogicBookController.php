@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Peminjam\Book;
 
 use App\Http\Controllers\Controller;
+use App\Models\Borrower;
 use App\Models\LikedBook;
 use Illuminate\Http\Request;
 
@@ -36,5 +37,16 @@ class LogicBookController extends Controller
         }
 
         return back();
+    }
+
+    public function delete_e_book($id)
+    {
+        $peminjamId = auth()->user()->id;
+
+        Borrower::where('buku_id', $id)
+            ->where('peminjam_id', $peminjamId)
+            ->delete();
+
+        return back()->withSuccess('Buku berhasil menghapus e-book');
     }
 }

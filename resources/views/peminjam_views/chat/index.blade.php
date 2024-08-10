@@ -62,7 +62,7 @@
                     </div>
                     <div class="overflow-y-scroll p-3 border rounded-md w-full pt-7">
                         <div class="flex flex-col justify-center items-center">
-                            <img src="https://img.freepik.com/free-vector/messages-concept-illustration_114360-583.jpg?t=st=1719328038~exp=1719331638~hmac=bad6c1947de83c03f5fb58fb6d85ee68b52e7bd84af35c6dc2cf10605b2b2d54&w=740"
+                            <img src="/img/assets/chat.webp"
                                 width="220" alt="" srcset="">
                             <p class="font-semibold">Selamat datang di fitur chat kami</p>
                         </div>
