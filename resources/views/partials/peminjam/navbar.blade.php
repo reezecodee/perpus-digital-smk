@@ -43,11 +43,15 @@
                         class="rounded-full p-0.5 border-2 border-white" width="45" alt="" srcset="">
                 </div>
                 <div id="dropdownDelay"
-                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 font-semibold">
+                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 font-semibold">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDelayButton">
                         <li>
                             <a href="{{ route('dashboard') }}" class="block px-4 py-2 hover:bg-gray-100"><i class="fas fa-home"></i>
                                 Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('calendar') }}" class="block px-4 py-2 hover:bg-gray-100"><i class="fas fa-calendar"></i>
+                                Kalender</a>
                         </li>
                         <li>
                             <a href="{{ route('overview') }}" class="block px-4 py-2 hover:bg-gray-100"><i class="fas fa-user"></i>

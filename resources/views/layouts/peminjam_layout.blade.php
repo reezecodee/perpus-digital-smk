@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" rel="stylesheet">
+    
     <!-- css & js -->
     <link href="/css/rating.css" rel="stylesheet" type="text/css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -30,7 +32,7 @@
     @include('partials.peminjam.navbar')
     @yield('content')
     @if ($chat_bubble ?? true)
-        <div class="fixed bottom-3 right-3 lg:bottom-10 lg:right-10">
+        <div class="fixed bottom-3 right-3 lg:bottom-10 lg:right-10 z-20">
             <a href="{{ route('chat_index') }}" class="flex flex-col justify-center items-center">
                 <div
                     class="bg-red-primary hover:bg-red-500 flex items-center justify-center border-2 border-white w-14 h-14 rounded-full">
@@ -49,10 +51,13 @@
     <script src="/assets/js/plugin/datatables/datatables.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+
 
     <!-- JavaScript -->
     <script src="/js/swiper.js"></script>
     <script src="/js/title.js"></script>
+    <script src="/js/calendar.js"></script>
     <script>
         let table = new DataTable('#data-table');
     </script>

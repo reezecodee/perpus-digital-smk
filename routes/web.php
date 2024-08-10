@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Peminjam\Book\BookController;
 use App\Http\Controllers\Peminjam\Book\LogicBookController;
+use App\Http\Controllers\Peminjam\Calendar\CalendarController;
 use App\Http\Controllers\Peminjam\Chat\ChatController;
 use App\Http\Controllers\Peminjam\Dashboard\DashboardController;
 use App\Http\Controllers\Peminjam\Notification\NotificationController;
@@ -101,6 +102,14 @@ Route::controller(ChatController::class)->group(function () {
 Route::controller(PaymentFineController::class)->group(function () {
     Route::middleware(['auth', 'role:Peminjam'])->group(function () {
         Route::get('/pembayaran-denda/{id}', 'show_payment')->name('payment');
+    });
+});
+
+Route::controller(CalendarController::class)->group(function () {
+    Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+        Route::get('/kalender-perpustakaan', 'show_calendar')->name('calendar');
+        // api
+        Route::get('/events', 'events')->middleware('throttle:30,1')->name('event');
     });
 });
 

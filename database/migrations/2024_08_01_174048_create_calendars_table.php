@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('calendars', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('tanggal');
+            $table->string('tanggal_mulai');
+            $table->string('tanggal_selesai')->nullable();
             $table->string('keterangan');
             $table->enum('warna', ['Merah', 'Kuning', 'Hijau']);
             $table->timestamps();
