@@ -112,22 +112,29 @@
                 <h1 class="text-2xl mb-4 font-bold">Rekomendasi untuk mu</h1>
                 <div class="flex lg:block justify-center lg:justify-normal">
                     <div class="grid grid-cols-2 lg:grid-cols-6 gap-9 lg:gap-3">
-                        @forelse ($recomendations as $item)
+                        @foreach ($recomendations as $item)
                             <div class="w-36">
                                 <a href="{{ route('detail_buku', $item->id) }}">
                                     <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
-                                        alt="" srcset="" class="rounded-lg mb-2">
+                                        alt="" srcset="" class="rounded-lg mb-2" loading="lazy">
                                 </a>
                                 <p class="text-sm font-semibold truncate-text">{{ $item->judul }}</p>
                                 <p class="text-xs font-medium">Kategori: {{ $item->category->nama_kategori }}
                                 </p>
-                                <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i> {{ $rating($item->id) }} | Tersedia 5
+                                <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i>
+                                    {{ $rating($item->id) }} | Tersedia 5
                                 </p>
                             </div>
-                        @empty
-                        Kosong
-                        @endforelse
+                        @endforeach
                     </div>
+                    @if ($recomendations->isEmpty())
+                        <div class="flex justify-center">
+                            <div class="text-center">
+                                <img src="/img/assets/oh_no.webp" alt="" srcset="" class="w-52 inline-block">
+                                <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan buku rekomendasi</h1>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

@@ -39,6 +39,39 @@ class LogicBookController extends Controller
         return back();
     }
 
+    public function update_e_book(Request $request, $id)
+    {
+        $request->validate([
+            'e_book' => 'required|in:tambah,hapus',
+        ]);
+
+        $peminjamId = auth()->user()->id;
+
+        if ($request->e_book == 'tambah') {
+            $credentials = [
+                'buku_id' => $id,
+                'peminjam_id' => $peminjamId,
+                'kode_peminjaman' => str_pad(mt_rand(0, 999999999999), 12, '0', STR_PAD_LEFT),
+                'status' => 'E-book',
+                'keterangan_denda' => 'Tidak ada',
+            ];
+
+            Borrower::firstOrCreate($credentials);
+            return redirect('/baca-e-book/' . $id);
+        } else if ($request->e_book == 'hapus') {
+            $book = Borrower::where('buku_id', $id)
+                ->where('peminjam_id', $peminjamId)
+                ->first();
+
+            if ($book) {
+                $book->delete();
+                return back();
+            }
+        }
+
+        return back();
+    }
+
     public function delete_e_book($id)
     {
         $peminjamId = auth()->user()->id;

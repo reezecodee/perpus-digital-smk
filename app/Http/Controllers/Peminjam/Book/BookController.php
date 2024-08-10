@@ -18,7 +18,7 @@ class BookController extends Controller
 
         $is_liked = LikedBook::where('peminjam_id', auth()->user()->id)->where('buku_id', $id)->exists();
 
-        $recomendations = Book::where('format', $data->format)->where('status', 'Tersedia')->with('category')->latest()->get();
+        $recomendations = Book::where('format', $data->format)->where('status', 'Tersedia')->where('id', '!=', $id)->with('category')->limit(12)->latest()->get();
 
         return view('peminjam_views.buku.detail_buku', [
             'title' => 'Detail Buku',

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('nama_rak');
             $table->string('kode')->unique();
             $table->integer('kapasitas');
-            $table->integer('jml_buku');
             $table->timestamps();
         });
     }

@@ -118,6 +118,7 @@ Route::controller(LogicPeminjamProfileController::class)->group(function(){
 Route::controller(LogicBookController::class)->group(function(){
     Route::middleware(['auth', 'role:Peminjam'])->group(function () {
         Route::post('/sukai-buku/{id}', 'update_like')->name('update_like');
+        Route::post('/baca-e-book/{id}', 'update_e_book')->name('update_e_book');
         Route::delete('/hapus-e-book/{id}', 'delete_e_book')->name('delete_e_book');
     });
 });

@@ -15,18 +15,17 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('peminjam_id');
             $table->uuid('buku_id');
-            $table->uuid('denda_id');
-            $table->string('kode_peminjaman')->unique();
-            $table->timestamp('peminjaman');
+            $table->string('kode_peminjaman')->unique()->nullable();
+            $table->timestamp('peminjaman')->nullable();
             $table->timestamp('pengembalian')->nullable();
-            $table->date('jatuh_tempo');
+            $table->date('jatuh_tempo')->nullable();
             $table->text('keterangan')->nullable();
-            $table->enum('status', ['Masa pinjam', 'Masa pengembalian', 'Terkena denda', 'Sudah dikembalikan']);
+            $table->enum('status', ['Masa pinjam', 'Masa pengembalian', 'Terkena denda', 'Sudah dikembalikan', 'Sudah dibayar', 'Sudah diulas', 'Menunggu persetujuan', 'Disetujui', 'E-book']);
+            $table->enum('keterangan_denda', ['Denda buku rusak', 'Denda buku terlambat', 'Denda buku tidak kembali', 'Tidak ada'])->default('Tidak ada');
             $table->timestamps();
 
             $table->foreign('peminjam_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('buku_id')->references('id')->on('books')->onDelete('cascade');
-            $table->foreign('denda_id')->references('id')->on('fines')->onDelete('cascade');
         });
     }
 

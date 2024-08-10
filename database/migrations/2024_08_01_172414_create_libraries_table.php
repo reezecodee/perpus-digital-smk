@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('libraries', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nama_perpustakaan');
-            $table->string('no_bangunan');
             $table->string('telepon');
             $table->string('email');
             $table->string('operasional_buka');

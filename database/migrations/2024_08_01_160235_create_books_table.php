@@ -15,7 +15,6 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('kategori_id');
             $table->string('judul');
-            $table->string('kode_buku')->unique();
             $table->string('author');
             $table->string('penerbit');
             $table->string('isbn');
@@ -23,7 +22,7 @@ return new class extends Migration
             $table->integer('jml_halaman');
             $table->string('bahasa');
             $table->text('cover_buku');
-            $table->text('direktori_ebook')->nullable();
+            $table->text('e_book_file')->nullable();
             $table->text('sinopsis');
             $table->enum('format', ['Fisik', 'Elektronik']);
             $table->enum('status', ['Tersedia', 'Tidak tersedia']);

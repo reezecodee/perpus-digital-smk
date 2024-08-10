@@ -10,6 +10,8 @@ class Borrower extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $guarded = ['id'];
+
     public function book()
     {
         return $this->belongsTo(Book::class, 'buku_id', 'id');

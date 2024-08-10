@@ -43,11 +43,12 @@
                                         buku</button>
                                 </a>
                             @elseif($data->format == 'Elektronik')
-                                <a href="{{ route('read_e_book', $data->id) }}">
-                                    <button
+                                <form action="{{ route('update_e_book', $data->id) }}" method="post">
+                                    @csrf
+                                    <button type="submit" value="tambah" name="e_book"
                                         class="bg-red-primary hover:bg-red-500 rounded-md text-white p-2.5 font-bold">Baca
                                         E-book</button>
-                                </a>
+                                </form>
                             @endif
                             @if ($is_liked)
                                 <form action="{{ route('update_like', $data->id) }}" method="post">
@@ -140,8 +141,7 @@
                         </div>
                     @empty
                         <div class="flex justify-center">
-                            <img src="/img/assets/no_comment.webp"
-                                alt="" srcset="" width="300">
+                            <img src="/img/assets/no_comment.webp" alt="" srcset="" width="300">
                         </div>
                         <h1 class="text-black text-center text-lg font-semibold">Belum ada komentar terkait buku ini</h1>
                     @endforelse
@@ -152,7 +152,7 @@
             <h1 class="font-extrabold text-2xl mb-4">Rekomendasi serupa</h1>
             <div class="flex lg:block justify-center lg:justify-normal">
                 <div class="grid grid-cols-2 lg:grid-cols-5 gap-9 lg:gap-3">
-                    @forelse ($recomendations as $item)
+                    @foreach ($recomendations as $item)
                         <div class="w-36">
                             <a href="{{ route('detail_buku', $item->id) }}">
                                 <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
@@ -165,11 +165,19 @@
                                 {{ $rating }} | Tersedia 5
                             </p>
                         </div>
-                    @empty
-                        Kosong
-                    @endforelse
+                    @endforeach
                 </div>
             </div>
+            @if ($recomendations->isEmpty())
+                <div class="flex justify-center">
+                    <div class="text-center">
+                        <img src="/img/assets/oh_no.webp" alt="" srcset="" class="w-52 inline-block">
+                        <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan buku rekomendasi
+                            serupa
+                        </h1>
+                        </>
+                    </div>
+            @endif
         </div>
     </section>
 @endsection

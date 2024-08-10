@@ -262,7 +262,7 @@
                         <img src="/img/assets/no_review.webp"
                             alt="" srcset="" width="300" class="block">
                     </div>
-                    <h1 class="text-black text-center text-lg font-semibold">Belum ada produk yang selesai diproses</h1>
+                    <h1 class="text-black text-center text-lg font-semibold">Belum ada buku yang selesai dibaca</h1>
                 @endforelse
             </div>
             <div id="slide-display4" class="hidden">
@@ -308,7 +308,7 @@
                         <img src="/img/assets/no_review.webp"
                             alt="" srcset="" width="300" class="block">
                     </div>
-                    <h1 class="text-black text-center text-lg font-semibold">Belum ada produk yang kamu berikan ulasan</h1>
+                    <h1 class="text-black text-center text-lg font-semibold">Belum ada buku yang kamu berikan ulasan</h1>
                 @endforelse
             </div>
         </div>

@@ -23,7 +23,7 @@
 
     <div>
         <!--Normal FLipbook-->
-        <div class="_df_book" height="100vh" backgroundcolor="#f4ecd8" webgl="true" source="/books/test.pdf"
+        <div class="_df_book" height="100vh" backgroundcolor="#f4ecd8" webgl="true" source="{{ asset('storage/pdf/' . ($book->e_book_file ?? 'not_found.pdf')) }}"
             id="df_manual_book">
             <div
                 class="bg-white rounded-bl-md absolute top-0 right-0 p-3 font-quicksand font-semibold text-red-primary z-50 pointer-events-auto">
