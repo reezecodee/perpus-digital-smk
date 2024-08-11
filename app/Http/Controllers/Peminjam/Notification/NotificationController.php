@@ -18,9 +18,15 @@ class NotificationController extends Controller
 
     public function show_read_notif($id)
     {
+        $data = Notification::find($id);
+
+        if(!$data){
+            return abort(404);
+        }
+
         return view('peminjam_views.notifikasi.baca_notif', [
             'title' => 'Baca Notifikasi',
-            'data' => Notification::find($id),
+            'data' => $data,
         ]);
     }
 }

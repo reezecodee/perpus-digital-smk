@@ -33,8 +33,6 @@
                                     <h1 class="text-base lg:text-lg font-bold mb-1">{{ $item->book->judul }}</h1>
                                 </a>
                                 <div class="mb-3 font-medium grid grid-cols-1 lg:grid-cols-4 gap-x-3">
-                                    <p><span class="font-bold text-red-primary">Kode buku: </span>
-                                        {{ $item->book->kode_buku }}</p>
                                     <p><span class="font-bold text-red-primary">Author: </span> {{ $item->book->author }}
                                     </p>
                                     <p><span class="font-bold text-red-primary">Penerbit:</span> {{ $item->book->penerbit }}
@@ -63,8 +61,10 @@
                                     </div>
                                     <div class="flex justify-end text-center">
                                         <div class="text-center">
-                                            <p>{!! $barcode($item->kode_peminjaman, 1, 40) !!}</p>
-                                            <p class="font-medium">{{ $item->kode_peminjaman }}</p>
+                                            <div class="flex justify-center">
+                                                <p>{!! $barcode(23874823472, 1, 40) !!}</p>
+                                            </div>
+                                            <p class="font-medium font-ibm-plex-mono text-center">ISBN 238748234722222</p>
                                         </div>
                                     </div>
                                 </div>
@@ -105,8 +105,7 @@
                     </div>
                 @empty
                     <div class="flex justify-center">
-                        <img src="/img/assets/oh_no.webp"
-                            alt="" srcset="" width="300" class="block">
+                        <img src="/img/assets/oh_no.webp" alt="" srcset="" width="300" class="block">
                     </div>
                     <h1 class="text-black text-center text-lg font-semibold">Belum ada buku yang dipinjam</h1>
                 @endforelse
@@ -122,8 +121,6 @@
                                     <h1 class="text-base lg:text-lg font-bold mb-1">{{ $item->book->judul }}</h1>
                                 </a>
                                 <div class="mb-3 font-medium grid grid-cols-1 lg:grid-cols-3 gap-x-3">
-                                    <p><span class="font-bold text-red-primary">Kode buku: </span>
-                                        {{ $item->book->kode_buku }}</p>
                                     <p><span class="font-bold text-red-primary">Author: </span> {{ $item->book->author }}
                                     </p>
                                     <p><span class="font-bold text-red-primary">Penerbit:</span>
@@ -151,8 +148,10 @@
                                     </div>
                                     <div class="flex justify-end text-center">
                                         <div class="text-center">
-                                            <p>{!! $barcode(23874823472, 1, 40) !!}</p>
-                                            <p class="font-medium">23874823472</p>
+                                            <div class="flex justify-center">
+                                                <p>{!! $barcode(23874823472, 1, 40) !!}</p>
+                                            </div>
+                                            <p class="font-medium font-ibm-plex-mono text-center">ISBN 238748234722222</p>
                                         </div>
                                     </div>
                                 </div>
@@ -181,7 +180,8 @@
                                     </svg>
                                     <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Anda ingin
                                         menghapus e-book ini dari daftar baca Anda</h3>
-                                    <form action="{{ route('delete_e_book', $item->book->id) }}" method="post" class="inline">
+                                    <form action="{{ route('delete_e_book', $item->book->id) }}" method="post"
+                                        class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button data-modal-hide="popup-modal2{{ $loop->iteration }}" type="submit"
@@ -197,8 +197,7 @@
                     </div>
                 @empty
                     <div class="flex justify-center">
-                        <img src="/img/assets/oh_no.webp"
-                            alt="" srcset="" width="300" class="block">
+                        <img src="/img/assets/oh_no.webp" alt="" srcset="" width="300" class="block">
                     </div>
                     <h1 class="text-black text-center text-lg font-semibold">Belum ada e-book yang dibaca</h1>
                 @endforelse
@@ -259,8 +258,8 @@
                     </div>
                 @empty
                     <div class="flex justify-center">
-                        <img src="/img/assets/no_review.webp"
-                            alt="" srcset="" width="300" class="block">
+                        <img src="/img/assets/no_review.webp" alt="" srcset="" width="300"
+                            class="block">
                     </div>
                     <h1 class="text-black text-center text-lg font-semibold">Belum ada buku yang selesai dibaca</h1>
                 @endforelse
@@ -305,8 +304,8 @@
                     </div>
                 @empty
                     <div class="flex justify-center">
-                        <img src="/img/assets/no_review.webp"
-                            alt="" srcset="" width="300" class="block">
+                        <img src="/img/assets/no_review.webp" alt="" srcset="" width="300"
+                            class="block">
                     </div>
                     <h1 class="text-black text-center text-lg font-semibold">Belum ada buku yang kamu berikan ulasan</h1>
                 @endforelse
@@ -314,5 +313,5 @@
         </div>
     </section>
 
-    <script src="/js/transaksi.js"></script>
+    <script src="/js/shelf.js"></script>
 @endsection

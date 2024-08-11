@@ -7,7 +7,7 @@
                     <div class="font-semibold">
                         <p><span class="text-red-primary">Judul buku:</span> {{ $data->book->judul }}</p>
                         <p><span class="text-red-primary">Status:</span> {{ $data->status }}</p>
-                        <p><span class="text-red-primary">Keterangan:</span> -</p>
+                        <p><span class="text-red-primary">Keterangan:</span> {{ $data->keterangan_denda }}</p>
                     </div>
                     <a href="">
                         <button
@@ -27,15 +27,29 @@
                                 sesuai nominal yang tertera. Pembayaran tidak akan dianggap jika kamu membayar kurang atau
                                 lebih dari nominal denda.</p>
                             <div class="flex items-center gap-3 mb-5">
-                                <h3 class="text-2xl font-bold mb-1">Rp.200.000</h3>
+                                @if ($data->keterangan_denda == 'Denda buku rusak')
+                                    <h3 class="text-2xl font-bold mb-1" id="nominal">
+                                        {{ formatRupiah($data->book->fine->denda_rusak) }}
+                                    </h3>
+                                @elseif($data->keterangan_denda == 'Denda buku terlambat')
+                                    <h3 class="text-2xl font-bold mb-1" id="nominal">
+                                        {{ formatRupiah($data->book->fine->denda_terlambat) }}</h3>
+                                @elseif($data->keterangan_denda == 'Denda buku tidak kembali')
+                                    <h3 class="text-2xl font-bold mb-1" id="nominal">
+                                        {{ formatRupiah($data->book->fine->denda_tidak_kembali) }}</h3>
+                                @endif
                                 <button
-                                    class="p-2 border-2 border-red-primary text-red-primary rounded-lg text-sm font-bold hover:bg-red-primary hover:text-white duration-300">Salin
+                                    class="p-2 border-2 border-red-primary text-red-primary rounded-lg text-sm font-bold hover:bg-red-primary hover:text-white duration-300"
+                                    onclick="copyNominal()" id="copy-btn">Salin
                                     nominal</button>
                             </div>
                             <div>
-                                <button
-                                    class="p-2 rounded-lg text-sm font-bold bg-red-primary text-white hover:bg-red-500 duration-300"><i
-                                        class="fas fa-download"></i> Download Qris</button>
+                                <a href="/img/qris/qris.jpeg"
+                                    download>
+                                    <button
+                                        class="p-2 rounded-lg text-sm font-bold bg-red-primary text-white hover:bg-red-500 duration-300"><i
+                                            class="fas fa-download"></i> Download Qris</button>
+                                </a>
                                 <button data-modal-target="default-modal" data-modal-toggle="default-modal"
                                     class="p-2 rounded-lg text-sm font-bold border border-red-primary text-red-primary hover:bg-red-primary hover:text-white duration-300"><i
                                         class="fas fa-search-plus"></i> Zoom</button>
@@ -68,7 +82,7 @@
                             <!-- Modal body -->
                             <div class="p-4 md:p-5 space-y-4 flex justify-center">
                                 <img src="https://assets.kompasiana.com/items/album/2020/06/05/qris-baznas-5eda34a3d541df43ac060963.png?t=o&v=300"
-                                class="w-72 border-2 rounded-md" alt="" srcset="">
+                                    class="w-72 border-2 rounded-md" alt="" srcset="">
                             </div>
                             <!-- Modal footer -->
                             <div
@@ -85,12 +99,12 @@
                 <form action="" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="flex justify-center mb-5">
-                        <img src="https://mediakonsumen.com/files/2023/04/IMG-20230403-WA0025.jpg" width="400"
-                            id="preview" alt="" srcset="">
+                        <img src="{{ asset('storage/img/pembayaran/' . ($data->fine_payment->bukti_pembayaran ?? '')) }}" width="400"
+                        id="imagePreview" alt="" srcset="">
                     </div>
                     <input
                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 mb-5"
-                        id="file_input" type="file">
+                        id="imageInput" accept="image/*" type="file" onchange="previewImage(event)">
                     <div class="text-end">
                         <button type="button" data-modal-target="popup-modal" data-modal-toggle="popup-modal"
                             class="p-3 rounded-lg text-sm font-bold bg-red-primary text-white hover:bg-red-500 duration-300">Kirim
@@ -111,14 +125,15 @@
                                     <span class="sr-only">Close modal</span>
                                 </button>
                                 <div class="p-4 md:p-5 text-center">
-                                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        viewBox="0 0 20 20">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                     </svg>
                                     <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah kamu yakin
                                         gambar bukti sudah benar?</h3>
-                                    <button data-modal-hide="popup-modal" type="button"
+                                    <button data-modal-hide="popup-modal" type="submit"
                                         class="text-white bg-red-primary hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                         Ya, sudah benar
                                     </button>
@@ -132,4 +147,6 @@
             </div>
         </div>
     </section>
+
+    <script src="/js/payment.js"></script>
 @endsection

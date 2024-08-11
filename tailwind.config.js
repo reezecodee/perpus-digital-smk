@@ -13,7 +13,8 @@ module.exports = {
         'gray-secondary': '#E0E6ED',
       },
       fontFamily: {
-        'quicksand': 'Quicksand, sans-serif'
+        'quicksand': 'Quicksand, sans-serif',
+        'ibm-plex-mono': 'IBM Plex Mono, monospace'
       },
       colors: {
         'red-primary': '#DB1919'

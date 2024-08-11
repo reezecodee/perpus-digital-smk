@@ -22,8 +22,8 @@ class Borrower extends Model
         return $this->belongsTo(User::class, 'peminjam_id', 'id');
     }
 
-    public function fine()
+    public function fine_payment()
     {
-        return $this->belongsTo(Fine::class, 'denda_id', 'id');
+        return $this->hasOne(FinePayment::class, 'peminjaman_id', 'id');
     }
-} 
+}

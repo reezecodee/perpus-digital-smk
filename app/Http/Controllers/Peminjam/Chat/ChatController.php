@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Peminjam\Chat;
 
 use App\Http\Controllers\Controller;
+use App\Models\Chat;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,12 @@ class ChatController extends Controller
 
     public function show_chat($id)
     {
+        $data = Chat::find($id);
+        
+        if(!$data){
+            return abort(404);
+        }
+
         return view('peminjam_views.chat.chat', [
             'title' => 'Chat Pustakawan',
             'chat_bubble' => false,

@@ -17,8 +17,12 @@ class PeminjamProfileController extends Controller
     
     public function show_history()
     {
-        $histories = Borrower::where('peminjam_id', auth()->user()->id)->whereNotIn('status', ['Terkena denda', 'Sudah dibayarkan'])->get();
-        $fine_histories = Borrower::where('peminjam_id', auth()->user()->id)->whereIn('status', ['terkena denda', 'sudah dibayarkan'])->get();
+        $histories = Borrower::where('peminjam_id', auth()->user()->id)->whereNotIn('status', ['Terkena denda', 'Sudah dibayar', 'E-book'])->whereHas('book', function($query) {
+            $query->where('format', 'Fisik');
+        })
+        ->with('book')->get();
+
+        $fine_histories = Borrower::where('peminjam_id', auth()->user()->id)->whereIn('status', ['Terkena denda', 'Sudah dibayarkan'])->get();
 
         return view('peminjam_views.profile.riwayat', [
             'title' => 'Riwayat Peminjaman Buku',

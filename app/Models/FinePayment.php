@@ -9,4 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class FinePayment extends Model
 {
     use HasFactory, HasUuids;
+
+    protected $guarded = ['id'];
+
+    public function borrower()
+    {
+        return $this->belongsTo(Borrower::class, 'peminjaman_id', 'id');
+    }
 }

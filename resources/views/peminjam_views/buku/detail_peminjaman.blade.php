@@ -2,6 +2,7 @@
 @section('content')
     <section class="mx-auto px-3 lg:px-12 text-gray-600">
         <div class="pt-24 lg:pt-36">
+            @if($data->status !== 'Terkena denda')
             <div class="border p-4 mb-5">
                 <h3 class="text-lg font-bold mb-5">Status peminjaman</h3>
                 <div class="flex justify-between lg:justify-around items-center">
@@ -43,6 +44,7 @@
                     </div>
                 @endif
             </div>
+            @endif
             <div class="border p-4 mb-5">
                 <h3 class="text-lg font-bold mb-5">Detail buku</h3>
                 <div class="flex justify-center lg:justify-normal gap-5 mb-4">
@@ -166,9 +168,6 @@
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     Kode peminjaman
                                 </th>
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    Kode buku perpustakaan
-                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -183,12 +182,7 @@
                                     {{ $data->pengembalian ?? '-' }}
                                 </th>
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {!! $barcode($data->kode_peminjaman, 1, 40) !!}
                                     {{ $data->kode_peminjaman }}
-                                </th>
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {!! $barcode($data->book->kode_buku, 1, 40) !!}
-                                    {{ $data->book->kode_buku }}
                                 </th>
                             </tr>
                         </tbody>
@@ -203,6 +197,9 @@
                             <tr class="border">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     Status denda Anda
+                                </th>
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                    Keterangan denda
                                 </th>
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     Denda buku terlambat
@@ -222,19 +219,22 @@
                                         $data->status == 'Denda terlambat' ||
                                             $data->status == 'Denda buku rusak' ||
                                             $data->status == 'Denda buku tidak kembali')
-                                        {{ $data->satus }}
+                                        {{ $data->status }}
                                     @else
                                         Anda tidak terkena denda
                                     @endif
                                 </th>
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ formatRupiah($data->fine->denda_terlambat) }}
+                                    {{ $data->keterangan_denda }}
                                 </th>
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ formatRupiah($data->fine->denda_rusak) }}
+                                    {{ formatRupiah($data->book->fine->denda_terlambat) }}
                                 </th>
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ formatRupiah($data->fine->denda_tidak_kembali) }}
+                                    {{ formatRupiah($data->book->fine->denda_rusak) }}
+                                </th>
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                    {{ formatRupiah($data->book->fine->denda_tidak_kembali) }}
                                 </th>
                             </tr>
                         </tbody>

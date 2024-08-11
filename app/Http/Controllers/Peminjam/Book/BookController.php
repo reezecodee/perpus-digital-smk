@@ -16,6 +16,10 @@ class BookController extends Controller
     {
         $data = Book::find($id);
 
+        if(!$data){
+            return abort(404);
+        }
+
         $is_liked = LikedBook::where('peminjam_id', auth()->user()->id)->where('buku_id', $id)->exists();
 
         $recomendations = Book::where('format', $data->format)->where('status', 'Tersedia')->where('id', '!=', $id)->with('category')->limit(12)->latest()->get();
@@ -52,11 +56,10 @@ class BookController extends Controller
 
     public function show_my_shelf()
     {
-        $books = Borrower::where('peminjam_id', auth()->user()->id)->where(
-            'status',
-            '!=',
-            'Sudah dikembalikan'
-        )->whereHas('book', function ($query) {
+        $excluded_statuses = ['Sudah dikembalikan', 'Sudah dibayar', 'Sudah diulas'];
+        $books = Borrower::where('peminjam_id', auth()->user()->id)
+        ->whereNotIn('status', $excluded_statuses)
+        ->whereHas('book', function ($query) {
             $query->where('format', 'Fisik');
         })->with('book')->get();
 
@@ -89,9 +92,15 @@ class BookController extends Controller
 
     public function show_detail_rent($id)
     {
+        $borrower = Borrower::find($id);
+
+        if(!$borrower || $borrower->status == 'E-book'){
+            abort(404);
+        }
+
         return view('peminjam_views.buku.detail_peminjaman', [
             'title' => 'Detail Peminjaman',
-            'data' => Borrower::find($id),
+            'data' => $borrower,
             'barcode' => function ($data, $widthFactor = 2, $height = 30) {
                 return $this->get_barcode($data, $widthFactor, $height);
             }
