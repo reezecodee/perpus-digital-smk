@@ -9,4 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Chat extends Model
 {
     use HasFactory, HasUuids;
+
+    protected $guarded = ['id'];
+
 }

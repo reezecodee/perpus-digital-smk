@@ -16,22 +16,28 @@
                         </button>
                     </div>
                 </form>
-                <a href="{{ route('notification') }}" class="hidden lg:inline">
+                <a href="{{ route('notification') }}" class="hidden lg:inline" title="Notifikasi">
                     <div
                         class="bg-red-primary rounded-full p-1 w-9 text-center border-2 border-white hover:border-red-primary duration-500 cursor-pointer">
                         <i class="fas fa-bell text-white text-sm"></i>
                     </div>
                 </a>
-                <a href="{{ route('liked') }}" class="hidden lg:inline">
+                <a href="{{ route('liked') }}" class="hidden lg:inline" title="Buku disukai">
                     <div
                         class="bg-red-primary rounded-full p-1 w-9 text-center border-2 border-white hover:border-red-primary duration-500 cursor-pointer">
                         <i class="fa-solid fa-heart text-white text-sm"></i>
                     </div>
                 </a>
-                <a href="{{ route('my_shelf') }}" class="hidden lg:inline">
+                <a href="{{ route('my_shelf') }}" class="hidden lg:inline" title="Rak buku saya">
                     <div
                         class="bg-red-primary rounded-full p-1 w-9 text-center border-2 border-white hover:border-red-primary duration-500 cursor-pointer">
                         <i class="fa-solid fa-book-bookmark text-white text-sm"></i>
+                    </div>
+                </a>
+                <a href="{{ route('visit') }}" class="hidden lg:inline" title="Kunjungan perpustakaan">
+                    <div
+                        class="bg-red-primary rounded-full p-1 w-9 text-center border-2 border-white hover:border-red-primary duration-500 cursor-pointer">
+                        <i class="fa-solid fa-clipboard-list text-white text-sm"></i>
                     </div>
                 </a>
             </div>

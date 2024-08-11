@@ -10,6 +10,8 @@ class Fine extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $guarded = ['id'];
+
     public function borrower()
     {
         return $this->hasMany(Borrower::class, 'denda_id', 'id');

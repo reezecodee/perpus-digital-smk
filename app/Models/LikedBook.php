@@ -10,10 +10,7 @@ class LikedBook extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $fillable = [
-        'buku_id',
-        'peminjam_id'
-    ];
+    protected $guarded = ['id'];
 
     public function book()
     {

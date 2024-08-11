@@ -10,6 +10,7 @@ use App\Http\Controllers\Peminjam\Notification\NotificationController;
 use App\Http\Controllers\Peminjam\Payment\PaymentFineController;
 use App\Http\Controllers\Peminjam\Profile\LogicPeminjamProfileController;
 use App\Http\Controllers\Peminjam\Profile\PeminjamProfileController;
+use App\Http\Controllers\Peminjam\Visit\VisitController;
 use App\Http\Controllers\Pustakawan\ChatMasukController;
 use App\Http\Controllers\Pustakawan\Information\ViewInformationController;
 use App\Http\Controllers\Pustakawan\MasterDataBuku\ViewBukuController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\ViewPeminjamanControlle
 use App\Http\Controllers\Pustakawan\MasterDataPengguna\ViewPenggunaController;
 use App\Http\Controllers\Pustakawan\MasterDataPerpustakaan\ViewPerpustakaanController;
 use App\Http\Controllers\Pustakawan\PustakawanDashboardController;
+use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +40,14 @@ Route::get('/', function () {
 });
 Route::get('/test', function () {
     return view('test', ['title' => 'Test only']);
+});
+
+Route::controller(SiteController::class)->group(function(){
+    Route::get('/syarat-dan-ketentuan', 'terms_conditions')->name('terms_conditions');
+    Route::get('/kebijakan-privasi', 'privacy_policy')->name('privacy_policy');
+    Route::get('/tentang-kami', 'about_us')->name('about_us');
+    Route::get('/kontak-kami', 'contact_us')->name('contact_us');
+    Route::get('/artikel', 'article')->name('article');
 });
 
 Route::controller(AuthController::class)->group(function () {
@@ -104,6 +114,16 @@ Route::controller(PaymentFineController::class)->group(function () {
         Route::get('/pembayaran-denda/{id}', 'show_payment')->name('payment');
     });
 });
+
+
+Route::controller(VisitController::class)->group(function(){
+    Route::middleware(['auth', 'role:Peminjam'])->group(function(){
+        Route::get('/kunjungan', 'show_visit')->name('visit');
+        Route::post('/kunjungan', 'add_visit')->name('add_visit');
+        Route::delete('/kunjungan/{id}', 'delete_visit')->name('delete_visit');
+    });
+});
+
 
 Route::controller(CalendarController::class)->group(function () {
     Route::middleware(['auth', 'role:Peminjam'])->group(function () {

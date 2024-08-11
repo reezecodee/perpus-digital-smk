@@ -10,6 +10,8 @@ class Notification extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $guarded = ['id'];
+
     public function sender()
     {
         return $this->belongsTo(User::class, 'pengirim_id', 'id');

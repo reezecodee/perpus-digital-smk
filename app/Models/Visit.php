@@ -9,4 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class Visit extends Model
 {
     use HasFactory, HasUuids;
+
+    protected $guarded = ['id'];
+
+    public function peminjam() 
+    {
+        return $this->belongsTo(User::class, 'pengunjung_id', 'id');
+    }
 }

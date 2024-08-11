@@ -10,6 +10,8 @@ class Category extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $guarded = ['id'];
+
     public function book() 
     {
         return $this->hasMany(Book::class, 'kategori_id', 'id');

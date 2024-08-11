@@ -66,4 +66,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Review::class, 'peminjam_id', 'id');
     }
+
+    public function visit()
+    {
+        return $this->hasMany(Visit::class, 'pengunjung_id', 'id');
+    }
 }

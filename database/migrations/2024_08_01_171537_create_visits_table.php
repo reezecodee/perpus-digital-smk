@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('visits', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('pengunjung_id');
+            $table->string('tanggal_kunjungan');
             $table->text('keterangan_kunjungan');
+            $table->enum('status_kunjungan', ["Menunggu persetujuan", "Diterima", "Ditolak"])->default('Menunggu persetujuan');
             $table->timestamps();
 
             $table->foreign('pengunjung_id')->references('id')->on('users')->onDelete('cascade');

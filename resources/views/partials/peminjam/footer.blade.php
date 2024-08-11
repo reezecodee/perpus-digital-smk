@@ -16,49 +16,52 @@
             <div>
                 <h3 class="font-bold text-xl mb-4">Menu Website</h3>
                 <div class="mb-3">
-                    <a href="/notifikasi" class="inline-block font-medium">Notifikasi</a>
+                    <a href="{{ route('notification') }}" class="inline-block font-medium">Notifikasi</a>
                 </div>
                 <div class="mb-3">
-                    <a href="/chat-pustakawan" class="inline-block font-medium">Chat Pustakawan</a>
+                    <a href="{{ route('liked') }}" class="inline-block font-medium">Buku disukai</a>
                 </div>
                 <div class="mb-3">
-                    <a href="/profile" class="inline-block font-medium">Profile</a>
+                    <a href="{{ route('my_shelf') }}" class="inline-block font-medium">Rak buku saya</a>
+                </div>
+                <div class="mb-3">
+                    <a href="{{ route('visit') }}" class="inline-block font-medium">Kunjungan</a>
                 </div>
             </div>
             <div>
                 <h3 class="font-bold text-xl mb-4">Sosial Media</h3>
                 <div class="mb-3">
-                    <a href="" class="inline-block font-medium">Instagram</a>
+                    <a href="" target="_blank" class="inline-block font-medium">Instagram</a>
                 </div>
                 <div class="mb-3">
-                    <a href="" class="inline-block font-medium">Facebook</a>
+                    <a href="" target="_blank" class="inline-block font-medium">Facebook</a>
                 </div>
                 <div class="mb-3">
-                    <a href="" class="inline-block font-medium">Twitter/X</a>
+                    <a href="" target="_blank" class="inline-block font-medium">Twitter/X</a>
                 </div>
                 <div class="mb-3">
-                    <a href="" class="inline-block font-medium">LinkedIn</a>
+                    <a href="" target="_blank" class="inline-block font-medium">LinkedIn</a>
                 </div>
             </div>
             <div>
                 <h3 class="font-bold text-xl mb-4">Bantuan & Panduan</h3>
                 <div class="mb-3">
-                    <a href="/syarat-ketentuan" class="inline-block font-medium">Syarat & Ketentuan</a>
+                    <a href="{{ route('terms_conditions') }}" class="inline-block font-medium">Syarat & Ketentuan</a>
                 </div>
                 <div class="mb-3">
-                    <a href="/kebijakan-privasi" class="inline-block font-medium">Kebijakan Privasi</a>
+                    <a href="{{ route('privacy_policy') }}" class="inline-block font-medium">Kebijakan Privasi</a>
                 </div>
                 <div class="mb-3">
-                    <a href="/tentang-kami" class="inline-block font-medium">Tentang Kami</a>
+                    <a href="{{ route('about_us') }}" class="inline-block font-medium">Tentang Kami</a>
                 </div>
             </div>
             <div>
                 <h3 class="font-bold text-xl mb-4">Informasi</h3>
                 <div class="mb-3">
-                    <a href="/kontak-kami" class="inline-block font-medium">Kontak Kami</a>
+                    <a href="{{ route('contact_us') }}" class="inline-block font-medium">Kontak Kami</a>
                 </div>
                 <div class="mb-3">
-                    <a href="/berita-artikel" class="inline-block font-medium">Berita</a>
+                    <a href="{{ route('article') }}" class="inline-block font-medium">Artikel</a>
                 </div>
             </div>
         </div>

@@ -10,6 +10,8 @@ class Book extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $guarded = ['id'];
+
     public function liked_book()
     {
         return $this->hasMany(LikedBook::class, 'buku_id', 'id');

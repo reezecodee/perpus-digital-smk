@@ -10,6 +10,8 @@ class Review extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $guarded = ['id'];
+
     public function borrower_review()
     {
         return $this->belongsTo(User::class, 'peminjam_id', 'id');
