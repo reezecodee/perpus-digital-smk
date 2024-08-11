@@ -104,7 +104,7 @@ Route::controller(PeminjamProfileController::class)->group(function () {
 Route::controller(ChatController::class)->group(function () {
     Route::middleware(['auth', 'role:Peminjam'])->group(function () {
         Route::get('/chat', 'show_chat_index')->name('chat_index');
-        Route::get('/chat{id}', 'show_chat')->name('chat');
+        Route::get('/chat/{id}', 'show_chat')->name('chat');
     });
 });
 

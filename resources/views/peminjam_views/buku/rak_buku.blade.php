@@ -209,14 +209,14 @@
                             <div class="flex items-center mb-1 lg:mb-4">
                                 <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
                                     class="rounded-md self-start w-28">
-                                <div class="text-xs ml-5 mr-0 lg:mr-16 self-start">
+                                <div class="text-xs ml-5 w-full self-start">
                                     <a href="{{ route('detail_buku', $item->book->id) }}" class="inline-block">
-                                        <h1 class="text-base lg:text-lg font-bold">{{ $item->judul }}</h1>
+                                        <h1 class="text-base lg:text-lg font-bold">{{ $item->book->judul }}</h1>
                                     </a>
-                                    <div>
-                                        <p class="text-base font-semibold">Berikan ulasanmu</p>
-                                        <form action="" method="post">
-                                            @csrf
+                                    <p class="text-base font-semibold">Berikan ulasanmu</p>
+                                    <form action="" method="post" class="flex flex-col">
+                                        @csrf
+                                        <div class="flex justify-start">
                                             <div class="rate">
                                                 <input type="radio" id="star5" name="rating" value="5"
                                                     required />
@@ -234,16 +234,16 @@
                                                     required />
                                                 <label for="star1" title="1">1 star</label>
                                             </div>
-                                            <div class="hidden lg:block">
-                                                <textarea id="message" name="komentar" rows="3"
-                                                    class="block p-2.5 max-w-xl w-full text-sm bg-gray-50 rounded-lg border focus:ring-red-500 focus:border-red-500 outline-none"
-                                                    placeholder="Tulis komentar disini..." required></textarea>
-                                                <button type="submit"
-                                                    class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-3 font-bold mt-2">Berikan
-                                                    ulasan</button>
-                                            </div>
-                                        </form>
-                                    </div>
+                                        </div>
+                                        <div class="hidden lg:block">
+                                            <textarea id="message" name="komentar" rows="3"
+                                                class="block p-2.5 max-w-xl w-full text-sm bg-gray-50 rounded-lg border focus:ring-red-500 focus:border-red-500 outline-none"
+                                                placeholder="Tulis komentar disini..." required></textarea>
+                                            <button type="submit"
+                                                class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-3 font-bold mt-2">Berikan
+                                                ulasan</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <div class="block lg:hidden">
