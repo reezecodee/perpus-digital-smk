@@ -109,32 +109,99 @@
                         </a>
                     </div>
                 </div>
-                <h1 class="text-2xl mb-4 font-bold">Rekomendasi untuk mu</h1>
-                <div class="flex lg:block justify-center lg:justify-normal">
-                    <div class="grid grid-cols-2 lg:grid-cols-6 gap-9 lg:gap-3">
-                        @foreach ($recomendations as $item)
-                            <div class="w-36">
-                                <a href="{{ route('detail_buku', $item->id) }}">
-                                    <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
-                                        alt="" srcset="" class="rounded-lg mb-2" loading="lazy">
-                                </a>
-                                <p class="text-sm font-semibold truncate-text">{{ $item->judul }}</p>
-                                <p class="text-xs font-medium">Kategori: {{ $item->category->nama_kategori }}
-                                </p>
-                                <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i>
-                                    {{ $rating($item->id) }} | Tersedia 5
-                                </p>
+                <div class="mt-5">
+                    <h1 class="text-2xl mb-4 font-bold">Rekomendasi untuk mu</h1>
+                    <div class="flex lg:block justify-center lg:justify-normal">
+                        <div class="grid grid-cols-2 lg:grid-cols-6 gap-9 lg:gap-3">
+                            @foreach ($recomendations as $item)
+                                <div class="w-36">
+                                    <a href="{{ route('detail_buku', $item->id) }}">
+                                        <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
+                                            alt="" srcset="" class="rounded-lg mb-2" loading="lazy">
+                                    </a>
+                                    <p class="text-sm font-semibold truncate-text">{{ $item->judul }}</p>
+                                    <p class="text-xs font-medium">Kategori: {{ $item->category->nama_kategori }}
+                                    </p>
+                                    <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i>
+                                        {{ $rating($item->id) }} | Tersedia 5
+                                    </p>
+                                </div>
+                            @endforeach
+                        </div>
+                        @if ($recomendations->isEmpty())
+                            <div class="flex justify-center">
+                                <div class="text-center">
+                                    <img src="/img/assets/oh_no.webp" alt="" srcset=""
+                                        class="w-52 inline-block">
+                                    <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan buku
+                                        rekomendasi</h1>
+                                </div>
                             </div>
-                        @endforeach
+                        @endif
                     </div>
-                    @if ($recomendations->isEmpty())
-                        <div class="flex justify-center">
-                            <div class="text-center">
-                                <img src="/img/assets/oh_no.webp" alt="" srcset="" class="w-52 inline-block">
-                                <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan buku rekomendasi</h1>
+                </div>
+                <div class="mt-7">
+                    <h1 class="text-2xl mb-4 font-bold">E-book terbaru</h1>
+                    <div class="flex lg:block justify-center lg:justify-normal">
+                        <div class="grid grid-cols-2 lg:grid-cols-6 gap-9 lg:gap-3">
+                            @foreach ($recomendations as $item)
+                                <div class="w-36">
+                                    <a href="{{ route('detail_buku', $item->id) }}">
+                                        <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
+                                            alt="" srcset="" class="rounded-lg mb-2" loading="lazy">
+                                    </a>
+                                    <p class="text-sm font-semibold truncate-text">{{ $item->judul }}</p>
+                                    <p class="text-xs font-medium">Kategori: {{ $item->category->nama_kategori }}
+                                    </p>
+                                    <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i>
+                                        {{ $rating($item->id) }} | Tersedia 5
+                                    </p>
+                                </div>
+                            @endforeach
+                        </div>
+                        @if ($recomendations->isEmpty())
+                            <div class="flex justify-center">
+                                <div class="text-center">
+                                    <img src="/img/assets/oh_no.webp" alt="" srcset=""
+                                        class="w-52 inline-block">
+                                    <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan buku
+                                        rekomendasi</h1>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                <div class="mt-7">
+                    <h1 class="text-2xl mb-4 font-bold">Artikel terbaru</h1>
+                    <div class="flex lg:block justify-center lg:justify-normal">
+                        <div class="overflow-x-auto scrollbar-hide">
+                            <div class="flex gap-9 lg:gap-3">
+                                <div class="w-64 flex-shrink-0">
+                                    <a href="">
+                                        <img src="https://images.unsplash.com/photo-1566389437851-a35bddb62402?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                            alt="" srcset="" class="rounded-lg mb-2" loading="lazy">
+                                    </a>
+                                    <p class="text-sm font-semibold truncate-text">Lorem ipsum dolor sit amet consectetur
+                                        adipisicing elit. Dolorum, beatae?</p>
+                                    <p class="text-xs font-medium">Kategori: Lorem, ipsum dolor.</p>
+                                    <p class="text-xs font-medium">
+                                        <i class="fas fa-star text-yellow-300"></i> 5.0 |
+                                        Tersedia 5
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    @endif
+                        @if ($recomendations->isEmpty())
+                            <div class="flex justify-center">
+                                <div class="text-center">
+                                    <img src="/img/assets/oh_no.webp" alt="" srcset=""
+                                        class="w-52 inline-block">
+                                    <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan buku
+                                        rekomendasi</h1>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
