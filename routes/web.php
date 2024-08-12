@@ -12,11 +12,12 @@ use App\Http\Controllers\Peminjam\Profile\LogicPeminjamProfileController;
 use App\Http\Controllers\Peminjam\Profile\PeminjamProfileController;
 use App\Http\Controllers\Peminjam\Visit\VisitController;
 use App\Http\Controllers\Pustakawan\ChatMasukController;
-use App\Http\Controllers\Pustakawan\Information\ViewInformationController;
-use App\Http\Controllers\Pustakawan\MasterDataBuku\ViewBukuController;
-use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\ViewPeminjamanController;
-use App\Http\Controllers\Pustakawan\MasterDataPengguna\ViewPenggunaController;
-use App\Http\Controllers\Pustakawan\MasterDataPerpustakaan\ViewPerpustakaanController;
+use App\Http\Controllers\Pustakawan\Information\InformationController;
+use App\Http\Controllers\Pustakawan\MasterDataBuku\BukuController;
+use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\PeminjamanController;
+use App\Http\Controllers\Pustakawan\MasterDataPengguna\UserController;
+use App\Http\Controllers\Pustakawan\MasterDataPerpustakaan\PerpustakaanController;
+use App\Http\Controllers\Pustakawan\Profile\PustakawanProfileController;
 use App\Http\Controllers\Pustakawan\PustakawanDashboardController;
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
@@ -42,13 +43,35 @@ Route::get('/test', function () {
     return view('test', ['title' => 'Test only']);
 });
 
-Route::controller(SiteController::class)->group(function(){
+
+/*
+|--------------------------------------------------------------------------
+| SiteController Group
+|--------------------------------------------------------------------------
+| SiteController class group memuat route yang dapat diakses tanpa melakukan proses Auth, 
+| Ini merupakan bagian yang memuat informasi mengenai website E-Perpustakaan ini. 
+|
+*/
+
+Route::controller(SiteController::class)->group(function () {
     Route::get('/syarat-dan-ketentuan', 'terms_conditions')->name('terms_conditions');
     Route::get('/kebijakan-privasi', 'privacy_policy')->name('privacy_policy');
     Route::get('/tentang-kami', 'about_us')->name('about_us');
     Route::get('/kontak-kami', 'contact_us')->name('contact_us');
     Route::get('/artikel', 'article')->name('article');
 });
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| AuthController Group
+|--------------------------------------------------------------------------
+| AuthController class group memuat route yang berkaitan dengan proses Auth. Ini mencakup 
+| http route GET dan POST 
+|
+*/
 
 Route::controller(AuthController::class)->group(function () {
     Route::prefix('auth')->middleware('guest')->group(function () {
@@ -61,8 +84,18 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::controller(BookController::class)->group(function () {
-    Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+
+
+/*
+|--------------------------------------------------------------------------
+| Route Middleware Peminjam
+|--------------------------------------------------------------------------
+| Ini merupakan route yang hanya boleh diakses oleh user dengan role peminjam saja,
+|
+*/
+
+Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+    Route::controller(BookController::class)->group(function () {
         Route::get('/peminjaman-sukses', 'show_success')->name('success');
         Route::get('/rak-buku-saya', 'show_my_shelf')->name('my_shelf');
         Route::get('/baca-e-book/{id}', 'show_read_e_book')->name('read_e_book');
@@ -70,82 +103,66 @@ Route::controller(BookController::class)->group(function () {
         Route::get('/buku-disukai', 'show_liked_book')->name('liked');
         Route::get('/semua-buku', 'show_all_books')->name('all_books');
         Route::get('/konfirmasi-peminjaman/{id}', 'show_confirm')->name('confirm');
+
+        Route::withoutMiddleware(['auth', 'role:Peminjam'])->group(function () {
+            Route::get('/hasil-pencarian', 'show_search_result')->name('search_result');
+            Route::get('/buku/{id}', 'show_book')->name('detail_buku');
+        });
     });
 
-    Route::get('/hasil-pencarian', 'show_search_result')->name('search_result');
-    Route::get('/buku/{id}', 'show_book')->name('detail_buku');
-});
 
-
-Route::controller(DashboardController::class)->group(function () {
-    Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+    Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard', 'show_dashboard')->name('dashboard');
     });
-});
 
 
-Route::controller(NotificationController::class)->group(function () {
-    Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+    Route::controller(NotificationController::class)->group(function () {
         Route::get('/notifikasi', 'show_notification')->name('notification');
         Route::get('/notifikasi/baca/{id}', 'show_read_notif')->name('read_notif');
     });
-});
 
 
-Route::controller(PeminjamProfileController::class)->group(function () {
-    Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+    Route::controller(PeminjamProfileController::class)->group(function () {
         Route::get('/overview-profile', 'show_overview')->name('overview');
         Route::get('/riwayat-peminjaman', 'show_history')->name('history');
         Route::get('/ganti-password', 'show_ch_password')->name('ch_password');
     });
-});
 
 
-Route::controller(ChatController::class)->group(function () {
-    Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+    Route::controller(ChatController::class)->group(function () {
         Route::get('/chat', 'show_chat_index')->name('chat_index');
         Route::get('/chat/{id}', 'show_chat')->name('chat');
     });
-});
 
 
-Route::controller(PaymentFineController::class)->group(function () {
-    Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+    Route::controller(PaymentFineController::class)->group(function () {
         Route::get('/pembayaran-denda/{id}', 'show_payment')->name('payment');
     });
-});
 
 
-Route::controller(VisitController::class)->group(function(){
-    Route::middleware(['auth', 'role:Peminjam'])->group(function(){
+    Route::controller(VisitController::class)->group(function () {
         Route::get('/kunjungan', 'show_visit')->name('visit');
         Route::post('/kunjungan', 'add_visit')->name('add_visit');
         Route::delete('/kunjungan/{id}', 'delete_visit')->name('delete_visit');
     });
-});
 
 
-Route::controller(CalendarController::class)->group(function () {
-    Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+    Route::controller(CalendarController::class)->group(function () {
         Route::get('/kalender-perpustakaan', 'show_calendar')->name('calendar');
-        // api
+        // API
         Route::get('/events', 'events')->middleware('throttle:30,1')->name('event');
     });
-});
 
 
-Route::controller(LogicPeminjamProfileController::class)->group(function(){
-    Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+    Route::controller(LogicPeminjamProfileController::class)->group(function () {
         Route::post('/overview-profile', 'upload_profile_image');
         Route::post('/ganti-password', 'update_password')->name('update_password');
 
         Route::put('/update-profile', 'update_profile_peminjam')->name('update_profile');
     });
-});
 
 
-Route::controller(LogicBookController::class)->group(function(){
-    Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+    Route::controller(LogicBookController::class)->group(function () {
         Route::post('/sukai-buku/{id}', 'update_like')->name('update_like');
         Route::post('/baca-e-book/{id}', 'update_e_book')->name('update_e_book');
         Route::delete('/hapus-e-book/{id}', 'delete_e_book')->name('delete_e_book');
@@ -155,62 +172,87 @@ Route::controller(LogicBookController::class)->group(function(){
 
 
 
-// 
+/*
+|--------------------------------------------------------------------------
+| Route Middleware Admin & Pustakawan
+|--------------------------------------------------------------------------
+| Route ini mencakup halaman yang boleh diakses oleh user dengan role Admin dan Pustakawan
+|
+*/
+
 Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
-    Route::get('/dashboard-pustakawan', [PustakawanDashboardController::class, 'show_dashboard'])->name('pustakawan.dashboard');
-    Route::get('/chat-masuk', [ChatMasukController::class, 'show_chat'])->name('chat_masuk');
-    // Route::get('/overview-profile-pustakawan', [ProfileController::class, 'show_overview_pustakawan'])->name('profile.overview');
-});
-
-
-Route::prefix('master-data')->group(function () {
-    Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
-        Route::get('/admin', [ViewPenggunaController::class, 'show_data_admin'])->name('data-admin.index');
-        Route::get('/pustakawan', [ViewPenggunaController::class, 'show_data_pustakawan'])->name('data-pustakawan.index');
-        Route::get('/peminjam', [ViewPenggunaController::class, 'show_data_peminjam'])->name('data-peminjam.index');
-
-        Route::get('/rak-buku', [ViewBukuController::class, 'show_data_rak_buku'])->name('data-buku.shelf');
-        Route::get('/kategori', [ViewBukuController::class, 'show_data_kategori'])->name('data-buku.category');
-        Route::get('/buku', [ViewBukuController::class, 'show_data_buku'])->name('data-buku.book');
-        Route::get('/e-book', [ViewBukuController::class, 'show_data_ebook'])->name('data-buku.ebook');
-
-        Route::get('/perpinjaman', [ViewPeminjamanController::class, 'show_data_peminjam'])->name('data-perpinjaman.index');
-        Route::get('/pengembalian', [ViewPeminjamanController::class, 'show_data_pengembali'])->name('data-pengembali.index');
-        Route::get('/kunjungan', [ViewPeminjamanController::class, 'show_data_kunjungan'])->name('data-kunjungan.index');
-        Route::get('/denda', [ViewPeminjamanController::class, 'show_data_denda'])->name('data-denda.index');
+    Route::controller(PustakawanDashboardController::class)->group(function () {
+        Route::get('/dashboard-control', 'show_dashboard')->name('dashboard.ctrl');
     });
 
-    Route::middleware(['auth', 'role:Admin'])->group(function () {
-        Route::get('/aplikasi', [ViewPerpustakaanController::class, 'show_data_aplikasi'])->name('data-aplikasi.index');
-        Route::get('/perpustakaan', [ViewPerpustakaanController::class, 'show_data_perpustakaan'])->name('data-perpustakaan.index');
+    Route::controller(ChatMasukController::class)->group(function () {
+        Route::get('/chat-masuk', 'show_chat')->name('chat_masuk');
     });
 
-    Route::middleware(['auth', 'role:Admin'])->group(function () {
-        Route::prefix('admin')->group(function () {
-            Route::get('/tambah', [ViewPenggunaController::class, 'show_tambah_admin'])->name('admin.add');
-            Route::get('/perbarui', [ViewPenggunaController::class, 'show_perbarui_admin'])->name('admin.update');
+    Route::controller(PustakawanProfileController::class)->group(function () {
+        Route::get('/overview-data-profile', 'show_overview_profile')->name('profile.overview');
+    });
+
+    Route::prefix('master-data')->group(function () {
+        Route::controller(UserController::class)->group(function () {
+            Route::get('/admin', 'show_data_admin')->name('data-admin');
+            Route::get('/pustakawan', 'show_data_pustakawan')->name('data-pustakawan');
+            Route::get('/peminjam', 'show_data_peminjam')->name('data-peminjam');
+
+            Route::prefix('admin')->group(function () {
+                Route::get('/tambah', 'show_manip_admin')->name('add_admin');
+                Route::get('/perbarui/{id}', 'show_manip_admin')->name('edit_admin');
+                Route::get('/detail/{id}', 'show_detail_admin')->name('detail_admin');
+
+                Route::put('/perbarui/{id}', 'update_admin')->name('update_admin');
+                Route::delete('/hapus/{id}', 'delete_admin')->name('delete_admin');
+            });
+
+            Route::prefix('pustakawan')->group(function () {
+                Route::get('/tambah', 'show_manip_pustakawan')->name('add_pustakawan');
+                Route::get('/perbarui/{id}', 'show_manip_pustakawan')->name('edit_pustakawan');
+                Route::get('/detail/{id}', 'show_detail_pustakawan')->name('detail_pustakawan');
+
+                Route::put('/perbarui/{id}', 'update_pustakawan')->name('update_pustakawan');
+                Route::delete('/hapus/{id}', 'delete_pustakawan')->name('delete_pustakawan');
+            });
+
+            Route::prefix('peminjam')->group(function () {
+                Route::get('/tambah', 'show_manip_peminjam')->name('add_peminjam');
+                Route::get('/perbarui/{id}', 'show_manip_peminjam')->name('edit_peminjam');
+                Route::get('/detail/{id}', 'show_detail_peminjam')->name('detail_peminjam');
+
+                Route::put('/perbarui/{id}', 'update_peminjam')->name('update_peminjam');
+                Route::delete('/hapus/{id}', 'delete_peminjam')->name('delete_peminjam');
+            });
         });
-        Route::prefix('pustakawan')->group(function () {
-            Route::get('/tambah', [ViewPenggunaController::class, 'show_tambah_pustakawan'])->name('pustakawan.add');
-            Route::get('/perbarui', [ViewPenggunaController::class, 'show_perbarui_pustakawan'])->name('pustakawan.update');
+
+        Route::controller(BukuController::class)->group(function () {
+            Route::get('/rak-buku', 'show_data_rak_buku')->name('data-rak');
+            Route::get('/kategori', 'show_data_kategori')->name('data-kategori');
+            Route::get('/buku', 'show_data_buku')->name('data-buku');
+            Route::get('/e-book', 'show_data_ebook')->name('data-ebook');
+        });
+
+        Route::controller(PeminjamanController::class)->group(function () {
+            Route::get('/perpinjaman', 'show_data_peminjam')->name('data-perpinjaman');
+            Route::get('/pengembalian', 'show_data_pengembali')->name('data-pengembali');
+            Route::get('/kunjungan', 'show_data_kunjungan')->name('data-kunjungan');
+            Route::get('/denda', 'show_data_denda')->name('data-denda');
+        });
+
+        Route::controller(PerpustakaanController::class)->group(function () {
+            Route::get('/aplikasi', 'show_data_aplikasi')->name('data-aplikasi');
+            Route::get('/perpustakaan', 'show_data_perpus')->name('data-perpustakaan');
         });
     });
 
-    Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
-        Route::get('/detail', [ViewPenggunaController::class, 'show_detail_admin'])->name('admin.detail');
-        Route::get('/detail', [ViewPenggunaController::class, 'show_detail_pustakawan'])->name('pustakawan.detail');
-
-        Route::prefix('peminjam')->group(function () {
-            Route::get('/tambah', [ViewPenggunaController::class, 'show_tambah_peminjam'])->name('peminjam.add');
-            Route::get('/perbarui', [ViewPenggunaController::class, 'show_perbarui_peminjam'])->name('peminjam.update');
-            Route::get('/detail', [ViewPenggunaController::class, 'show_detail_peminjam'])->name('peminjam.detail');
+    Route::prefix('informasi')->group(function () {
+        Route::controller(InformationController::class)->group(function () {
+            Route::get('/buat-notifikasi', 'show_create_notif')->name('buat_notifikasi');
+            Route::get('/kirim-email', 'show_send_email')->name('kirim_email');
+            Route::get('/buat-artikel', 'show_create_article')->name('buat_artikel');
+            Route::get('/atur-kalender', 'show_set_calendar')->name('atur_kalender');
         });
     });
-});
-
-Route::prefix('informasi')->middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
-    Route::get('/buat-notifikasi', [ViewInformationController::class, 'show_create_notif'])->name('buat_notifikasi');
-    Route::get('/kirim-email', [ViewInformationController::class, 'show_send_email'])->name('kirim_email');
-    Route::get('/buat-artikel', [ViewInformationController::class, 'show_create_article'])->name('buat_artikel');
-    Route::get('/atur-kalender', [ViewInformationController::class, 'show_set_calendar'])->name('atur_kalender');
 });

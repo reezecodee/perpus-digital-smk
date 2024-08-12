@@ -14,8 +14,8 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item">
-                    <a href="{{ route('pustakawan.dashboard') }}"
-                        class="nav-link {{ Request::is('dashboard-pustakawan*') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard.ctrl') }}"
+                        class="nav-link {{ Request::is('dashboard-control*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-chart-line"></i>
                         <p>
                             Dashboard
@@ -44,21 +44,21 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('data-admin.index') }}"
+                            <a href="{{ route('data-admin') }}"
                                 class="nav-link {{ Request::is('master-data/admin*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Admin</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('data-pustakawan.index') }}"
+                            <a href="{{ route('data-pustakawan') }}"
                                 class="nav-link {{ Request::is('master-data/pustakawan*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pustakawan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('data-peminjam.index') }}"
+                            <a href="{{ route('data-peminjam') }}"
                                 class="nav-link {{ Request::is('master-data/peminjam*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Peminjam</p>
@@ -77,28 +77,28 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('data-buku.shelf') }}"
+                            <a href="{{ route('data-rak') }}"
                                 class="nav-link {{ Request::is('master-data/rak-buku*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Rak buku</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('data-buku.category') }}"
+                            <a href="{{ route('data-kategori') }}"
                                 class="nav-link {{ Request::is('master-data/kategori*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kategori</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('data-buku.book') }}"
+                            <a href="{{ route('data-buku') }}"
                                 class="nav-link {{ Request::is('master-data/buku*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Buku</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('data-buku.ebook') }}"
+                            <a href="{{ route('data-ebook') }}"
                                 class="nav-link {{ Request::is('master-data/e-book*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>E-book</p>
@@ -117,28 +117,28 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('data-perpinjaman.index') }}"
+                            <a href="{{ route('data-perpinjaman') }}"
                                 class="nav-link {{ Request::is('master-data/perpinjaman*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Perminjaman</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('data-pengembali.index') }}"
+                            <a href="{{ route('data-pengembali') }}"
                                 class="nav-link {{ Request::is('master-data/pengembalian*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pengembalian</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('data-kunjungan.index') }}"
+                            <a href="{{ route('data-kunjungan') }}"
                                 class="nav-link {{ Request::is('master-data/kunjungan*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kunjungan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('data-denda.index') }}"
+                            <a href="{{ route('data-denda') }}"
                                 class="nav-link {{ Request::is('master-data/denda*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Denda</p>
@@ -158,14 +158,14 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('data-perpustakaan.index') }}"
+                                <a href="{{ route('data-perpustakaan') }}"
                                     class="nav-link {{ Request::is('master-data/perpustakaan*') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Perpustakaan</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('data-aplikasi.index') }}"
+                                <a href="{{ route('data-aplikasi') }}"
                                     class="nav-link {{ Request::is('master-data/aplikasi*') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Aplikasi</p>

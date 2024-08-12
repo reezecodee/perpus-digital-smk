@@ -33,9 +33,9 @@ class AuthController extends Controller
             $user = Auth::user();
 
             if ($user->hasRole('Peminjam')) {
-                return redirect()->intended('dashboard');
+                return redirect('/dashboard');
             } else if ($user->hasRole('Admin') || $user->hasRole('Pustakawan')) {
-                return redirect()->intended('dashboard-pustakawan');
+                return redirect('/dashboard-pustakawan');
             } else {
                 Auth::logout();
                 $request->session()->invalidate();

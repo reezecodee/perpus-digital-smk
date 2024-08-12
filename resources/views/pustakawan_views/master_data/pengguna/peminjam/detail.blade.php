@@ -7,46 +7,50 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="">Username</label>
-                            <input type="text" name="nama" class="form-control" disabled>
+                            <input type="text" value="{{ $data->username }}" class="form-control" disabled>
                         </div>
                         <div class="col-md-6">
                             <label for="">Nama lengkap</label>
-                            <input type="text" name="nama" class="form-control" disabled>
+                            <input type="text" value="{{ $data->nama }}" class="form-control" disabled>
                         </div>
                         <div class="col-md-6">
-                            <label for="">Nomor Induk Pegawai (NIP)</label>
-                            <input type="number" name="nip" class="form-control" disabled>
+                            <label for="">Nomor Induk Siswa (NIS)</label>
+                            <input type="text" value="{{ $data->nip_nis }}" class="form-control" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">Nomor Induk Siswa Nasional</label>
+                            <input type="text" value="{{ $data->nisn }}" class="form-control" disabled>
                         </div>
                         <div class="col-md-6">
                             <label for="">Nomor telepon</label>
-                            <input type="number" name="telepon" class="form-control"
+                            <input type="text" value="{{ $data->telepon }}" class="form-control"
                                 disabled>
                         </div>
                         <div class="col-md-6">
                             <label for="">Email</label>
-                            <input type="email" name="email" class="form-control" disabled>
+                            <input type="text" value="{{ $data->email }}" class="form-control" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">Jenis kelamin</label>
+                            <input type="text" value="{{ $data->jk }}" class="form-control" disabled>
                         </div>
                         <div class="col-md-12">
                             <label for="">Alamat</label>
-                            <textarea name="alamat" cols="30" rows="5" class="form-control" disabled></textarea>
+                            <textarea name="alamat" rows="5" class="form-control" disabled>{{ $data->alamat }}</textarea>
                         </div>
                         <div class="col-md-12">
                             <label for="">Status akun</label>
-                            <select name="status_akun" class="form-control" disabled>
-                                <option selected>Pilih status akun</option>
-                                <option value="Aktif">Aktif</option>
-                                <option value="Non aktif">Non aktif</option>
-                            </select>
+                            <input type="text" value="{{ $data->status }}" class="form-control" disabled>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="d-flex justify-content-center">
-                        <img src="https://lh3.googleusercontent.com/ogw/AF2bZygNbPseDkQ0HS9b3esmBQqCXS-H_eenMu566cNexqZF128=s64-c-mo"
+                        <img src="{{ asset('storage/img/profile/' . ($data->photo ?? 'unknown.jpg')) }}"
                             alt="" class=" rounded-circle w-25">
                     </div>
                     <div class="my-3 text-center">
-                        <h3>Atyla Azfa Al Harits</h3>
+                        <h3>{{ $data->nama }}</h3>
                     </div>
                 </div>
             </div>

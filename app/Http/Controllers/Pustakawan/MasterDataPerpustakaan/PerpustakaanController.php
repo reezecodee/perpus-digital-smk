@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Pustakawan\MasterDataPerpustakaan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ViewPerpustakaanController extends Controller
+class PerpustakaanController extends Controller
 {
     public function show_data_aplikasi()
     {

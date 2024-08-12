@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 
-class ViewInformationController extends Controller
+class InformationController extends Controller
 {
     public function show_create_notif()
     {

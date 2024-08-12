@@ -8,7 +8,7 @@ use App\Models\Category;
 use App\Models\Shelf;
 use Illuminate\Http\Request;
 
-class ViewBukuController extends Controller
+class BukuController extends Controller
 {
     public function show_data_rak_buku()
     {

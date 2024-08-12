@@ -8,7 +8,7 @@ use App\Models\Fine;
 use App\Models\Visit;
 use Illuminate\Http\Request;
 
-class ViewPeminjamanController extends Controller
+class PeminjamanController extends Controller
 {
     public function show_data_peminjam()
     {

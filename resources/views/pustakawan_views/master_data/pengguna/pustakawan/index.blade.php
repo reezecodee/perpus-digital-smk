@@ -2,6 +2,20 @@
 @section('content')
     <div class="card">
         <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <button class="btn btn-success"><i class="fas fa-print"></i></button>
+                </div>
+                <div>
+                    <a href="{{ route('add_pustakawan') }}">
+                        <button class="btn btn-primary"><i class="fas fa-plus"></i> Tambah pustakawan</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
             <table id="data-table" class="table table-bordered table-striped">
                 <thead>
                     <tr>
@@ -24,15 +38,17 @@
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->status }}</td>
                             <td>
-                                <a href="">
-                                    <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
-                                </a>
-                                <a href="">
+                                <a href="{{ route('detail_pustakawan', $item->id) }}">
                                     <button class="btn btn-success"><i class="fas fa-scroll"></i></button>
                                 </a>
-                                <a href="">
-                                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                <a href="{{ route('edit_pustakawan', $item->id) }}">
+                                    <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
                                 </a>
+                                <form class="d-inline" action="{{ route('delete_pustakawan', $item->id) }}" method="post">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
