@@ -208,11 +208,11 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
                 Route::get('/detail/{id}', 'show_detail_admin')->name('detail_admin');
                 
                 Route::controller(LogicUserController::class)->group(function(){
+                    Route::post('/tambah', 'store_admin')->name('store_admin');
+                    Route::put('/perbarui/{id}', 'update_admin')->name('update_admin');
+                    Route::delete('/hapus/{id}', 'delete_admin')->name('delete_admin');
                     Route::post('/import', 'logic_import_admin');
                 });
-
-                Route::put('/perbarui/{id}', 'update_admin')->name('update_admin');
-                Route::delete('/hapus/{id}', 'delete_admin')->name('delete_admin');
             });
 
             Route::prefix('pustakawan')->group(function () {

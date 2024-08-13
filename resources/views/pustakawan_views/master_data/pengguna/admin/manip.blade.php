@@ -2,7 +2,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-md-6">
@@ -125,9 +125,10 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-check">
-                                    <input type="checkbox" name="konfirmasi" value="setuju" class="form-check-input"
+                                    <input type="checkbox" class="form-check-input"
                                         id="konfirmasiCheck" style="cursor: pointer" required>
-                                    <label class="form-check-label" for="konfirmasiCheck" style="cursor: pointer">Saya yakin data tersebut sudah
+                                    <label class="form-check-label" for="konfirmasiCheck" style="cursor: pointer">Saya yakin
+                                        data tersebut sudah
                                         benar</label>
                                 </div>
                             </div>
@@ -173,13 +174,14 @@
                             </div>
                             <div class="modal-footer justify-content-end">
                                 <button type="button" class="btn btn-warning" id="crop_button">Crop</button>
-                                <button type="button" class="btn btn-success" data-dismiss="modal" aria-label="Close">Oke</button>
+                                <button type="button" class="btn btn-success" data-dismiss="modal"
+                                    aria-label="Close">Oke</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="mt-3">
-                    <button type="submit" onclick="upload()" class="btn btn-primary">Simpan data admin</button>
+                    <button type="submit" class="btn btn-primary" onclick="upload()">Simpan data admin</button>
                 </div>
             </form>
         </div>

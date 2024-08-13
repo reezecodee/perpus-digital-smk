@@ -17,14 +17,13 @@
     <link rel="stylesheet" href="/assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="/assets/plugins/jqvmap/jqvmap.min.css">
-    <link rel="stylesheet" href="/assets/plugins/fullcalendar/main.css">
     <link rel="stylesheet" href="/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="/assets/plugins/summernote/summernote-bs4.min.css">
     <!-- Customized CSS -->
     <link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="/assets/dist/css/dropzone.css">
     <link rel="stylesheet" href="/css/cropper.css">
     <!-- CDN CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.min.css">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.7/css/froala_editor.pkgd.min.css">
@@ -81,7 +80,6 @@
     <script src="/assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
     <script src="/assets/plugins/jquery-knob/jquery.knob.min.js"></script>
     <script src="/assets/plugins/moment/moment.min.js"></script>
-    <script src="/assets/plugins/fullcalendar/main.js"></script>
     <script src="/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="/assets/plugins/summernote/summernote-bs4.min.js"></script>
     <script src="/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
@@ -90,6 +88,7 @@
     <script src="/assets/dist/js/pages/dashboard.js"></script>
 
     <!-- CDN JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
     <script src="https://cdn.datatables.net/2.1.2/js/dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.7/js/froala_editor.pkgd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

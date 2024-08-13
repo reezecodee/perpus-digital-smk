@@ -31,9 +31,6 @@ class StoreImageRequest extends FormRequest
     public function messages()
     {
         return [
-            // 'image.image' => 'File yang di upload harus berupa gambar',
-            // 'image.mimes' => 'File yang di upload harus bertipe jpg, png, atau jpeg',
-            // 'image.max' => 'Ukuran file yang kamu upload terlalu besar'
             'image.required' => 'Anda harus mengupload photo Anda',
             'image.string' => 'Anda harus mengupload photo dalam format base64'
         ];
