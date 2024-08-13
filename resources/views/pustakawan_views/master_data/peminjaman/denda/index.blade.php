@@ -8,8 +8,7 @@
                         <th>Judul buku</th>
                         <th>Denda terlambat</th>
                         <th>Denda buku rusak</th>
-                        <th>Denda buku hilang</th>
-                        <th>Denda buku tidak dikembalikan</th>
+                        <th>Denda buku tidak kembali</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -19,14 +18,10 @@
                             <td>{{ $item->book->judul }}</td>
                             <td>{{ $item->denda_terlambat }}</td>
                             <td>{{ $item->denda_rusak }}</td>
-                            <td>{{ $item->denda_hilang }}</td>
-                            <td>{{ $item->denda_tidak_dikembalikan }}</td>
+                            <td>{{ $item->denda_tidak_kembali }}</td>
                             <td>
                                 <a href="">
                                     <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
-                                </a>
-                                <a href="">
-                                    <button class="btn btn-success"><i class="fas fa-scroll"></i></button>
                                 </a>
                                 <a href="">
                                     <button class="btn btn-danger"><i class="fas fa-trash"></i></button>

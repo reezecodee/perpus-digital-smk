@@ -105,7 +105,7 @@
                         <hr>
                         <div class="d-flex justify-content-center">
                             <img src="https://lh3.googleusercontent.com/ogw/AF2bZygNbPseDkQ0HS9b3esmBQqCXS-H_eenMu566cNexqZF128=s64-c-mo"
-                                alt="" class=" rounded-circle w-25">
+                                alt="" class="w-25">
                         </div>
                         <div class="my-3">
                             <input class="form-control" type="file" accept=".jpg, .png, .jpeg" name="logo">

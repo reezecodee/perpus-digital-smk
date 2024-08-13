@@ -23,12 +23,7 @@
                             <input type="number" name="kapasitas" id="kapasitas" class="form-control"
                                 placeholder="Masukkan kapasitas rak" required>
                         </div>
-                        <div class="form-group">
-                            <label for="jumlah_buku">Jumlah buku saat ini</label>
-                            <input type="number" name="jumlah_buku" id="jumlah_buku" class="form-control"
-                                placeholder="Masukkan jumlah buku saat ini" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Tambahkan</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Tambahkan</button>
                     </form>
 
                 </div>
@@ -43,7 +38,7 @@
                                 <th>Nama rak</th>
                                 <th>Kode</th>
                                 <th>Kapasitas</th>
-                                <th>Jumlah buku</th>
+                                <th>Buku saat ini</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -53,10 +48,15 @@
                                     <td>{{ $item->nama_rak }}</td>
                                     <td>{{ $item->kode }}</td>
                                     <td>{{ $item->kapasitas }}</td>
-                                    <td>{{ $item->jml_buku }}</td>
+                                    <td>{{ $item->seluruh_jumlah_buku }}</td>
                                     <td>
-                                        <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
-                                        <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                        <a href="" title="Detail">
+                                            <button class="btn btn-success" ><i class="fas fa-scroll"></i></button>
+                                        </a>
+                                        <a href="" title="Edit">
+                                            <button class="btn btn-primary" ><i class="fas fa-pen"></i></button>
+                                        </a>
+                                            <button class="btn btn-danger" title="Hapus"><i class="fas fa-trash"></i></button>
                                     </td>
                                 </tr>
                             @endforeach

@@ -12,7 +12,7 @@ class BukuController extends Controller
 {
     public function show_data_rak_buku()
     {
-        return view('pustakawan_views.master_data.buku.CRUD_rak_buku.index', [
+        return view('pustakawan_views.master_data.buku.rak_buku.index', [
             'title' => 'Daftar Data Rak Buku',
             'heading' => 'Daftar Rak Buku',
             'shelves' => Shelf::all(),
@@ -21,7 +21,7 @@ class BukuController extends Controller
 
     public function show_data_kategori()
     {
-        return view('pustakawan_views.master_data.buku.CRUD_kategori.index', [
+        return view('pustakawan_views.master_data.buku.kategori.index', [
             'title' => 'Daftar Data Kategori',
             'heading' => 'Daftar Kategori',
             'categories' => Category::all(),
@@ -30,7 +30,7 @@ class BukuController extends Controller
 
     public function show_data_ebook()
     {
-        return view('pustakawan_views.master_data.buku.CRUD_e-book.index', [
+        return view('pustakawan_views.master_data.buku.e-book.index', [
             'title' => 'Daftar Data E-book',
             'heading' => 'Daftar E-book',
             'e_books' => Book::where('format', 'Elektronik')->get(),
@@ -39,7 +39,7 @@ class BukuController extends Controller
 
     public function show_data_buku()
     {
-        return view('pustakawan_views.master_data.buku.CRUD_buku.index', [
+        return view('pustakawan_views.master_data.buku.buku.index', [
             'title' => 'Daftar Data Buku',
             'heading' => 'Daftar Buku',
             'books' => Book::where('format', 'Fisik')->get(),

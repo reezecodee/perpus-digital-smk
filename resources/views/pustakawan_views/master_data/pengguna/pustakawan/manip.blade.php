@@ -127,7 +127,8 @@
                                 <div class="form-check">
                                     <input type="checkbox" name="konfirmasi" value="setuju" class="form-check-input"
                                         id="konfirmasiCheck" style="cursor: pointer" required>
-                                    <label class="form-check-label" for="konfirmasiCheck" style="cursor: pointer">Saya yakin data tersebut sudah
+                                    <label class="form-check-label" for="konfirmasiCheck" style="cursor: pointer">Saya yakin
+                                        data tersebut sudah
                                         benar</label>
                                 </div>
                             </div>
@@ -145,6 +146,83 @@
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#modal-default"><i class="fas fa-upload"></i> Upload foto
                                 profile</button>
+                        </div>
+                        <div>
+                            <h5 class="mb-0">Permission pustakawan</h5>
+                            <p class="text-primary">Berikan minimal 1 izin pustakawan untuk melakukan tugasnya</p>
+                            <hr>
+                            <div class="d-flex flex-wrap justify-content-between">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                        id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Melayani chat
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                        id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Manajemen user peminjam
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                        id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Manajemen user pustakawan
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                        id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Manajemen buku
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                        id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Manajemen peminjaman
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                        id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Manajemen perpustakaan
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                        id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Mengirim notifikasi
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                        id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Mengirim email
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                        id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Mengatur jadwal perpustakaan
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                        id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Generate laporan
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -173,7 +251,8 @@
                             </div>
                             <div class="modal-footer justify-content-end">
                                 <button type="button" class="btn btn-warning" id="crop_button">Crop</button>
-                                <button type="button" class="btn btn-success" data-dismiss="modal" aria-label="Close">Oke</button>
+                                <button type="button" class="btn btn-success" data-dismiss="modal"
+                                    aria-label="Close">Oke</button>
                             </div>
                         </div>
                     </div>

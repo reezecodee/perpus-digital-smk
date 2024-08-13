@@ -120,7 +120,7 @@
                             <a href="{{ route('data-perpinjaman') }}"
                                 class="nav-link {{ Request::is('master-data/perpinjaman*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Perminjaman</p>
+                                <p>Perpinjaman</p>
                             </a>
                         </li>
                         <li class="nav-item">

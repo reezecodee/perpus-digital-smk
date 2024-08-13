@@ -12,19 +12,19 @@ class PeminjamanController extends Controller
 {
     public function show_data_peminjam()
     {
-        return view('pustakawan_views.master_data.peminjaman.CRUD_peminjaman.index', [
+        return view('pustakawan_views.master_data.peminjaman.peminjaman.index', [
             'title' => 'Data Peminjaman',
-            'heading' => 'Peminjaman',
-            'borrowers' => Borrower::all(),
+            'heading' => 'Perpinjaman',
+            'borrowers' => Borrower::whereNotIn('status', ['E-book', 'Sudah dikembalikan', 'Sudah dibayar', 'Sudah diulas'])->latest()->get(),
         ]);
     }
 
     public function show_data_pengembali()
     {
-        return view('pustakawan_views.master_data.peminjaman.CRUD_pengembalian.index', [
+        return view('pustakawan_views.master_data.peminjaman.pengembalian.index', [
             'title' => 'Data Pengembalian',
             'heading' => 'Pengembalian',
-            'borrowers' => Borrower::all(),
+            'borrowers' => Borrower::whereNotIn('status', ['E-book', 'Terkena denda', 'Masa pinjam', 'Masa pengembalian', 'Menunggu persetujuan', 'Disetujui']),
         ]);
     }
 
@@ -39,7 +39,7 @@ class PeminjamanController extends Controller
 
     public function show_data_denda()
     {
-        return view('pustakawan_views.master_data.peminjaman.CRUD_denda.index', [
+        return view('pustakawan_views.master_data.peminjaman.denda.index', [
             'title' => 'Data Denda',
             'heading' => 'Denda',
             'fines' => Fine::all(),

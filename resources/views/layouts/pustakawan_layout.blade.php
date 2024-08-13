@@ -96,6 +96,7 @@
     
     <!-- Customized JS -->
     <script src="/js/pure_cropper.js"></script>
+    <script src="/js/title.js"></script>
     <script>
         let table = new DataTable('#data-table');
     </script>

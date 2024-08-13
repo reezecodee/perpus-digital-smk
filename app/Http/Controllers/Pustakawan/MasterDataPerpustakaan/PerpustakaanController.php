@@ -15,7 +15,7 @@ class PerpustakaanController extends Controller
         ]);
     }
 
-    public function show_data_perpustakaan()
+    public function show_data_perpus()
     {
         return view('pustakawan_views.master_data.perpustakaan.data_perpustakaan.index', [
             'title' => 'Data Perpustakaan',

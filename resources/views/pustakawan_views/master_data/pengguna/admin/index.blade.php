@@ -38,14 +38,14 @@
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->status }}</td>
                             <td>
-                                <a href="{{ route('detail_admin', $item->id) }}">
+                                <a href="{{ route('detail_admin', $item->id) }}" title="Detail">
                                     <button class="btn btn-success"><i class="fas fa-scroll"></i></button>
                                 </a>
                                 @if ($item->status != 'Aktif')
-                                    <a href="{{ route('edit_admin', $item->id) }}">
+                                    <a href="{{ route('edit_admin', $item->id) }}" title="Edit">
                                         <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
                                     </a>
-                                    <form class="d-inline" action="{{ route('delete_admin', $item->id) }}" method="post">
+                                    <form class="d-inline" action="{{ route('delete_admin', $item->id) }}" method="post" title="Hapus">
                                         @method('DELETE')
                                         @csrf
                                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>

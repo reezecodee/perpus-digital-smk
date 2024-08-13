@@ -9,18 +9,16 @@
                     <form action="" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="kode_kategori">Kode kategori</label>
-                            <input type="text" name="kode_kategori" id="kode_kategori" class="form-control"
-                                placeholder="Masukkan kode kategori" required>
+                            <label for="nama_kategori">Nama kategori</label>
+                            <input type="text" name="nama_kategori" id="nama_kategori" class="form-control"
+                                placeholder="Masukkan nama kategori" required>
                         </div>
                         <div class="form-group">
-                            <label for="kategori">Kategori</label>
-                            <input type="text" name="kategori" id="kategori" class="form-control"
-                                placeholder="Masukkan nama kategori" required>
+                            <label for="keterangan">Keterangan (opsional)</label>
+                            <textarea name="keterangan" id="keterangan" class="form-control" placeholder="Masukkan nama keterangan" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Tambahkan</button>
                     </form>
-
                 </div>
             </div>
         </div>
@@ -30,8 +28,9 @@
                     <table id="data-table" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Kode kategori</th>
-                                <th>Nama kaegori</th>
+                                <th>Nama kategori</th>
+                                <th>Keterangan</th>
+                                <th>Buku terkait</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -39,10 +38,13 @@
                             @foreach ($categories as $item)
                                 <tr>
                                     <td>{{ $item->nama_kategori }}</td>
-                                    <td>{{ $item->keterangan }}</td>
+                                    <td>{{ $item->keterangan ?? 'Tidak ada' }}</td>
+                                    <td>{{ '' }}</td>
                                     <td>
-                                        <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
-                                        <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                        <a href="" title="Edit">
+                                            <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
+                                        </a>
+                                        <button class="btn btn-danger" title="Hapus"><i class="fas fa-trash"></i></button>
                                     </td>
                                 </tr>
                             @endforeach

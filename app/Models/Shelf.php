@@ -12,4 +12,13 @@ class Shelf extends Model
 
     protected $guarded = ['id'];
 
+    public function placement()
+    {
+        return $this->hasMany(Placement::class, 'rak_id', 'id');
+    }
+
+    public function getSeluruhJumlahBukuAttribute()
+    {
+        return $this->placement->sum('jumlah_buku');
+    }
 }

@@ -38,13 +38,13 @@
                             <td>{{ $item->telepon }}</td>
                             <td>{{ $item->email }}</td>
                             <td>
-                                <a href="{{ route('detail_peminjam', $item->id) }}">
+                                <a href="{{ route('detail_peminjam', $item->id) }}" title="Detail">
                                     <button class="btn btn-success"><i class="fas fa-scroll"></i></button>
                                 </a>
-                                <a href="{{ route('edit_peminjam', $item->id) }}">
+                                <a href="{{ route('edit_peminjam', $item->id) }}" title="Edit">
                                     <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
                                 </a>
-                                <form class="d-inline" action="{{ route('delete_peminjam', $item->id) }}" method="post">
+                                <form class="d-inline" action="{{ route('delete_peminjam', $item->id) }}" method="post" title="Hapus">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>

@@ -12,4 +12,8 @@ class Placement extends Model
 
     protected $guarded = ['id'];
 
+    public function shelf()
+    {
+        return $this->belongsTo(Shelf::class, 'rak_id', 'id');
+    }
 }

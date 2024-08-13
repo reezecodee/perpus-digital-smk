@@ -38,13 +38,13 @@
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->status }}</td>
                             <td>
-                                <a href="{{ route('detail_pustakawan', $item->id) }}">
+                                <a href="{{ route('detail_pustakawan', $item->id) }}" title="Detail">
                                     <button class="btn btn-success"><i class="fas fa-scroll"></i></button>
                                 </a>
-                                <a href="{{ route('edit_pustakawan', $item->id) }}">
+                                <a href="{{ route('edit_pustakawan', $item->id) }}" title="Edit">
                                     <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
                                 </a>
-                                <form class="d-inline" action="{{ route('delete_pustakawan', $item->id) }}" method="post">
+                                <form class="d-inline" action="{{ route('delete_pustakawan', $item->id) }}" method="post" title="hapus">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
