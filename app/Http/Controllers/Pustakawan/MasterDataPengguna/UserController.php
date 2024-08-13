@@ -131,4 +131,12 @@ class UserController extends Controller
             'data' => User::find($id)
         ]);
     }
+    
+    public function show_import_admin()
+    {
+        return view('pustakawan_views.master_data.pengguna.admin.import', [
+            'title' => 'Import Data Admin',
+            'heading' => 'Import Admin',
+        ]);
+    }
 }

@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Excel\ExcelController;
+use App\Http\Controllers\Excel\ImportExcelController;
+use App\Http\Controllers\PDF\PDFController;
 use App\Http\Controllers\Peminjam\Book\BookController;
 use App\Http\Controllers\Peminjam\Book\LogicBookController;
 use App\Http\Controllers\Peminjam\Calendar\CalendarController;
@@ -15,6 +18,7 @@ use App\Http\Controllers\Pustakawan\ChatMasukController;
 use App\Http\Controllers\Pustakawan\Information\InformationController;
 use App\Http\Controllers\Pustakawan\MasterDataBuku\BukuController;
 use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\PeminjamanController;
+use App\Http\Controllers\Pustakawan\MasterDataPengguna\LogicUserController;
 use App\Http\Controllers\Pustakawan\MasterDataPengguna\UserController;
 use App\Http\Controllers\Pustakawan\MasterDataPerpustakaan\PerpustakaanController;
 use App\Http\Controllers\Pustakawan\Profile\PustakawanProfileController;
@@ -149,8 +153,6 @@ Route::middleware(['auth', 'role:Peminjam'])->group(function () {
 
     Route::controller(CalendarController::class)->group(function () {
         Route::get('/kalender-perpustakaan', 'show_calendar')->name('calendar');
-        // API
-        Route::get('/events', 'events')->middleware('throttle:30,1')->name('event');
     });
 
 
@@ -200,9 +202,14 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
             Route::get('/peminjam', 'show_data_peminjam')->name('data-peminjam');
 
             Route::prefix('admin')->group(function () {
+                Route::get('/import', 'show_import_admin')->name('import_admin');
                 Route::get('/tambah', 'show_manip_admin')->name('add_admin');
                 Route::get('/perbarui/{id}', 'show_manip_admin')->name('edit_admin');
                 Route::get('/detail/{id}', 'show_detail_admin')->name('detail_admin');
+                
+                Route::controller(LogicUserController::class)->group(function(){
+                    Route::post('/import', 'logic_import_admin');
+                });
 
                 Route::put('/perbarui/{id}', 'update_admin')->name('update_admin');
                 Route::delete('/hapus/{id}', 'delete_admin')->name('delete_admin');
@@ -254,5 +261,13 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
             Route::get('/buat-artikel', 'show_create_article')->name('buat_artikel');
             Route::get('/atur-kalender', 'show_set_calendar')->name('atur_kalender');
         });
+    });
+
+    Route::controller(PDFController::class)->group(function(){
+        Route::post('/print_admin', 'print_data_admin')->name('print_pdf_admin');
+    });
+
+    Route::controller(ExcelController::class)->group(function(){
+        Route::post('/export_admin', 'export_admin')->name('export_admin');
     });
 });
