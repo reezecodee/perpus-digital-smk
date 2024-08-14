@@ -211,7 +211,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
                     Route::post('/tambah', 'store_admin')->name('store_admin');
                     Route::put('/perbarui/{id}', 'update_user')->name('update_user');
                     Route::delete('/hapus/{id}', 'delete_user')->name('delete_user');
-                    Route::post('/import', 'logic_import_admin');
+                    Route::post('/import-admin', 'import_admin')->name('direct_import');
                 });
             });
 

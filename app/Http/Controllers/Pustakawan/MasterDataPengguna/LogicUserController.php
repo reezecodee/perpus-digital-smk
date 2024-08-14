@@ -5,10 +5,15 @@ namespace App\Http\Controllers\Pustakawan\MasterDataPengguna;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MasterData\StoreAdminRequest;
 use App\Http\Requests\MasterData\UpdateAdminRequest;
+use App\Imports\UsersImport;
 use App\Models\User;
+use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException as ValidationValidationException;
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Validators\ValidationException as ValidatorsValidationException;
 
 class LogicUserController extends Controller
 {
@@ -121,10 +126,23 @@ class LogicUserController extends Controller
         return back()->withSuccess('Berhasi menghapus data ' . $role);
     }
 
-    public function logic_import_admin(StoreAdminRequest $request)
+    // public function logic_import_admin(StoreAdminRequest $request)
+    // {
+    //     $validated_data = $request->validated();
+
+    //     return response()->json(['message' => $validated_data['data'][1]]);
+    // }
+
+    public function import_admin(Request $request)
     {
-        $validated_data = $request->validated();
-        
-        return response()->json(['message' => $validated_data['data'][1]]);
+        $request->validate([
+            'data_admin' => 'required|file|mimes:xlsx,xls,csv|max:2048',
+        ]);
+    
+        $file = $request->file('data_admin');
+    
+        Excel::import(new UsersImport, $file);
+    
+        return back()->with('success', 'Data berhasil diimport.');
     }
 }

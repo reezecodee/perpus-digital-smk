@@ -15,13 +15,15 @@
                 </div>
                 <div>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-success"><i class="fas fa-upload"></i> Import via Excel</button>
+                        <button type="button" class="btn btn-success"><i class="fas fa-upload"></i> Import via
+                            Excel</button>
                         <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu" role="menu">
                             <a class="dropdown-item" href="{{ route('import_admin') }}">Import preview</a>
-                            <a class="dropdown-item" href="javascript:void(0)">Import langsung</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#modal-default"
+                                href="javascript:void(0)">Import langsung</a>
                             <a class="dropdown-item" href="javascript:void(0)">Download format</a>
                         </div>
                     </div>
@@ -29,6 +31,37 @@
                         <button class="btn btn-primary"><i class="fas fa-plus"></i> Tambah admin</button>
                     </a>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Import Excel</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('direct_import') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <p class="text-center">
+                            Pastikan kamu mengupload file dengan format yang sudah ditentukan. Kamu bisa upload file berformat xlsx, xls, dan csv
+                        </p>
+                        <div class="d-flex justify-content-center w-full mb-3">
+                            <img src="https://www.svgrepo.com/show/452084/pdf.svg" width="50" alt=""
+                                srcset="" class="d-block">
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <input type="file" class="d-block" name="data_admin" accept=".xlsx, xls, csv" id="">
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
