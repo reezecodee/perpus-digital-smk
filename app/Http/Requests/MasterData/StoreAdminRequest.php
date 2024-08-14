@@ -34,7 +34,6 @@ class StoreAdminRequest extends FormRequest
             'status' => 'required|in:Aktif,Non-aktif',
             'image' => 'nullable|string'
         ];
-        
     }
 
     public function messages()

@@ -4,6 +4,9 @@
         <div class="card-header">
             Upload Excel File
         </div>
+        @error('username')
+        {{ $message }}
+        @enderror
         <div class="card-body">
             <form id="uploadForm" method="POST">
                 @csrf

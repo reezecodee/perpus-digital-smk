@@ -4,6 +4,9 @@
         <div class="card-body">
             <form action="" method="post">
                 @csrf
+                @if(Request::is('master-data/admin/perbarui*'))
+                    @method('PUT')
+                @endif
                 <div class="row">
                     <div class="col-md-6">
                         <div class="row">
@@ -147,7 +150,7 @@
                                 data-target="#modal-default"><i class="fas fa-upload"></i> Upload foto
                                 profile</button>
                         </div>
-                    </div>
+                    </div> 
                 </div>
                 <div class="modal fade" id="modal-default">
                     <div class="modal-dialog">
@@ -165,9 +168,9 @@
                                             <img name="display_image_data" id="display_image_data"
                                                 src="/img/dummy-image.png" alt="Picture">
                                         </div>
-                                        <input type="hidden" name="cropped_image_data" id="cropped_image_data">
+                                        <input type="hidden" name="image" id="cropped_image_data">
                                         <br>
-                                        <input type="file" accept=".jpg, .jpeg, .png" name="browse_image"
+                                        <input type="file" accept=".jpg, .jpeg, .png" name=""
                                             id="browse_image">
                                     </div>
                                 </div>
@@ -181,7 +184,7 @@
                     </div>
                 </div>
                 <div class="mt-3">
-                    <button type="submit" class="btn btn-primary" onclick="upload()">Simpan data admin</button>
+                    <button type="submit" class="btn btn-primary">Simpan data admin</button>
                 </div>
             </form>
         </div>

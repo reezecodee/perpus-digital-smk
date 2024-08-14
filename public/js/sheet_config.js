@@ -1,50 +1,64 @@
 document.getElementById('fileUpload').addEventListener('change', function(event) {
     const file = event.target.files[0];
+    if (!file) return; // Jika tidak ada file, keluar dari fungsi
+    
     const reader = new FileReader();
-
+    
     reader.onload = function(e) {
-        const data = new Uint8Array(e.target.result);
-        const workbook = XLSX.read(data, { type: 'array' });
+        try {
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+            const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
 
-        const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-        const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+            const tableHeader = document.getElementById('tableHeader');
+            const tableBody = document.getElementById('tableBody');
+            
+            tableHeader.innerHTML = '';
+            tableBody.innerHTML = '';
 
-        document.getElementById('tableHeader').innerHTML = '';
-        document.getElementById('tableBody').innerHTML = '';
-
-        const headerRow = jsonData[0];
-        headerRow.forEach(header => {
-            const th = document.createElement('th');
-            th.textContent = header;
-            document.getElementById('tableHeader').appendChild(th);
-        });
-
-        const th = document.createElement('th');
-        th.textContent = 'Actions';
-        document.getElementById('tableHeader').appendChild(th);
-
-        for (let i = 1; i < jsonData.length; i++) {
-            const row = document.createElement('tr');
-            jsonData[i].forEach(cell => {
-                const td = document.createElement('td');
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.value = cell;
-                input.classList.add('form-control');
-                td.appendChild(input);
-                row.appendChild(td);
+            // Tambahkan header tabel
+            const headerRow = jsonData[0];
+            headerRow.forEach(header => {
+                const th = document.createElement('th');
+                th.textContent = header;
+                tableHeader.appendChild(th);
             });
-            const actionTd = document.createElement('td');
-            const deleteBtn = document.createElement('button');
-            deleteBtn.textContent = 'Delete';
-            deleteBtn.classList.add('btn', 'btn-danger');
-            deleteBtn.onclick = function() {
-                row.remove();
-                checkIfTableIsEmpty();
-            };
-            actionTd.appendChild(deleteBtn);
-            row.appendChild(actionTd);
-            document.getElementById('tableBody').appendChild(row);
+
+            // Tambahkan kolom Actions
+            const actionHeader = document.createElement('th');
+            actionHeader.textContent = 'Actions';
+            tableHeader.appendChild(actionHeader);
+
+            // Tambahkan baris data
+            for (let i = 1; i < jsonData.length; i++) {
+                const row = document.createElement('tr');
+                jsonData[i].forEach(cell => {
+                    const td = document.createElement('td');
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = cell;
+                    input.classList.add('form-control');
+                    td.appendChild(input);
+                    row.appendChild(td);
+                });
+
+                // Tambahkan tombol hapus
+                const actionTd = document.createElement('td');
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.classList.add('btn', 'btn-danger');
+                deleteBtn.onclick = function() {
+                    row.remove();
+                    checkIfTableIsEmpty();
+                };
+                actionTd.appendChild(deleteBtn);
+                row.appendChild(actionTd);
+                tableBody.appendChild(row);
+            }
+        } catch (error) {
+            console.error('Error reading file:', error);
+            alert('Error processing the file.');
         }
     };
 
@@ -63,24 +77,24 @@ document.getElementById('submitData').addEventListener('click', function() {
     const data = [];
 
     const headers = [];
-    for (let th of table.querySelectorAll('thead th')) {
+    table.querySelectorAll('thead th').forEach(th => {
         headers.push(th.textContent);
-    }
-    data.push(headers.slice(0, -1));
+    });
 
-    for (let tr of table.querySelectorAll('tbody tr')) {
-        const row = [];
-        for (let td of tr.querySelectorAll('td input')) {
-            row.push(td.value);
-        }
+    table.querySelectorAll('tbody tr').forEach(tr => {
+        const row = {};
+        tr.querySelectorAll('td input').forEach((td, index) => {
+            row[headers[index]] = td.value;
+        });
         data.push(row);
-    }
+    });
 
-    if (data.length === 1) {
+    if (data.length === 0) { // Periksa jika data kosong
         console.log('Data array is empty');
+        alert('No data to submit.');
     } else {
-        // let url = document.querySelector('meta[name="url"]').getAttribute('content')
-        // console.log(url);
+        // const url = document.querySelector('meta[name="url"]').getAttribute('content');
+
         fetch('', {
             method: 'POST',
             headers: {

@@ -14,9 +14,17 @@
                     </form>
                 </div>
                 <div>
-                    <a href="{{ route('import_admin') }}">
-                        <button class="btn btn-warning"><i class="fas fa-upload"></i> Import via excel</button>
-                    </a>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success"><i class="fas fa-upload"></i> Import via Excel</button>
+                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                            <a class="dropdown-item" href="{{ route('import_admin') }}">Import preview</a>
+                            <a class="dropdown-item" href="javascript:void(0)">Import langsung</a>
+                            <a class="dropdown-item" href="javascript:void(0)">Download format</a>
+                        </div>
+                    </div>
                     <a href="{{ route('add_admin') }}">
                         <button class="btn btn-primary"><i class="fas fa-plus"></i> Tambah admin</button>
                     </a>
@@ -32,7 +40,6 @@
                         <th>Username</th>
                         <th>Nama</th>
                         <th>NIP</th>
-                        <th>Telepon</th>
                         <th>Email</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -44,7 +51,6 @@
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->nip_nis }}</td>
-                            <td>{{ $item->telepon }}</td>
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->status }}</td>
                             <td>
@@ -55,7 +61,7 @@
                                     <a href="{{ route('edit_admin', $item->id) }}" title="Edit">
                                         <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
                                     </a>
-                                    <form class="d-inline" action="{{ route('delete_admin', $item->id) }}" method="post"
+                                    <form class="d-inline" action="{{ route('delete_user', $item->id) }}" method="post"
                                         title="Hapus">
                                         @method('DELETE')
                                         @csrf

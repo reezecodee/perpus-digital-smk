@@ -209,8 +209,8 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
                 
                 Route::controller(LogicUserController::class)->group(function(){
                     Route::post('/tambah', 'store_admin')->name('store_admin');
-                    Route::put('/perbarui/{id}', 'update_admin')->name('update_admin');
-                    Route::delete('/hapus/{id}', 'delete_admin')->name('delete_admin');
+                    Route::put('/perbarui/{id}', 'update_user')->name('update_user');
+                    Route::delete('/hapus/{id}', 'delete_user')->name('delete_user');
                     Route::post('/import', 'logic_import_admin');
                 });
             });

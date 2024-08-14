@@ -54,6 +54,9 @@ $("body").on("change", "#browse_image", function(e) {
         roundedImage.src = roundedCanvas.toDataURL()
         result.innerHTML = '';
         result.appendChild(roundedImage);
+        var base64data = $('#cropped_image_result img').attr('src');
+        var inputImage = document.getElementById('cropped_image_data')
+        inputImage.value = base64data;
     };
 });
 
@@ -83,19 +86,19 @@ function download() {
     downloadLink.click();
 }
 
-function upload() {
-    var base64data = $('#cropped_image_result img').attr('src');
-    $.ajax({
-            type: "POST",
-            dataType: "json",
-            url: $('meta[name="url"]').attr('content'),
-            data: {
-                '_token': $('meta[name="_token"]').attr('content'),
-                'image': base64data
-            },
-            success: function(data) {
-                console.log(data);
-                alert("Crop image successfully uploaded");
-            }
-        });
-}
+// function upload() {
+//     var base64data = $('#cropped_image_result img').attr('src');
+    // $.ajax({
+    //         type: "POST",
+    //         dataType: "json",
+    //         url: $('meta[name="url"]').attr('content'),
+    //         data: {
+    //             '_token': $('meta[name="_token"]').attr('content'),
+    //             'image': base64data
+    //         },
+    //         success: function(data) {
+    //             console.log(data);
+    //             alert("Crop image successfully uploaded");
+    //         }
+    //     });
+// }
