@@ -206,7 +206,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
                 Route::get('/{role}/detail/{id}', 'show_detail_user')->name('detail_user');
 
                 Route::controller(LogicUserController::class)->group(function () {
-                    Route::post('/tambah', 'store_user')->name('store_user');
+                    Route::post('/tambah/{role}', 'store_user')->name('store_user');
                     Route::put('/perbarui/{id}', 'update_user')->name('update_user');
                     Route::delete('/hapus/{id}', 'delete_user')->name('delete_user');
                     Route::post('/import-user', 'import_user')->name('direct_import');

@@ -3,17 +3,13 @@
 namespace App\Http\Controllers\Pustakawan\MasterDataPengguna;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\MasterData\StoreAdminRequest;
-use App\Http\Requests\MasterData\UpdateAdminRequest;
+use App\Http\Requests\MasterData\StoreUserRequest;
+use App\Http\Requests\MasterData\UpdateUserRequest;
 use App\Imports\UsersImport;
 use App\Models\User;
-use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\ValidationException as ValidationValidationException;
 use Maatwebsite\Excel\Facades\Excel;
-use Maatwebsite\Excel\Validators\ValidationException as ValidatorsValidationException;
 
 class LogicUserController extends Controller
 {
@@ -21,7 +17,6 @@ class LogicUserController extends Controller
     {
         $folderPath = 'public/img/profile/';
 
-        // Memisahkan bagian data image base64
         $image_parts = explode(";base64,", $base64);
         $image_type_aux = explode("image/", $image_parts[0]);
         $image_type = $image_type_aux[1];
@@ -29,12 +24,12 @@ class LogicUserController extends Controller
 
         $imageSize = strlen($image_base64);
 
-        $maxSizeInBytes = 2 * 1024 * 1024;
+        $maxSizeInBytes = 1048576;
 
         if ($imageSize > $maxSizeInBytes) {
             return [
                 'success' => false,
-                'message' => 'Ukuran gambar tidak boleh lebih dari 2MB.'
+                'message' => 'Ukuran gambar tidak boleh lebih dari 1MB.'
             ];
         }
 
@@ -54,13 +49,13 @@ class LogicUserController extends Controller
         $image_result = $this->store_image($image_request);
 
         if (!$image_result['success']) {
-            return back()->withErrors($image_result['message']);
+            return back()->withErrors($image_result['message'])->withInput();
         }
 
         return $image_result['name'];
     }
 
-    public function store_admin(StoreAdminRequest $request)
+    public function store_user(StoreUserRequest $request, $role)
     {
         $validated_data = $request->validated();
         if (isset($validated_data['image'])) {
@@ -70,14 +65,13 @@ class LogicUserController extends Controller
         $validated_data['password'] = bcrypt($validated_data['password']);
 
         $user = User::create($validated_data);
-        $user->assignRole('Admin');
+        $user->assignRole($role);
 
-        $role_name = $user->roles->first()->name;
-        $url_slug = strtolower("data-$role_name");
-        return redirect()->route($url_slug)->withSuccess('Berhasil menambahkan admin baru');
+        $role_name = strtolower($role);
+        return redirect()->route('data-user', $role_name)->withSuccess('Berhasil menambahkan admin baru');
     }
 
-    public function update_user(UpdateAdminRequest $request, $id)
+    public function update_user(UpdateUserRequest $request, $id)
     {
         $user = User::findOrFail($id);
 
@@ -109,20 +103,19 @@ class LogicUserController extends Controller
     public function delete_user($id)
     {
         $user = User::findOrFail($id);
-        $role = $user->roles()->pluck('name');
 
         if ($user->photo) {
-            $imagePath = 'public/img/profile/' . $user->photo;
-
-            if (Storage::exists($imagePath)) {
-                Storage::delete($imagePath);
-            }
+            Storage::delete('public/img/profile/' . $user->photo);
         }
-
+    
         $user->roles()->detach();
+    
         $user->delete();
-
-        return back()->withSuccess('Berhasi menghapus data ' . $role);
+    
+        $roles = $user->roles->pluck('name')->toArray();
+        $rolesString = implode(', ', $roles);
+    
+        return back()->withSuccess('Berhasil menghapus data ' . $rolesString);
     }
 
     // public function logic_import_admin(StoreAdminRequest $request)
@@ -132,16 +125,24 @@ class LogicUserController extends Controller
     //     return response()->json(['message' => $validated_data['data'][1]]);
     // }
 
-    public function import_admin(Request $request)
+    public function import_user(Request $request)
     {
         $request->validate([
-            'data_admin' => 'required|file|mimes:xlsx,xls,csv|max:2048',
+            'data_user' => 'required|file|mimes:xlsx,xls,csv|max:2048',
         ]);
-    
-        $file = $request->file('data_admin');
-    
-        Excel::import(new UsersImport, $file);
-    
-        return back()->with('success', 'Data berhasil diimport.');
+
+        $file = $request->file('data_user');
+
+        // Menangani import dan validasi
+        $import = new UsersImport();
+        try {
+            Excel::import($import, $file);
+            if (session()->has('import_errors')) {
+                return back()->with('import_errors', session('import_errors'));
+            }
+            return back()->with('success', 'Data berhasil diimport.');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 }

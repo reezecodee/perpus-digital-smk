@@ -1,5 +1,10 @@
 @extends('layouts.pustakawan_layout')
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="card">
         <div class="card-body">
             @if (Request::is('master-data/user/**/edit*'))
@@ -8,7 +13,8 @@
                     @method('PUT')
             @endif
             @if (Request::is('master-data/user/**/tambah*'))
-                <form action="{{ route('store_user') }}" method="post">
+                <form action="{{ route('store_user', $role) }}" method="post">
+                    @csrf
             @endif
             <div class="row">
                 <div class="col-md-6">
@@ -211,4 +217,15 @@
             </form>
         </div>
     </div>
+    
+    <script>
+        document.getElementById("browse_image").addEventListener('change', function() {
+            var file = this.files[0];
+            var size = file.size;
+            if (size > 1048576) {
+                alert("Ukuran file gambar terlalu besar. Maksimum ukuran file adalah 2MB.");
+                this.value = "";
+            }
+        });
+    </script>
 @endsection

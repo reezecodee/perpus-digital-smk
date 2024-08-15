@@ -47,8 +47,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="d-flex justify-content-center">
-                        <img src="{{ asset('storage/img/profile/' . ($data->photo ?? 'unknown.jpg')) }}" alt=""
-                            class=" rounded-circle w-25">
+                        <img src="{{ asset('storage/img/profile/' . ($data->photo ?? 'unknown.jpg')) }}" alt="" width="200"
+                            class="rounded-circle">
                     </div>
                     <div class="my-3 text-center">
                         <h3>{{ $data->nama }}</h3>

@@ -1,5 +1,31 @@
 @extends('layouts.pustakawan_layout')
 @section('content')
+    @if (session()->has('import_errors'))
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (session('import_errors') as $error)
+                    <li>
+                        <strong>Baris:</strong> {{ implode(', ', $error['row']) }} <br>
+                        <strong>Error:</strong>
+                        <ul>
+                            @foreach ($error['errors'] as $msg)
+                                <li>{{ $msg }}</li>
+                            @endforeach
+                        </ul>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+        @php
+            session()->forget('import_errors'); 
+        @endphp
+    @endif
+
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     @role('Admin')
         <div class="card">
             <div class="card-body">
