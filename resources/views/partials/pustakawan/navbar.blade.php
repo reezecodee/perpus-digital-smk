@@ -13,8 +13,8 @@
             <a data-toggle="dropdown" href="javascript:void(0)">
                 <div class="d-flex align-items-center">
                     <span class="block mr-2 text-dark">{{ auth()->user()->username }}</span>
-                    <img src="https://lh3.googleusercontent.com/ogw/AF2bZygNbPseDkQ0HS9b3esmBQqCXS-H_eenMu566cNexqZF128=s64-c-mo"
-                        alt="" srcset="" class="w-25 rounded-circle block">
+                    <img src="{{ asset('storage/img/profile/' . (auth()->user()->photo ?? 'unknown.jpg')) }}"
+                        alt="" srcset="" width="40" class="rounded-circle block">
                 </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-md dropdown-menu-right">

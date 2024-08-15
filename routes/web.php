@@ -187,7 +187,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
         Route::get('/dashboard-control', 'show_dashboard')->name('dashboard.ctrl');
     });
 
-    Route::controller(ChatMasukController::class)->group(function () {
+    Route::controller(ChatMasukController::class)->middleware('permission:melayani chat')->group(function () {
         Route::get('/chat-masuk', 'show_chat')->name('chat_masuk');
     });
 
@@ -197,44 +197,24 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
 
     Route::prefix('master-data')->group(function () {
         Route::controller(UserController::class)->group(function () {
-            Route::get('/admin', 'show_data_admin')->name('data-admin');
-            Route::get('/pustakawan', 'show_data_pustakawan')->name('data-pustakawan');
-            Route::get('/peminjam', 'show_data_peminjam')->name('data-peminjam');
+            Route::get('/user/{role}', 'show_data_user')->name('data-user');
 
-            Route::prefix('admin')->group(function () {
-                Route::get('/import', 'show_import_admin')->name('import_admin');
-                Route::get('/tambah', 'show_manip_admin')->name('add_admin');
-                Route::get('/perbarui/{id}', 'show_manip_admin')->name('edit_admin');
-                Route::get('/detail/{id}', 'show_detail_admin')->name('detail_admin');
-                
-                Route::controller(LogicUserController::class)->group(function(){
-                    Route::post('/tambah', 'store_admin')->name('store_admin');
+            Route::prefix('user')->group(function () {
+                Route::get('/{role}/import/', 'show_import_users')->name('import_users');
+                Route::get('/{role}/tambah/', 'show_add_user')->name('add_user');
+                Route::get('/{role}/edit/{id}', 'show_edit_user')->name('edit_user');
+                Route::get('/{role}/detail/{id}', 'show_detail_user')->name('detail_user');
+
+                Route::controller(LogicUserController::class)->group(function () {
+                    Route::post('/tambah', 'store_user')->name('store_user');
                     Route::put('/perbarui/{id}', 'update_user')->name('update_user');
                     Route::delete('/hapus/{id}', 'delete_user')->name('delete_user');
-                    Route::post('/import-admin', 'import_admin')->name('direct_import');
+                    Route::post('/import-user', 'import_user')->name('direct_import');
                 });
-            });
-
-            Route::prefix('pustakawan')->group(function () {
-                Route::get('/tambah', 'show_manip_pustakawan')->name('add_pustakawan');
-                Route::get('/perbarui/{id}', 'show_manip_pustakawan')->name('edit_pustakawan');
-                Route::get('/detail/{id}', 'show_detail_pustakawan')->name('detail_pustakawan');
-
-                Route::put('/perbarui/{id}', 'update_pustakawan')->name('update_pustakawan');
-                Route::delete('/hapus/{id}', 'delete_pustakawan')->name('delete_pustakawan');
-            });
-
-            Route::prefix('peminjam')->group(function () {
-                Route::get('/tambah', 'show_manip_peminjam')->name('add_peminjam');
-                Route::get('/perbarui/{id}', 'show_manip_peminjam')->name('edit_peminjam');
-                Route::get('/detail/{id}', 'show_detail_peminjam')->name('detail_peminjam');
-
-                Route::put('/perbarui/{id}', 'update_peminjam')->name('update_peminjam');
-                Route::delete('/hapus/{id}', 'delete_peminjam')->name('delete_peminjam');
             });
         });
 
-        Route::controller(BukuController::class)->group(function () {
+        Route::controller(BukuController::class)->middleware('permission:manajemen buku')->group(function () {
             Route::get('/rak-buku', 'show_data_rak_buku')->name('data-rak');
             Route::get('/kategori', 'show_data_kategori')->name('data-kategori');
             Route::get('/buku', 'show_data_buku')->name('data-buku');
@@ -248,7 +228,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
             Route::get('/denda', 'show_data_denda')->name('data-denda');
         });
 
-        Route::controller(PerpustakaanController::class)->group(function () {
+        Route::controller(PerpustakaanController::class)->middleware('role:Admin')->group(function () {
             Route::get('/aplikasi', 'show_data_aplikasi')->name('data-aplikasi');
             Route::get('/perpustakaan', 'show_data_perpus')->name('data-perpustakaan');
         });
@@ -256,18 +236,18 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
 
     Route::prefix('informasi')->group(function () {
         Route::controller(InformationController::class)->group(function () {
-            Route::get('/buat-notifikasi', 'show_create_notif')->name('buat_notifikasi');
-            Route::get('/kirim-email', 'show_send_email')->name('kirim_email');
+            Route::get('/buat-notifikasi', 'show_create_notif')->middleware('permission:mengirim notifikasi')->name('buat_notifikasi');
+            Route::get('/kirim-email', 'show_send_email')->middleware('permission:mengirim email')->name('kirim_email');
+            Route::get('/atur-kalender', 'show_set_calendar')->middleware('permission:mengatur jadwal perpustakaan')->name('atur_kalender');
             Route::get('/buat-artikel', 'show_create_article')->name('buat_artikel');
-            Route::get('/atur-kalender', 'show_set_calendar')->name('atur_kalender');
         });
     });
 
-    Route::controller(PDFController::class)->group(function(){
-        Route::post('/print_admin', 'print_data_admin')->name('print_pdf_admin');
+    Route::controller(PDFController::class)->group(function () {
+        Route::post('/print_users', 'print_data_users')->name('print_pdf_users');
     });
 
-    Route::controller(ExcelController::class)->group(function(){
-        Route::post('/export_admin', 'export_admin')->name('export_admin');
+    Route::controller(ExcelController::class)->group(function () {
+        Route::post('/export_users', 'export_users')->name('export_users');
     });
 });

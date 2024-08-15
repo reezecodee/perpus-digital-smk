@@ -3,14 +3,12 @@
 namespace App\Imports;
 
 use App\Models\User;
-use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\Importable;
-use Maatwebsite\Excel\Concerns\ToCollection;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\WithValidation;
 
-class UsersImport implements ToCollection
+
+class UsersImport implements ToModel, WithHeadingRow
 {
     /**
      * @param array $row
@@ -18,32 +16,39 @@ class UsersImport implements ToCollection
      * @return \Illuminate\Database\Eloquent\Model|null
      */
 
-    public function collection(Collection $collection)
+
+    public function model(array $row)
     {
-        foreach ($collection as $row) {
-            // Mengasumsikan bahwa baris pertama adalah header
-            $header = $collection->shift();
+        $validator = Validator::make($row, [
+            'username' => 'required|unique:users,username|min:7|max:15',
+            'nama' => 'required|min:5|max:255',
+            'nip_nis' => 'required|min:10|max:15|unique:users,nip_nis',
+            'telepon' => 'required|min:12|max:15|unique:users,telepon',
+            'email' => 'required|email|min:8|max:255|unique:users,email',
+            'jk' => 'required|in:Laki-laki,Perempuan',
+            'password' => 'required|min:8',
+            'alamat' => 'required|max:200',
+            'status' => 'required|in:Aktif,Non-aktif',
+        ]);
 
-            // Mengubah koleksi menjadi array asosiatif dengan header sebagai kunci
-            $data = $row->combine($header)->toArray();
-
-            // Menyimpan data ke database
-            $user = User::updateOrCreate(
-                ['email' => $data['email']], // Menentukan unique key (email)
-                [
-                    'username' => $data['username'],
-                    'nip_nis' => $data['nip_nis'],
-                    'nama' => $data['nama'],
-                    'email' => $data['email'],
-                    'telepon' => $data['telepon'],
-                    'jk' => $data['jk'],
-                    'password' => bcrypt($data['password']),
-                    'status' => $data['status'],
-                    'alamat' => $data['alamat'],
-                ]
-            );
-
-            $user->assignRole('Admin');
+        if ($validator->fails()) {
+            throw new \Exception('Data tidak valid: ' . implode(', ', $validator->errors()->all()));
         }
+
+        $user = new User([
+            'username' => $row['username'],
+            'nip_nis' => $row['nip_nis'],
+            'nama' => $row['nama'],
+            'email' => $row['email'],
+            'telepon' => $row['telepon'],
+            'jk' => $row['jk'], 
+            'password' => bcrypt($row['password']),
+            'status' => $row['status'],
+            'alamat' => $row['alamat'],
+        ]);
+
+        $user->assignRole('Admin');
+
+        return $user;
     }
 }

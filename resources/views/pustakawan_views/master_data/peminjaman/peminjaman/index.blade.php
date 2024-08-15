@@ -11,7 +11,9 @@
                         <th>Dikembalikan</th>
                         <th>Jatuh tempo</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        @can('manajemen peminjaman')
+                            <th>Action</th>
+                        @endcan
                     </tr>
                 </thead>
                 <tbody>
@@ -23,20 +25,22 @@
                             <td>{{ $item->pengembalian }}</td>
                             <td>{{ $item->jatuh_tempo }}</td>
                             <td>{{ $item->status }}</td>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-info">Action</button>
-                                    <button type="button" class="btn btn-info dropdown-toggle dropdown-icon"
-                                        data-toggle="dropdown" aria-expanded="false">
-                                        <span class="sr-only">Toggle Dropdown</span>
-                                    </button>
-                                    <div class="dropdown-menu" role="menu" style="">
-                                        <a class="dropdown-item" href="#">Detail</a>
-                                        <a class="dropdown-item" href="#">Edit</a>
-                                        <a class="dropdown-item" href="#">Hapus</a>
+                            @can('manajemen peminjaman')
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-info">Action</button>
+                                        <button type="button" class="btn btn-info dropdown-toggle dropdown-icon"
+                                            data-toggle="dropdown" aria-expanded="false">
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <div class="dropdown-menu" role="menu" style="">
+                                            <a class="dropdown-item" href="#">Detail</a>
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item" href="#">Hapus</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
+                            @endcan
                         </tr>
                     @endforeach
                 </tbody>

@@ -103,8 +103,7 @@ class LogicUserController extends Controller
         $user->update($validated_data);
 
         $role_name = $user->roles->first()->name;
-        $url_slug = strtolower("data-$role_name");
-        return redirect()->route($url_slug)->withSuccess('Berhasil memperbarui data ' . $role_name);
+        return redirect()->route('data-user', $role_name)->withSuccess('Berhasil memperbarui data ' . $role_name);
     }
 
     public function delete_user($id)

@@ -33,6 +33,7 @@ class UpdateAdminRequest extends FormRequest
             'alamat' => 'required|max:200',
             'status' => 'required|in:Aktif,Non-aktif',
             'image' => 'nullable|string',
+            'nisn' => 'nullable|min:10|max:10|unique:users,nisn,' . $this->route('id')
         ];
     }
 
@@ -79,6 +80,10 @@ class UpdateAdminRequest extends FormRequest
             'status.in' => 'Status yang dipilih tidak valid.',
 
             'image.string' => 'Gambar harus berupa string yang valid.',
+
+            'nisn.min' => 'NISN harus memiliki minimal 10 karakter.',
+            'nisn.max' => 'NISN tidak boleh lebih dari 10 karakter.',
+            'nisn.unique' => 'NISN sudah digunakan.',
         ];
     }
 }

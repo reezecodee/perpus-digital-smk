@@ -9,7 +9,9 @@
                         <th>Denda terlambat</th>
                         <th>Denda buku rusak</th>
                         <th>Denda buku tidak kembali</th>
-                        <th>Action</th>
+                        @can('manajemen peminjaman')
+                            <th>Action</th>
+                        @endcan
                     </tr>
                 </thead>
                 <tbody>
@@ -19,14 +21,16 @@
                             <td>{{ $item->denda_terlambat }}</td>
                             <td>{{ $item->denda_rusak }}</td>
                             <td>{{ $item->denda_tidak_kembali }}</td>
-                            <td>
-                                <a href="">
-                                    <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
-                                </a>
-                                <a href="">
-                                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                </a>
-                            </td>
+                            @can('manajemen peminjaman')
+                                <td>
+                                    <a href="">
+                                        <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
+                                    </a>
+                                    <a href="">
+                                        <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                    </a>
+                                </td>
+                            @endcan
                         </tr>
                     @endforeach
                 </tbody>

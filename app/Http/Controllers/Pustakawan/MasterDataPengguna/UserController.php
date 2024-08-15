@@ -8,133 +8,80 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function show_data_admin()
+    public function show_data_user($role)
     {
-        return view('pustakawan_views.master_data.pengguna.admin.index', [
-            'title' => 'Daftar Data Admin',
-            'heading' => 'Daftar Admin',
-            'admins' => User::role('Admin')->where('id', '!=', auth()->user()->id)->get()
-        ]);
-    }
+        $validRoles = ['Admin', 'Pustakawan', 'Peminjam'];
+        $uc_first = ucfirst($role);
 
-    public function show_data_pustakawan()
-    {
-        return view('pustakawan_views.master_data.pengguna.pustakawan.index', [
-            'title' => 'Daftar Data Pustakawan',
-            'heading' => 'Daftar Pustakawan',
-            'librarians' => User::role('Pustakawan')->where('id', '!=', auth()->user()->id)->get()
-        ]);
-    }
-
-    public function show_data_peminjam()
-    {
-        return view('pustakawan_views.master_data.pengguna.peminjam.index', [
-            'title' => 'Daftar Data Peminjam',
-            'heading' => 'Daftar Peminjam',
-            'borrowers' => User::role('Peminjam')->get()
-        ]);
-    }
-
-    public function show_manip_admin($id = '')
-    {
-        $admin = [];
-
-        if ($id) {
-            $admin = User::find($id);
-            $title = 'Perbarui Data Admin';
-            $heading = 'Perbarui Admin';
+        if (in_array($uc_first, $validRoles)) {
+            $users = User::role($role)
+                ->where('id', '!=', auth()->id())
+                ->get();
         } else {
-            $title = 'Tambah Admin Baru';
-            $heading = 'Tambah Admin';
+            abort(404);
         }
 
-        return view('pustakawan_views.master_data.pengguna.admin.manip', [
-            'title' => $title,
-            'heading' => $heading,
-            'data' => $admin
+        return view('pustakawan_views.master_data.pengguna.index', [
+            'title' => "Daftar Data $uc_first",
+            'heading' => "Daftar $uc_first",
+            'users' => $users,
+            'role' => strtolower(basename(url()->current()))
         ]);
     }
 
-    public function show_detail_admin($id)
+    public function show_add_user($role_param)
     {
-        if (!$id) {
-            return back();
+        if (!in_array($role_param, ['admin', 'pustakawan', 'peminjam'])) {
+            abort(404);
         }
 
-        return view('pustakawan_views.master_data.pengguna.admin.detail', [
-            'title' => 'Detail Data Admin',
-            'heading' => 'Detail Data Admin',
-            'data' => User::find($id)
+        $user = null;
+        $role = ucfirst($role_param);
+
+        return view('pustakawan_views.master_data.pengguna.form', [
+            'title' => "Tambah $role baru",
+            'heading' => "Tambah $role",
+            'data' => $user,
+            'role' => strtolower($role)
         ]);
     }
 
-    public function show_manip_pustakawan($id = '')
+    public function show_edit_user($role_param, $id)
     {
-        $pustakawan = [];
-
-        if ($id) {
-            $pustakawan = User::find($id);
-            $title = 'Perbarui Data Pustakawan';
-            $heading = 'Perbarui Pustakawan';
-        } else {
-            $title = 'Tambah Pustakawan Baru';
-            $heading = 'Tambah Pustakawan';
+        $user = User::findOrFail($id);
+        $role = $user->getRoleNames()->implode(', ');
+        
+        if ($role_param != strtolower($role)) {
+            abort(404);
         }
-
-        return view('pustakawan_views.master_data.pengguna.pustakawan.manip', [
-            'title' => $title,
-            'heading' => $heading,
-            'data' => $pustakawan
-        ]);
-    }
-    public function show_detail_pustakawan($id)
-    {
-        if (!$id) {
-            return back();
-        }
-
-        return view('pustakawan_views.master_data.pengguna.pustakawan.detail', [
-            'title' => 'Detail Data Pustakawan',
-            'heading' => 'Detail Data Pustakawan',
-            'data' => User::find($id)
+        
+        return view('pustakawan_views.master_data.pengguna.form', [
+            'title' => "Perbarui Data $role",
+            'heading' => "Perbarui $role",
+            'data' => $user,
+            'role' => strtolower($role)
         ]);
     }
 
-    public function show_manip_peminjam($id = '')
+    public function show_detail_user($role_param, $id)
     {
-        $peminjam = [];
-
-        if ($id) {
-            $peminjam = User::find($id);
-            $title = 'Perbarui Data Peminjam';
-            $heading = 'Perbarui Peminjam';
-        } else {
-            $title = 'Tambah Peminjam Baru';
-            $heading = 'Tambah Peminjam';
+        $user = User::findOrFail($id);
+        $role = $user->getRoleNames()->implode(', ');
+        if($role_param != strtolower($role)){
+            abort(404);
         }
-        return view('pustakawan_views.master_data.pengguna.peminjam.manip', [
-            'title' => $title,
-            'heading' => $heading,
-            'data' => $peminjam
+
+        return view('pustakawan_views.master_data.pengguna.detail', [
+            'title' => "Detail Data $role",
+            'heading' => "Detail Data $role",
+            'data' => $user,
+            'role' => $role
         ]);
     }
 
-    public function show_detail_peminjam($id)
+    public function show_import_users()
     {
-        if (!$id) {
-            return back();
-        }
-
-        return view('pustakawan_views.master_data.pengguna.peminjam.detail', [
-            'title' => 'Detail Data Peminjam',
-            'heading' => 'Detail Data Peminjam',
-            'data' => User::find($id)
-        ]);
-    }
-    
-    public function show_import_admin()
-    {
-        return view('pustakawan_views.master_data.pengguna.admin.import', [
+        return view('pustakawan_views.master_data.pengguna.import', [
             'title' => 'Import Data Admin',
             'heading' => 'Import Admin',
         ]);

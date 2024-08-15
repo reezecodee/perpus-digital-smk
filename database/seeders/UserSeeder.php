@@ -24,13 +24,12 @@ class UserSeeder extends Seeder
             'telepon' => '081298897305',
             'jk' => 'Perempuan',
             'password' => bcrypt('12345678'),
-            'photo' => 'https://lh3.googleusercontent.com/a/AEdFTp6XXjHQFNDvo7zHYJwLJt9QpLX3LtN39kDG1YrekQ=s96-c',
             'status' => 'Aktif',
             'alamat' => 'Jl Raya Banjar - Sidaharja, Tambakreja, Lakbok, Ciamis, Jawa barat. 46385'
         ]);
         $admin->assignRole('Admin');
 
-        $pustakawan = User::create([
+        $pustakawanWithoutPermission = User::create([
             'id' => Str::uuid(),
             'username' => 'Harits25',
             'nip_nis' => '19230827',
@@ -40,11 +39,27 @@ class UserSeeder extends Seeder
             'telepon' => '081298897307',
             'jk' => 'Laki-laki',
             'password' => bcrypt('12345678'),
-            'photo' => 'https://lh3.googleusercontent.com/a/AEdFTp6XXjHQFNDvo7zHYJwLJt9QpLX3LtN39kDG1YrekQ=s96-c',
             'status' => 'Aktif',
             'alamat' => 'Jl Raya Banjar - Sidaharja, Tambakreja, Lakbok, Ciamis, Jawa barat. 46385'
         ]);
-        $pustakawan->assignRole('Pustakawan');
+        $pustakawanWithoutPermission->assignRole('Pustakawan');
+
+        $pustakawanWithPermission = User::create([
+            'id' => Str::uuid(),
+            'username' => 'Reeze',
+            'nip_nis' => '19230763',
+            'nisn' => '832487324222',
+            'nama' => 'Atyla Azfa Al Harits',
+            'email' => 'reeze@reeze.com',
+            'telepon' => '081298896969',
+            'jk' => 'Laki-laki',
+            'password' => bcrypt('12345678'),
+            'status' => 'Aktif',
+            'alamat' => 'Jl Raya Banjar - Sidaharja, Tambakreja, Lakbok, Ciamis, Jawa barat. 46385'
+        ]);
+
+        $pustakawanWithPermission->assignRole('Pustakawan');
+        $pustakawanWithPermission->givePermissionTo(['melayani chat', 'manajemen buku']);
 
         $peminjam = User::create([
             'id' => Str::uuid(),
@@ -56,7 +71,6 @@ class UserSeeder extends Seeder
             'telepon' => '081298897309',
             'jk' => 'Laki-laki',
             'password' => bcrypt('12345678'),
-            'photo' => 'https://lh3.googleusercontent.com/a/AEdFTp6XXjHQFNDvo7zHYJwLJt9QpLX3LtN39kDG1YrekQ=s96-c',
             'status' => 'Aktif',
             'alamat' => 'Jl Raya Banjar - Sidaharja, Tambakreja, Lakbok, Ciamis, Jawa barat. 46385'
         ]);

@@ -19,13 +19,18 @@
                         </div>
                         <div class="col-md-6">
                             <label for="">Nomor telepon</label>
-                            <input type="text" value="{{ $data->telepon }}" class="form-control"
-                                disabled>
+                            <input type="text" value="{{ $data->telepon }}" class="form-control" disabled>
                         </div>
                         <div class="col-md-6">
                             <label for="">Email</label>
                             <input type="text" value="{{ $data->email }}" class="form-control" disabled>
                         </div>
+                        @if ($role == 'peminjam')
+                            <div class="col-md-6">
+                                <label for="">Nomor Induk Siswa Nasional</label>
+                                <input type="text" value="{{ $data->nisn }}" class="form-control" disabled>
+                            </div>
+                        @endif
                         <div class="col-md-6">
                             <label for="">Jenis kelamin</label>
                             <input type="text" value="{{ $data->jk }}" class="form-control" disabled>
@@ -42,8 +47,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="d-flex justify-content-center">
-                        <img src="{{ asset('storage/img/profile/' . ($data->photo ?? 'unknown.jpg')) }}"
-                            alt="" class=" rounded-circle w-25">
+                        <img src="{{ asset('storage/img/profile/' . ($data->photo ?? 'unknown.jpg')) }}" alt=""
+                            class=" rounded-circle w-25">
                     </div>
                     <div class="my-3 text-center">
                         <h3>{{ $data->nama }}</h3>

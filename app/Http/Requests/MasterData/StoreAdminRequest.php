@@ -24,7 +24,7 @@ class StoreAdminRequest extends FormRequest
         return [
             'username' => 'required|unique:users,username|min:7|max:15',
             'nama' => 'required|min:5|max:255',
-            'nip_nis' => 'required|min:10|max:15|unique:users,nip_nis',
+            'nip_nis' => 'required|min:10|max:18|unique:users,nip_nis',
             'telepon' => 'required|min:12|max:15|unique:users,telepon',
             'email' => 'required|email|min:8|max:255|unique:users,email',
             'jk' => 'required|in:Laki-laki,Perempuan',
@@ -32,7 +32,8 @@ class StoreAdminRequest extends FormRequest
             'confirm_password' => 'required|min:8|same:password',
             'alamat' => 'required|max:200',
             'status' => 'required|in:Aktif,Non-aktif',
-            'image' => 'nullable|string'
+            'image' => 'nullable|string',
+            'nisn' => 'nullable|min:10|max:10|unique:users,nisn'
         ];
     }
 
@@ -50,7 +51,7 @@ class StoreAdminRequest extends FormRequest
             
             'nip_nis.required' => 'NIP/NIS wajib diisi.',
             'nip_nis.min' => 'NIP/NIS harus memiliki minimal 10 karakter.',
-            'nip_nis.max' => 'NIP/NIS maksimal hanya 15 karakter.',
+            'nip_nis.max' => 'NIP/NIS maksimal hanya 18 karakter.',
             'nip_nis.unique' => 'NIP/NIS sudah digunakan, silakan pilih yang lain.',
             
             'telepon.required' => 'Nomor telepon wajib diisi.',
@@ -80,7 +81,11 @@ class StoreAdminRequest extends FormRequest
             'status.required' => 'Status wajib dipilih.',
             'status.in' => 'Status harus salah satu dari: Aktif atau Non-aktif.',
             
-            'image.string' => 'Gambar profil harus berupa string.'
+            'image.string' => 'Gambar profil harus berupa string.',
+
+            'nisn.min' => 'NISN harus memiliki minimal 10 karakter.',
+            'nisn.max' => 'NISN tidak boleh lebih dari 10 karakter.',
+            'nisn.unique' => 'NISN sudah digunakan.',
         ];        
     }
 }

@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Contracts\Permission;
 use Spatie\Permission\Models\Permission as ModelsPermission;
 use Spatie\Permission\Models\Role;
 
@@ -16,48 +14,25 @@ class RolePermissionSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
-            'chat bantuan',
-            'manajemen pengguna_internal',
-            'manajemen peminjam',
-            'manajemen rak',
-            'manajemen kategori',
-            'manajemen buku',
+            'melayani chat',
+            'manajemen user pustakawan',
             'manajemen peminjaman',
-            'manajemen kunjungan',
-            'manajemen denda',
-            'manajemen perpustakaan',
-            'manajemen aplikasi',
-            'manajemen notifikasi',
-            'manajemen email',
-            'manajemen artikel',
-            'manajemen kelender',
+            'mengirim notifikasi',
+            'mengatur jadwal perpustakaan',
+            'manajemen user peminjam',
+            'manajemen buku',
+            'mengirim email',
             'generate laporan',
-            'akses penuh peminjam'
         ];
 
-        foreach($permissions as $permission){
+        foreach ($permissions as $permission) {
             ModelsPermission::create(['name' => $permission]);
         }
 
         $admin_role = Role::create(['name' => 'Admin']);
-        $librarian_role = Role::create(['name' => 'Pustakawan']);
-        $borrower_role = Role::create(['name' => 'Peminjam']);
+        Role::create(['name' => 'Pustakawan']);
+        Role::create(['name' => 'Peminjam']);
 
         $admin_role->givePermissionTo(ModelsPermission::all());
-        $librarian_role->givePermissionTo([
-            'chat bantuan',
-            'manajemen peminjam',
-            'manajemen rak',
-            'manajemen kategori',
-            'manajemen buku',
-            'manajemen peminjaman',
-            'manajemen kunjungan',
-            'manajemen denda',
-            'manajemen notifikasi',
-            'manajemen artikel',
-            'manajemen kelender',
-            'generate laporan',
-        ]);
-        $borrower_role->givePermissionTo(['akses penuh peminjam']);
     }
 }
