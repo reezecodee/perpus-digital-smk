@@ -9,8 +9,8 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ExcelController extends Controller
 {
-    public function export_admin(Request $request) 
+    public function export_users(Request $request) 
     {
-        return Excel::download(new UsersExport($request->filter, 'Admin'), 'admin.xlsx');
+        return Excel::download(new UsersExport($request->filter, 'Admin'), 'daftar_admin.xlsx');
     }
 }

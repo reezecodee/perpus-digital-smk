@@ -4,24 +4,17 @@
         <div class="card-header">
             Upload Excel File
         </div>
-        @error('username')
-        {{ $message }}
-        @enderror
         <div class="card-body">
-            <form id="uploadForm" method="POST">
+            <form id="uploadForm" method="post">
                 @csrf
-                <div class="form-group">
-                    <input type="file" id="fileUpload" class="form-control-file" />
-                </div>
+                <input type="file" id="fileInput" accept=".xlsx, .xls, .csv" />
+                <br><br>
+                <div id="excelPreview"></div>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                <a href="">
+                    <button type="button" class="btn btn-warning"><i class="fas fa-redo-alt"></i> Refresh</button>
+                </a>
             </form>
-            <h5>Data Preview:</h5>
-            <table class="table table-bordered mb-3" id="excelTable">
-                <thead>
-                    <tr id="tableHeader"></tr>
-                </thead>
-                <tbody id="tableBody"></tbody>
-            </table>
-            <button class="btn btn-primary" id="submitData">Submit Data</button>
         </div>
     </div>
 @endsection

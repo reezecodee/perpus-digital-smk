@@ -9,9 +9,10 @@ use Illuminate\Http\Request;
 
 class PDFController extends Controller
 {
-    public function print_data_admin(Request $request, PDF $pdf)
+    public function print_data_users(Request $request, PDF $pdf, $role)
     {
-        $admin = User::role('Admin');
+        $role = ucfirst($role);
+        $users = User::role($role);
         $except = [
             'id',
             'email_verified_at',
@@ -22,17 +23,17 @@ class PDFController extends Controller
         ];
 
         if ($request->filter) {
-            $admin = $admin->where('status', $request->filter)->get();
+            $users = $users->where('status', $request->filter)->get();
         } else {
-            $admin = $admin->get();
+            $users = $users->get();
         }
 
-        $admin->makeHidden($except);
+        $users->makeHidden($except);
 
-        $pdf_instance = $pdf->loadView('print_views.pdf.admpust', compact('admin'));
+        $pdf_instance = $pdf->loadView('pustakawan_views.generate.pdf_list.users', compact('users', 'role'));
 
         $pdf_instance->setPaper('A4', 'potrait');
 
-        return $pdf_instance->download('daftar_admin.pdf');
+        return $pdf_instance->download("Daftar $role.pdf");
     }
 }

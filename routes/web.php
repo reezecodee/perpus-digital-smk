@@ -244,10 +244,10 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
     });
 
     Route::controller(PDFController::class)->group(function () {
-        Route::post('/print_users', 'print_data_users')->name('print_pdf_users');
+        Route::post('/print_users/{role}', 'print_data_users')->name('print_pdf_users');
     });
 
     Route::controller(ExcelController::class)->group(function () {
-        Route::post('/export_users', 'export_users')->name('export_users');
+        Route::post('/export_users/{role}', 'export_users')->name('export_users');
     });
 });

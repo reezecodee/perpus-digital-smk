@@ -31,11 +31,11 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <form class="d-inline" action="{{ route('print_pdf_users') }}" method="post">
+                        <form class="d-inline" action="{{ route('print_pdf_users', $role) }}" method="post">
                             @csrf
                             <button class="btn btn-primary" type="submit"><i class="fas fa-print"></i></button>
                         </form>
-                        <form class="d-inline" action="{{ route('export_users') }}" method="post">
+                        <form class="d-inline" action="{{ route('export_users', $role) }}" method="post">
                             @csrf
                             <button class="btn btn-success" type="submit"><i class="fas fa-file-excel"></i></button>
                         </form>
