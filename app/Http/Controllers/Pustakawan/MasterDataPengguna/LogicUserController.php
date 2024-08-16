@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pustakawan\MasterDataPengguna;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MasterData\ImportUserRequest;
 use App\Http\Requests\MasterData\StoreUserRequest;
 use App\Http\Requests\MasterData\UpdateUserRequest;
 use App\Imports\UsersImport;
@@ -107,23 +108,16 @@ class LogicUserController extends Controller
         if ($user->photo) {
             Storage::delete('public/img/profile/' . $user->photo);
         }
-    
+
         $user->roles()->detach();
-    
+
         $user->delete();
-    
+
         $roles = $user->roles->pluck('name')->toArray();
         $rolesString = implode(', ', $roles);
-    
+
         return back()->withSuccess('Berhasil menghapus data ' . $rolesString);
     }
-
-    // public function logic_import_admin(StoreAdminRequest $request)
-    // {
-    //     $validated_data = $request->validated();
-
-    //     return response()->json(['message' => $validated_data['data'][1]]);
-    // }
 
     public function import_user(Request $request)
     {

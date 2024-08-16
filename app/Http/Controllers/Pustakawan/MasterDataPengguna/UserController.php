@@ -78,12 +78,4 @@ class UserController extends Controller
             'role' => $role
         ]);
     }
-
-    public function show_import_users()
-    {
-        return view('pustakawan_views.master_data.pengguna.import', [
-            'title' => 'Import Data Admin',
-            'heading' => 'Import Admin',
-        ]);
-    }
 }

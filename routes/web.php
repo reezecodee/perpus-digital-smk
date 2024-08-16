@@ -200,7 +200,6 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
             Route::get('/user/{role}', 'show_data_user')->name('data-user');
 
             Route::prefix('user')->group(function () {
-                Route::get('/{role}/import/', 'show_import_users')->name('import_users');
                 Route::get('/{role}/tambah/', 'show_add_user')->name('add_user');
                 Route::get('/{role}/edit/{id}', 'show_edit_user')->name('edit_user');
                 Route::get('/{role}/detail/{id}', 'show_detail_user')->name('detail_user');

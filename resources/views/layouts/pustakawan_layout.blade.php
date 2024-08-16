@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="/assets/plugins/jqvmap/jqvmap.min.css">
     <link rel="stylesheet" href="/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <link rel="stylesheet" href="/assets/plugins/summernote/summernote-bs4.min.css">
     <!-- Customized CSS -->
     <link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="/css/cropper.css">
@@ -81,7 +80,6 @@
     <script src="/assets/plugins/jquery-knob/jquery.knob.min.js"></script>
     <script src="/assets/plugins/moment/moment.min.js"></script>
     <script src="/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="/assets/plugins/summernote/summernote-bs4.min.js"></script>
     <script src="/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <script src="/assets/dist/js/adminlte.js"></script>
     <script src="/assets/dist/js/demo.js"></script>
@@ -99,7 +97,6 @@
     <!-- Customized JS -->
     <script src="/js/pure_cropper.js"></script>
     <script src="/js/title.js"></script>
-    <script src="/js/sheet_config.js"></script>
     <script>
         let table = new DataTable('#data-table');
     </script>

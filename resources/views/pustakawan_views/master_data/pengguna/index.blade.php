@@ -17,7 +17,7 @@
             </ul>
         </div>
         @php
-            session()->forget('import_errors'); 
+            session()->forget('import_errors');
         @endphp
     @endif
 
@@ -48,7 +48,6 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu" role="menu">
-                                <a class="dropdown-item" href="{{ route('import_users', $role) }}">Import preview</a>
                                 <a class="dropdown-item" data-toggle="modal" data-target="#modal-default"
                                     href="javascript:void(0)">Import langsung</a>
                                 <a class="dropdown-item" href="javascript:void(0)">Download format</a>
@@ -101,7 +100,10 @@
                     <tr>
                         <th>Username</th>
                         <th>Nama</th>
-                        <th>NIP</th>
+                        <th>{{ $role != 'peminjam' ? 'NIP' : 'NIS' }}</th>
+                        @if ($role == 'peminjam')
+                            <th>NISN</th>
+                        @endif
                         <th>Email</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -113,6 +115,9 @@
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->nip_nis }}</td>
+                            @if ($role == 'peminjam')
+                                <td>{{ $item->nisn }}</td>
+                            @endif
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->status }}</td>
                             <td>
