@@ -7,6 +7,13 @@
     <title>{{ $title }}</title>
     <meta name="_token" content="{{ csrf_token() }}">
     <meta name="url" content="{{ request()->path() }}">
+    @if (session('success'))
+        <meta name="flash-message-success" content="{{ session('success') }}">
+    @endif
+    @if (session('error'))
+        <meta name="flash-message-error" content="{{ session('error') }}">
+    @endif
+
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -28,7 +35,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.7/css/froala_editor.pkgd.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" />
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
 </head>
 
@@ -63,7 +70,7 @@
             <!-- Control sidebar content goes here -->
         </aside>
     </div>
-    
+
 
     <!-- jQuery -->
     <script src="/assets/plugins/jquery/jquery.min.js"></script>
@@ -93,10 +100,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Customized JS -->
     <script src="/js/pure_cropper.js"></script>
     <script src="/js/title.js"></script>
+    <script src="/js/sweet_alert.js"></script>
     <script>
         let table = new DataTable('#data-table');
     </script>

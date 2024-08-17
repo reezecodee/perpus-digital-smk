@@ -36,8 +36,7 @@
                 @endcan
                 <li class="nav-header">Master Data</li>
                 <li class="nav-item">
-                    <a href="#"
-                        class="nav-link {{ Request::is('master-data/user*') ? 'active' : '' }}">
+                    <a href="#" class="nav-link {{ Request::is('master-data/user*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Data Pengguna
@@ -80,10 +79,17 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('data-rak') }}"
-                                    class="nav-link {{ Request::is('master-data/rak-buku*') ? 'active' : '' }}">
+                                <a href="{{ route('data-buku', 'fisik') }}"
+                                    class="nav-link {{ Request::is('master-data/buku/fisik*') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Rak buku</p>
+                                    <p>Buku</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('data-buku', 'elektronik') }}"
+                                    class="nav-link {{ Request::is('master-data/buku/elektronik*') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>E-book</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -94,17 +100,10 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('data-buku') }}"
-                                    class="nav-link {{ Request::is('master-data/buku*') ? 'active' : '' }}">
+                                <a href="{{ route('data-rak') }}"
+                                    class="nav-link {{ Request::is('master-data/rak-buku*') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Buku</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('data-ebook') }}"
-                                    class="nav-link {{ Request::is('master-data/e-book*') ? 'active' : '' }}">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>E-book</p>
+                                    <p>Rak buku</p>
                                 </a>
                             </li>
                         </ul>

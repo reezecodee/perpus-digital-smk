@@ -1,9 +1,9 @@
 @extends('layouts.pustakawan_layout')
 @section('content')
-    @if (session()->has('import_errors'))
+    @if (session()->has('error'))
         <div class="alert alert-danger">
             <ul>
-                @foreach (session('import_errors') as $error)
+                @foreach (session('error') as $error)
                     <li>
                         <strong>Baris:</strong> {{ implode(', ', $error['row']) }} <br>
                         <strong>Error:</strong>
@@ -17,7 +17,7 @@
             </ul>
         </div>
         @php
-            session()->forget('import_errors');
+            session()->forget('error');
         @endphp
     @endif
 
@@ -70,7 +70,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('direct_import') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('direct_import_user') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <p class="text-center">
@@ -98,6 +98,7 @@
             <table id="data-table" class="table table-bordered table-striped">
                 <thead>
                     <tr>
+                        <th>Foto</th>
                         <th>Username</th>
                         <th>Nama</th>
                         <th>{{ $role != 'peminjam' ? 'NIP' : 'NIS' }}</th>
@@ -112,6 +113,10 @@
                 <tbody>
                     @foreach ($users as $item)
                         <tr>
+                            <td>
+                                <img src="{{ asset('storage/img/profile/' . ($item->photo ?? 'unknown.jpg')) }}"
+                                    alt="" width="40" class="rounded-circle" loading="lazy">
+                            </td>
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->nip_nis }}</td>
@@ -127,11 +132,14 @@
                                 <a href="{{ route('edit_user', ['role' => $role, 'id' => $item->id]) }}" title="Edit">
                                     <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
                                 </a>
-                                <form class="d-inline" action="{{ route('delete_user', $item->id) }}" method="post"
-                                    title="Hapus">
+                                <form id="delete-form-{{ $item->id }}" class="d-inline"
+                                    action="{{ route('delete_user', $item->id) }}" method="post" title="Hapus">
                                     @method('DELETE')
                                     @csrf
-                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                    <button type="button" onclick="confirmDelete('{{ $item->id }}')"
+                                        class="btn btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </form>
                             </td>
                         </tr>

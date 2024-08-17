@@ -12,3 +12,21 @@
     outline: 0;
     box-shadow: 0 0 0 1px #39f;
 }
+
+.preview {
+    text-align: center;
+    overflow: hidden;
+    margin: 10px;
+    border: 1px solid red;
+}
+
+
+.section {
+    margin-top: 150px;
+    background: #fff;
+    padding: 50px 30px;
+}
+
+.modal-lg {
+    max-width: 500px !important;
+}

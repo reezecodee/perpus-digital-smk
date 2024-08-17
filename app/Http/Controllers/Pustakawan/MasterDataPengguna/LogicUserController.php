@@ -109,14 +109,13 @@ class LogicUserController extends Controller
             Storage::delete('public/img/profile/' . $user->photo);
         }
 
-        $user->roles()->detach();
+        $roles = $user->roles->pluck('name')->toArray();
+        $roles = implode(', ', $roles);
 
+        $user->roles()->detach();
         $user->delete();
 
-        $roles = $user->roles->pluck('name')->toArray();
-        $rolesString = implode(', ', $roles);
-
-        return back()->withSuccess('Berhasil menghapus data ' . $rolesString);
+        return back()->withSuccess('Berhasil menghapus data ' . $roles);
     }
 
     public function import_user(Request $request)
@@ -127,12 +126,11 @@ class LogicUserController extends Controller
 
         $file = $request->file('data_user');
 
-        // Menangani import dan validasi
         $import = new UsersImport();
         try {
             Excel::import($import, $file);
-            if (session()->has('import_errors')) {
-                return back()->with('import_errors', session('import_errors'));
+            if (session()->has('error')) {
+                return back()->with('error', session('error'));
             }
             return back()->with('success', 'Data berhasil diimport.');
         } catch (\Exception $e) {

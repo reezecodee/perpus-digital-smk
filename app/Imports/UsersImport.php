@@ -25,7 +25,7 @@ class UsersImport implements ToModel, WithHeadingRow
         $validator = Validator::make($row, $import_request->rules(), $import_request->messages());
 
         if ($validator->fails()) {
-            session()->push('import_errors', [
+            session()->push('error', [
                 'errors' => $validator->errors()->all(),
                 'row' => $row
             ]);

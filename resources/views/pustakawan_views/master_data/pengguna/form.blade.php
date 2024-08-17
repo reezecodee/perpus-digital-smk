@@ -217,13 +217,18 @@
             </form>
         </div>
     </div>
-    
+
     <script>
         document.getElementById("browse_image").addEventListener('change', function() {
             var file = this.files[0];
             var size = file.size;
             if (size > 1048576) {
-                alert("Ukuran file gambar terlalu besar. Maksimum ukuran file adalah 2MB.");
+                Swal.fire({
+                    title: 'Gagal!',
+                    text: 'Gambar yang di upload terlalu besar, maximal adalah 1MB',
+                    icon: 'error',
+                    confirmButtonText: 'Oke'
+                });
                 this.value = "";
             }
         });

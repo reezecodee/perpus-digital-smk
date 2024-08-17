@@ -208,16 +208,25 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
                     Route::post('/tambah/{role}', 'store_user')->name('store_user');
                     Route::put('/perbarui/{id}', 'update_user')->name('update_user');
                     Route::delete('/hapus/{id}', 'delete_user')->name('delete_user');
-                    Route::post('/import-user', 'import_user')->name('direct_import');
+                    Route::post('/import-user', 'import_user')->name('direct_import_user');
                 });
             });
         });
 
         Route::controller(BukuController::class)->middleware('permission:manajemen buku')->group(function () {
-            Route::get('/rak-buku', 'show_data_rak_buku')->name('data-rak');
+            Route::get('/buku/{format}', 'show_data_buku')->name('data-buku');
             Route::get('/kategori', 'show_data_kategori')->name('data-kategori');
-            Route::get('/buku', 'show_data_buku')->name('data-buku');
-            Route::get('/e-book', 'show_data_ebook')->name('data-ebook');
+            Route::get('/rak-buku', 'show_data_rak_buku')->name('data-rak');
+
+            Route::get('/{role}/tambah/', 'show_add_book')->name('add_book');
+            Route::get('/{role}/edit/{id}', 'show_edit_book')->name('edit_book');
+            Route::get('/{role}/detail/{id}', 'show_detail_book')->name('detail_book');
+            Route::controller(LogicBookController::class)->group(function () {
+                Route::post('/tambah/{format}', 'store_book')->name('store_book');
+                Route::put('/{format}/edit/{id}', 'update_book')->name('update_book');
+                Route::delete('/hapus/{id}', 'delete_buku')->name('delete_book');
+                Route::post('/import-buku', 'import_buku')->name('direct_import_books');
+            });
         });
 
         Route::controller(PeminjamanController::class)->group(function () {
@@ -244,9 +253,11 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
 
     Route::controller(PDFController::class)->group(function () {
         Route::post('/print_users/{role}', 'print_data_users')->name('print_pdf_users');
+        Route::post('/print_books/{format}', 'print_data_books')->name('print_pdf_books');
     });
 
     Route::controller(ExcelController::class)->group(function () {
         Route::post('/export_users/{role}', 'export_users')->name('export_users');
+        Route::post('/export_books/{format}', 'export_books')->name('export_books');
     });
 });
