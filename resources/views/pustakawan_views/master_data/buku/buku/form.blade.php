@@ -1,5 +1,13 @@
 @extends('layouts.pustakawan_layout')
 @section('content')
+    @if (isset($data))
+        <form action="{{ route('update_book', ['format' => $format, 'id' => $data->id]) }}" method="post"
+            enctype="multipart/form-data">
+            @method('PUT')
+        @else
+            <form action="{{ route('store_book', $format) }}" method="post" enctype="multipart/form-data">
+    @endif
+    @csrf
     <div class="row">
         <div class="col-md-8">
             <div class="card">
@@ -63,12 +71,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="" class="mb-0">Kategori</label>
-                                <select name="kategori_id" id=""
+                                <select name="kategori_id" id="kategori_id"
                                     class="form-control @error('kategori_id') is-invalid @enderror" required>
-                                    <option value="{{ old('kategori_id', $data->kategori_id ?? '') }}" selected>
-                                        {{ old('kategori_id', $data->kategori_id ?? '-- Pilih kategori --') }}</option>
+                                    <option value="">-- Pilih kategori --</option>
                                     @foreach ($categories as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
+                                        <option value="{{ $item->id }}"
+                                            {{ old('kategori_id', $data->kategori_id ?? '') == $item->id ? 'selected' : '' }}>
+                                            {{ $item->nama_kategori }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 @error('kategori_id')
@@ -123,7 +133,9 @@
                                 @enderror
                             </div>
                         </div>
-                        <input type="hidden" name="format" id="" value="Fisik">
+                        <input type="hidden" name="format" id="" value="{{ ucfirst($format) }}">
+                    </div>
+                    @if ($format == 'elektronik')
                         <div class="col-md-12 mb-3">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="konfirmasiCheck"
@@ -134,11 +146,11 @@
                                     benar</label>
                             </div>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Simpan buku</button>
-                    <a href="">
-                        <button type="button" class="btn btn-warning">Refresh</button>
-                    </a>
+                        <button type="submit" class="btn btn-primary">Simpan buku</button>
+                        <a href="">
+                            <button type="button" class="btn btn-warning">Refresh</button>
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -148,63 +160,123 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="">Cover buku</label>
-                            <div class="d-flex justify-content-center mb-3">
-                                <img src="/img/unknown_cover.png" alt="" class="w-75 border preview" srcset="">
+                            <div class="d-flex justify-content-center">
+                                <img src="{{ asset('storage/img/cover/' . ($data->cover_buku ?? 'unknown_cover.png')) }}"
+                                    alt="" class="w-75 border preview" id="coverPreview">
                             </div>
+                            <p class="text-center" id="file-name-cover"></p>
                             <div class="d-flex justify-content-center w-full">
-                                <input type="file" name="image" class="image d-none" id="fileInput">
-                                <button class="btn btn-success" id="uploadBtn" type="button" data-toggle="modal"
-                                    data-target="#modal-defaults"><i class="fas fa-upload"></i> Upload cover</button>
+                                <input type="file" id="fileInputCover" name="cover_buku" class="image"
+                                    style="display: none" accept=".jpg, .png, .jpeg">
+                                <button class="btn btn-success mr-2" type="button" id="uploadCoverBtn"><i
+                                        class="fas fa-upload"></i> Upload cover</button>
+                                <a href="/crop-cover" target="_blank">
+                                    <button class="btn btn-warning" type="button"><i class="fas fa-crop-alt"></i> Crop
+                                        gambar</button>
+                                </a>
                             </div>
+                            @error('cover_buku')
+                                <div style="color: red;">{{ $message }}</div>
+                            @enderror
+                            <div id="error-message" style="display: none; color: red;"></div>
                         </div>
-                        <div class="modal fade" id="modal-default">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Default Modal</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="img-container">
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    <img id="image"
-                                                        src="/img/unknown_cover.png">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer justify-content-between">
-                                        <button type="button" class="btn btn-default"
-                                            data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
+                    </div>
+                </div>
+            </div>
+            @if ($format == 'elektronik')
+                <div class="row">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="">Upload PDF E-book</label>
+                                <div class="d-flex justify-content-center mb-3">
+                                    <img src="https://www.svgrepo.com/show/518507/pdf-doc-scan.svg" alt=""
+                                        class="w-25 border" srcset="">
                                 </div>
+                                <p id="fileNamePDF" class="text-center"></p>
+                                <input type="file" name="e_book_file" id="fileInputPDF" accept=".pdf"
+                                    style="display: none">
+                                <div class="d-flex justify-content-center w-full">
+                                    <button type="button" id="uploadPDFBtn" class="btn btn-success mr-2"><i
+                                            class="fas fa-upload"></i>
+                                        Upload PDF</button>
+                                    @if (isset($data->e_book_file))
+                                        <a href="{{ route('read_e_book', $data->id) }}">
+                                            <button type="button" class="btn btn-warning"><i class="fas fa-book"></i>
+                                                Lihat E-book</button>
+                                        </a>
+                                    @endif
+                                </div>
+                                @error('e_book_file')
+                                    <div style="color: red;">{{ $message }}</div>
+                                @enderror
+                                <p id="errorMessagePDF"></p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="">Upload PDF E-book</label>
-                            <div class="d-flex justify-content-center mb-3">
-                                <img src="https://www.svgrepo.com/show/518507/pdf-doc-scan.svg" alt=""
-                                    class="w-25 border" srcset="">
-                            </div>
-                            <div class="d-flex justify-content-center w-full">
-                                <button class="btn btn-success"><i class="fas fa-upload"></i> Upload PDF</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endif
         </div>
     </div>
-
-    <script src="cropper_square.js"></script>
+    @if ($format == 'fisik')
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="" class="mb-0">Denda buku terlambat</label>
+                            <input type="number" name="denda_terlambat" placeholder="Nominal denda jika buku terlambat"
+                                id="" class="form-control @error('denda_terlambat') is-invalid @enderror"
+                                autocomplete="off"
+                                value="{{ old('denda_terlambat', $data->fine->denda_terlambat ?? '') }}" required>
+                            @error('denda_terlambat')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="" class="mb-0">Denda buku rusak</label>
+                            <input type="number" name="denda_rusak" placeholder="Nominal denda jika buku terlambat"
+                                id="" class="form-control @error('denda_rusak') is-invalid @enderror"
+                                autocomplete="off" value="{{ old('denda_rusak', $data->fine->denda_rusak ?? '') }}"
+                                required>
+                            @error('denda_rusak')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="" class="mb-0">Denda buku tidak kembali</label>
+                            <input type="text" name="denda_tidak_kembali"
+                                placeholder="Nominal denda jika buku tidak_kembali" id=""
+                                class="form-control @error('denda_tidak_kembali') is-invalid @enderror"
+                                autocomplete="off"
+                                value="{{ old('denda_tidak_kembali', $data->fine->denda_tidak_kembali ?? '') }}" required>
+                            @error('denda_tidak_kembali')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="konfirmasiCheck" style="cursor: pointer"
+                            required>
+                        <label class="form-check-label" for="konfirmasiCheck" style="cursor: pointer">Saya
+                            yakin
+                            data tersebut sudah
+                            benar</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Simpan buku</button>
+                <a href="">
+                    <button type="button" class="btn btn-warning">Refresh</button>
+                </a>
+            </div>
+        </div>
+    @endif
+    </form>
+    <script src="/js/upload_book.js"></script>
 @endsection

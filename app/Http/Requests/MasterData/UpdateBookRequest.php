@@ -4,7 +4,7 @@ namespace App\Http\Requests\MasterData;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreBookRequest extends FormRequest
+class UpdateBookRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,7 +30,7 @@ class StoreBookRequest extends FormRequest
             'tgl_terbit' => 'required|max:255',
             'jml_halaman' => 'required',
             'bahasa' => 'required|max:255',
-            'cover_buku' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'cover_buku' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'e_book_file' => 'nullable|file|mimes:pdf',
             'sinopsis' => 'required|max:600',
             'format' => 'required|in:Fisik,Elektronik',
@@ -59,7 +59,6 @@ class StoreBookRequest extends FormRequest
             'jml_halaman.required' => 'Jumlah halaman harus diisi.',
             'bahasa.required' => 'Bahasa harus diisi.',
             'bahasa.max' => 'Bahasa tidak boleh lebih dari 255 karakter.',
-            'cover_buku.required' => 'Cover buku harus diunggah.',
             'cover_buku.image' => 'Cover buku harus berupa gambar.',
             'cover_buku.mimes' => 'Cover buku harus bertipe jpeg, png, atau jpg.',
             'cover_buku.max' => 'Cover buku tidak boleh lebih dari 2 MB.',

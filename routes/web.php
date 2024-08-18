@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Excel\ExcelController;
-use App\Http\Controllers\Excel\ImportExcelController;
 use App\Http\Controllers\PDF\PDFController;
 use App\Http\Controllers\Peminjam\Book\BookController;
 use App\Http\Controllers\Peminjam\Book\LogicBookController;
@@ -17,6 +16,7 @@ use App\Http\Controllers\Peminjam\Visit\VisitController;
 use App\Http\Controllers\Pustakawan\ChatMasukController;
 use App\Http\Controllers\Pustakawan\Information\InformationController;
 use App\Http\Controllers\Pustakawan\MasterDataBuku\BukuController;
+use App\Http\Controllers\Pustakawan\MasterDataBuku\LogicBukuController;
 use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\PeminjamanController;
 use App\Http\Controllers\Pustakawan\MasterDataPengguna\LogicUserController;
 use App\Http\Controllers\Pustakawan\MasterDataPengguna\UserController;
@@ -48,6 +48,7 @@ Route::get('/test', function () {
 });
 
 
+
 /*
 |--------------------------------------------------------------------------
 | SiteController Group
@@ -63,6 +64,7 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/tentang-kami', 'about_us')->name('about_us');
     Route::get('/kontak-kami', 'contact_us')->name('contact_us');
     Route::get('/artikel', 'article')->name('article');
+    Route::get('/crop-cover', 'crop_cover')->name('crop_cover');
 });
 
 
@@ -98,11 +100,14 @@ Route::controller(AuthController::class)->group(function () {
 |
 */
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/baca-e-book/{id}', [BookController::class, 'show_read_e_book'])->name('read_e_book');
+});
+
 Route::middleware(['auth', 'role:Peminjam'])->group(function () {
     Route::controller(BookController::class)->group(function () {
         Route::get('/peminjaman-sukses', 'show_success')->name('success');
         Route::get('/rak-buku-saya', 'show_my_shelf')->name('my_shelf');
-        Route::get('/baca-e-book/{id}', 'show_read_e_book')->name('read_e_book');
         Route::get('/detail-peminjaman/{id}', 'show_detail_rent')->name('detail_rent');
         Route::get('/buku-disukai', 'show_liked_book')->name('liked');
         Route::get('/semua-buku', 'show_all_books')->name('all_books');
@@ -207,7 +212,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
                 Route::controller(LogicUserController::class)->group(function () {
                     Route::post('/tambah/{role}', 'store_user')->name('store_user');
                     Route::put('/perbarui/{id}', 'update_user')->name('update_user');
-                    Route::delete('/hapus/{id}', 'delete_user')->name('delete_user');
+                    Route::delete('/hapus-user/{id}', 'delete_user')->name('delete_user');
                     Route::post('/import-user', 'import_user')->name('direct_import_user');
                 });
             });
@@ -218,14 +223,31 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
             Route::get('/kategori', 'show_data_kategori')->name('data-kategori');
             Route::get('/rak-buku', 'show_data_rak_buku')->name('data-rak');
 
-            Route::get('/{role}/tambah/', 'show_add_book')->name('add_book');
-            Route::get('/{role}/edit/{id}', 'show_edit_book')->name('edit_book');
-            Route::get('/{role}/detail/{id}', 'show_detail_book')->name('detail_book');
-            Route::controller(LogicBookController::class)->group(function () {
+            Route::prefix('buku')->group(function () {
+                Route::get('/{format}/tambah/', 'show_add_book')->name('add_book');
+                Route::get('/{format}/edit/{id}', 'show_edit_book')->name('edit_book');
+                Route::get('/{format}/detail/{id}', 'show_detail_book')->name('detail_book');
+            });
+
+            Route::controller(LogicBukuController::class)->group(function () {
                 Route::post('/tambah/{format}', 'store_book')->name('store_book');
                 Route::put('/{format}/edit/{id}', 'update_book')->name('update_book');
-                Route::delete('/hapus/{id}', 'delete_buku')->name('delete_book');
-                Route::post('/import-buku', 'import_buku')->name('direct_import_books');
+                Route::delete('/hapus-buku/{id}', 'delete_book')->name('delete_book');
+                Route::post('/import-buku', 'import_books')->name('direct_import_books');
+            });
+
+            Route::get('/edit-kategori/{id}', 'show_edit_category')->name('edit_category');
+            Route::controller(LogicBukuController::class)->group(function () {
+                Route::post('/tambah-kategori', 'add_category')->name('add_category');
+                Route::put('/edit-kategori/{id}', 'update_category')->name('update_category');
+                Route::delete('/delete-kategori/{id}', 'delete_category')->name('delete_category');
+            });
+
+            Route::get('/edit-rak/{id}', 'show_edit_shelf')->name('edit_shelf');
+            Route::controller(LogicBukuController::class)->group(function () {
+                Route::post('/tambah-rak', 'add_shelf')->name('add_shelf');
+                Route::put('/edit-rak/{id}', 'update_shelf')->name('update_shelf');
+                Route::delete('/delete-rak/{id}', 'delete_shelf')->name('delete_shelf');
             });
         });
 

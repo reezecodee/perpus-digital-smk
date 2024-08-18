@@ -42,19 +42,22 @@
                     </div>
                     <div>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-success"><i class="fas fa-upload"></i> Import via
-                                Excel</button>
-                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu" role="menu">
-                                <a class="dropdown-item" data-toggle="modal" data-target="#modal-default"
-                                    href="javascript:void(0)">Import langsung</a>
-                                <a class="dropdown-item" href="javascript:void(0)">Download format</a>
-                            </div>
+                            @if ($format != 'elektronik')
+                                <button type="button" class="btn btn-success"><i class="fas fa-upload"></i> Import via
+                                    Excel</button>
+                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#modal-default"
+                                        href="javascript:void(0)">Import langsung</a>
+                                    <a class="dropdown-item" href="javascript:void(0)">Download format</a>
+                                </div>
+                            @endif
                         </div>
                         <a href="{{ route('add_book', $format) }}">
-                            <button class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Buku {{ ucfirst($format) }}</button>
+                            <button class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Buku
+                                {{ ucfirst($format) }}</button>
                         </a>
                     </div>
                 </div>
@@ -110,23 +113,24 @@
                     @foreach ($books as $item)
                         <tr>
                             <td>
-                                <img src="{{ asset('storage/img/cover/' . ($item->cover_buku ?? 'unknown.jpg')) }}"
-                                    alt="" width="40" class="rounded-md" loading="lazy">
+                                <img src="{{ asset('storage/img/cover/' . ($item->cover_buku ?? 'unknown_cover.png')) }}"
+                                    alt="" width="60" class="rounded-md" loading="lazy">
                             </td>
                             <td>{{ $item->judul }}</td>
-                            <td>{{ $item->penulis }}</td>
+                            <td>{{ $item->author }}</td>
                             <td>{{ $item->isbn }}</td>
-                            <td>{{ $item->email }}</td>
                             <td>{{ $item->status }}</td>
                             <td>
-                                <a href="{{ route('detail_book', ['format' => $format, 'id' => $item->id]) }}" title="Detail">
+                                <a href="{{ route('detail_book', ['format' => $format, 'id' => $item->id]) }}"
+                                    title="Detail">
                                     <button class="btn btn-success"><i class="fas fa-scroll"></i></button>
                                 </a>
-                                <a href="{{ route('edit_book', ['format' => $format, 'id' => $item->id]) }}" title="Edit">
+                                <a href="{{ route('edit_book', ['format' => $format, 'id' => $item->id]) }}"
+                                    title="Edit">
                                     <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
                                 </a>
                                 <form id="delete-form-{{ $item->id }}" class="d-inline"
-                                    action="{{ route('delete_user', $item->id) }}" method="post" title="Hapus">
+                                    action="{{ route('delete_book', $item->id) }}" method="post" title="Hapus">
                                     @method('DELETE')
                                     @csrf
                                     <button type="button" onclick="confirmDelete('{{ $item->id }}')"

@@ -13,4 +13,11 @@ class SiteController extends Controller
             'title' => 'List artikel E-perpustakaan'
         ]);
     }
+
+    public function crop_cover() 
+    {
+        return view('site_views.crop_cover', [
+            'title' => 'Crop Cover Buku'
+        ]);
+    }
 }
