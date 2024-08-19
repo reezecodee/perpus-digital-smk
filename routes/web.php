@@ -17,6 +17,7 @@ use App\Http\Controllers\Pustakawan\ChatMasukController;
 use App\Http\Controllers\Pustakawan\Information\InformationController;
 use App\Http\Controllers\Pustakawan\MasterDataBuku\BukuController;
 use App\Http\Controllers\Pustakawan\MasterDataBuku\LogicBukuController;
+use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\LogicPeminjamanController;
 use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\PeminjamanController;
 use App\Http\Controllers\Pustakawan\MasterDataPengguna\LogicUserController;
 use App\Http\Controllers\Pustakawan\MasterDataPengguna\UserController;
@@ -222,6 +223,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
             Route::get('/buku/{format}', 'show_data_buku')->name('data-buku');
             Route::get('/kategori', 'show_data_kategori')->name('data-kategori');
             Route::get('/rak-buku', 'show_data_rak_buku')->name('data-rak');
+            Route::get('/denda', 'show_data_denda')->name('data-denda');
 
             Route::prefix('buku')->group(function () {
                 Route::get('/{format}/tambah/', 'show_add_book')->name('add_book');
@@ -234,6 +236,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
                 Route::put('/{format}/edit/{id}', 'update_book')->name('update_book');
                 Route::delete('/hapus-buku/{id}', 'delete_book')->name('delete_book');
                 Route::post('/import-buku', 'import_books')->name('direct_import_books');
+                Route::delete('/hapus-denda/{id}', 'delete_fine')->name('delete_fine');
             });
 
             Route::get('/edit-kategori/{id}', 'show_edit_category')->name('edit_category');
@@ -247,15 +250,27 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
             Route::controller(LogicBukuController::class)->group(function () {
                 Route::post('/tambah-rak', 'add_shelf')->name('add_shelf');
                 Route::put('/edit-rak/{id}', 'update_shelf')->name('update_shelf');
-                Route::delete('/delete-rak/{id}', 'delete_shelf')->name('delete_shelf');
+                Route::delete('/hapus-rak/{id}', 'delete_shelf')->name('delete_shelf');
             });
         });
 
         Route::controller(PeminjamanController::class)->group(function () {
-            Route::get('/perpinjaman', 'show_data_peminjam')->name('data-perpinjaman');
-            Route::get('/pengembalian', 'show_data_pengembali')->name('data-pengembali');
-            Route::get('/kunjungan', 'show_data_kunjungan')->name('data-kunjungan');
-            Route::get('/denda', 'show_data_denda')->name('data-denda');
+            Route::prefix('perpinjaman')->group(function () {
+                Route::get('/daftar-peminjam', 'show_data_peminjam')->name('data_perpinjaman');
+                Route::get('/tambah-peminjaman', 'show_add_peminjaman')->name('add_peminjaman');
+                Route::get('/edit-peminjaman/{id}', 'show_edit_peminjaman')->name('edit_peminjaman');
+            });
+            
+            Route::get('/pengembalian', 'show_data_pengembali')->name('data_pengembali');
+            Route::get('/terkena-denda', 'show_data_pendendaan')->name('data_pendenda');
+            Route::get('/kunjungan', 'show_data_kunjungan')->name('data_kunjungan');
+
+        });
+
+        Route::controller(LogicPeminjamanController::class)->group(function () {
+            Route::post('/tambah-peminjaman', 'store_peminjaman')->name('store_peminjaman');
+            Route::put('/edit-peminjaman/{id}', 'update_peminjaman')->name('update_peminjaman');
+            Route::delete('/delete-peminjaman/{id}', 'delete_peminjaman')->name('delete_peminjaman');
         });
 
         Route::controller(PerpustakaanController::class)->middleware('role:Admin')->group(function () {

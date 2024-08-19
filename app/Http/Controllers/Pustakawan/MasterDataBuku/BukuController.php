@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pustakawan\MasterDataBuku;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Fine;
 use App\Models\Shelf;
 use Illuminate\Http\Request;
 
@@ -43,6 +44,18 @@ class BukuController extends Controller
             'heading' => 'Daftar Buku ' . $uc_first_format,
             'books' => Book::where('format', $uc_first_format)->latest()->get(),
             'format' => $format
+        ]);
+    }
+
+    public function show_data_denda()
+    {
+        $booksWithoutFines = Book::where('format', 'Fisik')->doesntHave('fine')->get();
+
+        return view('pustakawan_views.master_data.buku.denda.index', [
+            'title' => 'Data Denda Buku',
+            'heading' => 'Denda Buku',
+            'fines' => Fine::all(),
+            'without_fines' => $booksWithoutFines
         ]);
     }
 

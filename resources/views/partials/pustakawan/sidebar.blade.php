@@ -70,7 +70,7 @@
                 @can('manajemen buku')
                     <li class="nav-item">
                         <a href="#"
-                            class="nav-link {{ Request::is('master-data/rak-buku*', 'master-data/kategori*', 'master-data/buku*', 'master-data/e-book*') ? 'active' : '' }}">
+                            class="nav-link {{ Request::is('master-data/rak-buku*', 'master-data/kategori*', 'master-data/buku*', 'master-data/e-book*', 'master-data/denda*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-book"></i>
                             <p>
                                 Data Buku
@@ -83,6 +83,13 @@
                                     class="nav-link {{ Request::is('master-data/buku/fisik*') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Buku</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('data-denda') }}"
+                                    class="nav-link {{ Request::is('master-data/denda*') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Denda</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -111,7 +118,7 @@
                 @endcan
                 <li class="nav-item">
                     <a href="#"
-                        class="nav-link {{ Request::is('master-data/perpinjaman*', 'master-data/pengembalian*', 'master-data/kunjungan*', 'master-data/denda*') ? 'active' : '' }}">
+                        class="nav-link {{ Request::is('master-data/perpinjaman*', 'master-data/pengembalian*', 'master-data/kunjungan*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-calendar-day"></i>
                         <p>
                             Data Peminjaman
@@ -120,33 +127,34 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('data-perpinjaman') }}"
+                            <a href="{{ route('data_perpinjaman') }}"
                                 class="nav-link {{ Request::is('master-data/perpinjaman*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Perpinjaman</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('data-pengembali') }}"
+                            <a href="{{ route('data_pengembali') }}"
                                 class="nav-link {{ Request::is('master-data/pengembalian*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pengembalian</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('data-kunjungan') }}"
+                            <a href="{{ route('data_pendenda') }}"
+                                class="nav-link {{ Request::is('master-data/terkena-denda*') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Terkena denda</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('data_kunjungan') }}"
                                 class="nav-link {{ Request::is('master-data/kunjungan*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kunjungan</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('data-denda') }}"
-                                class="nav-link {{ Request::is('master-data/denda*') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Denda</p>
-                            </a>
-                        </li>
+                        
                     </ul>
                 </li>
                 @role('Admin')

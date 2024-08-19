@@ -4,14 +4,15 @@
         <div class="card-body">
             <form id="save-form" action="" method="POST">
                 @csrf
-                <div class="d-flex justify-content-end align-items-center mb-4">
-                    <span class="mr-2">Penerima:</span>
-                    <select name="penerima" class="form-control select2 w-25" required>
-                        <option selected>--Pilih penerima--</option>
-                        <option value="Ambatukam">Ambatukam</option>
-                        <option value="John Doe">John Doe</option>
-                        <option value="Jane Doe">Jane Doe</option>
-                    </select>
+                <div class="d-flex justify-content-end align-items-center">
+                    <div class="form-group">
+                        <select name="penerima" class="form-control select2" required>
+                            <option selected>--Pilih calon peminjam--</option>
+                            <option value="Ambatukam">Ambatukam</option>
+                            <option value="John Doe">John Doe</option>
+                            <option value="Jane Doe">Jane Doe</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="">Subject</label>

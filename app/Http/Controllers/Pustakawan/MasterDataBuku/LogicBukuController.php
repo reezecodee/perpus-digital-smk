@@ -214,4 +214,12 @@ class LogicBukuController extends Controller
 
         return back()->withSuccess('Berhasil menghapus data rak');
     }
+
+    public function delete_fine($id)
+    {
+        $fine = Fine::findOrFail($id);
+        $fine->delete();
+
+        return back()->withSuccess('Berhasil menghapus data denda buku');
+    }
 }

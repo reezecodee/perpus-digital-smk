@@ -33,7 +33,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.min.css">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.7/css/froala_editor.pkgd.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/tom-select/1.7.7/css/tom-select.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
@@ -96,12 +97,12 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
     <script src="https://cdn.datatables.net/2.1.2/js/dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.7/js/froala_editor.pkgd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tom-select/1.7.7/js/tom-select.complete.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+
 
 
     <!-- Customized JS -->
@@ -117,9 +118,10 @@
     </script>
 
     <script>
-        $(document).ready(function() {
-            $('.select2').select2({
-                placeholder: '--Pilih penerima--'
+        document.addEventListener('DOMContentLoaded', function() {
+            const tomSelectElements = document.querySelectorAll('.tom-select');
+            tomSelectElements.forEach(element => {
+                new TomSelect(element);
             });
         });
     </script>

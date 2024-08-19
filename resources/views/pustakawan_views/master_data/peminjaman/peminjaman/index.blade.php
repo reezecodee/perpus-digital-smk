@@ -1,5 +1,50 @@
 @extends('layouts.pustakawan_layout')
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    @role('Admin')
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <form class="d-inline" action="" method="post">
+                            @csrf
+                            <button class="btn btn-primary" type="submit"><i class="fas fa-print"></i></button>
+                        </form>
+                        <form class="d-inline" action="" method="post">
+                            @csrf
+                            <button class="btn btn-success" type="submit"><i class="fas fa-file-excel"></i></button>
+                        </form>
+                    </div>
+                    <div>
+                        <a href="{{ route('data_perpinjaman') }}" title="Hapus filter">
+                            <button class="btn btn-success"><i class="fas fa-eraser"></i></button>
+                        </a>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-warning"><i class="fas fa-filter"></i> Filter
+                                berdasarkan</button>
+                            <button type="button" class="btn btn-warning dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu" role="menu">
+                                <a class="dropdown-item" href="?filter=masa%20pinjam">Masa pinjam</a>
+                                <a class="dropdown-item" href="?filter=masa%20pengembalian">Masa pengembalian</a>
+                                <a class="dropdown-item" href="?filter=menunggu%20persetujuan">Menunggu persetujuan</a>
+                                <a class="dropdown-item" href="?filter=ditolak">Ditolak</a>
+                                <a class="dropdown-item" href="?filter=menunggu%20diambil">Menunggu diambil</a>
+                            </div>
+                        </div>
+                        <a href="{{ route('add_peminjaman') }}">
+                            <button type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah peminjam</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endrole
     <div class="card">
         <div class="card-body">
             <table id="data-table" class="table table-bordered table-striped">
@@ -35,8 +80,14 @@
                                         </button>
                                         <div class="dropdown-menu" role="menu" style="">
                                             <a class="dropdown-item" href="#">Detail</a>
-                                            <a class="dropdown-item" href="#">Edit</a>
-                                            <a class="dropdown-item" href="#">Hapus</a>
+                                            <a class="dropdown-item" href="{{ route('edit_peminjaman', $item->id) }}">Edit</a>
+                                            <form action="{{ route('delete_peminjaman', $item->id) }}" method="post"
+                                                id="delete-form-{{ $item->id }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="dropdown-item" href="javascript:void(0)"
+                                                    onclick="confirmDelete('{{ $item->id }}')">Hapus</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </td>
