@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Pustakawan\MasterDataPeminjaman;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MasterData\PeminjamRequest;
+use App\Http\Requests\MasterData\VisitRequest;
 use App\Models\Borrower;
+use App\Models\Visit;
 use Illuminate\Http\Request;
 
 class LogicPeminjamanController extends Controller
@@ -31,7 +33,7 @@ class LogicPeminjamanController extends Controller
         $peminjaman = Borrower::findOrFail($id);
         $peminjaman->update($validated_data);
 
-        return redirect()->route('data_perpinjaman')->withSuccess('Berhasil memperbarui data peminjaman');
+        return back()->withSuccess('Berhasil memperbarui data peminjaman');
     }
 
     public function delete_peminjaman($id)
@@ -39,5 +41,27 @@ class LogicPeminjamanController extends Controller
         $peminjaman = Borrower::findOrFail($id);
         $peminjaman->delete();
         return back()->withSuccess('Berhasil menghapus data peminjaman');
+    }
+
+    public function store_visit(VisitRequest $request)
+    {
+        $validated_data = $request->validated();
+        Visit::create($validated_data);
+        return redirect()->route('data_kunjungan')->withSuccess('Berhasil menambahkan data kunjungan');
+    }
+
+    public function update_visit(VisitRequest $request, $id)
+    {
+        $validated_data = $request->validated();
+        $visit = Visit::find($id);
+        $visit->update($validated_data);
+        return back()->withSuccess('Berhasil memperbarui data kunjungan');
+    }
+
+    public function delete_visit($id)
+    {
+        $visit = Visit::find($id);
+        $visit->delete();
+        return back()->withSuccess('Berhasil menghapus data kunjungan');
     }
 }

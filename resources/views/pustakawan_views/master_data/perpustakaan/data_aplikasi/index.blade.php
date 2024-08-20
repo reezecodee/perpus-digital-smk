@@ -1,6 +1,11 @@
 @extends('layouts.pustakawan_layout')
 @section('content')
-    <form action="" method="POST" enctype="multipart/form-data">
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    <form action="{{ route('update_app') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-md-6">
@@ -12,35 +17,61 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Nama sekolah</label>
-                                    <input type="text" name="nama_perpus" class="form-control"
-                                        placeholder="Nama sekolah" value="" required>
+                                    <input type="text" name="nama_sekolah"
+                                        class="form-control @error('nama_sekolah') is-invalid @enderror"
+                                        placeholder="Nama sekolah"
+                                        value="{{ old('nama_sekolah', $data->nama_sekolah ?? '') }}" autocomplete="off"
+                                        required>
+                                    @error('nama_sekolah')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Keyword</label>
-                                    <input type="text" name="keyword" class="form-control"
-                                        placeholder="Keyword website" value="" required>
+                                    <input type="text" name="keyword"
+                                        class="form-control @error('keyword') is-invalid @enderror"
+                                        placeholder="Keyword website" value="{{ old('keyword', $data->keyword ?? '') }}"
+                                        autocomplete="off" required>
+                                    @error('keyword')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Hak cipta</label>
-                                    <input type="text" name="keyword" class="form-control"
-                                        placeholder="Keyword website" value="" required>
+                                    <input type="text" name="hak_cipta"
+                                        class="form-control @error('hak_cipta') is-invalid @enderror"
+                                        placeholder="Hak cipta website"
+                                        value="{{ old('hak_cipta', $data->hak_cipta ?? '') }}" autocomplete="off" required>
+                                    @error('hak_cipta')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Website utama sekolah</label>
-                                    <input type="text" name="website" class="form-control"
-                                        placeholder="Website utama sekolah" value="" required>
+                                    <input type="text" name="web_sekolah"
+                                        class="form-control @error('web_sekolah') is-invalid @enderror"
+                                        placeholder="Website utama sekolah"
+                                        value="{{ old('web_sekolah', $data->web_sekolah ?? '') }}" autocomplete="off"
+                                        required>
+                                    @error('web_sekolah')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">Deskripsi singkat</label>
-                                    <textarea name="alamat" class="form-control" cols="30" rows="3" placeholder="Deskripsi singkat" required></textarea>
+                                    <textarea name="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" cols="30" rows="3"
+                                        placeholder="Deskripsi singkat" autocomplete="off" required>{{ old('deskripsi', $data->deskripsi ?? '') }}</textarea>
+                                    @error('deskripsi')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -62,15 +93,21 @@
                         <h4>Favicon website</h4>
                         <hr>
                         <div class="d-flex justify-content-center">
-                            <img src="https://lh3.googleusercontent.com/ogw/AF2bZygNbPseDkQ0HS9b3esmBQqCXS-H_eenMu566cNexqZF128=s64-c-mo"
-                                alt="" class="w-25">
+                            <img src="/assets/app/{{ $data->favicon ?? 'img_not_found.svg' }}" alt=""
+                                class="w-25" id="imagePreview">
                         </div>
                         <div class="my-3">
-                            <input class="form-control" type="file" accept=".jpg, .png, .jpeg" name="logo">
+                            <input type="file" accept=".jpg, .png, .jpeg, .ico, .svg" id="imageUpload" name="favicon">
                         </div>
+                        @error('favicon')
+                            <span class="invalid-feedback">{{ $message }}</span>
+                        @enderror
+                        <span class="text-danger" id="error-message"></span>
                     </div>
                 </div>
             </div>
         </div>
     </form>
+
+    <script src="/js/data_perpus.js"></script>
 @endsection

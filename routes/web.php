@@ -21,6 +21,7 @@ use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\LogicPeminjamanControll
 use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\PeminjamanController;
 use App\Http\Controllers\Pustakawan\MasterDataPengguna\LogicUserController;
 use App\Http\Controllers\Pustakawan\MasterDataPengguna\UserController;
+use App\Http\Controllers\Pustakawan\MasterDataPerpustakaan\LogicPerpustakaanController;
 use App\Http\Controllers\Pustakawan\MasterDataPerpustakaan\PerpustakaanController;
 use App\Http\Controllers\Pustakawan\Profile\PustakawanProfileController;
 use App\Http\Controllers\Pustakawan\PustakawanDashboardController;
@@ -259,23 +260,37 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
                 Route::get('/daftar-peminjam', 'show_data_peminjam')->name('data_perpinjaman');
                 Route::get('/tambah-peminjaman', 'show_add_peminjaman')->name('add_peminjaman');
                 Route::get('/edit-peminjaman/{id}', 'show_edit_peminjaman')->name('edit_peminjaman');
+                Route::get('/detail-peminjaman/{id}', 'show_detail_peminjaman')->name('detail_peminjaman');
             });
             
             Route::get('/pengembalian', 'show_data_pengembali')->name('data_pengembali');
-            Route::get('/terkena-denda', 'show_data_pendendaan')->name('data_pendenda');
-            Route::get('/kunjungan', 'show_data_kunjungan')->name('data_kunjungan');
+            Route::get('/terkena-denda', 'show_data_terkena_denda')->name('data_terkena_denda');
 
+            Route::get('/kunjungan', 'show_data_visit')->name('data_kunjungan');
+            Route::prefix('kunjungan')->group(function() {
+                Route::get('/tambah-kunjungan', 'show_add_visit')->name('add_kunjungan');
+                Route::get('/edit-kunjungan/{id}', 'show_edit_visit')->name('edit_kunjungan');            
+            });
         });
 
         Route::controller(LogicPeminjamanController::class)->group(function () {
             Route::post('/tambah-peminjaman', 'store_peminjaman')->name('store_peminjaman');
             Route::put('/edit-peminjaman/{id}', 'update_peminjaman')->name('update_peminjaman');
             Route::delete('/delete-peminjaman/{id}', 'delete_peminjaman')->name('delete_peminjaman');
+            
+            Route::post('/tambah-kunjungan', 'store_visit')->name('store_visit');
+            Route::put('/edit-kunjungan/{id}', 'update_visit')->name('update_visit');
+            Route::delete('/delete-kunjungan/{id}', 'delete_visit')->name('delete_visit');
         });
 
         Route::controller(PerpustakaanController::class)->middleware('role:Admin')->group(function () {
             Route::get('/aplikasi', 'show_data_aplikasi')->name('data-aplikasi');
             Route::get('/perpustakaan', 'show_data_perpus')->name('data-perpustakaan');
+        });
+
+        Route::controller(LogicPerpustakaanController::class)->group(function(){
+            Route::post('/aplikasi', 'update_data_app')->name('update_app');
+            Route::post('/perpustakaan', 'update_data_perpus')->name('update_perpus');
         });
     });
 

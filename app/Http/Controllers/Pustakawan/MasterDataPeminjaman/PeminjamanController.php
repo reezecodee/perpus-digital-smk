@@ -65,22 +65,93 @@ class PeminjamanController extends Controller
         ]);
     }
 
-
-    public function show_data_pengembali()
+    public function show_detail_peminjaman($id)
     {
-        return view('pustakawan_views.master_data.peminjaman.pengembalian.index', [
-            'title' => 'Data Pengembalian',
-            'heading' => 'Pengembalian',
-            'borrowers' => Borrower::whereNotIn('status', ['E-book', 'Terkena denda', 'Masa pinjam', 'Masa pengembalian', 'Menunggu persetujuan', 'Disetujui']),
+        return view('pustakawan_views.master_data.peminjaman.peminjaman.detail', [
+            'title' => 'Detail Peminjam Buku',
+            'heading' => 'Detail Peminjam Buku',
+            'data' => Borrower::where('id', $id)->first()
         ]);
     }
 
-    public function show_data_kunjungan()
+    public function show_data_pengembali()
+    {
+        $ucfirst_filter = ucfirst(request('filter'));
+        $status = ['Sudah dikembalikan', 'Sudah diulas'];
+
+        if ($ucfirst_filter && !in_array($ucfirst_filter, $status)) {
+            abort(404); 
+        }
+
+        $borrowersQuery = Borrower::query();
+
+        if ($ucfirst_filter) {
+            $borrowersQuery->where('status', $ucfirst_filter);
+        } else {
+            $borrowersQuery->whereIn('status', $status);
+        }
+
+        $borrowers = $borrowersQuery->latest()->get();
+
+        return view('pustakawan_views.master_data.peminjaman.peminjaman.index', [
+            'title' => 'Data Pengembalian Buku',
+            'heading' => 'Pengembalian Buku',
+            'borrowers' => $borrowers
+        ]);
+    }
+
+    public function show_data_terkena_denda()
+    {
+        $ucfirst_filter = ucfirst(request('filter'));
+        $status = ['Sudah dibayar', 'Terkena denda', 'Menunggu konfirmasi pembayaran'];
+
+        if ($ucfirst_filter && !in_array($ucfirst_filter, $status)) {
+            abort(404); 
+        }
+
+        $borrowersQuery = Borrower::query();
+
+        if ($ucfirst_filter) {
+            $borrowersQuery->where('status', $ucfirst_filter);
+        } else {
+            $borrowersQuery->whereIn('status', $status);
+        }
+
+        $borrowers = $borrowersQuery->latest()->get();
+
+        return view('pustakawan_views.master_data.peminjaman.peminjaman.index', [
+            'title' => 'Data Terkena Denda',
+            'heading' => 'Peminjam Terkena Denda',
+            'borrowers' => $borrowers
+        ]);
+    }
+
+    public function show_data_visit()
     {
         return view('pustakawan_views.master_data.peminjaman.kunjungan.index', [
             'title' => 'Data Kunjungan',
             'heading' => 'Kunjungan',
-            'visits' => Visit::orderBy('created_at', 'desc')->get(),
+            'visits' => Visit::orderBy('created_at', 'desc')->limit(10)->get(),
+        ]);
+    }
+
+    public function show_add_visit()
+    {
+        return view('pustakawan_views.master_data.peminjaman.kunjungan.form', [
+            'title' => 'Daftarkan Data Kunjungan',
+            'heading' => 'Daftarkan Kunjungan',
+            'visit' => null,
+            'visitors' => User::role('Peminjam')->get()
+        ]);
+    }
+
+    public function show_edit_visit($id)
+    {
+        return view('pustakawan_views.master_data.peminjaman.kunjungan.form', [
+            'title' => 'Edir Data Kunjungan',
+            'heading' => 'Edit Kunjungan',
+            'visit' => Visit::find($id),
+            'visitors' => User::role('Peminjam')->get()
         ]);
     }
 }

@@ -30,11 +30,20 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu" role="menu">
-                                <a class="dropdown-item" href="?filter=masa%20pinjam">Masa pinjam</a>
-                                <a class="dropdown-item" href="?filter=masa%20pengembalian">Masa pengembalian</a>
-                                <a class="dropdown-item" href="?filter=menunggu%20persetujuan">Menunggu persetujuan</a>
-                                <a class="dropdown-item" href="?filter=ditolak">Ditolak</a>
-                                <a class="dropdown-item" href="?filter=menunggu%20diambil">Menunggu diambil</a>
+                                @if (Request::is('master-data/perpinjaman*'))
+                                    <a class="dropdown-item" href="?filter=masa%20pinjam">Masa pinjam</a>
+                                    <a class="dropdown-item" href="?filter=masa%20pengembalian">Masa pengembalian</a>
+                                    <a class="dropdown-item" href="?filter=menunggu%20persetujuan">Menunggu persetujuan</a>
+                                    <a class="dropdown-item" href="?filter=ditolak">Ditolak</a>
+                                    <a class="dropdown-item" href="?filter=menunggu%20diambil">Menunggu diambil</a>
+                                @elseif(Request::is('master-data/pengembalian'))
+                                    <a class="dropdown-item" href="?filter=sudah%20dikembalikan">Sudah dikembalikan</a>
+                                    <a class="dropdown-item" href="?filter=sudah%20diulas">Sudah diulas</a>
+                                @elseif(Request::is('master-data/terkena-denda*'))
+                                    <a class="dropdown-item" href="?filter=terkena%20denda">Terkena denda</a>
+                                    <a class="dropdown-item" href="?filter=sudah%20dibayar">Sudah dibayar</a>
+                                    <a class="dropdown-item" href="?filter=menunggu%20konfirmasi%20pembayaran">Menunggu konfirmasi pembayaran</a>
+                                @endif
                             </div>
                         </div>
                         <a href="{{ route('add_peminjaman') }}">
@@ -79,7 +88,8 @@
                                             <span class="sr-only">Toggle Dropdown</span>
                                         </button>
                                         <div class="dropdown-menu" role="menu" style="">
-                                            <a class="dropdown-item" href="#">Detail</a>
+                                            <a class="dropdown-item"
+                                                href="{{ route('detail_peminjaman', $item->id) }}">Detail</a>
                                             <a class="dropdown-item" href="{{ route('edit_peminjaman', $item->id) }}">Edit</a>
                                             <form action="{{ route('delete_peminjaman', $item->id) }}" method="post"
                                                 id="delete-form-{{ $item->id }}">

@@ -27,6 +27,7 @@ class PeminjamRequest extends FormRequest
             'peminjaman' => 'required|date',
             'jatuh_tempo' => 'required|date|after_or_equal:peminjaman',
             'keterangan' => 'nullable|string',
+            'status' => 'nullable'
         ];
     }
 
