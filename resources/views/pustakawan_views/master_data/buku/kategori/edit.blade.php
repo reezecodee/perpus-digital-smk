@@ -9,15 +9,14 @@
                     <form action="{{ route('update_category', $data->id) }}" method="POST" id="update-form">
                         @method('PUT')
                         @csrf
-                        <div class="form-group">
-                            <label for="nama_kategori">Nama kategori</label>
-                            <input type="text" name="nama_kategori" id="nama_kategori"
-                                class="form-control @error('nama_kategori') is-invalid " value="{{ old('nama_kategori', $data->nama_kategori) }}"
-                                placeholder="Masukkan nama kategori" required>
-                            @error('nama_kategori')
-                                <span class="invalid-feedback">{{ $message }}</span>
-                            @enderror
-                        </div>
+                        @include('pustakawan_views.components.input.basic', [
+                            'label' => 'Nama kategori',
+                            'name' => 'nama_kategori',
+                            'value' => old('nama_kategori', $data->nama_kategori),
+                            'placeholder' => 'Masukkan nama kategori',
+                            'type' => 'text',
+                            'is_required' => true,
+                        ])
                         <div class="form-group">
                             <label for="keterangan">Keterangan (opsional)</label>
                             <textarea name="keterangan" id="keterangan" class="form-control" placeholder="Masukkan nama keterangan">{{ old('keterangan', $data->keterangan) }}</textarea>

@@ -20,197 +20,141 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="">Username</label>
-                            <input type="text" name="username" placeholder="Masukkan username"
-                                value="{{ old('username', $data->username ?? '') }}"
-                                class="form-control @error('username') is-invalid @enderror" required>
-                            @error('username')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            @include('pustakawan_views.components.input.basic', [
+                                'label' => 'Username',
+                                'name' => 'username',
+                                'value' => old('username', $data->username ?? ''),
+                                'placeholder' => 'Masukkan username',
+                                'type' => 'text',
+                                'is_required' => true,
+                            ])
                         </div>
                         <div class="col-md-6">
-                            <label for="">Nama lengkap</label>
-                            <input type="text" name="nama" value="{{ old('nama', $data->nama ?? '') }}"
-                                placeholder="Masukkan nama" class="form-control @error('nama') is-invalid @enderror"
-                                required>
-                            @error('nama')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            @include('pustakawan_views.components.input.basic', [
+                                'label' => 'Nama lengkap',
+                                'name' => 'nama',
+                                'value' => old('nama', $data->nama ?? ''),
+                                'placeholder' => 'Masukkan nama lengkap',
+                                'type' => 'text',
+                                'is_required' => true,
+                            ])
                         </div>
                         <div class="col-md-6">
-                            <label for="">Nomor Induk
-                                {{ ($role == 'Admin') | ($role == 'Pustakaawan') ? 'Pegawai (NIP)' : 'Siswa (NIS)' }}</label>
-                            <input type="number" name="nip_nis" value="{{ old('nip_nis', $data->nip_nis ?? '') }}"
-                                placeholder="Masukkan NIP" class="form-control @error('nip_nis') is-invalid @enderror"
-                                required>
-                            @error('nip_nis')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            @include('pustakawan_views.components.input.basic', [
+                                'label' =>
+                                    'Nomor Induk' . in_array($role, ['Admin', 'Pustakawan'])
+                                        ? 'Pegawai (NIP)'
+                                        : 'Siswa (NIS)',
+                                'name' => 'nip_nis',
+                                'value' => old('nip_nis', $data->nip_nis ?? ''),
+                                'placeholder' =>
+                                    'Masukkan ' . in_array($role, ['Admin', 'Pustakawan']) ? 'NIP' : 'NIS',
+                                'type' => 'number',
+                                'is_required' => true,
+                            ])
                         </div>
                         <div class="col-md-6">
-                            <label for="">Nomor telepon</label>
-                            <input type="number" name="telepon" value="{{ old('telepon', $data->telepon ?? '') }}"
-                                placeholder="Masukkan no.telepon"
-                                class="form-control @error('telepon') is-invalid @enderror" required>
-                            @error('telepon')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            @include('pustakawan_views.components.input.basic', [
+                                'label' => 'Nomor telepon',
+                                'name' => 'telepon',
+                                'value' => old('telepon', $data->telepon ?? ''),
+                                'placeholder' => 'Masukkan telepon',
+                                'type' => 'number',
+                                'is_required' => true,
+                            ])
                         </div>
                         <div class="col-md-6">
-                            <label for="">Email</label>
-                            <input type="email" name="email" value="{{ old('email', $data->email ?? '') }}"
-                                placeholder="Masukkan email" class="form-control @error('email') is-invalid @enderror"
-                                required>
-                            @error('email')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            @include('pustakawan_views.components.input.basic', [
+                                'label' => 'Email',
+                                'name' => 'email',
+                                'value' => old('email', $data->email ?? ''),
+                                'placeholder' => 'Masukkan email',
+                                'type' => 'email',
+                                'is_required' => true,
+                            ])
                         </div>
                         @if ($role == 'peminjam')
                             <div class="col-md-6">
-                                <label for="">Nomor Induk Siswa Nasional</label>
-                                <input type="number" name="nisn" value="{{ old('nisn', $data->nisn ?? '') }}"
-                                    placeholder="Masukkan nisn" class="form-control @error('nisn') is-invalid @enderror"
-                                    required>
-                                @error('nisn')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                @include('pustakawan_views.components.input.basic', [
+                                    'label' => 'NISN',
+                                    'name' => 'nisn',
+                                    'value' => old('nisn', $data->nisn ?? ''),
+                                    'placeholder' => 'Masukkan NISN',
+                                    'type' => 'number',
+                                    'is_required' => true,
+                                ])
                             </div>
                         @endif
                         <div class="col-md-6">
-                            <label for="">Jenis kelamin</label>
-                            <select name="jk" class="form-control"required>
-                                <option value="{{ old('jk', $data->jk ?? '') }}" selected>
-                                    {{ old('jk', $data->jk ?? '-- Pilih jenis kelamin --') }}</option>
-                                <option value="Laki-laki">Laki-laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                            </select>
-                            @error('jk')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            @include('pustakawan_views.components.input.select', [
+                                'label' => 'Jenis kelamin',
+                                'name' => 'jk',
+                                'options' => ['Laki-laki', 'Perempuan'],
+                                'selected_value' => $data->jk ?? '',
+                                'is_required' => true,
+                                'placeholder' => 'Pilih jenis kelamin',
+                            ])
                         </div>
                         @if (!isset($data->status) || $data->status == 'Non-aktif')
                             <div class="col-md-6">
-                                <label for="">Password sementara</label>
-                                <input type="text" name="password" value="{{ old('password') }}"
-                                    placeholder="Masukkan password sementara" class="form-control">
-                                @error('password')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                @include('pustakawan_views.components.input.basic', [
+                                    'label' => 'Password sementara',
+                                    'name' => 'password',
+                                    'value' => old('password'),
+                                    'placeholder' => 'Masukkan password sementara',
+                                    'type' => 'text',
+                                    'is_required' => false,
+                                ])
                             </div>
                             <div class="col-md-6">
-                                <label for="">Konfirmasi password</label>
-                                <input type="password" name="confirm_password" placeholder="Masukkan konfirmasi password"
-                                    class="form-control">
-                                @error('confirm_password')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                @include('pustakawan_views.components.input.basic', [
+                                    'label' => 'Konfirmasi password',
+                                    'name' => 'confirm_password',
+                                    'value' => old('confirm_password'),
+                                    'placeholder' => 'Masukkan konfirmasi password',
+                                    'type' => 'text',
+                                    'is_required' => false,
+                                ])
                             </div>
                         @endif
                         <div class="col-md-12">
-                            <label for="">Alamat</label>
-                            <textarea name="alamat" rows="5" placeholder="Masukkan alamat" class="form-control">{{ old('alamat', $data->alamat ?? '') }}</textarea>
-                            @error('alamat')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            @include('pustakawan_views.components.input.textarea', [
+                                'label' => 'Alamat',
+                                'name' => 'alamat',
+                                'value' => old('alamat', $data->alamat ?? ''),
+                                'placeholder' => 'Masukkan alamat',
+                                'is_required' => true,
+                            ])
                         </div>
                         <div class="col-md-12">
-                            <label for="">Status akun</label>
-                            <select name="status" class="form-control" required>
-                                <option value="{{ old('status', $data->status ?? '') }}" selected>
-                                    {{ old('status', $data->status ?? '-- Pilih status akun --') }}</option>
-                                <option value="Aktif">Aktif</option>
-                                <option value="Non-aktif">Nonaktif</option>
-                            </select>
-                            @error('status')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            @include('pustakawan_views.components.input.select', [
+                                'label' => 'Status akun',
+                                'name' => 'status',
+                                'options' => ['Aktif', 'Non-aktif'],
+                                'selected_value' => $data->status ?? '',
+                                'is_required' => true,
+                                'placeholder' => 'Pilih status akun',
+                            ])
                         </div>
                         @if ($role == 'admin')
                             <div class="col-md-12 mt-2">
-                                <p class="text-danger">* Anda tidak dapat lagi mengubah data Admin ini jika statusnya
+                                <p class="text-danger">* Anda tidak dapat lagi mengubah akun ini jika statusnya
                                     sudah
                                     aktif.</p>
                             </div>
                         @endif
                         <div class="col-md-12 mt-2">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="konfirmasiCheck"
-                                    style="cursor: pointer" required>
-                                <label class="form-check-label" for="konfirmasiCheck" style="cursor: pointer">Saya
-                                    yakin
-                                    data tersebut sudah
-                                    benar</label>
-                            </div>
+                            @include('pustakawan_views.components.input.cnfrm-checkbox')
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="d-flex justify-content-center">
-                        <div id="cropped_image_result">
-                            <img class="crop-result"
-                                src="{{ asset('storage/img/profile/' . ($data->photo ?? 'unknown.jpg')) }}"
-                                alt="" width="200" style="border-radius: 100px">
-                        </div>
-                    </div>
-                    <div class="my-3 d-flex justify-content-center">
-                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#modal-default"><i class="fas fa-upload"></i> Upload foto
-                            profile</button>
-                    </div>
+                    @include('pustakawan_views.components.input.upload-profile', [
+                        'photo' => $data->photo ?? 'unknown.jpg',
+                    ])
                 </div>
             </div>
-            <div class="modal fade" id="modal-default">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Crop Profile</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="d-flex justify-content-center gap-5">
-                                <div class="w-full" align="center">
-                                    <div id="display_image_div">
-                                        <img name="display_image_data" id="display_image_data" src="/img/dummy-image.png"
-                                            alt="Picture">
-                                    </div>
-                                    <input type="hidden" name="image" id="cropped_image_data">
-                                    <br>
-                                    <input type="file" accept=".jpg, .jpeg, .png" name="" id="browse_image">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer justify-content-end">
-                            <button type="button" class="btn btn-warning" id="crop_button">Crop</button>
-                            <button type="button" class="btn btn-success" data-dismiss="modal"
-                                aria-label="Close">Oke</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @include('pustakawan_views.components.modal.crop-profile-modal')
             <div class="mt-3">
                 <button type="submit" class="btn btn-primary">Simpan data {{ $role }}</button>
             </div>

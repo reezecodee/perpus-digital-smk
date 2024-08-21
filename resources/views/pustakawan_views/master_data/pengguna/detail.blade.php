@@ -6,49 +6,79 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="">Username</label>
-                            <input type="text" value="{{ $data->username }}" class="form-control" disabled>
+                            @include('pustakawan_views.components.input.input-disable', [
+                                'label' => 'Username',
+                                'name' => 'username',
+                                'value' => $data->username,
+                            ])
                         </div>
                         <div class="col-md-6">
-                            <label for="">Nama lengkap</label>
-                            <input type="text" value="{{ $data->nama }}" class="form-control" disabled>
+                            @include('pustakawan_views.components.input.input-disable', [
+                                'label' => 'Nama lengkap',
+                                'name' => 'nama',
+                                'value' => $data->nama,
+                            ])
                         </div>
                         <div class="col-md-6">
-                            <label for="">Nomor Induk Pegawai (NIP)</label>
-                            <input type="text" value="{{ $data->nip_nis }}" class="form-control" disabled>
+                            @include('pustakawan_views.components.input.input-disable', [
+                                'label' =>
+                                    'Nomor Induk ' . in_array($role, ['admin', 'pustakawan'])
+                                        ? 'Pegawai (NIP)'
+                                        : 'Siswa (NIS)',
+                                'name' => 'nip_nis',
+                                'value' => $data->nip_nis,
+                            ])
                         </div>
                         <div class="col-md-6">
-                            <label for="">Nomor telepon</label>
-                            <input type="text" value="{{ $data->telepon }}" class="form-control" disabled>
+                            @include('pustakawan_views.components.input.input-disable', [
+                                'label' => 'Nomor telepon',
+                                'name' => 'telepon',
+                                'value' => $data->telepon,
+                            ])
                         </div>
                         <div class="col-md-6">
-                            <label for="">Email</label>
-                            <input type="text" value="{{ $data->email }}" class="form-control" disabled>
+                            @include('pustakawan_views.components.input.input-disable', [
+                                'label' => 'Email',
+                                'name' => 'email',
+                                'value' => $data->email,
+                            ])
                         </div>
                         @if ($role == 'peminjam')
                             <div class="col-md-6">
-                                <label for="">Nomor Induk Siswa Nasional</label>
-                                <input type="text" value="{{ $data->nisn }}" class="form-control" disabled>
+                                @include('pustakawan_views.components.input.input-disable', [
+                                    'label' => 'Nomor Induk Siswa Nasional',
+                                    'name' => 'nisn',
+                                    'value' => $data->nisn,
+                                ])
                             </div>
                         @endif
                         <div class="col-md-6">
-                            <label for="">Jenis kelamin</label>
-                            <input type="text" value="{{ $data->jk }}" class="form-control" disabled>
+                            @include('pustakawan_views.components.input.input-disable', [
+                                'label' => 'Jenis kelamin',
+                                'name' => 'jk',
+                                'value' => $data->jk,
+                            ])
                         </div>
                         <div class="col-md-12">
-                            <label for="">Alamat</label>
-                            <textarea name="alamat" rows="5" class="form-control" disabled>{{ $data->alamat }}</textarea>
+                            @include('pustakawan_views.components.input.textarea-disable', [
+                                'label' => 'Alamat',
+                                'name' => 'alamat',
+                                'value' => $data->alamat,
+                            ])
                         </div>
                         <div class="col-md-12">
-                            <label for="">Status akun</label>
-                            <input type="text" value="{{ $data->status }}" class="form-control" disabled>
+                            @include('pustakawan_views.components.input.input-disable', [
+                                'label' => 'Status akun',
+                                'name' => 'status',
+                                'value' => $data->status,
+                            ])
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="d-flex justify-content-center">
-                        <img src="{{ asset('storage/img/profile/' . ($data->photo ?? 'unknown.jpg')) }}" alt="" width="200"
-                            class="rounded-circle">
+                        <img src="{{ asset('storage/img/profile/' . ($data->photo ?? 'unknown.jpg')) }}" alt=""
+                            width="200" class="rounded-circle">
                     </div>
                     <div class="my-3 text-center">
                         <h3>{{ $data->nama }}</h3>
