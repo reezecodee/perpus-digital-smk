@@ -6,25 +6,32 @@
                 <h5 class="text-bold">Peminjam ini terkena denda</h5>
                 <hr class="border-light">
                 <div class="d-flex justify-content-around align-items-center" style="height: 7rem">
-                    <div class="form-group text-center">
-                        <label for="">Status peminjaman</label>
-                        <input type="text" class="form-control" value="{{ $data->status }}" disabled>
-                    </div>
-                    <div class="form-group text-center">
-                        <label for="">Keterangan denda</label>
-                        <input type="text" class="form-control" value="{{ $data->keterangan_denda }}" disabled>
-                    </div>
+                    @include('pustakawan_views.components.input.input-disable', [
+                        'label' => 'Status peminjaman',
+                        'name' => 'status',
+                        'value' => $data->status,
+                    ])
+                    @include('pustakawan_views.components.input.input-disable', [
+                        'label' => 'Keterangan denda',
+                        'name' => 'keterangan_denda',
+                        'value' => $data->keterangan_denda,
+                    ])
+                    @include('pustakawan_views.components.input.input-disable', [
+                        'label' => 'Jenis kelamin',
+                        'name' => 'jk',
+                        'value' => $data->jk,
+                    ])
                     <div class="form-group text-center">
                         <label for="">Denda yang harus dibayarkan</label>
                         @if ($data->keterangan_denda == 'Denda buku rusak')
-                            <input type="text" class="form-control" value="{{ formatRupiah($data->book->fine->denda_rusak) }}"
-                                disabled>
+                            <input type="text" class="form-control"
+                                value="{{ formatRupiah($data->book->fine->denda_rusak) }}" disabled>
                         @elseif($data->keterangan_denda == 'Denda buku terlambat')
-                            <input type="text" class="form-control" value="{{ formatRupiah($data->book->fine->denda_terlambat) }}"
-                                disabled>
+                            <input type="text" class="form-control"
+                                value="{{ formatRupiah($data->book->fine->denda_terlambat) }}" disabled>
                         @elseif($data->keterangan_denda == 'Denda buku tidak kembali')
-                            <input type="text" class="form-control" value="{{ formatRupiah($data->book->fine->denda_tidak_kembali) }}"
-                                disabled>
+                            <input type="text" class="form-control"
+                                value="{{ formatRupiah($data->book->fine->denda_tidak_kembali) }}" disabled>
                         @else
                             <input type="text" class="form-control" value="-" disabled>
                         @endif
@@ -39,34 +46,39 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="" class="mb-0">Nama peminjam</label>
-                                <input type="text" class="form-control" value="{{ $data->peminjam->nama }}" disabled>
-                            </div>
+                            @include('pustakawan_views.components.input.input-disable', [
+                                'label' => 'Nama peminjam',
+                                'name' => 'nama',
+                                'value' => $data->peminjam->nama,
+                            ])
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="" class="mb-0">Nomor Induk Siswa</label>
-                                <input type="text" class="form-control" value="{{ $data->peminjam->nip_nis }}" disabled>
-                            </div>
+                            @include('pustakawan_views.components.input.input-disable', [
+                                'label' => 'Nomor Induk Siswa',
+                                'name' => 'nip_nis',
+                                'value' => $data->peminjam->nip_nis,
+                            ])
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="" class="mb-0">NISN</label>
-                                <input type="text" class="form-control" value="{{ $data->peminjam->nisn }}" disabled>
-                            </div>
+                            @include('pustakawan_views.components.input.input-disable', [
+                                'label' => 'NISN',
+                                'name' => 'nisn',
+                                'value' => $data->peminjam->nisn,
+                            ])
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="" class="mb-0">Email</label>
-                                <input type="text" class="form-control" value="{{ $data->peminjam->email }}" disabled>
-                            </div>
+                            @include('pustakawan_views.components.input.input-disable', [
+                                'label' => 'Email',
+                                'name' => 'email',
+                                'value' => $data->peminjam->email,
+                            ])
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="" class="mb-0">Telepon</label>
-                                <input type="text" class="form-control" value="{{ $data->peminjam->telepon }}" disabled>
-                            </div>
+                            @include('pustakawan_views.components.input.input-disable', [
+                                'label' => 'Telepon',
+                                'name' => 'telepon',
+                                'value' => $data->peminjam->telepon,
+                            ])
                         </div>
                     </div>
                 </div>
@@ -87,47 +99,53 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="" class="mb-0">Judul buku</label>
-                                <input type="text" class="form-control" value="{{ $data->book->judul }}" disabled>
-                            </div>
+                            @include('pustakawan_views.components.input.input-disable', [
+                                'label' => 'Judul buku',
+                                'name' => 'judul',
+                                'value' => $data->book->judul,
+                            ])
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="" class="mb-0">Kode peminjaman</label>
-                                <input type="text" class="form-control" value="{{ $data->kode_peminjaman }}" disabled>
-                            </div>
+                            @include('pustakawan_views.components.input.input-disable', [
+                                'label' => 'Kode peminjaman',
+                                'name' => 'kode_peminjaman',
+                                'value' => $data->kode_peminjaman,
+                            ])
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="" class="mb-0">Tanggal pinjam</label>
-                                <input type="text" class="form-control" value="{{ $data->peminjaman }}" disabled>
-                            </div>
+                            @include('pustakawan_views.components.input.input-disable', [
+                                'label' => 'Tanggal pinjam',
+                                'name' => 'peminjaman',
+                                'value' => $data->peminjaman,
+                            ])
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="" class="mb-0">Jatuh tempo</label>
-                                <input type="text" class="form-control" value="{{ $data->jatuh_tempo }}" disabled>
-                            </div>
+                            @include('pustakawan_views.components.input.input-disable', [
+                                'label' => 'Jatuh tempo',
+                                'name' => 'jatuh_tempo',
+                                'value' => $data->jatuh_tempo,
+                            ])
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="" class="mb-0">Tanggal dikembalikan</label>
-                                <input type="text" class="form-control" value="{{ $data->pengembalian ?? '-' }}"
-                                    disabled>
-                            </div>
+                            @include('pustakawan_views.components.input.input-disable', [
+                                'label' => 'Tanggal dikembalikan',
+                                'name' => 'pengembalian',
+                                'value' => $data->pengembalian ?? '-',
+                            ])
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="" class="mb-0">Status peminjaman</label>
-                                <input type="text" class="form-control" value="{{ $data->status }}" disabled>
-                            </div>
+                            @include('pustakawan_views.components.input.input-disable', [
+                                'label' => 'Status peminjaman',
+                                'name' => 'status',
+                                'value' => $data->status,
+                            ])
                         </div>
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="" class="mb-0">Keterangan peminjaman</label>
-                                <textarea rows="5" class="form-control" disabled>{{ $data->keterangan }}</textarea>
-                            </div>
+                            @include('pustakawan_views.components.input.textarea-disable', [
+                                'label' => 'Keterangan peminjaman',
+                                'name' => 'keterangan',
+                                'value' => $data->keterangan,
+                            ])
                         </div>
                     </div>
                 </div>

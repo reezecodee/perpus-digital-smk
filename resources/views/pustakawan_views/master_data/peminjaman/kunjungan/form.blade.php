@@ -11,75 +11,38 @@
             @csrf
             <div class="row">
                 <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="" class="mb-0">Pengunjung</label>
-                        <select name="pengunjung_id" class="tom-select @error('pengunjung_id') is-invalid @enderror"
-                            required>
-                            @if (!isset($visit))
-                                <option selected>--Pilih pengunjung--</option>
-                            @endif
-                            @foreach ($visitors as $item)
-                                <option value="{{ $item->id }}"
-                                    {{ $visit->pengunjung_id ?? '' == $item->id ? 'selected' : '' }}>
-                                    {{ $item->nama }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('pengunjung_id')
-                            <span class="invalid-feedback">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    @include('pustakawan_views.components.input.tom-select', [
+                        'label' => 'Pengunjung',
+                        'name' => 'pengunjung_id',
+                        'data' => $visit,
+                        'collects' => $visitors,
+                        'is_required' => true,
+                    ])
                 </div>
                 <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="" class="mb-0">Tanggal kunjungan</label>
-                        <input type="date" name="tanggal_kunjungan"
-                            class="form-control @error('tanggal_kunjungan') is-invalid @enderror"
-                            value="{{ old('tanggal_kunjungan', $visit->tanggal_kunjungan ?? '') }}" required>
-                        @error('tanggal_kunjungan')
-                            <span class="invalid-feedback">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    @include('pustakawan_views.components.input.basic', [
+                        'label' => 'Tanggal kunjungan',
+                        'name' => 'tanggal_kunjungan',
+                        'value' => old('tanggal_kunjungan', $visit->tanggal_kunjungan ?? date('Y-m-d')),
+                        'placeholder' => '',
+                        'type' => 'date',
+                        'is_required' => true,
+                    ])
                 </div>
                 <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="" class="mb-0">Status kunjungan</label>
-                        <select name="status_kunjungan" class="form-control @error('status_kunjungan') is-invalid @enderror" id="status_kunjungan">
-                            <option value="" disabled {{ !isset($visit) ? 'selected' : '' }}>--Pilih status--</option>
-                            <option value="Menunggu persetujuan" {{ isset($visit) && $visit->status_kunjungan == 'Menunggu persetujuan' ? 'selected' : '' }}>
-                                Menunggu persetujuan
-                            </option>
-                            <option value="Diterima" {{ isset($visit) && $visit->status_kunjungan == 'Diterima' ? 'selected' : '' }}>
-                                Diterima
-                            </option>
-                            <option value="Ditolak" {{ isset($visit) && $visit->status_kunjungan == 'Ditolak' ? 'selected' : '' }}>
-                                Ditolak
-                            </option>
-                        </select>                        
-                        @error('tanggal_kunjungan')
-                            <span class="invalid-feedback">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    @include('pustakawan_views.components.input.visit-status')
                 </div>
                 <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="" class="mb-0">Keterangan kunjungan</label>
-                        <textarea name="keterangan_kunjungan" class="form-control @error('keterangan_kunjungan') is-invalid @enderror"
-                            id="" rows="6" placeholder="Masukkan keterangan kunjungan" required>{{ old('keterangan_kunjungan', $visit->keterangan_kunjungan ?? '') }}</textarea>
-                        @error('keterangan_kunjungan')
-                            <span class="invalid-feedback">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    @include('pustakawan_views.components.input.textarea', [
+                        'label' => 'Keterangan kunjungan',
+                        'name' => 'keterangan_kunjungan',
+                        'value' => old('keterangan_kunjungan', $visit->keterangan_kunjungan ?? ''),
+                        'placeholder' => 'Masukkan keterangan kunjungan',
+                        'is_required' => true,
+                    ])
                 </div>
                 <div class="col-md-12">
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="konfirmasiCheck" style="cursor: pointer"
-                            required>
-                        <label class="form-check-label" for="konfirmasiCheck" style="cursor: pointer">Saya
-                            yakin
-                            data tersebut sudah
-                            benar</label>
-                    </div>
+                    @include('pustakawan_views.components.input.cnfrm-checkbox')
                 </div>
             </div>
             <div class="d-flex justify-content-end">

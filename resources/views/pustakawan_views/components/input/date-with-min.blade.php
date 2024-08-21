@@ -1,7 +1,7 @@
 <div class="form-group">
     <label class="mb-0" for="{{ $name }}">{{ $label }}</label>
     <input type="{{ $type }}" name="{{ $name }}" id="{{ $name }}" placeholder="{{ $placeholder ?? '' }}" value="{{ $value }}" class="form-control @error($name) is-invalid @enderror"
-        autocomplete="off" {{ $is_required ? 'required' : '' }} {{ $is_readonly ?? false ? 'readonly' : '' }}>
+        autocomplete="off" {{ $is_required ? 'required' : '' }} min="{{ $min_date }}">
     @error($name)
         <div class="invalid-feedback">
             {{ $message }}
