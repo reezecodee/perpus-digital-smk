@@ -34,3 +34,7 @@
 .modal-lg {
     max-width: 500px !important;
 }
+
+#fr-logo {
+    display: none !important;
+}

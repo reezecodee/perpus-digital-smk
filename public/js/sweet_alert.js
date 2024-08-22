@@ -17,6 +17,44 @@ function confirmAdd() {
   });
 }
 
+function confirmSendNotif() {
+  event.preventDefault();
+
+  Swal.fire({
+      title: 'Apakah kamu yakin ingin mengirimkan notifikasi ini',
+      text: "Pastikan data yang kamu inputkan sudah benar",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya, kirimkan!',
+      cancelButtonText: 'Batalkan'
+  }).then((result) => {
+      if (result.isConfirmed) {
+          document.getElementById(`notif-form`).submit();
+      }
+  });
+}
+
+function confirmCreateArticle() {
+  event.preventDefault();
+
+  Swal.fire({
+      title: 'Apakah kamu yakin ingin membuat artikel ini',
+      text: "Pastikan informasi yang kamu inputkan sudah benar",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya, buat!',
+      cancelButtonText: 'Batalkan'
+  }).then((result) => {
+      if (result.isConfirmed) {
+          document.getElementById(`article-form`).submit();
+      }
+  });
+}
+
 function confirmUpdate() {
   event.preventDefault();
 

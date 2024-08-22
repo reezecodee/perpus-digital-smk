@@ -15,6 +15,7 @@ use App\Http\Controllers\Peminjam\Profile\PeminjamProfileController;
 use App\Http\Controllers\Peminjam\Visit\VisitController;
 use App\Http\Controllers\Pustakawan\ChatMasukController;
 use App\Http\Controllers\Pustakawan\Information\InformationController;
+use App\Http\Controllers\Pustakawan\Information\LogicInformationController;
 use App\Http\Controllers\Pustakawan\MasterDataBuku\BukuController;
 use App\Http\Controllers\Pustakawan\MasterDataBuku\LogicBukuController;
 use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\LogicPeminjamanController;
@@ -104,6 +105,9 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/baca-e-book/{id}', [BookController::class, 'show_read_e_book'])->name('read_e_book');
+    Route::controller(CalendarController::class)->group(function(){
+        Route::get('/events', 'events')->middleware('throttle:60,1')->name('event');
+    });
 });
 
 Route::middleware(['auth', 'role:Peminjam'])->group(function () {
@@ -300,6 +304,13 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
             Route::get('/kirim-email', 'show_send_email')->middleware('permission:mengirim email')->name('kirim_email');
             Route::get('/atur-kalender', 'show_set_calendar')->middleware('permission:mengatur jadwal perpustakaan')->name('atur_kalender');
             Route::get('/buat-artikel', 'show_create_article')->name('buat_artikel');
+        });
+
+        Route::controller(LogicInformationController::class)->group(function() {
+            Route::post('/kirim-notifikasi', 'send_notification')->name('send_notification');
+            Route::post('/kirim-email', 'send_email')->name('send_email');
+            Route::post('/buat-artikel', 'post_article')->name('post_article');
+            Route::post('/tambah-jadwal', 'add_schedule')->name('add_schedule');
         });
     });
 

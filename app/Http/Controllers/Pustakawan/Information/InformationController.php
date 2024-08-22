@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Pustakawan\Information;
 
 use App\Http\Controllers\Controller;
+use App\Models\Calendar;
 use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class InformationController extends Controller
@@ -13,6 +15,7 @@ class InformationController extends Controller
         return view('pustakawan_views.informasi.buat_notifikasi', [
             'title' => 'Buat Notifikasi',
             'heading' => 'Buat Notifikasi',
+            'receivers' => User::role('Peminjam')->where('status', 'Aktif')->latest()->get(),
             'notifications' => Notification::where('pengirim_id', auth()->user()->id)->get(),
         ]);
     }
@@ -21,7 +24,8 @@ class InformationController extends Controller
     {
         return view('pustakawan_views.informasi.kirim_email', [
             'title' => 'Kirim Email',
-            'heading' => 'Kirim Email'
+            'heading' => 'Kirim Email',
+            'receivers' => User::role('Peminjam')->where('status', 'Aktif')->latest()->get(),
         ]);
     }
 
@@ -32,10 +36,11 @@ class InformationController extends Controller
             'heading' => 'Buat Artikel'
         ]);
     }
+
     public function show_set_calendar()
     {
         return view('pustakawan_views.informasi.atur_kalender', [
-            'title' => 'Atur Kalender',            
+            'title' => 'Atur Kalender',
             'heading' => 'Atur Kalender',
         ]);
     }

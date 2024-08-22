@@ -2,24 +2,26 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <form id="save-form" action="" method="POST">
+            <form id="notif-form" action="{{ route('send_notification') }}" method="post">
                 @csrf
                 <div class="d-flex justify-content-end align-items-center">
-                    <div class="form-group">
-                        <select name="penerima" class="form-control select2" required>
-                            <option selected>--Pilih calon peminjam--</option>
-                            <option value="Ambatukam">Ambatukam</option>
-                            <option value="John Doe">John Doe</option>
-                            <option value="Jane Doe">Jane Doe</option>
-                        </select>
-                    </div>
+                    @include('pustakawan_views.components.input.tom-select-notif', [
+                        'name' => 'penerima_id',
+                        'placeholder' => 'Pilih akun pengguna',
+                        'options' => $receivers,
+                    ])
                 </div>
                 <div class="form-group">
                     <label for="">Subject</label>
-                    <input type="text" name="subject" class="form-control" placeholder="Subject:">
+                    <input type="text" name="judul" class="form-control" value="{{ old('judul') }}" placeholder="Subject:">
+                    @error('judul')
+                        <span class="invalid-feedback">{{ $message }}</span>
+                    @enderror
                 </div>
-                <textarea id="editor" name="pesan"></textarea>
-                <button type="submit" class="btn btn-primary mt-4">Kirim notifikasi</button>
+                @include('pustakawan_views.components.input.froala', [
+                    'name' => 'pesan',
+                ])
+                <button type="button" onclick="confirmSendNotif()" class="btn btn-primary mt-4">Kirim notifikasi</button>
             </form>
         </div>
     </div>
@@ -30,7 +32,7 @@
                 <thead>
                     <tr>
                         <th>Penerima</th>
-                        <th>Isi pesan</th>
+                        <th>Judul</th>
                         <th>Tgl pengiriman</th>
                         <th>Action</th>
                     </tr>
@@ -40,7 +42,6 @@
                         <tr>
                             <td>{{ $item->receiver->nama }}</td>
                             <td>{{ $item->judul }}</td>
-                            <td>{{ $item->pesan }}</td>
                             <td>{{ $item->tgl_pengiriman }}</td>
                             <td>
                                 <div class="dropdown-center">

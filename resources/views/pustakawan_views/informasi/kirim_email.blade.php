@@ -5,23 +5,23 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <form id="save-form" action="" method="POST">
+            <form id="notif-form" action="{{ route('send_email') }}" method="post">
                 @csrf
-                <div class="d-flex justify-content-end align-items-center mb-4">
-                    <span class="mr-2">Penerima:</span>
-                    <select name="penerima" class="form-control select2 w-25" required>
-                        <option selected>--Pilih penerima--</option>
-                        <option value="Ambatukam">Ambatukam</option>
-                        <option value="John Doe">John Doe</option>
-                        <option value="Jane Doe">Jane Doe</option>
-                    </select>
+                <div class="d-flex justify-content-end align-items-center">
+                    @include('pustakawan_views.components.input.tom-select-notif', [
+                        'name' => 'penerima_id',
+                        'placeholder' => 'Pilih akun pengguna',
+                        'options' => $receivers,
+                    ])
                 </div>
                 <div class="form-group">
                     <label for="">Subject</label>
-                    <input type="text" name="subject" class="form-control" placeholder="Subject:">
+                    <input type="text" autocomplete="off" name="subject" class="form-control" placeholder="Subject:">
                 </div>
-                <textarea id="editor" name="pesan"></textarea>
-                <button type="submit" class="btn btn-primary mt-4">Kirim email</button>
+                @include('pustakawan_views.components.input.froala', [
+                    'name' => 'pesan',
+                ])
+                <button type="button" onclick="confirmSendNotif()" class="btn btn-primary mt-4">Kirim email</button>
             </form>
         </div>
     </div>

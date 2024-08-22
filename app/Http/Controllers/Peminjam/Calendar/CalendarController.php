@@ -36,6 +36,10 @@ class CalendarController extends Controller
             ->where('peminjam_id', auth()->user()->id)
             ->where('status', '!=', 'E-book')
             ->get();
+        
+        if(!$schedules_return){
+            return response()->json($events);
+        }
 
         $closed_return = function ($end) {
             $initial_date = Carbon::createFromFormat('Y-m-d', $end);

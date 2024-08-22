@@ -126,7 +126,6 @@
         });
     </script>
 
-    <script src="/js/calendar.js"></script>
 </body>
 
 </html>

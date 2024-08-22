@@ -1,0 +1,1 @@
+<textarea id="editor" name="{{ $name }}" required>{{ old($name) }}</textarea>

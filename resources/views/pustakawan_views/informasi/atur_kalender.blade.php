@@ -10,47 +10,53 @@
                                 <h4 class="card-title">Tambahkan jadwal</h4>
                             </div>
                             <div class="card-body">
-                                <form action="" method="POST">
+                                <form action="{{ route('add_schedule') }}" method="post" id="add-form">
                                     @csrf
-                                    <div class="form-group">
-                                        <label for="">Tanggal</label>
-                                        <input type="date" name="tanggal" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Keterangan</label>
-                                        <input type="text" name="keterangan" class="form-control"
-                                            placeholder="Masukkan keterangan" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Legend color</label>
-                                        <select name="legend_color" class="form-control" required>
-                                            <option selected>--Pilih warna--</option>
-                                            <option value="Hijau">Hijau</option>
-                                            <option value="Kuning">Kuning</option>
-                                            <option value="Merah">Merah</option>
-                                        </select>
-                                    </div>
-                                    <button class="btn btn-primary">Tambahkan acara</button>
+                                    @include('pustakawan_views.components.input.basic', [
+                                        'label' => 'Tanggal mulai',
+                                        'name' => 'tanggal_mulai',
+                                        'value' => old('tanggal_mulai'),
+                                        'placeholder' => '',
+                                        'type' => 'date',
+                                        'is_required' => true,
+                                    ])
+                                    @include('pustakawan_views.components.input.basic', [
+                                        'label' => 'Tanggal selesai',
+                                        'name' => 'tanggal_selesai',
+                                        'value' => old('tanggal_selesai'),
+                                        'placeholder' => '',
+                                        'type' => 'date',
+                                        'is_required' => true,
+                                    ])
+                                    @include('pustakawan_views.components.input.basic', [
+                                        'label' => 'Keterangan',
+                                        'name' => 'keterangan',
+                                        'value' => old('keterangan'),
+                                        'placeholder' => 'Masukkan keterangan',
+                                        'type' => 'text',
+                                        'is_required' => true,
+                                    ])
+                                    @include('pustakawan_views.components.input.pure-select', [
+                                        'label' => 'Pilih warna',
+                                        'name' => 'warna',
+                                        'options' => ['Hijau', 'Kuning', 'Merah'],
+                                        'is_required' => true,
+                                    ])
+                                    <button class="btn btn-primary" type="button" onclick="confirmAdd()">Tambahkan acara</button>
                                 </form>
                             </div>
-                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card -->
                     </div>
                 </div>
-                <!-- /.col -->
                 <div class="col-md-8">
                     <div class="card card-primary">
                         <div class="card-body p-0">
-                            <!-- THE CALENDAR -->
                             <div id="calendar"></div>
                         </div>
-                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
                 </div>
-                <!-- /.col -->
             </div>
         </div>
     </div>
+    <script src="/js/calendar.js"></script>
 @endsection

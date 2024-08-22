@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Peminjam\Calendar\CalendarController;
+use App\Http\Controllers\Pustakawan\Information\LogicInformationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::controller(CalendarController::class)->group(function(){
-    Route::get('/events', 'events')->middleware('throttle:30,1')->name('event');
-});
+
+

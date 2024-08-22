@@ -1,59 +1,124 @@
 @extends('layouts.pustakawan_layout')
 @section('content')
-    <form id="save-form" action="" method="POST" enctype="multipart/form-data">
+    <form id="article-form" action="{{ route('post_article') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="card">
             <div class="card-body">
-                <h5>Cover artikel</h5>
-                <div id="dropzone" class="dropzone">
-                    <img src="https://www.svgrepo.com/show/458232/img-box.svg" width="50" alt="" srcset="">
-                    <p>Seret dan jatuhkan gambar di sini atau klik untuk memilih gambar</p>
-                    <input type="file" id="fileInput" style="display: none;">
-                </div>
-                <div class="d-flex justify-content-center">
-                    <div id="previewContainer" class="preview-container"></div>
+                <div class="form-group">
+                    <div class="d-flex justify-content-center mb-3">
+                        <img src="" alt="" class="w-75 border preview" id="imagePreview"
+                            style="display: none;">
+                    </div>
+                    <div class="d-flex justify-content-center w-full">
+                        <input type="file" id="fileInput" name="thumbnail" class="image" style="display: none;">
+                        <button class="btn btn-primary" type="button" id="uploadBtn"><i class="fas fa-upload"></i> Upload
+                            cover artikel</button>
+                    </div>
+                    <div id="error-message" style="display: none; color: red;"></div>
+                    @error('thumbnail')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
-                <h5>Metadata</h5>
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="">Title</label>
-                            <input type="text" name="title" placeholder="Judul artikel" class="form-control" required>
-                        </div>
+                        @include('pustakawan_views.components.input.basic', [
+                            'label' => 'Judul',
+                            'name' => 'judul',
+                            'value' => old('judul'),
+                            'placeholder' => 'Judul artikel',
+                            'type' => 'text',
+                            'is_required' => true,
+                        ])
                     </div>
                     <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="">Author</label>
-                            <input type="text" name="author" placeholder="Author artikel" class="form-control" required>
-                        </div>
+                        @include('pustakawan_views.components.input.basic', [
+                            'label' => 'Keyword',
+                            'name' => 'keyword',
+                            'value' => old('keyword'),
+                            'placeholder' => 'Kata kunci',
+                            'type' => 'text',
+                            'is_required' => true,
+                        ])
                     </div>
                     <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="">Keyword</label>
-                            <input type="text" name="keyword" placeholder="Kata kunci" class="form-control" required>
-                        </div>
+                        @include('pustakawan_views.components.input.pure-select', [
+                            'label' => 'Pilih visibilitas',
+                            'name' => 'visibilitas',
+                            'options' => ['Publik', 'Privasi'],
+                            'is_required' => true,
+                        ])
                     </div>
                     <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="">Description</label>
-                            <textarea name="deskripsi" class="form-control" cols="30" rows="3" placeholder="Deskripsi artikel" required></textarea>
-                        </div>
+                        @include('pustakawan_views.components.input.textarea', [
+                            'label' => 'Deskripsi',
+                            'name' => 'deskripsi',
+                            'value' => old('deskripsi'),
+                            'placeholder' => 'Deskripsi artikel',
+                            'is_required' => true,
+                        ])
                     </div>
                 </div>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
-                <h5>Content artikel</h5>
-                <textarea id="editor" name="pesan"></textarea>
-                <button type="submit" class="btn btn-primary mt-4">Publikasikan</button>
+                @include('pustakawan_views.components.input.froala', [
+                    'name' => 'konten_artikel',
+                ])
+                <button class="btn btn-primary mt-3" type="button" onclick="confirmCreateArticle()">Simpan artikel</button>
             </div>
         </div>
     </form>
 
-    <script src="/js/dropzone.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const uploadBtn = document.getElementById('uploadBtn');
+            const fileInput = document.getElementById('fileInput');
+            const imagePreview = document.getElementById('imagePreview');
+            const errorMessage = document.getElementById('error-message');
+
+            uploadBtn.addEventListener('click', function() {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    if (file.size > 2 * 1024 * 1024) {
+                        errorMessage.textContent = 'Ukuran file tidak boleh lebih dari 2MB.';
+                        errorMessage.style.display = 'block';
+                        imagePreview.style.display = 'none';
+                        return;
+                    }
+
+                    const img = new Image();
+                    img.src = URL.createObjectURL(file);
+                    img.onload = function() {
+                        const width = img.width;
+                        const height = img.height;
+                        const aspectRatio = width / height;
+
+                        // Validasi rasio aspek
+                        if (Math.abs(aspectRatio - 16 / 9) > 0.01) {
+                            errorMessage.textContent = 'Gambar harus memiliki rasio aspek 16:9.';
+                            errorMessage.style.display = 'block';
+                            imagePreview.style.display = 'none';
+                        } else {
+                            errorMessage.style.display = 'none';
+                            imagePreview.src = img.src;
+                            imagePreview.style.display = 'block';
+                        }
+                    };
+                } else {
+                    errorMessage.textContent = 'Silakan pilih file gambar.';
+                    errorMessage.style.display = 'block';
+                    imagePreview.style.display = 'none';
+                }
+            });
+        });
+    </script>
 @endsection
