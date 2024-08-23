@@ -9,7 +9,7 @@ class ChatMasukController extends Controller
 {
     public function show_chat()
     {
-        return view('pustakawan_views.chat_masuk', [
+        return view('pustakawan_views.chat-masuk', [
             'title' => 'Chat Masuk E-Perpustakaan',
             'heading' => 'Chat Masuk',
         ]);

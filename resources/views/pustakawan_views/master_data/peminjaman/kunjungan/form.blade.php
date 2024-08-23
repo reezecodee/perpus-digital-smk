@@ -1,4 +1,4 @@
-@extends('layouts.pustakawan_layout')
+@extends('layouts.pustakawan-layout')
 @section('content')
     <div class="card">
         <div class="card-body">
@@ -11,38 +11,22 @@
             @csrf
             <div class="row">
                 <div class="col-md-4">
-                    @include('pustakawan_views.components.input.tom-select', [
-                        'label' => 'Pengunjung',
-                        'name' => 'pengunjung_id',
-                        'data' => $visit,
-                        'collects' => $visitors,
-                        'is_required' => true,
-                    ])
+                    <x-pustakawan.input.tom-select label="Pengunjung" name="pengunjung_id" :data="$visit" :collects="$visitors"
+                        :isrequired="true" />
                 </div>
                 <div class="col-md-4">
-                    @include('pustakawan_views.components.input.basic', [
-                        'label' => 'Tanggal kunjungan',
-                        'name' => 'tanggal_kunjungan',
-                        'value' => old('tanggal_kunjungan', $visit->tanggal_kunjungan ?? date('Y-m-d')),
-                        'placeholder' => '',
-                        'type' => 'date',
-                        'is_required' => true,
-                    ])
+                    <x-pustakawan.input.basic label="Tanggal kunjungan" name="tanggal_kunjungan" :value="old('tanggal_kunjungan', $visit->tanggal_kunjungan ?? date('Y-m-d'))"
+                        placeholder="" type="date" :isrequired="true" />
                 </div>
                 <div class="col-md-4">
-                    @include('pustakawan_views.components.input.visit-status')
+                    <x-pustakawan.input.visit-status />
                 </div>
                 <div class="col-md-12">
-                    @include('pustakawan_views.components.input.textarea', [
-                        'label' => 'Keterangan kunjungan',
-                        'name' => 'keterangan_kunjungan',
-                        'value' => old('keterangan_kunjungan', $visit->keterangan_kunjungan ?? ''),
-                        'placeholder' => 'Masukkan keterangan kunjungan',
-                        'is_required' => true,
-                    ])
+                    <x-pustakawan.input.textarea label="Keterangan kunjungan" name="keterangan_kunjungan" :value="old('keterangan_kunjungan', $visit->keterangan_kunjungan ?? '')"
+                        placeholder="Masukkan keterangan kunjungan" isrequired="true" />
                 </div>
                 <div class="col-md-12">
-                    @include('pustakawan_views.components.input.cnfrm-checkbox')
+                    <x-pustakawan.input.cnfrm-checkbox />
                 </div>
             </div>
             <div class="d-flex justify-content-end">

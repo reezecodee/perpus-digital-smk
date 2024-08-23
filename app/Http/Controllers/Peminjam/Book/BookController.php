@@ -24,7 +24,7 @@ class BookController extends Controller
 
         $recomendations = Book::where('format', $data->format)->where('status', 'Tersedia')->where('id', '!=', $id)->with('category')->limit(12)->latest()->get();
 
-        return view('peminjam_views.buku.detail_buku', [
+        return view('peminjam_views.buku.detail-buku', [
             'title' => 'Detail Buku',
             'data' => $data,
             'likes' => count(LikedBook::where('buku_id', $id)->get()),
@@ -41,7 +41,7 @@ class BookController extends Controller
             return back();
         }
 
-        return view('peminjam_views.buku.konfirmasi_peminjaman', [
+        return view('peminjam_views.buku.konfirmasi-peminjaman', [
             'title' => 'Konfirmasi Peminjaman',
             'data' => Book::with('fine')->find($id),
         ]);
@@ -70,7 +70,7 @@ class BookController extends Controller
 
         $for_reviews = Borrower::where('peminjam_id', auth()->user()->id)->where('status', 'Sudah dikembalikan')->get();
 
-        return view('peminjam_views.buku.rak_buku', [
+        return view('peminjam_views.buku.rak-buku', [
             'title' => 'Rak Buku Saya',
             'books' => $books,
             'e_books' => $e_books,
@@ -84,7 +84,7 @@ class BookController extends Controller
 
     public function show_read_e_book($id)
     {
-        return view('peminjam_views.buku.baca_e_book', [
+        return view('peminjam_views.buku.baca-e-book', [
             'title' => 'Baca E-Book',
             'book' => Book::find($id),
         ]);
@@ -98,7 +98,7 @@ class BookController extends Controller
             abort(404);
         }
 
-        return view('peminjam_views.buku.detail_peminjaman', [
+        return view('peminjam_views.buku.detail-peminjaman', [
             'title' => 'Detail Peminjaman',
             'data' => $borrower,
             'barcode' => function ($data, $widthFactor = 2, $height = 30) {
@@ -109,7 +109,7 @@ class BookController extends Controller
 
     public function show_liked_book()
     {
-        return view('peminjam_views.buku.buku_disukai', [
+        return view('peminjam_views.buku.buku-disukai', [
             'title' => 'Buku yang Anda Sukai',
             'liked_books' => LikedBook::where('peminjam_id', auth()->user()->id)->latest()->get()
         ]);
@@ -124,7 +124,7 @@ class BookController extends Controller
         $booksQuery = Book::where('format', $format);
 
         if (!$request->has('_token')) {
-            return view('peminjam_views.buku.semua_buku', [
+            return view('peminjam_views.buku.semua-buku', [
                 'title' => 'Semua Buku Perpustakaan',
                 'books' => $booksQuery->paginate(10),
                 'format' => $format
@@ -147,7 +147,7 @@ class BookController extends Controller
 
         $get_books = $booksQuery->paginate(10);
 
-        return view('peminjam_views.buku.semua_buku', [
+        return view('peminjam_views.buku.semua-buku', [
             'title' => 'Semua Buku Perpustakaan',
             'books' => $get_books,
             'format' => $format
@@ -172,13 +172,13 @@ class BookController extends Controller
         }
 
         if (!$request->has('_token')) {
-            return view('peminjam_views.buku.hasil_pencarian', [
+            return view('peminjam_views.buku.hasil-pencarian', [
                 'title' => 'Hasil Pencarian Buku',
                 'books' => $booksQuery->get() 
             ]);
         }
 
-        return view('peminjam_views.buku.hasil_pencarian', [
+        return view('peminjam_views.buku.hasil-pencarian', [
             'title' => 'Hasil Pencarian Buku',
             'books' => $booksQuery->paginate(10)
         ]);

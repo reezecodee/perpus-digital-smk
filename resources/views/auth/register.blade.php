@@ -1,4 +1,4 @@
-@extends('layouts.auth_layout')
+@extends('layouts.auth-layout')
 @section('content')
     <div class="self-center">
         <img src="https://img.freepik.com/free-vector/sign-up-concept-illustration_114360-7865.jpg?t=st=1718806665~exp=1718810265~hmac=a410e5ce99500c1c4932549ef32f417864923d78a0df78292d5ee2542049e9db&w=740"

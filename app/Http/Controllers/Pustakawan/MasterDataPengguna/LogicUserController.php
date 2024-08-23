@@ -98,6 +98,11 @@ class LogicUserController extends Controller
         $user->update($validated_data);
 
         $role_name = $user->roles->first()->name;
+
+        if($user->id == auth()->user()->id){
+            return back()->withSuccess('Berhasil memperbarui profil');
+        }
+
         return redirect()->route('data-user', $role_name)->withSuccess('Berhasil memperbarui data ' . $role_name);
     }
 

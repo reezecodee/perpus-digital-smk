@@ -1,4 +1,4 @@
-@extends('layouts.pustakawan_layout')
+@extends('layouts.pustakawan-layout')
 @section('content')
     <div class="row">
         <div class="col-md-4">
@@ -9,14 +9,8 @@
                     <form action="{{ route('update_category', $data->id) }}" method="POST" id="update-form">
                         @method('PUT')
                         @csrf
-                        @include('pustakawan_views.components.input.basic', [
-                            'label' => 'Nama kategori',
-                            'name' => 'nama_kategori',
-                            'value' => old('nama_kategori', $data->nama_kategori),
-                            'placeholder' => 'Masukkan nama kategori',
-                            'type' => 'text',
-                            'is_required' => true,
-                        ])
+                        <x-pustakawan.input.basic label="Nama kategori" name="nama_kategori" :value="old('nama_kategori', $data->nama_kategori)"
+                            placeholder="Masukkan nama kategori" type="text" :isrequired="true" />
                         <div class="form-group">
                             <label for="keterangan">Keterangan (opsional)</label>
                             <textarea name="keterangan" id="keterangan" class="form-control" placeholder="Masukkan nama keterangan">{{ old('keterangan', $data->keterangan) }}</textarea>

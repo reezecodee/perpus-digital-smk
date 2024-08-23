@@ -24,7 +24,7 @@ class NotificationController extends Controller
             return abort(404);
         }
 
-        return view('peminjam_views.notifikasi.baca_notif', [
+        return view('peminjam_views.notifikasi.baca-notif', [
             'title' => 'Baca Notifikasi',
             'data' => $data,
         ]);

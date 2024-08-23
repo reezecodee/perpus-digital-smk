@@ -1,4 +1,4 @@
-@extends('layouts.peminjam_layout')
+@extends('layouts.peminjam-layout')
 @section('content')
     <section>
         <div class="pt-7 lg:pt-20 mx-auto">

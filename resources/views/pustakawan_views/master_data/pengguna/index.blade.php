@@ -1,7 +1,7 @@
 @extends('pustakawan_views.layouts.main')
 @section('master_data_content')
-    @include('pustakawan_views.components.card.user-nav-card')
-    @include('pustakawan_views.components.modal.import-user-modal')
+    <x-pustakawan.card.user-nav :role="$role" />
+    <x-pustakawan.modal.import-user />
     <table id="data-table" class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -33,16 +33,9 @@
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->status }}</td>
                     <td>
-                        @include('pustakawan_views.components.button.detail-btn', [
-                            'route' => route('detail_user', ['role' => $role, 'id' => $item->id]),
-                        ])
-                        @include('pustakawan_views.components.button.edit-btn', [
-                            'route' => route('edit_user', ['role' => $role, 'id' => $item->id]),
-                        ])
-                        @include('pustakawan_views.components.button.delete-btn', [
-                            'id' => $item->id,
-                            'route' => route('delete_user', $item->id)
-                        ])
+                        <x-pustakawan.button.detail :route="route('detail_user', ['role' => $role, 'id' => $item->id])" />
+                        <x-pustakawan.button.edit :route="route('edit_user', ['role' => $role, 'id' => $item->id])" />
+                        <x-pustakawan.button.delete :id="$item->id" :route="route('delete_user', $item->id)" />
                     </td>
                 </tr>
             @endforeach

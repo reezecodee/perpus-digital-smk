@@ -1,4 +1,4 @@
-@extends('layouts.pustakawan_layout')
+@extends('layouts.pustakawan-layout')
 @section('content')
     @if (session('success'))
         <div class="alert alert-success">
@@ -15,106 +15,48 @@
                         <hr>
                         <div class="row">
                             <div class="col-md-6">
-                                @include('pustakawan_views.components.input.basic', [
-                                    'label' => 'Nama perpustakaan',
-                                    'name' => 'nama_perpustakaan',
-                                    'value' => old('nama_perpustakaan', $data->nama_perpustakaan ?? ''),
-                                    'placeholder' => 'Nama perpustakaan',
-                                    'type' => 'text',
-                                    'is_required' => true,
-                                ])
+                                <x-pustakawan.input.basic label="Nama perpustakaan" name="nama_perpustakaan"
+                                    :value="old('nama_perpustakaan', $data->nama_perpustakaan ?? '')" placeholder="Nama perpustakaan" type="text" :isrequired="true" />
                             </div>
                             <div class="col-md-6">
-                                @include('pustakawan_views.components.input.basic', [
-                                    'label' => 'No. telepon',
-                                    'name' => 'telepon',
-                                    'value' => old('telepon', $data->telepon ?? ''),
-                                    'placeholder' => 'Telepon perpustakaan',
-                                    'type' => 'number',
-                                    'is_required' => true,
-                                ])
+                                <x-pustakawan.input.basic label="Telepon" name="nama_perpustakaan" :value="old('telepon', $data->telepon ?? '')"
+                                    placeholder="Telepon perpustakaan" type="number" :isrequired="true" />
                             </div>
                             <div class="col-md-6">
-                                @include('pustakawan_views.components.input.basic', [
-                                    'label' => 'Email',
-                                    'name' => 'email',
-                                    'value' => old('email', $data->email ?? ''),
-                                    'placeholder' => 'Email perpustakaan',
-                                    'type' => 'email',
-                                    'is_required' => true,
-                                ])
+                                <x-pustakawan.input.basic label="Email" name="email" :value="old('email', $data->email ?? '')"
+                                    placeholder="Email perpustakaan" type="email" :isrequired="true" />
                             </div>
                             <div class="col-md-6">
-                                @include('pustakawan_views.components.input.basic', [
-                                    'label' => 'Jam operasional buka',
-                                    'name' => 'operasional_buka',
-                                    'value' => old('operasional_buka', $data->operasional_buka ?? ''),
-                                    'placeholder' => 'Jam operasional buka',
-                                    'type' => 'time',
-                                    'is_required' => true,
-                                ])
+                                <x-pustakawan.input.basic label="Jam operasional buka" name="operasional_buka"
+                                    :value="old('operasional_buka', $data->operasional_buka ?? '')" placeholder="Jam operasional buka" type="time" :isrequired="true" />
                             </div>
                             <div class="col-md-6">
-                                @include('pustakawan_views.components.input.basic', [
-                                    'label' => 'Jam operasional tutup',
-                                    'name' => 'operasional_tutup',
-                                    'value' => old('operasional_tutup', $data->operasional_tutup ?? ''),
-                                    'placeholder' => 'Jam operasional tutup',
-                                    'type' => 'time',
-                                    'is_required' => true,
-                                ])
+                                <x-pustakawan.input.basic label="Jam operasional tutup" name="operasional_tutup"
+                                    :value="old('operasional_tutup', $data->operasional_tutup ?? '')" placeholder="Jam operasional tutup" type="time"
+                                    :isrequired="true" />
                             </div>
                             <div class="col-md-6">
-                                @include('pustakawan_views.components.input.basic', [
-                                    'label' => 'Website',
-                                    'name' => 'website',
-                                    'value' => old('website', $data->website ?? ''),
-                                    'placeholder' => 'Website perpustakaan',
-                                    'type' => 'text',
-                                    'is_required' => true,
-                                ])
+                                <x-pustakawan.input.basic label="Website" name="website" :value="old('website', $data->website ?? '')"
+                                    placeholder="Website perpustakaan" type="text" :isrequired="true" />
                             </div>
                             <div class="col-md-6">
-                                @include('pustakawan_views.components.input.basic', [
-                                    'label' => 'Instagram',
-                                    'name' => 'instagram',
-                                    'value' => old('instagram', $data->instagram ?? ''),
-                                    'placeholder' => 'Link instagram',
-                                    'type' => 'text',
-                                    'is_required' => true,
-                                ])
+                                <x-pustakawan.input.basic label="Instagram" name="instagram" :value="old('instagram', $data->instagram ?? '')"
+                                    placeholder="Link instagram" type="text" :isrequired="true" />
                             </div>
                             <div class="col-md-6">
-                                @include('pustakawan_views.components.input.basic', [
-                                    'label' => 'Facebook',
-                                    'name' => 'facebook',
-                                    'value' => old('facebook', $data->facebook ?? ''),
-                                    'placeholder' => 'Link facebook',
-                                    'type' => 'text',
-                                    'is_required' => true,
-                                ])
+                                <x-pustakawan.input.basic label="Facebook" name="facebook" :value="old('facebook', $data->facebook ?? '')"
+                                    placeholder="Link facebook" type="text" :isrequired="true" />
                             </div>
                             <div class="col-md-6">
-                                @include('pustakawan_views.components.input.basic', [
-                                    'label' => 'Twitter/X',
-                                    'name' => 'twitter_x',
-                                    'value' => old('twitter_x', $data->twitter_x ?? ''),
-                                    'placeholder' => 'Link twitter x',
-                                    'type' => 'text',
-                                    'is_required' => true,
-                                ])
+                                <x-pustakawan.input.basic label="Twitter/X" name="twitter_x" :value="old('twitter_x', $data->twitter_x ?? '')"
+                                    placeholder="Link twitter x" type="text" :isrequired="true" />
                             </div>
                             <div class="col-md-12">
-                                @include('pustakawan_views.components.input.textarea', [
-                                    'label' => 'Alamat',
-                                    'name' => 'alamat',
-                                    'value' => old('alamat', $data->alamat ?? ''),
-                                    'placeholder' => 'Alamat perpustakaan',
-                                    'is_required' => true,
-                                ])
+                                <x-pustakawan.input.textarea label="Alamat" name="alamat" :value="old('alamat', $data->alamat ?? '')"
+                                    placeholder="Alamat perpustakaan" :isrequired="true" />
                             </div>
                             <div class="col-md-12">
-                                @include('pustakawan_views.components.input.cnfrm-checkbox')
+                                <x-pustakawan.input.cnfrm-checkbox />
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary mt-3">Simpan data</button>

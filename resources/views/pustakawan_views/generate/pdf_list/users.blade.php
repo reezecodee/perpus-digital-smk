@@ -1,4 +1,4 @@
-@extends('layouts.pdf_layout')
+@extends('layouts.pdf-layout')
 @section('content')
 <div style="text-align: center">Data {{ $role }}</div>
 <table class="table-container" style="font-size: 14px">

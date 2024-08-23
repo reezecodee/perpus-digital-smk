@@ -1,4 +1,4 @@
-@extends('layouts.auth_layout')
+@extends('layouts.auth-layout')
 @section('content')
     <div class="flex flex-col justify-center items-center h-screen text-center">
         <img src="/img/assets/success.webp"

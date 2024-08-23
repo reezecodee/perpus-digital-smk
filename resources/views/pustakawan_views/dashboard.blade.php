@@ -1,4 +1,4 @@
-@extends('layouts.pustakawan_layout')
+@extends('layouts.pustakawan-layout')
 @section('content')
     <div class="row">
         <div class="col-lg-3 col-6">

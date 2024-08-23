@@ -16,7 +16,7 @@ class SiteController extends Controller
 
     public function crop_cover() 
     {
-        return view('site_views.crop_cover', [
+        return view('site_views.crop-cover', [
             'title' => 'Crop Cover Buku'
         ]);
     }

@@ -171,7 +171,7 @@ Route::middleware(['auth', 'role:Peminjam'])->group(function () {
         Route::post('/overview-profile', 'upload_profile_image');
         Route::post('/ganti-password', 'update_password')->name('update_password');
 
-        Route::put('/update-profile', 'update_profile_peminjam')->name('update_profile');
+        Route::put('/update-profile', 'update_profile')->name('update_profile');
     });
 
 
@@ -196,6 +196,10 @@ Route::middleware(['auth', 'role:Peminjam'])->group(function () {
 Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
     Route::controller(PustakawanDashboardController::class)->group(function () {
         Route::get('/dashboard-control', 'show_dashboard')->name('dashboard.ctrl');
+    });
+
+    Route::controller(PustakawanProfileController::class)->group(function(){
+        Route::post('/ganti-pw-pustakawan', 'update_password')->name('update_pw_pustakawan');
     });
 
     Route::controller(ChatMasukController::class)->middleware('permission:melayani chat')->group(function () {
@@ -244,7 +248,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
                 Route::delete('/hapus-denda/{id}', 'delete_fine')->name('delete_fine');
             });
 
-            Route::get('/edit-kategori/{id}', 'show_edit_category')->name('edit_category');
+            Route::get('/kategori/edit-kategori/{id}', 'show_edit_category')->name('edit_category');
             Route::controller(LogicBukuController::class)->group(function () {
                 Route::post('/tambah-kategori', 'add_category')->name('add_category');
                 Route::put('/edit-kategori/{id}', 'update_category')->name('update_category');

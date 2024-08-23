@@ -1,4 +1,4 @@
-@extends('layouts.profile_layout')
+@extends('layouts.profile-layout')
 @section('content-card')
     <div class="self-start w-full border shadow-md rounded-md p-4">
         <h1 class="text-xl font-bold mb-1">Profile saya</h1>

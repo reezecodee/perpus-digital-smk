@@ -33,7 +33,7 @@ class PeminjamProfileController extends Controller
 
     public function show_ch_password()
     {
-        return view('peminjam_views.profile.ganti_password', [
+        return view('peminjam_views.profile.ganti-password', [
             'title' => 'Ganti Password'
         ]);
     }

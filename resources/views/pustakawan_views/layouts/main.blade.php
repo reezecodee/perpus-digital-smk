@@ -1,7 +1,7 @@
-@extends('layouts.pustakawan_layout')
+@extends('layouts.pustakawan-layout')
 @section('content')
-    @include('pustakawan_views.components.alert.alert-import-error')
-    @include('pustakawan_views.components.alert.alert-success')
+    <x-pustakawan.alert.import-error />
+    <x-pustakawan.alert.success />
     <div class="card">
         <div class="card-body">
             @yield('master_data_content')

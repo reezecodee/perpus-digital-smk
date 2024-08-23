@@ -1,6 +1,6 @@
 @extends('pustakawan_views.layouts.main')
 @section('master_data_content')
-    @include('pustakawan_views.components.card.book-nav-card')
+    <x-pustakawan.card.book-nav :format="$format" />
     <div class="card">
         <div class="card-body">
             <table id="data-table" class="table table-bordered table-striped">
@@ -26,16 +26,9 @@
                             <td>{{ $item->isbn }}</td>
                             <td>{{ $item->status }}</td>
                             <td>
-                                @include('pustakawan_views.components.button.detail-btn', [
-                                    'route' => route('detail_book', ['format' => $format, 'id' => $item->id]),
-                                ])
-                                @include('pustakawan_views.components.button.edit-btn', [
-                                    'route' => route('edit_book', ['format' => $format, 'id' => $item->id]),
-                                ])
-                                @include('pustakawan_views.components.button.delete-btn', [
-                                    'id' => $item->id,
-                                    'route' => route('delete_book', $item->id),
-                                ])
+                                <x-pustakawan.button.detail :route="route('detail_book', ['format' => $format, 'id' => $item->id])" />
+                                <x-pustakawan.button.edit :route="route('edit_book', ['format' => $format, 'id' => $item->id])" />
+                                <x-pustakawan.button.delete :id="$item->id" :route="route('delete_book', $item->id)" />
                             </td>
                         </tr>
                     @endforeach

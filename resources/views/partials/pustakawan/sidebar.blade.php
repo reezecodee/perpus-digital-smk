@@ -228,28 +228,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('generate laporan')
-                    <li class="nav-header">Generate</li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link">
-                            <i class="nav-icon fas fa-file-alt"></i>
-                            <p>
-                                Laporan Peminjaman
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link">
-                            <i class="nav-icon fas fa-file-alt"></i>
-                            <p>
-                                Laporan Buku
-                            </p>
-                        </a>
-                    </li>
-                @endcan
             </ul>
         </nav>
-        <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
 </aside>

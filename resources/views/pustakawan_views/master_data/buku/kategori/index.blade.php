@@ -8,14 +8,8 @@
                     <hr>
                     <form action="{{ route('add_category') }}" method="POST" id="add-form">
                         @csrf
-                        @include('pustakawan_views.components.input.basic', [
-                            'label' => 'Nama kategori',
-                            'name' => 'nama_kategori',
-                            'value' => old('nama_kategori'),
-                            'placeholder' => 'Masukkan nama kategori',
-                            'type' => 'text',
-                            'is_required' => true,
-                        ])
+                        <x-pustakawan.input.basic label="Nama kategori" name="nama_kategori" :value="old('nama_kategori')"
+                            placeholder="Masukkan nama kategori" type="text" :isrequired="true" />
                         <div class="form-group">
                             <label for="keterangan">Keterangan (opsional)</label>
                             <textarea name="keterangan" value="{{ old('keterangan') }}" id="keterangan"
@@ -49,13 +43,8 @@
                                     <td>{{ $item->keterangan ?? 'Tidak ada' }}</td>
                                     <td>{{ $item->book_count }}</td>
                                     <td>
-                                        @include('pustakawan_views.components.button.edit-btn', [
-                                            'route' => route('edit_category', $item->id),
-                                        ])
-                                        @include('pustakawan_views.components.button.delete-btn', [
-                                            'id' => $item->id,
-                                            'route' => route('delete_category', $item->id),
-                                        ])
+                                        <x-pustakawan.button.edit :route="route('edit_category', $item->id)" />
+                                        <x-pustakawan.button.delete :id="$item->id" :route="route('delete_category', $item->id)" />
                                     </td>
                                 </tr>
                             @endforeach

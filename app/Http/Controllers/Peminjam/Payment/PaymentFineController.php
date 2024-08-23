@@ -16,7 +16,7 @@ class PaymentFineController extends Controller
             abort(404);
         }
 
-        return view('peminjam_views.pembayaran.pembayaran_denda', [
+        return view('peminjam_views.pembayaran.pembayaran-denda', [
             'title' => 'Pembayaran Denda',
             'data' => $data,
         ]);

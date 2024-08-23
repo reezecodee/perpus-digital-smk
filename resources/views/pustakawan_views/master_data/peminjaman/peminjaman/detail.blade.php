@@ -1,4 +1,4 @@
-@extends('layouts.pustakawan_layout')
+@extends('layouts.pustakawan-layout')
 @section('content')
     @if ($data->status == 'Terkena denda' && $data->keterangan_denda != 'Tidak ada')
         <div class="card">
@@ -6,21 +6,13 @@
                 <h5 class="text-bold">Peminjam ini terkena denda</h5>
                 <hr class="border-light">
                 <div class="d-flex justify-content-around align-items-center" style="height: 7rem">
-                    @include('pustakawan_views.components.input.input-disable', [
-                        'label' => 'Status peminjaman',
-                        'name' => 'status',
-                        'value' => $data->status,
-                    ])
-                    @include('pustakawan_views.components.input.input-disable', [
-                        'label' => 'Keterangan denda',
-                        'name' => 'keterangan_denda',
-                        'value' => $data->keterangan_denda,
-                    ])
-                    @include('pustakawan_views.components.input.input-disable', [
+                    <x-pustakawan.input.basic-disable label="Status peminjaman" name="status" :value="$data->status" />
+                    <x-pustakawan.input.basic-disable label="Keterangan denda" name="keterangan_denda" :value="$data->keterangan_denda" />
+                    {{-- @include('pustakawan_views.components.input.input-disable', [
                         'label' => 'Jenis kelamin',
                         'name' => 'jk',
                         'value' => $data->jk,
-                    ])
+                    ]) --}}
                     <div class="form-group text-center">
                         <label for="">Denda yang harus dibayarkan</label>
                         @if ($data->keterangan_denda == 'Denda buku rusak')
@@ -46,39 +38,19 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-6">
-                            @include('pustakawan_views.components.input.input-disable', [
-                                'label' => 'Nama peminjam',
-                                'name' => 'nama',
-                                'value' => $data->peminjam->nama,
-                            ])
+                            <x-pustakawan.input.basic-disable label="Nama peminjam" name="nama" :value="$data->peminjam->nama" />
                         </div>
                         <div class="col-md-6">
-                            @include('pustakawan_views.components.input.input-disable', [
-                                'label' => 'Nomor Induk Siswa',
-                                'name' => 'nip_nis',
-                                'value' => $data->peminjam->nip_nis,
-                            ])
+                            <x-pustakawan.input.basic-disable label="Nomor Induk Siswa" name="nip_nis" :value="$data->peminjam->nip_nis" />
                         </div>
                         <div class="col-md-6">
-                            @include('pustakawan_views.components.input.input-disable', [
-                                'label' => 'NISN',
-                                'name' => 'nisn',
-                                'value' => $data->peminjam->nisn,
-                            ])
+                            <x-pustakawan.input.basic-disable label="NISN" name="nisn" :value="$data->peminjam->nisn" />
                         </div>
                         <div class="col-md-6">
-                            @include('pustakawan_views.components.input.input-disable', [
-                                'label' => 'Email',
-                                'name' => 'email',
-                                'value' => $data->peminjam->email,
-                            ])
+                            <x-pustakawan.input.basic-disable label="Email" name="email" :value="$data->peminjam->email" />
                         </div>
                         <div class="col-md-6">
-                            @include('pustakawan_views.components.input.input-disable', [
-                                'label' => 'Telepon',
-                                'name' => 'telepon',
-                                'value' => $data->peminjam->telepon,
-                            ])
+                            <x-pustakawan.input.basic-disable label="Telepon" name="telepon" :value="$data->peminjam->telepon" />
                         </div>
                     </div>
                 </div>
@@ -99,53 +71,26 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-6">
-                            @include('pustakawan_views.components.input.input-disable', [
-                                'label' => 'Judul buku',
-                                'name' => 'judul',
-                                'value' => $data->book->judul,
-                            ])
+                            <x-pustakawan.input.basic-disable label="Judul buku" name="judul" :value="$data->book->judul" />
                         </div>
                         <div class="col-md-6">
-                            @include('pustakawan_views.components.input.input-disable', [
-                                'label' => 'Kode peminjaman',
-                                'name' => 'kode_peminjaman',
-                                'value' => $data->kode_peminjaman,
-                            ])
+                            <x-pustakawan.input.basic-disable label="Kode peminjaman" name="kode_peminjaman"
+                                :value="$data->kode_peminjaman" />
                         </div>
                         <div class="col-md-6">
-                            @include('pustakawan_views.components.input.input-disable', [
-                                'label' => 'Tanggal pinjam',
-                                'name' => 'peminjaman',
-                                'value' => $data->peminjaman,
-                            ])
+                            <x-pustakawan.input.basic-disable label="Tanggal pinjam" name="peminjaman" :value="$data->peminjaman" />
                         </div>
                         <div class="col-md-6">
-                            @include('pustakawan_views.components.input.input-disable', [
-                                'label' => 'Jatuh tempo',
-                                'name' => 'jatuh_tempo',
-                                'value' => $data->jatuh_tempo,
-                            ])
+                            <x-pustakawan.input.basic-disable label="Jatuh tempo" name="jatuh_tempo" :value="$data->jatuh_tempo" />
                         </div>
                         <div class="col-md-6">
-                            @include('pustakawan_views.components.input.input-disable', [
-                                'label' => 'Tanggal dikembalikan',
-                                'name' => 'pengembalian',
-                                'value' => $data->pengembalian ?? '-',
-                            ])
+                            <x-pustakawan.input.basic-disable label="Tanggal dikembalikan" name="pengembalian" :value="$data->pengembalian" />
                         </div>
                         <div class="col-md-6">
-                            @include('pustakawan_views.components.input.input-disable', [
-                                'label' => 'Status peminjaman',
-                                'name' => 'status',
-                                'value' => $data->status,
-                            ])
+                            <x-pustakawan.input.basic-disable label="Status peminjaman" name="status" :value="$data->status" />
                         </div>
                         <div class="col-md-12">
-                            @include('pustakawan_views.components.input.textarea-disable', [
-                                'label' => 'Keterangan peminjaman',
-                                'name' => 'keterangan',
-                                'value' => $data->keterangan,
-                            ])
+                            <x-pustakawan.input.textarea-disable label="Keterangan peminjaman"  name="keterangan" :value="$data->keterangan" />
                         </div>
                     </div>
                 </div>

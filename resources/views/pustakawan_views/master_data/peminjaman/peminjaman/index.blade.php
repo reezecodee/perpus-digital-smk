@@ -1,6 +1,6 @@
 @extends('pustakawan_views.layouts.main')
 @section('master_data_content')
-    @include('pustakawan_views.components.card.loan-nav-card')
+    <x-pustakawan.card.loan-nav />
     <div class="card">
         <div class="card-body">
             <table id="data-table" class="table table-bordered table-striped">
@@ -12,9 +12,7 @@
                         <th>Dikembalikan</th>
                         <th>Jatuh tempo</th>
                         <th>Status</th>
-                        @can('manajemen peminjaman')
-                            <th>Action</th>
-                        @endcan
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,7 +25,7 @@
                             <td>{{ $item->jatuh_tempo }}</td>
                             <td>{{ $item->status }}</td>
                             <td>
-                                @include('pustakawan_views.components.button.btn-group')
+                                <x-pustakawan.button.btn-group :item="$item" />
                             </td>
                         </tr>
                     @endforeach

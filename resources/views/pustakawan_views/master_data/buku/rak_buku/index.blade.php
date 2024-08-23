@@ -6,32 +6,14 @@
                 <div class="card-body">
                     <h4 class="text-bold">Tambah Rak</h4>
                     <hr>
-                    <form action="{{ route('add_shelf') }}" method="POST" id="add-form">
+                    <form action="{{ route('add_shelf') }}" method="post" id="add-form">
                         @csrf
-                        @include('pustakawan_views.components.input.basic', [
-                            'label' => 'Kode rak',
-                            'name' => 'kode',
-                            'value' => old('kode'),
-                            'placeholder' => 'Masukkan kode rak',
-                            'type' => 'text',
-                            'is_required' => true,
-                        ])
-                        @include('pustakawan_views.components.input.basic', [
-                            'label' => 'Nama rak',
-                            'name' => 'nama_rak',
-                            'value' => old('nama_rak'),
-                            'placeholder' => 'Masukkan nama rak',
-                            'type' => 'text',
-                            'is_required' => true,
-                        ])
-                        @include('pustakawan_views.components.input.basic', [
-                            'label' => 'Kapasitas rak',
-                            'name' => 'kapasitas',
-                            'value' => old('kapasitas'),
-                            'placeholder' => 'Masukkan kapasitas rak',
-                            'type' => 'number',
-                            'is_required' => true,
-                        ])
+                        <x-pustakawan.input.basic label="Kode rak" name="kode" :value="old('kode')"
+                            placeholder="Masukkan kode rak" type="text" :isrequired="true" />
+                        <x-pustakawan.input.basic label="Nama rak" name="nama_rak" :value="old('nama_rak')"
+                            placeholder="Masukkan nama rak" type="text" :isrequired="true" />
+                        <x-pustakawan.input.basic label="Kapasitas rak" name="kapasitas" :value="old('kapasitas')"
+                            placeholder="Masukkan kapasitas rak" type="number" :isrequired="true" />
                         <button type="button" onclick="confirmAdd()" class="btn btn-primary"><i class="fas fa-plus"></i>
                             Tambahkan</button>
                     </form>
@@ -59,16 +41,8 @@
                                     <td>{{ $item->kapasitas }}</td>
                                     <td>{{ $item->seluruh_jumlah_buku }}</td>
                                     <td>
-                                        <a href="{{ route('edit_shelf', $item->id) }}" title="Edit">
-                                            <button class="btn btn-primary"><i class="fas fa-pen"></i></button>
-                                        </a>
-                                        <form action="{{ route('delete_shelf', $item->id) }}" method="post" class="inline"
-                                            id="delete-form-{{ $item->id }}">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" onclick="confirmDelete('{{ $item->id }}')"
-                                                class="btn btn-danger" title="Hapus"><i class="fas fa-trash"></i></button>
-                                        </form>
+                                        <x-pustakawan.button.edit :route="route('edit_shelf', $item->id)" />
+                                        <x-pustakawan.button.delete :id="$item->id" :route="route('delete_shelf', $item->id)" />
                                     </td>
                                 </tr>
                             @endforeach

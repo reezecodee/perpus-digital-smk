@@ -68,7 +68,7 @@ class LogicPeminjamProfileController extends Controller
         ]);
     }
 
-    public function update_profile_peminjam(UpdatePeminjamRequest $update_request)
+    public function update_profile(UpdatePeminjamRequest $update_request)
     {
         $update_data = $update_request->validated();
         $user = auth()->user();

@@ -1,4 +1,4 @@
-@extends('layouts.pustakawan_layout')
+@extends('layouts.pustakawan-layout')
 @section('content')
     <div class="card">
         <div class="card-body">
@@ -6,72 +6,36 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-6">
-                            @include('pustakawan_views.components.input.input-disable', [
-                                'label' => 'Username',
-                                'name' => 'username',
-                                'value' => $data->username,
-                            ])
+                            <x-pustakawan.input.basic-disable label="Username" name="username" :value="$data->username" />
                         </div>
                         <div class="col-md-6">
-                            @include('pustakawan_views.components.input.input-disable', [
-                                'label' => 'Nama lengkap',
-                                'name' => 'nama',
-                                'value' => $data->nama,
-                            ])
+                            <x-pustakawan.input.basic-disable label="Nama lengkap" name="nama" :value="$data->nama" />
                         </div>
                         <div class="col-md-6">
-                            @include('pustakawan_views.components.input.input-disable', [
-                                'label' =>
-                                    'Nomor Induk ' . in_array($role, ['admin', 'pustakawan'])
-                                        ? 'Pegawai (NIP)'
-                                        : 'Siswa (NIS)',
-                                'name' => 'nip_nis',
-                                'value' => $data->nip_nis,
-                            ])
+                            <x-pustakawan.input.basic-disable :label="'Nomor Induk ' . in_array($role, ['admin', 'pustakawan'])
+                                ? 'Pegawai (NIP)'
+                                : 'Siswa (NIS)'" name="nip_nis" :value="$data->nip_nis" />
                         </div>
                         <div class="col-md-6">
-                            @include('pustakawan_views.components.input.input-disable', [
-                                'label' => 'Nomor telepon',
-                                'name' => 'telepon',
-                                'value' => $data->telepon,
-                            ])
+                            <x-pustakawan.input.basic-disable label="Nomor telepon" name="telepon" :value="$data->telepon" />
                         </div>
                         <div class="col-md-6">
-                            @include('pustakawan_views.components.input.input-disable', [
-                                'label' => 'Email',
-                                'name' => 'email',
-                                'value' => $data->email,
-                            ])
+                            <x-pustakawan.input.basic-disable label="Email" name="email" :value="$data->email" />
                         </div>
                         @if ($role == 'peminjam')
                             <div class="col-md-6">
-                                @include('pustakawan_views.components.input.input-disable', [
-                                    'label' => 'Nomor Induk Siswa Nasional',
-                                    'name' => 'nisn',
-                                    'value' => $data->nisn,
-                                ])
+                                <x-pustakawan.input.basic-disable label="Nomor Induk Siswa Nasional" name="nisn"
+                                    :value="$data->nisn" />
                             </div>
                         @endif
                         <div class="col-md-6">
-                            @include('pustakawan_views.components.input.input-disable', [
-                                'label' => 'Jenis kelamin',
-                                'name' => 'jk',
-                                'value' => $data->jk,
-                            ])
+                            <x-pustakawan.input.basic-disable label="Jenis kelamin" name="jk" :value="$data->jk" />
                         </div>
                         <div class="col-md-12">
-                            @include('pustakawan_views.components.input.textarea-disable', [
-                                'label' => 'Alamat',
-                                'name' => 'alamat',
-                                'value' => $data->alamat,
-                            ])
+                            <x-pustakawan.input.textarea-disable label="Alamat" name="alamat" :value="$data->alamat" />
                         </div>
                         <div class="col-md-12">
-                            @include('pustakawan_views.components.input.input-disable', [
-                                'label' => 'Status akun',
-                                'name' => 'status',
-                                'value' => $data->status,
-                            ])
+                            <x-pustakawan.input.basic-disable label="Status akun" name="status" :value="$data->status" />
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-@extends('layouts.peminjam_layout')
+@extends('layouts.peminjam-layout')
 @section('content')
     <section class="bg-white dark:bg-gray-900">
         <div class="grid max-w-screen-xl px-4 pt-24 mx-auto lg:gap-8 xl:gap-0 lg:py-14 lg:grid-cols-12 lg:pt-32">
