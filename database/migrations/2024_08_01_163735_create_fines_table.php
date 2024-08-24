@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('fines', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('buku_id'); // Foreign key UUID
+            $table->uuid('buku_id');
             $table->string('denda_terlambat');
             $table->string('denda_rusak');
             $table->string('denda_tidak_kembali');

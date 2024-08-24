@@ -43,9 +43,9 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        @include('partials.pustakawan.navbar')
+        <x-pustakawan.navigation.navbar />
 
-        @include('partials.pustakawan.sidebar')
+        <x-pustakawan.navigation.sidebar />
 
         <div class="content-wrapper">
             <div class="content-header">
@@ -65,7 +65,7 @@
             </section>
         </div>
 
-        @include('partials.pustakawan.footer')
+        <x-pustakawan.navigation.footer />
 
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->

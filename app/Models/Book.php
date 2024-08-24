@@ -19,7 +19,7 @@ class Book extends Model
 
     public function borrower()
     {
-        return $this->hasMany(Borrower::class, 'buku_id', 'id');
+        return $this->hasMany(Loan::class, 'buku_id', 'id');
     }
 
     public function category()

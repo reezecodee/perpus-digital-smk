@@ -1,0 +1,204 @@
+<?php
+
+namespace App\Http\Controllers\Pustakawan\MasterDataBuku;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\MasterData\StoreBookRequest;
+use App\Http\Requests\MasterData\UpdateBookRequest;
+use App\Models\Book;
+use App\Models\Category;
+use App\Models\Fine;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+class ManageBook extends Controller
+{
+    public function show_data_buku($format)
+    {
+        $formats = ['elektronik', 'fisik'];
+
+        if (!in_array($format, $formats)) {
+            abort(404);
+        }
+
+        $uc_first_format = ucfirst($format);
+
+        return view('pustakawan_views.master_data.buku.buku.index', [
+            'title' => 'Daftar Data Buku ' . $uc_first_format,
+            'heading' => 'Daftar Buku ' . $uc_first_format,
+            'books' => Book::where('format', $uc_first_format)->latest()->get(),
+            'format' => $format
+        ]);
+    }
+
+    public function show_add_book($format)
+    {
+        $formats = ['elektronik', 'fisik'];
+
+        if (!in_array($format, $formats)) {
+            abort(404);
+        }
+
+        $uc_first_format = ucfirst($format);
+
+        return view('pustakawan_views.master_data.buku.buku.form', [
+            'title' => 'Tambah Buku ' . $uc_first_format,
+            'heading' => 'Tambah Buku ' . $uc_first_format,
+            'categories' => Category::all(),
+            'data' => null,
+            'format' => $format
+        ]);
+    }
+
+    public function show_edit_book($format, $id)
+    {
+        $formats = ['elektronik', 'fisik'];
+
+        if (!in_array($format, $formats)) {
+            abort(404);
+        }
+
+        $book = Book::findOrFail($id);
+        $uc_first_format = ucfirst($format);
+
+        return view('pustakawan_views.master_data.buku.buku.form', [
+            'title' => 'Edit Buku ' . $uc_first_format,
+            'heading' => 'Edit Buku ' . $uc_first_format,
+            'data' => $book,
+            'format' => $format,
+            'categories' => Category::all(),
+        ]);
+    }
+
+    public function show_detail_book($format, $id)
+    {
+        $formats = ['elektronik', 'fisik'];
+
+        if (!in_array($format, $formats)) {
+            abort(404);
+        }
+
+        $book = Book::findOrFail($id);
+        $uc_first_format = ucfirst($format);
+
+        return view('pustakawan_views.master_data.buku.buku.detail', [
+            'title' => 'Detail Buku ' . $book->judul,
+            'heading' => 'Detail Buku ' . $uc_first_format,
+            'data' => $book,
+            'format' => $format
+        ]);
+    }
+
+    // Logical Backend Here...
+
+    private function book_cover_handler($file_cover)
+    {
+        $folder_path = 'public/img/cover/';
+        $file_name = uniqid() . '.' . $file_cover->getClientOriginalExtension();
+        $file_cover->storeAs($folder_path, $file_name);
+
+        return $file_name;
+    }
+
+    private function pdf_file_handler($file_pdf)
+    {
+        $folder_path = 'public/pdf/';
+        $file_name = uniqid() . '.' . $file_pdf->getClientOriginalExtension();
+        $file_pdf->storeAs($folder_path, $file_name);
+
+        return $file_name;
+    }
+
+    public function store_book(StoreBookRequest $request)
+    {
+        $validated_data = $request->validated();
+
+        $validated_data['cover_buku'] = $this->book_cover_handler($request->file('cover_buku'));
+
+        if ($request->hasFile('e_book_file')) {
+            $validated_data['e_book_file'] = $this->pdf_file_handler($request->file('e_book_file'));
+        }
+
+        $book = Book::create($validated_data);
+
+        if (isset($validated_data['denda_terlambat'], $validated_data['denda_rusak'], $validated_data['denda_tidak_kembali'])) {
+            $fine_data = [
+                'buku_id' => $book->id,
+                'denda_terlambat' => $validated_data['denda_terlambat'],
+                'denda_rusak' => $validated_data['denda_rusak'],
+                'denda_tidak_kembali' => $validated_data['denda_tidak_kembali'],
+            ];
+
+            Fine::create($fine_data);
+        }
+
+
+        return redirect()->route('data-buku', lcfirst($book->format))->withSuccess('Berhasil menambahkan buku baru');
+    }
+
+    public function update_book(UpdateBookRequest $request, $format, $id)
+    {
+        $validated_data = $request->validated();
+
+        $book = Book::find($id);
+
+        if (!$book) {
+            abort(404);
+        }
+
+        if ($request->hasFile('cover_buku')) {
+            $old_cover_path = 'public/img/cover/' . $book->cover_buku;
+            if ($book->cover_buku && Storage::exists($old_cover_path)) {
+                Storage::delete($old_cover_path);
+            }
+
+            $validated_data['cover_buku'] = $this->book_cover_handler($request->file('cover_buku'));
+        }
+
+        if ($request->hasFile('e_book_file')) {
+            $old_pdf_path = 'public/pdf/' . $book->e_book_file;
+            if ($book->e_book_file && Storage::exists($old_pdf_path)) {
+                Storage::delete($old_pdf_path);
+            }
+
+            $validated_data['e_book_file'] = $this->pdf_file_handler($request->file('e_book_file'));
+        }
+
+        $book->update($validated_data);
+
+        if (isset($validated_data['denda_terlambat'], $validated_data['denda_rusak'], $validated_data['denda_tidak_kembali'])) {
+            $fine_data = [
+                'buku_id' => $book->id,
+                'denda_terlambat' => $validated_data['denda_terlambat'] ?? $book->fine->denda_terlambat,
+                'denda_rusak' => $validated_data['denda_rusak'] ?? $book->fine->denda_rusak,
+                'denda_tidak_kembali' => $validated_data['denda_tidak_kembali'] ?? $book->fine->denda_tidak_kembali,
+            ];
+
+            Fine::updateOrCreate(['buku_id' => $book->id], $fine_data);
+        }
+
+        return redirect()->route('data-buku', lcfirst($format))->withSuccess('Berhasil memperbarui buku.');
+    }
+
+    public function delete_book($id)
+    {
+        $book = Book::findOrFail($id);
+        $fine = Fine::where('buku_id', $id)->first();
+
+        if ($book->cover_buku) {
+            Storage::delete('public/img/cover/' . $book->cover_buku);
+        }
+
+        if ($book->e_book_file) {
+            Storage::delete('public/pdf/' . $book->e_book_file);
+        }
+
+        $book->delete();
+
+        if ($fine) {
+            $fine->delete();
+        }
+
+        return back()->withSuccess('Berhasil menghapus data buku');
+    }
+}

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('web_sekolah');
             $table->text('deskripsi');
             $table->text('favicon');
-            $table->enum('status', ['Utama', 'Bukan utama'])->default('Bukan utama');
             $table->timestamps();
         });
     }

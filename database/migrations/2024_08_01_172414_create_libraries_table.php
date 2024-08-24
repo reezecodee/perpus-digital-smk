@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('twitter_x');
             $table->text('alamat');
             $table->text('logo');
-            $table->enum('status', ['Utama', 'Bukan utama'])->default('Bukan utama');
             $table->timestamps();
         });
     }

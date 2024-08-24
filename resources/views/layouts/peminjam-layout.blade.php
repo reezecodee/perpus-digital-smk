@@ -30,20 +30,13 @@
 </head>
 
 <body class="font-quicksand">
-    @include('partials.peminjam.navbar')
+    <x-peminjam.navigation.navbar />
     @yield('content')
     @if ($chat_bubble ?? true)
-        <div class="fixed bottom-3 right-3 lg:bottom-10 lg:right-10 z-20">
-            <a href="{{ route('chat_index') }}" class="flex flex-col justify-center items-center">
-                <div
-                    class="bg-red-primary hover:bg-red-500 flex items-center justify-center border-2 border-white w-14 h-14 rounded-full">
-                    <i class="fas fa-comments text-xl text-white text-center"></i>
-                </div>
-                <span class="mt-1 text-center text-black font-semibold">Hubungi kami</span>
-            </a>
-        </div>
+        <x-peminjam.navigation.bubble />
     @endif
-    @include('partials.peminjam.footer')
+
+    <x-peminjam.navigation.footer />
 
     <!-- CDN JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

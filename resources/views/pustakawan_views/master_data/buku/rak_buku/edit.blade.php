@@ -4,7 +4,7 @@
         <div class="col-md-5">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="text-bold">Edit Kategori Buku</h4>
+                    <h4 class="text-bold">Edit Rak Buku</h4>
                     <hr>
                     <form action="{{ route('update_shelf', $data->id) }}" method="POST" id="update-form">
                         @method('PUT')

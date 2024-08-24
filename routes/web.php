@@ -4,31 +4,41 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Excel\ExcelController;
 use App\Http\Controllers\PDF\PDFController;
-use App\Http\Controllers\Peminjam\Book\BookController;
-use App\Http\Controllers\Peminjam\Book\LogicBookController;
-use App\Http\Controllers\Peminjam\Calendar\CalendarController;
-use App\Http\Controllers\Peminjam\Chat\ChatController;
+use App\Http\Controllers\Peminjam\Book\AllBooks;
+use App\Http\Controllers\Peminjam\Book\BookDetail;
+use App\Http\Controllers\Peminjam\Book\BookShelf;
+use App\Http\Controllers\Peminjam\Book\DetailRent;
+use App\Http\Controllers\Peminjam\Book\LikedBookList;
+use App\Http\Controllers\Peminjam\Book\LoanConfirmation;
+use App\Http\Controllers\Peminjam\Book\ReadEbook;
+use App\Http\Controllers\Peminjam\Book\SearchResult;
+use App\Http\Controllers\Peminjam\Calendar\Schedule;
 use App\Http\Controllers\Peminjam\Dashboard\DashboardController;
-use App\Http\Controllers\Peminjam\Notification\NotificationController;
-use App\Http\Controllers\Peminjam\Payment\PaymentFineController;
-use App\Http\Controllers\Peminjam\Profile\LogicPeminjamProfileController;
-use App\Http\Controllers\Peminjam\Profile\PeminjamProfileController;
-use App\Http\Controllers\Peminjam\Visit\VisitController;
-use App\Http\Controllers\Pustakawan\ChatMasukController;
-use App\Http\Controllers\Pustakawan\Information\InformationController;
-use App\Http\Controllers\Pustakawan\Information\LogicInformationController;
-use App\Http\Controllers\Pustakawan\MasterDataBuku\BukuController;
-use App\Http\Controllers\Pustakawan\MasterDataBuku\LogicBukuController;
-use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\LogicPeminjamanController;
-use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\PeminjamanController;
+use App\Http\Controllers\Peminjam\Notification\NotificationList;
+use App\Http\Controllers\Peminjam\Payment\PaymentFine;
+use App\Http\Controllers\Peminjam\Profile\Profile;
+use App\Http\Controllers\Peminjam\Visit\VisitPlan;
+use App\Http\Controllers\Pustakawan\Information\ManageCreateArticle;
+use App\Http\Controllers\Pustakawan\Information\ManageNotification;
+use App\Http\Controllers\Pustakawan\Information\ManageSchedule;
+use App\Http\Controllers\Pustakawan\Information\ManageSendEmail;
+use App\Http\Controllers\Pustakawan\MasterDataBuku\ManageBook;
+use App\Http\Controllers\Pustakawan\MasterDataBuku\ManageCategory;
+use App\Http\Controllers\Pustakawan\MasterDataBuku\ManageFineBook;
+use App\Http\Controllers\Pustakawan\MasterDataBuku\ManageShelf;
+use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\ManageLoan;
+use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\ManageLoanFined;
+use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\ManageLoanReturned;
+use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\ManageVisitor;
 use App\Http\Controllers\Pustakawan\MasterDataPengguna\LogicUserController;
 use App\Http\Controllers\Pustakawan\MasterDataPengguna\UserController;
-use App\Http\Controllers\Pustakawan\MasterDataPerpustakaan\LogicPerpustakaanController;
-use App\Http\Controllers\Pustakawan\MasterDataPerpustakaan\PerpustakaanController;
-use App\Http\Controllers\Pustakawan\Profile\PustakawanProfileController;
+use App\Http\Controllers\Pustakawan\MasterDataPerpustakaan\ManageAppWeb;
+use App\Http\Controllers\Pustakawan\MasterDataPerpustakaan\ManageLibrary;
+use App\Http\Controllers\Pustakawan\Profile\ManageProfile;
 use App\Http\Controllers\Pustakawan\PustakawanDashboardController;
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +57,7 @@ Route::get('/', function () {
         'chat_bubble' => false,
     ]);
 });
+
 Route::get('/test', function () {
     return view('test', ['title' => 'Test only']);
 });
@@ -87,19 +98,18 @@ Route::controller(AuthController::class)->group(function () {
     Route::prefix('auth')->middleware('guest')->group(function () {
         Route::get('/login', 'show_login')->name('show_login');
         Route::get('/register', 'show_register')->name('show_register');
-        
+
         Route::post('/login', 'logic_login')->name('logic_login');
     });
-    
+
     Route::get('/email/verify', 'show_verify_notice')->middleware(['auth'])->name('verification.notice');
 
     Route::get('/email/verify/{id}/{hash}', 'verify')->middleware(['auth', 'signed'])->name('verification.verify');
 
     Route::post('/email/verification-notification', 'resend_verify')->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
 
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/not-activated', [AuthController::class, 'show_not_activated'])->name('show_not_activated');
-
+    Route::get('/logout', 'logout')->name('logout');
+    Route::get('/not-activated', 'show_not_activated')->name('show_not_activated');
 });
 
 Route::controller(PasswordResetController::class)->group(function () {
@@ -121,81 +131,99 @@ Route::controller(PasswordResetController::class)->group(function () {
 */
 
 Route::middleware(['auth', 'status_active', 'verified'])->group(function () {
-    Route::get('/baca-e-book/{id}', [BookController::class, 'show_read_e_book'])->name('read_e_book');
-    Route::controller(CalendarController::class)->group(function () {
+    Route::get('/baca-e-book/{id}', [ReadEbook::class, 'show_read_e_book'])->name('read_e_book');
+    Route::controller(Schedule::class)->group(function () {
         Route::get('/events', 'events')->middleware('throttle:60,1')->name('event');
     });
 });
 
 Route::middleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group(function () {
-    Route::controller(BookController::class)->group(function () {
-        Route::get('/peminjaman-sukses', 'show_success')->name('success');
-        Route::get('/rak-buku-saya', 'show_my_shelf')->name('my_shelf');
-        Route::get('/detail-peminjaman/{id}', 'show_detail_rent')->name('detail_rent');
-        Route::get('/buku-disukai', 'show_liked_book')->name('liked');
-        Route::get('/semua-buku', 'show_all_books')->name('all_books');
-        Route::get('/konfirmasi-peminjaman/{id}', 'show_confirm')->name('confirm');
-
-        Route::withoutMiddleware(['auth', 'role:Peminjam'])->group(function () {
-            Route::get('/hasil-pencarian', 'show_search_result')->name('search_result');
-            Route::get('/buku/{id}', 'show_book')->name('detail_buku');
-        });
-    });
-
-
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard', 'show_dashboard')->name('dashboard');
     });
 
+    // Book
 
-    Route::controller(NotificationController::class)->group(function () {
+    Route::controller(BookShelf::class)->group(function () {
+        Route::get('/rak-buku-saya', 'show_my_shelf')->name('my_shelf');
+        Route::post('/baca-e-book/{id}', 'update_e_book')->name('update_e_book');
+        Route::delete('/hapus-e-book/{id}', 'delete_e_book')->name('delete_e_book');
+    });
+
+    Route::withoutMiddleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group(function () {
+        Route::controller(BookDetail::class)->group(function () {
+            Route::get('/buku/{id}', 'show_book')->name('detail_buku');
+            Route::post('/sukai-buku/{id}', 'update_like')->name('update_like');
+        });
+
+        Route::controller(SearchResult::class)->group(function () {
+            Route::get('/hasil-pencarian', 'show_search_result')->name('search_result');
+        });
+    });
+
+    Route::controller(LoanConfirmation::class)->group(function () {
+        Route::get('/konfirmasi-peminjaman/{id}', 'show_confirm')->name('confirm');
+        Route::get('/peminjaman-sukses', 'show_success')->name('success');
+    });
+
+    Route::controller(DetailRent::class)->group(function () {
+        Route::get('/detail-peminjaman/{id}', 'show_detail_rent')->name('detail_rent');
+    });
+
+    Route::controller(LikedBookList::class)->group(function () {
+        Route::get('/buku-disukai', 'show_liked_book')->name('liked');
+    });
+
+    Route::controller(AllBooks::class)->group(function () {
+        Route::get('/semua-buku', 'show_all_books')->name('all_books');
+    });
+
+
+    // Schedule
+
+    Route::controller(Schedule::class)->group(function () {
+        Route::get('/kalender-perpustakaan', 'show_calendar')->name('calendar');
+    });
+
+
+    // Notification
+
+
+    Route::controller(NotificationList::class)->group(function () {
         Route::get('/notifikasi', 'show_notification')->name('notification');
         Route::get('/notifikasi/baca/{id}', 'show_read_notif')->name('read_notif');
     });
 
 
-    Route::controller(PeminjamProfileController::class)->group(function () {
-        Route::get('/overview-profile', 'show_overview')->name('overview');
-        Route::get('/riwayat-peminjaman', 'show_history')->name('history');
-        Route::get('/ganti-password', 'show_ch_password')->name('ch_password');
-    });
+    // Payment
 
 
-    Route::controller(ChatController::class)->group(function () {
-        Route::get('/chat', 'show_chat_index')->name('chat_index');
-        Route::get('/chat/{id}', 'show_chat')->name('chat');
-    });
-
-
-    Route::controller(PaymentFineController::class)->group(function () {
+    Route::controller(PaymentFine::class)->group(function () {
         Route::get('/pembayaran-denda/{id}', 'show_payment')->name('payment');
     });
 
 
-    Route::controller(VisitController::class)->group(function () {
-        Route::get('/kunjungan', 'show_visit')->name('visit');
-        Route::post('/kunjungan', 'add_visit')->name('add_visit');
-        Route::delete('/kunjungan/{id}', 'delete_visit')->name('delete_visit');
-    });
+    // Profile
 
 
-    Route::controller(CalendarController::class)->group(function () {
-        Route::get('/kalender-perpustakaan', 'show_calendar')->name('calendar');
-    });
+    Route::controller(Profile::class)->group(function () {
+        Route::get('/overview-profile', 'show_overview')->name('overview');
+        Route::get('/riwayat-peminjaman', 'show_history')->name('history');
+        Route::get('/ganti-password', 'show_ch_password')->name('ch_password');
 
-
-    Route::controller(LogicPeminjamProfileController::class)->group(function () {
         Route::post('/overview-profile', 'upload_profile_image');
         Route::post('/ganti-password', 'update_password')->name('update_password');
-
         Route::put('/update-profile', 'update_profile')->name('update_profile');
     });
 
 
-    Route::controller(LogicBookController::class)->group(function () {
-        Route::post('/sukai-buku/{id}', 'update_like')->name('update_like');
-        Route::post('/baca-e-book/{id}', 'update_e_book')->name('update_e_book');
-        Route::delete('/hapus-e-book/{id}', 'delete_e_book')->name('delete_e_book');
+    // Visit
+
+
+    Route::controller(VisitPlan::class)->group(function () {
+        Route::get('/kunjungan', 'show_visit')->name('visit');
+        Route::post('/kunjungan', 'add_visit')->name('add_visit');
+        Route::delete('/kunjungan/{id}', 'delete_visit')->name('delete_visit');
     });
 });
 
@@ -215,19 +243,15 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
         Route::get('/dashboard-control', 'show_dashboard')->name('dashboard.ctrl');
     });
 
-    Route::controller(PustakawanProfileController::class)->group(function () {
+    Route::controller(ManageProfile::class)->group(function () {
+        Route::get('/overview-data-profile', 'show_overview_profile')->name('profile.overview');
         Route::post('/ganti-pw-pustakawan', 'update_password')->name('update_pw_pustakawan');
     });
 
-    Route::controller(ChatMasukController::class)->middleware('permission:melayani chat')->group(function () {
-        Route::get('/chat-masuk', 'show_chat')->name('chat_masuk');
-    });
-
-    Route::controller(PustakawanProfileController::class)->group(function () {
-        Route::get('/overview-data-profile', 'show_overview_profile')->name('profile.overview');
-    });
-
     Route::prefix('master-data')->group(function () {
+
+        // Master Data User Route
+
         Route::controller(UserController::class)->group(function () {
             Route::get('/user/{role}', 'show_data_user')->name('data-user');
 
@@ -245,42 +269,46 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
             });
         });
 
-        Route::controller(BukuController::class)->middleware('permission:manajemen buku')->group(function () {
-            Route::get('/buku/{format}', 'show_data_buku')->name('data-buku');
-            Route::get('/kategori', 'show_data_kategori')->name('data-kategori');
-            Route::get('/rak-buku', 'show_data_rak_buku')->name('data-rak');
-            Route::get('/denda', 'show_data_denda')->name('data-denda');
+        // Master Data Buku Route
 
+        Route::controller(ManageBook::class)->group(function () {
+            Route::get('/buku/{format}', 'show_data_buku')->name('data-buku');
             Route::prefix('buku')->group(function () {
                 Route::get('/{format}/tambah/', 'show_add_book')->name('add_book');
                 Route::get('/{format}/edit/{id}', 'show_edit_book')->name('edit_book');
                 Route::get('/{format}/detail/{id}', 'show_detail_book')->name('detail_book');
             });
 
-            Route::controller(LogicBukuController::class)->group(function () {
-                Route::post('/tambah/{format}', 'store_book')->name('store_book');
-                Route::put('/{format}/edit/{id}', 'update_book')->name('update_book');
-                Route::delete('/hapus-buku/{id}', 'delete_book')->name('delete_book');
-                Route::post('/import-buku', 'import_books')->name('direct_import_books');
-                Route::delete('/hapus-denda/{id}', 'delete_fine')->name('delete_fine');
-            });
-
-            Route::get('/kategori/edit-kategori/{id}', 'show_edit_category')->name('edit_category');
-            Route::controller(LogicBukuController::class)->group(function () {
-                Route::post('/tambah-kategori', 'add_category')->name('add_category');
-                Route::put('/edit-kategori/{id}', 'update_category')->name('update_category');
-                Route::delete('/delete-kategori/{id}', 'delete_category')->name('delete_category');
-            });
-
-            Route::get('/edit-rak/{id}', 'show_edit_shelf')->name('edit_shelf');
-            Route::controller(LogicBukuController::class)->group(function () {
-                Route::post('/tambah-rak', 'add_shelf')->name('add_shelf');
-                Route::put('/edit-rak/{id}', 'update_shelf')->name('update_shelf');
-                Route::delete('/hapus-rak/{id}', 'delete_shelf')->name('delete_shelf');
-            });
+            Route::post('/tambah/{format}', 'store_book')->name('store_book');
+            Route::put('/{format}/edit/{id}', 'update_book')->name('update_book');
+            Route::delete('/hapus-buku/{id}', 'delete_book')->name('delete_book');
+            Route::post('/import-buku', 'import_books')->name('direct_import_books');
         });
 
-        Route::controller(PeminjamanController::class)->group(function () {
+        Route::controller(ManageCategory::class)->group(function () {
+            Route::get('/kategori', 'show_data_kategori')->name('data-kategori');
+            Route::get('/kategori/edit-kategori/{id}', 'show_edit_category')->name('edit_category');
+            Route::post('/tambah-kategori', 'add_category')->name('add_category');
+            Route::put('/edit-kategori/{id}', 'update_category')->name('update_category');
+            Route::delete('/delete-kategori/{id}', 'delete_category')->name('delete_category');
+        });
+
+        Route::controller(ManageShelf::class)->group(function () {
+            Route::get('/rak-buku', 'show_data_rak_buku')->name('data-rak');
+            Route::get('/edit-rak/{id}', 'show_edit_shelf')->name('edit_shelf');
+            Route::post('/tambah-rak', 'add_shelf')->name('add_shelf');
+            Route::put('/edit-rak/{id}', 'update_shelf')->name('update_shelf');
+            Route::delete('/hapus-rak/{id}', 'delete_shelf')->name('delete_shelf');
+        });
+
+        Route::controller(ManageFineBook::class)->group(function () {
+            Route::get('/denda', 'show_data_denda')->name('data-denda');
+            Route::delete('/hapus-denda/{id}', 'delete_fine')->name('delete_fine');
+        });
+
+        // Master Data Peminjaman Route
+
+        Route::controller(ManageLoan::class)->group(function () {
             Route::prefix('perpinjaman')->group(function () {
                 Route::get('/daftar-peminjam', 'show_data_peminjam')->name('data_perpinjaman');
                 Route::get('/tambah-peminjaman', 'show_add_peminjaman')->name('add_peminjaman');
@@ -288,49 +316,62 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
                 Route::get('/detail-peminjaman/{id}', 'show_detail_peminjaman')->name('detail_peminjaman');
             });
 
-            Route::get('/pengembalian', 'show_data_pengembali')->name('data_pengembali');
-            Route::get('/terkena-denda', 'show_data_terkena_denda')->name('data_terkena_denda');
+            Route::post('/tambah-peminjaman', 'store_peminjaman')->name('store_peminjaman');
+            Route::put('/edit-peminjaman/{id}', 'update_peminjaman')->name('update_peminjaman');
+            Route::delete('/delete-peminjaman/{id}', 'delete_peminjaman')->name('delete_peminjaman');
+        });
 
+        Route::controller(ManageLoanReturned::class)->group(function () {
+            Route::get('/pengembalian', 'show_data_pengembali')->name('data_pengembali');
+        });
+
+        Route::controller(ManageLoanFined::class)->group(function () {
+            Route::get('/terkena-denda', 'show_data_terkena_denda')->name('data_terkena_denda');
+        });
+
+        Route::controller(ManageVisitor::class)->group(function () {
             Route::get('/kunjungan', 'show_data_visit')->name('data_kunjungan');
             Route::prefix('kunjungan')->group(function () {
                 Route::get('/tambah-kunjungan', 'show_add_visit')->name('add_kunjungan');
                 Route::get('/edit-kunjungan/{id}', 'show_edit_visit')->name('edit_kunjungan');
             });
-        });
-
-        Route::controller(LogicPeminjamanController::class)->group(function () {
-            Route::post('/tambah-peminjaman', 'store_peminjaman')->name('store_peminjaman');
-            Route::put('/edit-peminjaman/{id}', 'update_peminjaman')->name('update_peminjaman');
-            Route::delete('/delete-peminjaman/{id}', 'delete_peminjaman')->name('delete_peminjaman');
 
             Route::post('/tambah-kunjungan', 'store_visit')->name('store_visit');
             Route::put('/edit-kunjungan/{id}', 'update_visit')->name('update_visit');
             Route::delete('/delete-kunjungan/{id}', 'delete_visit')->name('delete_visit');
         });
 
-        Route::controller(PerpustakaanController::class)->middleware('role:Admin')->group(function () {
+        // Master Data Perpustakaan Route
+
+        Route::controller(ManageAppWeb::class)->group(function () {
             Route::get('/aplikasi', 'show_data_aplikasi')->name('data-aplikasi');
-            Route::get('/perpustakaan', 'show_data_perpus')->name('data-perpustakaan');
+            Route::post('/aplikasi', 'update_data_app')->name('update_app');
         });
 
-        Route::controller(LogicPerpustakaanController::class)->group(function () {
-            Route::post('/aplikasi', 'update_data_app')->name('update_app');
+        Route::controller(ManageLibrary::class)->group(function () {
+            Route::get('/perpustakaan', 'show_data_perpus')->name('data-perpustakaan');
             Route::post('/perpustakaan', 'update_data_perpus')->name('update_perpus');
         });
     });
 
     Route::prefix('informasi')->group(function () {
-        Route::controller(InformationController::class)->group(function () {
+        Route::controller(ManageNotification::class)->group(function () {
             Route::get('/buat-notifikasi', 'show_create_notif')->middleware('permission:mengirim notifikasi')->name('buat_notifikasi');
-            Route::get('/kirim-email', 'show_send_email')->middleware('permission:mengirim email')->name('kirim_email');
-            Route::get('/atur-kalender', 'show_set_calendar')->middleware('permission:mengatur jadwal perpustakaan')->name('atur_kalender');
-            Route::get('/buat-artikel', 'show_create_article')->name('buat_artikel');
+            Route::post('/kirim-notifikasi', 'send_notification')->name('send_notification');
         });
 
-        Route::controller(LogicInformationController::class)->group(function () {
-            Route::post('/kirim-notifikasi', 'send_notification')->name('send_notification');
+        Route::controller(ManageSendEmail::class)->group(function () {
+            Route::get('/kirim-email', 'show_send_email')->middleware('permission:mengirim email')->name('kirim_email');
             Route::post('/kirim-email', 'send_email')->name('send_email');
+        });
+
+        Route::controller(ManageSchedule::class)->group(function () {
+            Route::get('/atur-kalender', 'show_set_calendar')->middleware('permission:mengatur jadwal perpustakaan')->name('atur_kalender');
             Route::post('/buat-artikel', 'post_article')->name('post_article');
+        });
+
+        Route::controller(ManageCreateArticle::class)->group(function () {
+            Route::get('/buat-artikel', 'show_create_article')->name('buat_artikel');
             Route::post('/tambah-jadwal', 'add_schedule')->name('add_schedule');
         });
     });

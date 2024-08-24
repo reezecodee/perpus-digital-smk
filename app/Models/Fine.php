@@ -14,7 +14,7 @@ class Fine extends Model
 
     public function borrower()
     {
-        return $this->hasMany(Borrower::class, 'denda_id', 'id');
+        return $this->hasMany(Loan::class, 'denda_id', 'id');
     }
 
     public function book()
