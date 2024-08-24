@@ -6,7 +6,7 @@
         </div>
         <p class="text-justify text-sm mb-3 p-2 bg-gray-200 rounded-md">Masukkan email kamu yang terdaftar di aplikasi dan kami akan mengirimkan link
             verifikasi ke email kamu</p>
-        <form action="" method="post">
+        <form action="{{ route('send_email_reset') }}" method="post">
             @csrf
             <label for="" class="font-bold text-sm mb-1 block">Email</label>
             <input type="email" name="email"

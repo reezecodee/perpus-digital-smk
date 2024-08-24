@@ -4,8 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use Stringable;
 
 class AuthController extends Controller
 {
@@ -23,31 +28,10 @@ class AuthController extends Controller
         ]);
     }
 
-    public function show_forget_password()
-    {
-        return view('auth.forget-password', [
-            'title' => 'Lupa Password'
-        ]);
-    }
-
-    public function show_reset_password()
-    {
-        return view('auth.reset-password', [
-            'title' => 'Konfirmasi perubahan password'
-        ]);
-    }
-
-    public function show_verify_email()
+    public function show_verify_notice()
     {
         return view('auth.verify-email', [
             'title' => 'Verifikasi email'
-        ]);
-    }
-
-    public function show_email_confirmed()
-    {
-        return view('auth.email-confirmed', [
-            'title' => 'Email berhasil di verifikasi'
         ]);
     }
 
@@ -67,6 +51,12 @@ class AuthController extends Controller
 
             $user = Auth::user();
 
+            if (!$user->hasVerifiedEmail()) {
+                $user->sendEmailVerificationNotification();
+                return redirect()->route('verification.notice')
+                    ->with('warning', 'Silakan verifikasi email Anda terlebih dahulu.');
+            }
+
             if ($user->hasRole('Peminjam')) {
                 return redirect('/dashboard');
             } else if ($user->hasRole('Admin') || $user->hasRole('Pustakawan')) {
@@ -81,6 +71,30 @@ class AuthController extends Controller
         }
 
         return back()->with('error', 'Email atau password yang Anda masukkan salah')->withInput();
+    }
+
+    public function resend_verify(Request $request)
+    {
+        $request->user()->sendEmailVerificationNotification();
+        return back()->with('status', 'Link verifikasi baru telah dikirim ke email Anda.');
+    }
+
+    public function verify(EmailVerificationRequest $request)
+    {
+        $request->fulfill();
+        $user = auth()->user();
+
+        if ($user->hasRole('Peminjam')) {
+            return redirect('/dashboard')->withSuccess('Selamat akun kamu berhasil di verifikasi');
+        } else if ($user->hasRole('Admin') || $user->hasRole('Pustakawan')) {
+            return redirect('/dashboard-control')->withSuccess('Selamat akun kamu berhasil di verifikasi');
+        } else {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return back()->with(['error', 'Mohon maaf role user tidak terdaftar di sistem kami'])->withInput();
+        }
     }
 
     public function logout(Request $request)

@@ -8,7 +8,7 @@
             <h3 class="text-lg font-bold">Email verifikasi terkirim</h3>
         </div>
         <p class="text-justify text-sm mb-3 p-2 bg-gray-200 rounded-md">Email verifikasi akun sudah dikirim. Silahkan cek inbox email atau spam untuk verifikasi.</p>
-        <form action="" method="post">
+        <form action="{{ route('verification.resend') }}" method="post">
             @csrf
             <button type="submit"
                 class="bg-red-primary w-full p-2 text-white font-bold mb-3 rounded-sm hover:bg-red-500">Kirim ulang</button>

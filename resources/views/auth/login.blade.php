@@ -36,7 +36,7 @@
                         class="w-4 h-4 text-blue-600 bg-gray-100 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer">
                     <label for="default-checkbox" class="cursor-pointer">Ingat saya</label>
                 </div>
-                <a href="/lupa-password" class="hover:text-red-primary hover:underline">Lupa password?</a>
+                <a href="{{ route('show_forgot_password') }}" class="hover:text-red-primary hover:underline">Lupa password?</a>
             </div>
             <button type="submit"
                 class="bg-red-primary w-full p-2 text-white font-bold mb-3 rounded-sm hover:bg-red-500">Login</button>

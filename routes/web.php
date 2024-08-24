@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Excel\ExcelController;
 use App\Http\Controllers\PDF\PDFController;
 use App\Http\Controllers\Peminjam\Book\BookController;
@@ -86,16 +87,27 @@ Route::controller(AuthController::class)->group(function () {
     Route::prefix('auth')->middleware('guest')->group(function () {
         Route::get('/login', 'show_login')->name('show_login');
         Route::get('/register', 'show_register')->name('show_register');
-        Route::get('/lupa-password', 'show_forget_password')->name('show_forget_password');
-        Route::get('/reset-password', 'show_reset_password')->name('show_reset_password');
-        Route::get('/verify-email', 'show_verify_email')->name('show_verify_email');
-        Route::get('/email-confirmed', 'show_email_confirmed')->name('show_email_confirmed');
-        Route::get('/not-activated', 'show_not_activated')->name('show_not_activated');
-
+        
         Route::post('/login', 'logic_login')->name('logic_login');
     });
+    
+    Route::get('/email/verify', 'show_verify_notice')->middleware(['auth'])->name('verification.notice');
+
+    Route::get('/email/verify/{id}/{hash}', 'verify')->middleware(['auth', 'signed'])->name('verification.verify');
+
+    Route::post('/email/verification-notification', 'resend_verify')->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/not-activated', [AuthController::class, 'show_not_activated'])->name('show_not_activated');
+
+});
+
+Route::controller(PasswordResetController::class)->group(function () {
+    Route::get('/lupa-password', 'show_forgot_password')->name('show_forgot_password');
+    Route::post('/lupa-password', 'send_reset_link_email')->name('send_email_reset');
+
+    Route::get('/reset-password/{token}', 'show_reset_password')->name('password.reset');
+    Route::post('/reset-password', 'reset_password')->name('reset_password');
 });
 
 
@@ -108,14 +120,14 @@ Route::controller(AuthController::class)->group(function () {
 |
 */
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'status_active', 'verified'])->group(function () {
     Route::get('/baca-e-book/{id}', [BookController::class, 'show_read_e_book'])->name('read_e_book');
-    Route::controller(CalendarController::class)->group(function(){
+    Route::controller(CalendarController::class)->group(function () {
         Route::get('/events', 'events')->middleware('throttle:60,1')->name('event');
     });
 });
 
-Route::middleware(['auth', 'role:Peminjam'])->group(function () {
+Route::middleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group(function () {
     Route::controller(BookController::class)->group(function () {
         Route::get('/peminjaman-sukses', 'show_success')->name('success');
         Route::get('/rak-buku-saya', 'show_my_shelf')->name('my_shelf');
@@ -198,12 +210,12 @@ Route::middleware(['auth', 'role:Peminjam'])->group(function () {
 |
 */
 
-Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
+Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified'])->group(function () {
     Route::controller(PustakawanDashboardController::class)->group(function () {
         Route::get('/dashboard-control', 'show_dashboard')->name('dashboard.ctrl');
     });
 
-    Route::controller(PustakawanProfileController::class)->group(function(){
+    Route::controller(PustakawanProfileController::class)->group(function () {
         Route::post('/ganti-pw-pustakawan', 'update_password')->name('update_pw_pustakawan');
     });
 
@@ -275,14 +287,14 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
                 Route::get('/edit-peminjaman/{id}', 'show_edit_peminjaman')->name('edit_peminjaman');
                 Route::get('/detail-peminjaman/{id}', 'show_detail_peminjaman')->name('detail_peminjaman');
             });
-            
+
             Route::get('/pengembalian', 'show_data_pengembali')->name('data_pengembali');
             Route::get('/terkena-denda', 'show_data_terkena_denda')->name('data_terkena_denda');
 
             Route::get('/kunjungan', 'show_data_visit')->name('data_kunjungan');
-            Route::prefix('kunjungan')->group(function() {
+            Route::prefix('kunjungan')->group(function () {
                 Route::get('/tambah-kunjungan', 'show_add_visit')->name('add_kunjungan');
-                Route::get('/edit-kunjungan/{id}', 'show_edit_visit')->name('edit_kunjungan');            
+                Route::get('/edit-kunjungan/{id}', 'show_edit_visit')->name('edit_kunjungan');
             });
         });
 
@@ -290,7 +302,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
             Route::post('/tambah-peminjaman', 'store_peminjaman')->name('store_peminjaman');
             Route::put('/edit-peminjaman/{id}', 'update_peminjaman')->name('update_peminjaman');
             Route::delete('/delete-peminjaman/{id}', 'delete_peminjaman')->name('delete_peminjaman');
-            
+
             Route::post('/tambah-kunjungan', 'store_visit')->name('store_visit');
             Route::put('/edit-kunjungan/{id}', 'update_visit')->name('update_visit');
             Route::delete('/delete-kunjungan/{id}', 'delete_visit')->name('delete_visit');
@@ -301,7 +313,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
             Route::get('/perpustakaan', 'show_data_perpus')->name('data-perpustakaan');
         });
 
-        Route::controller(LogicPerpustakaanController::class)->group(function(){
+        Route::controller(LogicPerpustakaanController::class)->group(function () {
             Route::post('/aplikasi', 'update_data_app')->name('update_app');
             Route::post('/perpustakaan', 'update_data_perpus')->name('update_perpus');
         });
@@ -315,7 +327,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan'])->group(function () {
             Route::get('/buat-artikel', 'show_create_article')->name('buat_artikel');
         });
 
-        Route::controller(LogicInformationController::class)->group(function() {
+        Route::controller(LogicInformationController::class)->group(function () {
             Route::post('/kirim-notifikasi', 'send_notification')->name('send_notification');
             Route::post('/kirim-email', 'send_email')->name('send_email');
             Route::post('/buat-artikel', 'post_article')->name('post_article');
