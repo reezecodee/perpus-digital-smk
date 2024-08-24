@@ -23,6 +23,41 @@ class AuthController extends Controller
         ]);
     }
 
+    public function show_forget_password()
+    {
+        return view('auth.forget-password', [
+            'title' => 'Lupa Password'
+        ]);
+    }
+
+    public function show_reset_password()
+    {
+        return view('auth.reset-password', [
+            'title' => 'Konfirmasi perubahan password'
+        ]);
+    }
+
+    public function show_verify_email()
+    {
+        return view('auth.verify-email', [
+            'title' => 'Verifikasi email'
+        ]);
+    }
+
+    public function show_email_confirmed()
+    {
+        return view('auth.email-confirmed', [
+            'title' => 'Email berhasil di verifikasi'
+        ]);
+    }
+
+    public function show_not_activated()
+    {
+        return view('auth.not-activated', [
+            'title' => 'Status akun kamu nonaktif'
+        ]);
+    }
+
     public function logic_login(LoginRequest $request)
     {
         $validatedData = $request->validated();

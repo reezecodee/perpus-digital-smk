@@ -86,6 +86,11 @@ Route::controller(AuthController::class)->group(function () {
     Route::prefix('auth')->middleware('guest')->group(function () {
         Route::get('/login', 'show_login')->name('show_login');
         Route::get('/register', 'show_register')->name('show_register');
+        Route::get('/lupa-password', 'show_forget_password')->name('show_forget_password');
+        Route::get('/reset-password', 'show_reset_password')->name('show_reset_password');
+        Route::get('/verify-email', 'show_verify_email')->name('show_verify_email');
+        Route::get('/email-confirmed', 'show_email_confirmed')->name('show_email_confirmed');
+        Route::get('/not-activated', 'show_not_activated')->name('show_not_activated');
 
         Route::post('/login', 'logic_login')->name('logic_login');
     });
