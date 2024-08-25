@@ -15,6 +15,12 @@
                 <span class="font-medium">{{ session('error') }}</span>
             </div>
         @endif
+        @if (session('status'))
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100 dark:bg-gray-800 dark:text-green-400"
+                role="alert">
+                <span class="font-medium">{{ session('status') }}</span>
+            </div>
+        @endif
         <form action="" method="post">
             @csrf
             <x-auth.input.rectangle name="email" type="email" label="Email" placeholder="Masukkan email"

@@ -4,6 +4,12 @@
         <div class="flex justify-center mb-3">
             <h3 class="text-xl font-bold">Lupa password</h3>
         </div>
+        @if (session('status'))
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100 dark:bg-gray-800 dark:text-green-400"
+                role="alert">
+                <span class="font-medium">{{ session('status') }}</span>
+            </div>
+        @endif
         <p class="text-justify text-sm mb-3 p-2 bg-gray-200 rounded-md">Masukkan email kamu yang terdaftar di aplikasi dan
             kami akan mengirimkan link
             verifikasi ke email kamu</p>

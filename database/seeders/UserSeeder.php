@@ -59,7 +59,6 @@ class UserSeeder extends Seeder
         ]);
 
         $pustakawanWithPermission->assignRole('Pustakawan');
-        $pustakawanWithPermission->givePermissionTo(['melayani chat', 'manajemen buku']);
 
         $peminjam = User::create([
             'id' => Str::uuid(),

@@ -55,55 +55,53 @@
                         </li>
                     </ul>
                 </li>
-                @can('manajemen buku')
-                    <li class="nav-item">
-                        <a href="#"
-                            class="nav-link {{ Request::is('master-data/rak-buku*', 'master-data/kategori*', 'master-data/buku*', 'master-data/e-book*', 'master-data/denda*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-book"></i>
-                            <p>
-                                Data Buku
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('data-buku', 'fisik') }}"
-                                    class="nav-link {{ Request::is('master-data/buku/fisik*') ? 'active' : '' }}">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Buku</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('data-denda') }}"
-                                    class="nav-link {{ Request::is('master-data/denda*') ? 'active' : '' }}">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Denda</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('data-buku', 'elektronik') }}"
-                                    class="nav-link {{ Request::is('master-data/buku/elektronik*') ? 'active' : '' }}">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>E-book</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('data-kategori') }}"
-                                    class="nav-link {{ Request::is('master-data/kategori*') ? 'active' : '' }}">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Kategori</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('data-rak') }}"
-                                    class="nav-link {{ Request::is('master-data/rak-buku*') ? 'active' : '' }}">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Rak buku</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                @endcan
+                <li class="nav-item">
+                    <a href="#"
+                        class="nav-link {{ Request::is('master-data/rak-buku*', 'master-data/kategori*', 'master-data/buku*', 'master-data/e-book*', 'master-data/denda*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>
+                            Data Buku
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('data-buku', 'fisik') }}"
+                                class="nav-link {{ Request::is('master-data/buku/fisik*') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Buku</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('data-denda') }}"
+                                class="nav-link {{ Request::is('master-data/denda*') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Denda</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('data-buku', 'elektronik') }}"
+                                class="nav-link {{ Request::is('master-data/buku/elektronik*') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>E-book</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('data-kategori') }}"
+                                class="nav-link {{ Request::is('master-data/kategori*') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Kategori</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('data-rak') }}"
+                                class="nav-link {{ Request::is('master-data/rak-buku*') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Rak buku</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a href="#"
                         class="nav-link {{ Request::is('master-data/perpinjaman*', 'master-data/pengembalian*', 'master-data/terkena-denda*', 'master-data/kunjungan*') ? 'active' : '' }}">
@@ -142,60 +140,54 @@
                                 <p>Kunjungan</p>
                             </a>
                         </li>
-                        
+
                     </ul>
                 </li>
-                @role('Admin')
-                    <li class="nav-item">
-                        <a href="#"
-                            class="nav-link {{ Request::is('master-data/perpustakaan*', 'master-data/aplikasi*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-hotel"></i>
-                            <p>
-                                Data Perpustakaan
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('data-aplikasi') }}"
-                                    class="nav-link {{ Request::is('master-data/aplikasi*') ? 'active' : '' }}">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Aplikasi</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('data-perpustakaan') }}"
-                                    class="nav-link {{ Request::is('master-data/perpustakaan*') ? 'active' : '' }}">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Perpustakaan</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                @endrole
+                <li class="nav-item">
+                    <a href="#"
+                        class="nav-link {{ Request::is('master-data/perpustakaan*', 'master-data/aplikasi*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-hotel"></i>
+                        <p>
+                            Data Perpustakaan
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('data-aplikasi') }}"
+                                class="nav-link {{ Request::is('master-data/aplikasi*') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Aplikasi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('data-perpustakaan') }}"
+                                class="nav-link {{ Request::is('master-data/perpustakaan*') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Perpustakaan</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-header">Informasi</li>
-                @can('mengirim notifikasi')
-                    <li class="nav-item">
-                        <a href="{{ route('buat_notifikasi') }}"
-                            class="nav-link {{ Request::is('informasi/buat-notifikasi*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-bell"></i>
-                            <p>
-                                Notifikasi
-                            </p>
-                        </a>
-                    </li>
-                @endcan
-                @can('mengirim email')
-                    <li class="nav-item">
-                        <a href="{{ route('kirim_email') }}"
-                            class="nav-link {{ Request::is('informasi/kirim-email*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-envelope"></i>
-                            <p>
-                                Kirim Email
-                            </p>
-                        </a>
-                    </li>
-                @endcan
+                <li class="nav-item">
+                    <a href="{{ route('buat_notifikasi') }}"
+                        class="nav-link {{ Request::is('informasi/buat-notifikasi*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-bell"></i>
+                        <p>
+                            Notifikasi
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('kirim_email') }}"
+                        class="nav-link {{ Request::is('informasi/kirim-email*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-envelope"></i>
+                        <p>
+                            Kirim Email
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('buat_artikel') }}"
                         class="nav-link {{ Request::is('informasi/buat-artikel*') ? 'active' : '' }}">
@@ -205,17 +197,15 @@
                         </p>
                     </a>
                 </li>
-                @can('mengatur jadwal perpustakaan')
-                    <li class="nav-item">
-                        <a href="{{ route('atur_kalender') }}"
-                            class="nav-link {{ Request::is('informasi/atur-kalender*') ? 'active' : '' }}">
-                            <i class="nav-icon far fa-calendar-alt"></i>
-                            <p>
-                                Kalender
-                            </p>
-                        </a>
-                    </li>
-                @endcan
+                <li class="nav-item">
+                    <a href="{{ route('atur_kalender') }}"
+                        class="nav-link {{ Request::is('informasi/atur-kalender*') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-calendar-alt"></i>
+                        <p>
+                            Kalender
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

@@ -42,16 +42,20 @@ class AuthController extends Controller
     public function logic_login(LoginRequest $request)
     {
         $validatedData = $request->validated();
+        $remember = $request->boolean('remember');
+        $credentials = [
+            'email' => $validatedData['email'],
+            'password' => $validatedData['password']
+        ];
 
-        if (Auth::attempt($validatedData)) {
+        if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
             $user = Auth::user();
 
             if (!$user->hasVerifiedEmail()) {
                 $user->sendEmailVerificationNotification();
-                return redirect()->route('verification.notice')
-                    ->with('warning', 'Silakan verifikasi email Anda terlebih dahulu.');
+                return redirect()->route('verification.notice');
             }
 
             if ($user->hasRole('Peminjam')) {

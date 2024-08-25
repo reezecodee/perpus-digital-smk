@@ -1,6 +1,12 @@
 @extends('layouts.auth-layout')
 @section('content')
     <div class="max-w-md w-full shadow-lg p-4">
+        @if (session('status'))
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100 dark:bg-gray-800 dark:text-green-400"
+                role="alert">
+                <span class="font-medium">{{ session('status') }}</span>
+            </div>
+        @endif
         <div class="flex justify-center">
             <img src="/img/assets/verify_email.webp" class="w-40" alt="">
         </div>

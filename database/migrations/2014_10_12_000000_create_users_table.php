@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('photo')->nullable();
-            $table->enum('status', ['Aktif', 'Nonaktif'])->default('Non-aktif');
+            $table->enum('status', ['Aktif', 'Nonaktif'])->default('Nonaktif');
             $table->text('alamat');
             $table->rememberToken();
             $table->timestamps();

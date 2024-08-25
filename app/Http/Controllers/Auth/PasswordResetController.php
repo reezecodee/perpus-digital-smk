@@ -22,7 +22,7 @@ class PasswordResetController extends Controller
         $status = Password::sendResetLink($request->only('email'));
 
         return $status === Password::RESET_LINK_SENT
-            ? back()->with('status', __($status))
+            ? back()->with('status', 'Email verifikasi berhasil dikirim, silahkan cek email Anda')
             : back()->withErrors(['email' => __($status)]);
     }
 
@@ -41,6 +41,10 @@ class PasswordResetController extends Controller
             'email' => 'required|email',
             'password' => 'required|confirmed|min:8',
             'token' => 'required'
+        ],[
+            'password.required' => 'Password harus di isi',
+            'password.confirmed' => 'Konfirmasi password tidak sama',
+            'password.min' => 'Password minimal berisi 8 karakter'
         ]);
     
         $status = Password::reset(
@@ -53,7 +57,7 @@ class PasswordResetController extends Controller
         );
     
         return $status === Password::PASSWORD_RESET
-                    ? redirect()->route('show_login')->with('status', __($status))
+                    ? redirect()->route('show_login')->with('status', 'Berhasil memperbarui password')
                     : back()->withErrors(['email' => __($status)]);
     }
 }
