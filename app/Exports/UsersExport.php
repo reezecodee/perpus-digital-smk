@@ -14,7 +14,6 @@ class UsersExport implements FromCollection, WithHeadings
     protected $filter;
     protected $role;
 
-    // Constructor untuk menerima filter dari controller
     public function __construct($filter = null, $role)
     {
         $this->filter = $filter;
@@ -23,39 +22,61 @@ class UsersExport implements FromCollection, WithHeadings
 
     public function collection()
     {
+        // Tambahkan NIS atau NIP terlebih dahulu
         $get_attributes = [
             'username',
             'nip_nis',
+        ];
+
+        // Jika role adalah Peminjam, tambahkan NISN setelah NIS
+        if ($this->role === 'Peminjam') {
+            $get_attributes[] = 'nisn';
+        }
+
+        // Tambahkan atribut lainnya setelahnya
+        $get_attributes = array_merge($get_attributes, [
             'nama',
             'email',
             'telepon',
             'jk',
             'status',
             'alamat'
-        ];
+        ]);
 
-        $admin = User::role($this->role); 
+        $user = User::role($this->role);
 
         if ($this->filter) {
-            $admin = $admin->where('status', $this->filter)->get();
+            $user = $user->where('status', $this->filter);
         }
 
-        $admin = $admin->get($get_attributes);
+        $user = $user->select($get_attributes)->get();
 
-        return $admin;
+        return $user;
     }
 
     public function headings(): array
     {
-        return [
+        // Tambahkan NIS atau NIP terlebih dahulu
+        $headings = [
             'Username',
-            'NIP',
+            $this->role === 'Peminjam' ? 'NIS' : 'NIP',
+        ];
+
+        // Jika role adalah Peminjam, tambahkan NISN setelah NIS
+        if ($this->role === 'Peminjam') {
+            $headings[] = 'NISN';
+        }
+
+        // Tambahkan heading lainnya setelahnya
+        $headings = array_merge($headings, [
             'Nama',
             'Email',
             'Telepon',
             'Jenis kelamin',
             'Status',
-            'Alamat'
-        ];
+            'Alamat',
+        ]);
+
+        return $headings;
     }
 }

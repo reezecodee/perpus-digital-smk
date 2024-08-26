@@ -18,13 +18,18 @@ use App\Http\Controllers\Peminjam\Notification\NotificationList;
 use App\Http\Controllers\Peminjam\Payment\PaymentFine;
 use App\Http\Controllers\Peminjam\Profile\Profile;
 use App\Http\Controllers\Peminjam\Visit\VisitPlan;
+use App\Http\Controllers\Pustakawan\Help\ManageHelp;
+use App\Http\Controllers\Pustakawan\Image\ManageCarousel;
+use App\Http\Controllers\Pustakawan\Image\ManagePopup;
 use App\Http\Controllers\Pustakawan\Information\ManageCreateArticle;
 use App\Http\Controllers\Pustakawan\Information\ManageNotification;
 use App\Http\Controllers\Pustakawan\Information\ManageSchedule;
 use App\Http\Controllers\Pustakawan\Information\ManageSendEmail;
+use App\Http\Controllers\Pustakawan\Log\ManageLogActivity;
 use App\Http\Controllers\Pustakawan\MasterDataBuku\ManageBook;
 use App\Http\Controllers\Pustakawan\MasterDataBuku\ManageCategory;
 use App\Http\Controllers\Pustakawan\MasterDataBuku\ManageFineBook;
+use App\Http\Controllers\Pustakawan\MasterDataBuku\ManagePlacement;
 use App\Http\Controllers\Pustakawan\MasterDataBuku\ManageShelf;
 use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\ManageLoan;
 use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\ManageLoanFined;
@@ -79,7 +84,7 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/tentang-kami', 'about_us')->name('about_us');
     Route::get('/kontak-kami', 'contact_us')->name('contact_us');
     Route::get('/artikel', 'article')->name('article');
-    Route::get('/crop-cover', 'crop_cover')->name('crop_cover');
+    Route::get('/crop-picture', 'crop_picture')->name('crop_picture');
 });
 
 
@@ -243,6 +248,29 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
         Route::get('/dashboard-control', 'show_dashboard')->name('dashboard.ctrl');
     });
 
+    Route::controller(ManageCarousel::class)->group(function(){
+        Route::get('/carousel', 'show_carousel')->name('carousel');
+        Route::post('/carousel', 'upload_carousel')->name('upload_carousel');
+        Route::delete('/hapus-carousel/{id}', 'delete_carousel')->name('delete_carousel');
+    });
+    
+    Route::controller(ManagePopup::class)->group(function(){
+        Route::get('/popup', 'show_popup')->name('popup');
+        Route::post('/popup', 'upload_popup')->name('upload_popup');
+        Route::delete('/hapus-popup/{id}', 'delete_popup')->name('delete_popup');
+    });
+
+    Route::controller(ManageHelp::class)->group(function(){
+        Route::get('/manajemen-bantuan', 'show_help')->name('help');
+        Route::get('/manajemen-bantuan/detail-bantuan/{id}', 'show_detail_help')->name('detail_help');
+        Route::delete('/hapus-bantuan/{id}', 'delete_help')->name('delete_help');
+        Route::post('/print-bantuan/{id}', 'print_help_report')->name('print_help_report');
+    });
+
+    Route::controller(ManageLogActivity::class)->group(function(){
+        Route::get('/log-aktivitas', 'show_log')->name('log_activity');
+    });
+
     Route::controller(ManageProfile::class)->group(function () {
         Route::get('/overview-data-profile', 'show_overview_profile')->name('profile.overview');
         Route::post('/ganti-pw-pustakawan', 'update_password')->name('update_pw_pustakawan');
@@ -301,6 +329,10 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
             Route::delete('/hapus-rak/{id}', 'delete_shelf')->name('delete_shelf');
         });
 
+        Route::controller(ManagePlacement::class)->group(function(){
+            Route::get('/penempatan-buku', 'show_placement')->name('data-penempatan');
+        });
+
         Route::controller(ManageFineBook::class)->group(function () {
             Route::get('/denda', 'show_data_denda')->name('data-denda');
             Route::delete('/hapus-denda/{id}', 'delete_fine')->name('delete_fine');
@@ -356,12 +388,12 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
 
     Route::prefix('informasi')->group(function () {
         Route::controller(ManageNotification::class)->group(function () {
-            Route::get('/buat-notifikasi', 'show_create_notif')->middleware('permission:mengirim notifikasi')->name('buat_notifikasi');
+            Route::get('/buat-notifikasi', 'show_create_notif')->name('buat_notifikasi');
             Route::post('/kirim-notifikasi', 'send_notification')->name('send_notification');
         });
 
         Route::controller(ManageSendEmail::class)->group(function () {
-            Route::get('/kirim-email', 'show_send_email')->middleware('permission:mengirim email')->name('kirim_email');
+            Route::get('/kirim-email', 'show_send_email')->name('kirim_email');
             Route::post('/kirim-email', 'send_email')->name('send_email');
         });
 
@@ -379,10 +411,14 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
     Route::controller(PDFController::class)->group(function () {
         Route::post('/print_users/{role}', 'print_data_users')->name('print_pdf_users');
         Route::post('/print_books/{format}', 'print_data_books')->name('print_pdf_books');
+        Route::post('/print_helps', 'print_data_helps')->name('print_pdf_helps');
+        Route::post('/print_log_aktivitas', 'print_data_logs')->name('print_pdf_logs');
     });
-
+    
     Route::controller(ExcelController::class)->group(function () {
         Route::post('/export_users/{role}', 'export_users')->name('export_users');
+        Route::post('/export_helps', 'export_helps')->name('export_helps');
         Route::post('/export_books/{format}', 'export_books')->name('export_books');
+        Route::post('/export_aktivitas', 'export_logs')->name('export_logs');
     });
 });

@@ -20,7 +20,7 @@
         <tbody>
             @foreach ($users as $item)
                 <tr>
-                    <td>
+                    <td align="center">
                         <img src="{{ asset('storage/img/profile/' . ($item->photo ?? 'unknown.jpg')) }}" alt=""
                             width="40" class="rounded-circle" loading="lazy">
                     </td>
@@ -32,7 +32,7 @@
                     @endif
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->status }}</td>
-                    <td>
+                    <td align="center">
                         <x-pustakawan.button.detail :route="route('detail_user', ['role' => $role, 'id' => $item->id])" />
                         <x-pustakawan.button.edit :route="route('edit_user', ['role' => $role, 'id' => $item->id])" />
                         <x-pustakawan.button.delete :id="$item->id" :route="route('delete_user', $item->id)" />

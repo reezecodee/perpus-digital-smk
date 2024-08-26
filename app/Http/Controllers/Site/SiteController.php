@@ -14,10 +14,10 @@ class SiteController extends Controller
         ]);
     }
 
-    public function crop_cover() 
+    public function crop_picture() 
     {
-        return view('site_views.crop-cover', [
-            'title' => 'Crop Cover Buku'
+        return view('site_views.crop-picture', [
+            'title' => 'Crop & Resize Picture'
         ]);
     }
 }

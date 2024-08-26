@@ -1,5 +1,5 @@
 <form id="delete-form-{{ $id }}" class="d-inline"
-    action="{{ route('delete_user', $id) }}" method="post" title="Hapus">
+    action="{{ $route }}" method="post" title="Hapus">
     @method('DELETE')
     @csrf
     <button type="button" onclick="confirmDelete('{{ $id }}')" class="btn btn-danger">

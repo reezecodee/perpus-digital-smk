@@ -62,7 +62,7 @@ class LogicUserController extends Controller
             $validated_data['photo'] = $this->upload_profile_image($validated_data['image']);
         }
 
-        $validated_data['password'] = bcrypt($validated_data['password']);
+        $validated_data['password'] = bcrypt($validated_data['password_temporary']);
 
         $user = User::create($validated_data);
         $user->assignRole($role);

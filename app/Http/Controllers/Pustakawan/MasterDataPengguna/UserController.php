@@ -15,7 +15,7 @@ class UserController extends Controller
 
         if (in_array($uc_first, $validRoles)) {
             $users = User::role($role)
-                ->where('id', '!=', auth()->id())
+                ->where('id', '!=', auth()->id())->latest()
                 ->get();
         } else {
             abort(404);

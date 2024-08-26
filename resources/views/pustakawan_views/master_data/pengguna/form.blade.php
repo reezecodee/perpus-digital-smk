@@ -51,15 +51,15 @@
                             <x-pustakawan.input.select label="Jenis kelamin" name="jk" :options="['Laki-laki', 'Perempuan']"
                                 :selectedvalue="$data->jk ?? ''" :isrequired="true" placeholder="Pilih jenis kelamin" />
                         </div>
-                        @if (!isset($data->status) || $data->status == 'Non-aktif')
+                        @if (!isset($data->status) || $data->status == 'Nonaktif')
                             <div class="col-md-6">
-                                <x-pustakawan.input.basic label="Password sementara" name="password" :value="old('password')"
-                                    placeholder="Masukkan password sementara" type="text" :isrequired="true" />
+                                <x-pustakawan.input.basic label="Password sementara" name="password_temporary" :value="old('password_temporary')"
+                                    placeholder="Masukkan password sementara" type="password" :isrequired="true" />
                             </div>
                             <div class="col-md-6">
                                 <x-pustakawan.input.basic label="Konfirmasi password" name="confirm_password"
-                                    :value="old('confirm_password')" placeholder="Masukkan konfirmasi password" type="text"
-                                    :isrequired="false" />
+                                    :value="old('confirm_password')" placeholder="Masukkan konfirmasi password" type="password"
+                                    :isrequired="true" />
                             </div>
                         @endif
                         <div class="col-md-12">
@@ -67,7 +67,7 @@
                                 placeholder="Masukkan alamat" :isrequired="true" />
                         </div>
                         <div class="col-md-12">
-                            <x-pustakawan.input.select label="Status akun" name="status" :options="['Aktif', 'Non-aktif']" :selectedvalue="$data->status ?? ''" :isrequired="true" placeholder="Pilih status akun" />
+                            <x-pustakawan.input.select label="Status akun" name="status" :options="['Aktif', 'Nonaktif']" :selectedvalue="$data->status ?? ''" :isrequired="true" placeholder="Pilih status akun" />
                         </div>
                         @if ($role == 'admin')
                             <div class="col-md-12 mt-2">

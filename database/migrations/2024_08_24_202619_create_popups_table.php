@@ -15,7 +15,6 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->text('popup_file');
             $table->text('link')->nullable();
-            $table->enum('switch', ['On', 'Off']);
             $table->timestamps();
         });
     }

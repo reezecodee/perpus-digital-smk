@@ -22,6 +22,42 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('help') }}"
+                        class="nav-link {{ Request::is('manajemen-bantuan*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-hands-helping"></i>
+                        <p>
+                            Bantuan
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('log_activity') }}"
+                        class="nav-link {{ Request::is('log-aktivitas*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-list"></i>
+                        <p>
+                            Log Aktivitas
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('carousel') }}"
+                        class="nav-link {{ Request::is('carousel*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-chalkboard"></i>
+                        <p>
+                            Carousel
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('popup') }}"
+                        class="nav-link {{ Request::is('popup*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-flag"></i>
+                        <p>
+                            Popup
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-header">Master Data</li>
                 <li class="nav-item">
                     <a href="#" class="nav-link {{ Request::is('master-data/user*') ? 'active' : '' }}">
@@ -57,7 +93,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#"
-                        class="nav-link {{ Request::is('master-data/rak-buku*', 'master-data/kategori*', 'master-data/buku*', 'master-data/e-book*', 'master-data/denda*') ? 'active' : '' }}">
+                        class="nav-link {{ Request::is('master-data/rak-buku*', 'master-data/kategori*', 'master-data/penempatan-buku', 'master-data/buku*', 'master-data/e-book*', 'master-data/denda*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
                             Data Buku
@@ -91,6 +127,13 @@
                                 class="nav-link {{ Request::is('master-data/kategori*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kategori</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('data-penempatan') }}"
+                                class="nav-link {{ Request::is('master-data/penempatan-buku*') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Penempatan buku</p>
                             </a>
                         </li>
                         <li class="nav-item">

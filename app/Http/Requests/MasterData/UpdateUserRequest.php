@@ -28,10 +28,10 @@ class UpdateUserRequest extends FormRequest
             'telepon' => 'required|min:12|max:15|unique:users,telepon,' . $this->route('id'),
             'email' => 'required|email|min:8|max:255|unique:users,email,' . $this->route('id'),
             'jk' => 'required|in:Laki-laki,Perempuan',
-            'password' => 'nullable|min:8',
-            'confirm_password' => 'nullable|min:8|same:password',
+            'password_temporary' => 'nullable|min:8',
+            'confirm_password' => 'nullable|min:8|same:password_temporary',
             'alamat' => 'required|max:200',
-            'status' => 'required|in:Aktif,Non-aktif',
+            'status' => 'required|in:Aktif,Nonaktif',
             'image' => 'nullable|string',
             'nisn' => 'nullable|min:10|max:10|unique:users,nisn,' . $this->route('id')
         ];

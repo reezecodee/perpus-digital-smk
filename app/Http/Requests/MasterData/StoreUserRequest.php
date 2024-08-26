@@ -28,10 +28,10 @@ class StoreUserRequest extends FormRequest
             'telepon' => 'required|min:12|max:15|unique:users,telepon',
             'email' => 'required|email|min:8|max:255|unique:users,email',
             'jk' => 'required|in:Laki-laki,Perempuan',
-            'password' => 'required|min:8',
-            'confirm_password' => 'required|min:8|same:password',
+            'password_temporary' => 'required|min:8',
+            'confirm_password' => 'required|min:8|same:password_temporary',
             'alamat' => 'required|max:200',
-            'status' => 'required|in:Aktif,Non-aktif',
+            'status' => 'required|in:Aktif,Nonaktif',
             'image' => 'nullable|string',
             'nisn' => 'nullable|min:10|max:10|unique:users,nisn'
         ];

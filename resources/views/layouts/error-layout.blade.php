@@ -23,8 +23,11 @@
 <body class="font-quicksand">
     <div class="h-screen flex items-center justify-center">
         <div>
-            @yield('content')
-            <h2 class="text-center font-bold text-lg">{{ $exception->getStatusCode() }} - {{ $exception->getMessage() }}</h2>
+            <div class="flex justify-center">
+                @yield('content')
+            </div>
+            <h2 class="text-center font-bold text-lg">{{ $exception->getStatusCode() }} - {{ $exception->getMessage() }}
+            </h2>
         </div>
     </div>
 </body>
