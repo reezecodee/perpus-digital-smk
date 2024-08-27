@@ -138,7 +138,7 @@ Route::controller(PasswordResetController::class)->group(function () {
 Route::middleware(['auth', 'status_active', 'verified'])->group(function () {
     Route::get('/baca-e-book/{id}', [ReadEbook::class, 'show_read_e_book'])->name('read_e_book');
     Route::controller(Schedule::class)->group(function () {
-        Route::get('/events', 'events')->middleware('throttle:60,1')->name('event');
+        Route::get('/events', 'events')->name('event');
     });
 });
 
@@ -390,6 +390,8 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
         Route::controller(ManageNotification::class)->group(function () {
             Route::get('/buat-notifikasi', 'show_create_notif')->name('buat_notifikasi');
             Route::post('/kirim-notifikasi', 'send_notification')->name('send_notification');
+            Route::delete('/hapus-notifikasi/{id}', 'delete_notification')->name('delete_notification');
+            Route::get('/detail-notifikasi/{id}', 'detail_notif')->name('detail_notif');
         });
 
         Route::controller(ManageSendEmail::class)->group(function () {
@@ -398,13 +400,18 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
         });
 
         Route::controller(ManageSchedule::class)->group(function () {
-            Route::get('/atur-kalender', 'show_set_calendar')->middleware('permission:mengatur jadwal perpustakaan')->name('atur_kalender');
-            Route::post('/buat-artikel', 'post_article')->name('post_article');
+            Route::get('/atur-kalender', 'show_set_calendar')->name('atur_kalender');
+            Route::post('/tambah-jadwal', 'add_schedule')->name('add_schedule');
+            Route::delete('/hapus-jadwal/{id}', 'delete_schedule')->name('delete_schedule');
         });
-
+        
         Route::controller(ManageCreateArticle::class)->group(function () {
             Route::get('/buat-artikel', 'show_create_article')->name('buat_artikel');
-            Route::post('/tambah-jadwal', 'add_schedule')->name('add_schedule');
+            Route::get('/artikel-saya', 'show_my_article')->name('artikel_saya');
+            Route::get('/edit-artikel/{id}', 'show_edit_article')->name('edit_article');
+            Route::post('/buat-artikel', 'post_article')->name('post_article');
+            Route::put('/update-artikel/{id}', 'update_article')->name('update_article');
+            Route::delete('/hapus-artikel/{id}', 'delete_article')->name('delete_article');
         });
     });
 

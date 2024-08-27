@@ -11,7 +11,7 @@
                 <div class="form-group">
                     <label for="">Subject</label>
                     <input type="text" name="judul" class="form-control" value="{{ old('judul') }}"
-                        placeholder="Subject:">
+                        placeholder="Subject:" autocomplete="off">
                     @error('judul')
                         <span class="invalid-feedback">{{ $message }}</span>
                     @enderror
@@ -46,14 +46,19 @@
                                         <i class="fas fa-list"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Hapus</a></li>
-                                        <li><a class="dropdown-item" href="#">Detail</a></li>
+                                        <li>
+                                            <form action="{{ route('delete_notification', $item->id) }}" method="post" id="delete-form-{{ $item->id }}">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="button" onclick="confirmDelete('{{ $item->id }}')" class="dropdown-item">Hapus</button>
+                                            </form>
+                                        </li>
+                                        <li><a class="dropdown-item" href="{{ route('detail_notif', $item->id) }}">Detail</a></li>
                                     </ul>
                                 </div>
                             </td>
                         </tr>
                     @endforeach
-
                 </tbody>
             </table>
         </div>

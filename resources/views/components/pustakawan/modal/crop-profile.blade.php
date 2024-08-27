@@ -21,8 +21,7 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-end">
-                <button type="button" class="btn btn-warning" id="crop_button">Crop</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal" aria-label="Close">Oke</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal" id="crop_button" ><i class="fas fa-crop-alt"></i> Crop</button>
             </div>
         </div>
     </div>

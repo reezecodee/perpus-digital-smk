@@ -1,16 +1,17 @@
 @extends('layouts.pustakawan-layout')
 @section('content')
-    <form id="article-form" action="{{ route('post_article') }}" method="post" enctype="multipart/form-data">
+    <form id="update-form" action="{{ route('update_article', $data->id) }}" method="post" enctype="multipart/form-data">
+        @method('PUT')
         @csrf
         <div class="card">
             <div class="card-body">
                 <div class="form-group">
                     <div class="d-flex justify-content-center mb-3">
-                        <img src="" alt="" class="w-75 border preview" id="imagePreview"
-                            style="display: none;">
+                        <img src="{{ asset('storage/img/thumbnail/' . ($data->thumbnail ?? 'unknown_cover.png')) }}" alt="" class="w-75 border preview" id="imagePreview"
+                            >
                     </div>
                     <div class="d-flex justify-content-center w-full">
-                        <input type="file" id="fileInput" name="thumbnail" class="image" style="display: none;">
+                        <input type="file" id="fileInput" name="thumbnail" class="image" style="display: none;" value="{{ $data->thumbnail }}">
                         <button class="btn btn-primary" type="button" id="uploadBtn"><i class="fas fa-upload"></i> Upload
                             cover artikel</button>
                     </div>
@@ -25,19 +26,19 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <x-pustakawan.input.basic label="Judul" name="judul" :value="old('judul')"
+                        <x-pustakawan.input.basic label="Judul" name="judul" :value="old('judul', $data->judul)"
                             placeholder="Judul artikel" type="text" :isrequired="true" />
                     </div>
                     <div class="col-md-4">
-                        <x-pustakawan.input.basic label="Keyword" name="keyword" :value="old('keyword')" placeholder="Kata kunci"
+                        <x-pustakawan.input.basic label="Keyword" name="keyword" :value="old('keyword', $data->keyword)" placeholder="Kata kunci"
                             type="text" :isrequired="true" />
                     </div>
                     <div class="col-md-4">
-                        <x-pustakawan.input.pure-select label="Pilih visibilitas" name="visibilitas" :options="['Publik', 'Privasi']"
+                        <x-pustakawan.input.select label="Pilih visibilitas" name="visibilitas" :options="['Publik', 'Privasi']" :selectedvalue="$data->visibilitas"
                             :isrequired="true" />
                     </div>
                     <div class="col-md-12">
-                        <x-pustakawan.input.textarea label="Deskripsi" name="deskripsi" :value="old('deskripsi')" placeholder="Deskripsi artikel"
+                        <x-pustakawan.input.textarea label="Deskripsi" name="deskripsi" :value="old('deskripsi', $data->deskripsi)" placeholder="Deskripsi artikel"
                             :isrequired="true" />
                     </div>
                 </div>
@@ -45,8 +46,8 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <x-pustakawan.input.froala name="konten_artikel" />
-                <button class="btn btn-primary mt-3" type="button" onclick="confirmCreateArticle()">Simpan artikel</button>
+                <x-pustakawan.input.froala name="konten_artikel" :value="old('konten_artikel', $data->konten_artikel)" />
+                <button class="btn btn-primary mt-3" type="button" onclick="confirmUpdate()">Edit artikel</button>
             </div>
         </div>
     </form>

@@ -39,7 +39,7 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <h5>Keseluruhan jadwal</h5>
+            <h5>Keseluruhan jadwal tahun ini</h5>
             <table id="data-table" class="table table-bordered table-striped">
                 <thead>
                     <tr>
@@ -69,8 +69,8 @@
                                     <div class="badge bg-success">{{ $item->warna }}</div>
                                 </td>
                             @endif
-                            <td>
-
+                            <td align="center">
+                                <x-pustakawan.button.delete :id="$item->id" :route="route('delete_schedule', $item->id)" />
                             </td>
                         </tr>
                     @endforeach

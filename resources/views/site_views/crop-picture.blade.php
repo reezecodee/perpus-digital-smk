@@ -40,11 +40,13 @@
 <body class="bg-dark">
     <input type="file" name="image" class="image d-none" id="upload-cover">
     <input type="file" name="image" class="image d-none" id="upload-carousel">
+    <input type="file" name="image" class="image d-none" id="upload-popup">
     <div class="container">
         <div class="d-flex flex-col justify-content-center align-items-center" style="height: 100vh">
             <div class="text-center">
-                <h1 class="text-light fw-bold mb-5">Crop or Resize Picture</h1>
-                <button class="btn btn-success mr-2" id="btn-upload"><i class="fas fa-upload"></i> Crop cover buku</button>
+                <h1 class="text-light fw-bold">Crop or Resize Picture</h1>
+                <p class="mb-5 text-white">Refresh halaman ini jika button crop tidak berfungsi.</p>
+                <button class="btn btn-success mr-2" id="btn-upload-cover"><i class="fas fa-upload"></i> Crop cover buku</button>
                 <button class="btn btn-primary mr-2" id="btn-upload-carousel"><i class="fas fa-upload"></i> Crop carousel</button>
                 <button class="btn btn-danger mr-2" id="btn-upload-popup"><i class="fas fa-upload"></i> Crop popup</button>
                 <a href="https://imageresizer.com/" target="_blank">
@@ -55,23 +57,70 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+    <div class="modal fade" id="modal-cover" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modalr" aria-label="Close">
+                    Resolusi: 650 x 974
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="img-container">
-                        <img id="image" src="">
+                        <img id="image-cover" src="">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Batalkan</button>
-                    <button type="button" class="btn btn-primary" id="crop">Crop & download</button>
+                    <button type="button" class="btn btn-primary" id="crop-cover">Crop & download</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-carousel" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Resolusi: 1216 x 304
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="img-container">
+                        <img id="image-carousel" src="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batalkan</button>
+                    <button type="button" class="btn btn-primary" id="crop-carousel">Crop & download</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-popup" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Resolusi: 507 x 336
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="img-container">
+                        <img id="image-popup" src="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batalkan</button>
+                    <button type="button" class="btn btn-primary" id="crop-popup">Crop & download</button>
                 </div>
             </div>
         </div>

@@ -23,7 +23,7 @@ class CalendarRequest extends FormRequest
     {
         return [
             'tanggal_mulai' => 'required|date',
-            'tanggal_selesai' => 'nullable|date',
+            'tanggal_selesai' => 'nullable|date|after_or_equal:tanggal_mulai',
             'keterangan' => 'required|max:20',
             'warna' => 'required|in:Merah,Kuning,Hijau'
         ];
@@ -36,6 +36,7 @@ class CalendarRequest extends FormRequest
             'tanggal_mulai.date' => 'Tanggal mulai harus berupa tanggal yang valid.',
 
             'tanggal_selesai.date' => 'Tanggal selesai harus berupa tanggal yang valid.',
+            'tanggal_selesai.after_or_equal' => 'Tanggal selesai tidak boleh lebih awal dari tanggal mulai.',
 
             'keterangan.required' => 'Keterangan harus diisi.',
             'keterangan.max' => 'Keterangan tidak boleh lebih dari 20 karakter.',

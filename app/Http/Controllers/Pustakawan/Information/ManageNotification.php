@@ -16,7 +16,17 @@ class ManageNotification extends Controller
             'title' => 'Buat Notifikasi',
             'heading' => 'Buat Notifikasi',
             'receivers' => User::role('Peminjam')->where('status', 'Aktif')->latest()->get(),
-            'notifications' => Notification::where('pengirim_id', auth()->user()->id)->get(),
+            'notifications' => Notification::with('receiver')->where('pengirim_id', auth()->user()->id)->latest()->get(),
+        ]);
+    }
+
+    public function detail_notif($id)
+    {
+        $notification = Notification::findOrFail($id);
+        return view('pustakawan_views.informasi.detail-notifikasi', [
+            'title' => 'Detail Notifikasi',
+            'heading' => 'Detail Notifikasi',
+            'data' => $notification
         ]);
     }
 
@@ -28,5 +38,12 @@ class ManageNotification extends Controller
 
         Notification::create($validation_data);
         return back()->withSuccess('Berhasil mengirimkan notifikasi');
+    }
+
+    public function delete_notification($id)
+    {
+        $notification = Notification::findOrFail($id);
+        $notification->delete();
+        return back()->withSuccess('Berhasil menghapus notifikasi');
     }
 }

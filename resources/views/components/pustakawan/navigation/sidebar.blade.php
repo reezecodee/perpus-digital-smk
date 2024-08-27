@@ -41,8 +41,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('carousel') }}"
-                        class="nav-link {{ Request::is('carousel*') ? 'active' : '' }}">
+                    <a href="{{ route('carousel') }}" class="nav-link {{ Request::is('carousel*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-chalkboard"></i>
                         <p>
                             Carousel
@@ -50,8 +49,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('popup') }}"
-                        class="nav-link {{ Request::is('popup*') ? 'active' : '' }}">
+                    <a href="{{ route('popup') }}" class="nav-link {{ Request::is('popup*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-flag"></i>
                         <p>
                             Popup
@@ -215,7 +213,7 @@
                 <li class="nav-header">Informasi</li>
                 <li class="nav-item">
                     <a href="{{ route('buat_notifikasi') }}"
-                        class="nav-link {{ Request::is('informasi/buat-notifikasi*') ? 'active' : '' }}">
+                        class="nav-link {{ Request::is('informasi/buat-notifikasi*', 'informasi/detail-notifikasi*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-bell"></i>
                         <p>
                             Notifikasi
@@ -232,13 +230,31 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('buat_artikel') }}"
-                        class="nav-link {{ Request::is('informasi/buat-artikel*') ? 'active' : '' }}">
+                    <a href="#" class="nav-link {{ Request::is('informasi/buat-artikel*', 'informasi/artikel-saya*', 'informasi/edit-artikel*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-paste"></i>
                         <p>
-                            Buat Artikel
+                            Artikel
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('buat_artikel') }}"
+                                class="nav-link {{ Request::is('informasi/buat-artikel*') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Buat Artikel
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('artikel_saya') }}"
+                                class="nav-link {{ Request::is('informasi/artikel-saya*') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Artikel Saya</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('atur_kalender') }}"

@@ -11,5 +11,4 @@ class Article extends Model
     use HasFactory, HasUuids;
 
     protected $guarded = ['id'];
-
 }

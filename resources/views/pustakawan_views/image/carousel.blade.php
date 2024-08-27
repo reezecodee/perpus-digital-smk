@@ -26,7 +26,7 @@
                             placeholder="Link redirect (opsional)" type="text" :isrequired="false" />
                         <button type="button" onclick="confirmAdd()" class="btn btn-primary"><i class="fas fa-plus"></i>
                             Tambahkan</button>
-                        <a href="{{ route('crop-picture') }}" target="_blank">
+                        <a href="{{ route('crop_picture') }}" target="_blank">
                             <button class="btn btn-warning" type="button"><i class="fas fa-crop-alt"></i> Crop
                                 gambar</button>
                         </a>

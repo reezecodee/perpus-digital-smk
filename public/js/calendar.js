@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 eventColor = '#ffd859';
             } else if (info.event.extendedProps.type === 'Merah') {
                 eventColor = '#db1919';
-            } else if (info.event.extendedProps.type === 'Biru') {
-                eventColor = '#3f83f8';
+            } else if (info.event.extendedProps.type === 'Hijau') {
+                eventColor = '#28a745';
             }
 
             return {
