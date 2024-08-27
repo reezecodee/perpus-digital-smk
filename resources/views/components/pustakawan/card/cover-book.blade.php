@@ -12,7 +12,7 @@
                     accept=".jpg, .png, .jpeg">
                 <button class="btn btn-success mr-2" type="button" id="uploadCoverBtn"><i class="fas fa-upload"></i>
                     Upload cover</button>
-                <a href="{{ route('crop-picture') }}" target="_blank">
+                <a href="{{ route('crop_picture') }}" target="_blank">
                     <button class="btn btn-warning" type="button"><i class="fas fa-crop-alt"></i> Crop
                         gambar</button>
                 </a>

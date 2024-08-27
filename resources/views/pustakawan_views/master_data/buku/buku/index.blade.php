@@ -17,7 +17,7 @@
                 <tbody>
                     @foreach ($books as $item)
                         <tr>
-                            <td>
+                            <td align="center">
                                 <img src="{{ asset('storage/img/cover/' . ($item->cover_buku ?? 'unknown_cover.png')) }}"
                                     alt="" width="60" class="rounded-md" loading="lazy">
                             </td>

@@ -37,6 +37,11 @@ class Book extends Model
         return $this->hasOne(Fine::class, 'buku_id', 'id');
     }
 
+    public function placement()
+    {
+        return $this->hasMany(Placement::class, 'bukud_id', 'id');
+    }
+
     public function scopeAvailable($query)
     {
         return $query->where('status', 'tersedia');

@@ -91,7 +91,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#"
-                        class="nav-link {{ Request::is('master-data/rak-buku*', 'master-data/kategori*', 'master-data/penempatan-buku', 'master-data/buku*', 'master-data/e-book*', 'master-data/denda*') ? 'active' : '' }}">
+                        class="nav-link {{ Request::is('master-data/rak-buku*', 'master-data/kategori*', 'master-data/penempatan-buku*', 'master-data/buku*', 'master-data/e-book*', 'master-data/denda*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
                             Data Buku

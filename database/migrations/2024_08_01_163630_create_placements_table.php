@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('rak_id');
             $table->uuid('buku_id');
             $table->integer('jumlah_buku');
+            $table->integer('buku_saat_ini');
             $table->timestamps();
 
             $table->foreign('rak_id')->references('id')->on('shelves')->onDelete('cascade');

@@ -15,6 +15,14 @@
                     </form>
                 @endif
             </div>
+            @if ($addbtn ?? false)
+                <div>
+                    <a href="{{ $addroute }}">
+                        <button class="btn btn-primary"><i class="fas fa-plus"></i> {{ $title }}
+                        </button>
+                    </a>
+                </div>
+            @endif
         </div>
     </div>
 </div>

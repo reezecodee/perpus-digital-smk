@@ -16,4 +16,9 @@ class Placement extends Model
     {
         return $this->belongsTo(Shelf::class, 'rak_id', 'id');
     }
+
+    public function book()
+    {
+        return $this->belongsTo(Book::class, 'buku_id', 'id');
+    }
 }
