@@ -28,10 +28,14 @@ class ManageHelp extends Controller
         ]);
     }
 
+    // Logical Backend Here...
+
     public function delete_help($id)
     {
         $help = Help::findOrFail($id);
         $help->delete();
+        
+        $this->log("Menghapus laporan bantuan milik {$help->user->nama}");
         return back()->withSuccess('Berhasil menghapus data bantuan');
     }
 

@@ -48,7 +48,7 @@ class ManageLoan extends Controller
         return view('pustakawan_views.master_data.peminjaman.peminjaman.form', [
             'title' => 'Tambah Peminjam Buku',
             'heading' => 'Tambah Peminjam Buku',
-            'borrowers' => User::role('Peminjam')->get(),
+            'borrowers' => User::role('Peminjam')->where('status', 'Aktif')->get(),
             'books' => Book::where('status', 'Tersedia')->get(),
             'peminjaman' => null
         ]);
@@ -88,7 +88,9 @@ class ManageLoan extends Controller
         $validated_data['status'] = 'Masa pinjam';
         $validated_data['keterangan_denda'] = 'Tidak ada';
 
-        Loan::create($validated_data);
+        $loan = Loan::create($validated_data);
+
+        $this->log("Memberikan izin peminjaman buku \"{$loan->book->judul}\" kepada {$loan->peminjam->nama}");
         return redirect()->route('data_perpinjaman')->withSuccess('Berhasil menambahkan peminjaman baru');
     }
 
@@ -98,13 +100,15 @@ class ManageLoan extends Controller
         $peminjaman = Loan::findOrFail($id);
         $peminjaman->update($validated_data);
 
+        $this->log('Memperbarui data peminjaman');
         return back()->withSuccess('Berhasil memperbarui data peminjaman');
     }
 
     public function delete_peminjaman($id)
     {
-        $peminjaman = Loan::findOrFail($id);
-        $peminjaman->delete();
+        $loan = Loan::findOrFail($id);
+        $loan->delete();
+        $this->log("Menghapus data peminjaman buku \"{$loan->book->judul}\" yang dipinjam oleh {$loan->peminjam->nama}");
         return back()->withSuccess('Berhasil menghapus data peminjaman');
     }
 }

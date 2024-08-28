@@ -26,6 +26,7 @@ class ManageProfile extends Controller
             'password' => Hash::make($validatedData['new_password']),
         ]);
 
+        $this->log('Memperbarui passwordnya');
         return redirect()->back()->withSuccess('Password berhasil diperbarui.');
     }
 }

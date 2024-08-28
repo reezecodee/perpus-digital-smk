@@ -36,13 +36,15 @@ class ManageNotification extends Controller
         $validation_data['pengirim_id'] = auth()->user()->id;
         $validation_data['tgl_pengiriman'] = date('Y-m-d');
 
-        Notification::create($validation_data);
+        $notif = Notification::create($validation_data);
+        $this->log("Mengirimkan notifikasi kepada {$notif->receiver->nama}");
         return back()->withSuccess('Berhasil mengirimkan notifikasi');
     }
 
     public function delete_notification($id)
     {
         $notification = Notification::findOrFail($id);
+        $this->log("Menghapus notifikasi yang dikirimkan kepada {$notification->receiver->nama}");
         $notification->delete();
         return back()->withSuccess('Berhasil menghapus notifikasi');
     }

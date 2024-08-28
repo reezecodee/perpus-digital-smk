@@ -24,6 +24,7 @@ class ManageSendEmail extends Controller
         $receiver = User::findOrFail($request->penerima_id);
 
         Mail::to($receiver->email)->send(new NotificationMail($request, $request->subject));
+        $this->log("Mengirimkan email kepada {$receiver->nama} - {$receiver->email}");
         return back()->withSuccess('Berhasil mengirimkan email kepada ' . $receiver->nama);
     }
 }

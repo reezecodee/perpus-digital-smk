@@ -54,6 +54,7 @@ class ManageLibrary extends Controller
             $message = 'Berhasil menambahkan data informasi perpustakaan';
         }
 
+        $this->log('Memperbarui data informasi perpustakaan');
         return back()->withSuccess($message);
     }
 }

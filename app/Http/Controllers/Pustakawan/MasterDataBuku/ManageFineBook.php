@@ -20,14 +20,4 @@ class ManageFineBook extends Controller
             'without_fines' => $booksWithoutFines
         ]);
     }
-
-    // Logical Backend Here
-
-    public function delete_fine($id)
-    {
-        $fine = Fine::findOrFail($id);
-        $fine->delete();
-
-        return back()->withSuccess('Berhasil menghapus data denda buku');
-    }
 }

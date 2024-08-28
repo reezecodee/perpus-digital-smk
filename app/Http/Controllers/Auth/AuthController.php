@@ -59,8 +59,10 @@ class AuthController extends Controller
             }
 
             if ($user->hasRole('Peminjam')) {
+                $this->log('Berhasil login ke aplikasi dan redirect ke dashboard peminjam');
                 return redirect('/dashboard');
             } else if ($user->hasRole('Admin') || $user->hasRole('Pustakawan')) {
+                $this->log('Berhasil login ke aplikasi dan redirect ke dashboard control');
                 return redirect('/dashboard-control');
             } else {
                 Auth::logout();
@@ -86,8 +88,10 @@ class AuthController extends Controller
         $user = auth()->user();
 
         if ($user->hasRole('Peminjam')) {
+            $this->log('Berhasil memverifikasi akunnya');
             return redirect('/dashboard')->withSuccess('Selamat akun kamu berhasil di verifikasi');
         } else if ($user->hasRole('Admin') || $user->hasRole('Pustakawan')) {
+            $this->log('Berhasil memverifikasi akunnya');
             return redirect('/dashboard-control')->withSuccess('Selamat akun kamu berhasil di verifikasi');
         } else {
             Auth::logout();
@@ -100,6 +104,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        $this->log('Logout dari aplikasi perpustakaan');
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

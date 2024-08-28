@@ -35,7 +35,9 @@ class PDFController extends Controller
         $pdf_instance = $pdf->loadView('pustakawan_views.generate.pdf_list.users', compact('users', 'role'));
 
         $pdf_instance->setPaper('A4', 'potrait');
+        $lcfirst = lcfirst($role);
 
+        $this->log("Mencetak list users {$lcfirst} kedalam PDF");
         return $pdf_instance->download("Daftar $role.pdf");
     }
 
@@ -54,7 +56,8 @@ class PDFController extends Controller
 
         $pdf_instance->setPaper('A4', 'potrait');
 
-        return $pdf_instance->download("Daftar laporan bantuan.pdf");
+        $this->log('Mencetak list laporan bantuan kedalam PDF');
+        return $pdf_instance->download('Daftar laporan bantuan.pdf');
     }
 
     public function print_data_logs(PDF $pdf)
@@ -70,6 +73,7 @@ class PDFController extends Controller
         $pdf_instance = $pdf->loadView('pustakawan_views.generate.pdf_list.logs', compact('logs'));
         $pdf_instance->setPaper('A4', 'potrait');
 
-        return $pdf_instance->download("Daftar log aktivitas.pdf");
+        $this->log('Mencetak list log aktivias kedalam PDF');
+        return $pdf_instance->download('Daftar log aktivitas.pdf');
     }
 }

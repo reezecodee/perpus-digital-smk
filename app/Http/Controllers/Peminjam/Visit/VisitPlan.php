@@ -26,17 +26,15 @@ class VisitPlan extends Controller
 
         Visit::create($data);
 
+        $this->log('Melakukan permohonan izin kunjungan perpustakaan');
         return back()->withSuccess('Permohonan kunjungan berhasil ditambahkan');
     }
 
     public function delete_visit($id)
     {
-        $visit = Visit::find($id);
-        if ($visit) {
-            $visit->delete();
-            return back()->withSuccess('Berhasil menghapus data kunjungan Anda');
-        }
-
-        return back();
+        $visit = Visit::findOrFail($id);
+        $visit->delete();
+        $this->log('Menghapus dan membatalkan permohonan kunjungan perpustakaan');
+        return back()->withSuccess('Berhasil menghapus data kunjungan Anda');
     }
 }

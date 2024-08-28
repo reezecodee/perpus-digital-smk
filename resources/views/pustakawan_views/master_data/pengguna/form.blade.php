@@ -54,12 +54,12 @@
                         @if (!isset($data->status) || $data->status == 'Nonaktif')
                             <div class="col-md-6">
                                 <x-pustakawan.input.basic label="Password sementara" name="password_temporary" :value="old('password_temporary')"
-                                    placeholder="Masukkan password sementara" type="password" :isrequired="true" />
+                                    placeholder="Masukkan password sementara" type="password" :isrequired="$data ? false : true" />
                             </div>
                             <div class="col-md-6">
                                 <x-pustakawan.input.basic label="Konfirmasi password" name="confirm_password"
                                     :value="old('confirm_password')" placeholder="Masukkan konfirmasi password" type="password"
-                                    :isrequired="true" />
+                                    :isrequired="$data ? false : true" />
                             </div>
                         @endif
                         <div class="col-md-12">

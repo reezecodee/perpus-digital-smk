@@ -39,7 +39,7 @@
                             <td>{{ $item->receiver->nama }}</td>
                             <td>{{ $item->judul }}</td>
                             <td>{{ $item->tgl_pengiriman }}</td>
-                            <td>
+                            <td align="center">
                                 <div class="dropdown-center">
                                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"
                                         aria-expanded="false">

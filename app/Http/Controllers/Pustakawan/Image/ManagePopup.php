@@ -30,6 +30,7 @@ class ManagePopup extends Controller
             Popup::create($validated_data);
         }
 
+        $this->log('Menambahkan gambar popup baru');
         return redirect()->back()->withSuccess('Gambar berhasil diupload!');
     }
 
@@ -44,6 +45,7 @@ class ManagePopup extends Controller
 
         $popup->delete();
 
+        $this->log('Menghapus data gambar popup');
         return back()->withSuccess('Popup berhasil dihapus!');
     }
 }

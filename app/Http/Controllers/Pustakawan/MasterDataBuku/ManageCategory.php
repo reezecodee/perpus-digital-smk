@@ -44,7 +44,8 @@ class ManageCategory extends Controller
             'keterangan.max' => 'Panjang maksimal keterangan adalah 50 karakter',
         ]);
 
-        Category::create($validated_data);
+        $category = Category::create($validated_data);
+        $this->log("Menambahkan kategori buku baru {$category->nama_kategori}");
         return redirect()->route('data-kategori')->withSuccess('Berhasil menambah data kategori');
     }
 
@@ -62,6 +63,7 @@ class ManageCategory extends Controller
 
         $category = Category::findOrFail($id);
         $category->update($validated_data);
+        $this->log('Memperbarui data kategori');
         return redirect()->route('data-kategori')->withSuccess('Berhasil memperbarui data kategori');
     }
 
@@ -70,6 +72,7 @@ class ManageCategory extends Controller
         $category = Category::findOrFail($id);
         $category->delete();
 
+        $this->log("Menghapus data kategori {$category->nama_kategori}");
         return back()->withSuccess('Berhasil menghapus data kategori');
     }
 }

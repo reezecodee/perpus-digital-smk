@@ -42,7 +42,7 @@
                                     <td>{{ $item->nama_kategori }}</td>
                                     <td>{{ $item->keterangan ?? 'Tidak ada' }}</td>
                                     <td>{{ $item->book_count }}</td>
-                                    <td>
+                                    <td align="center">
                                         <x-pustakawan.button.edit :route="route('edit_category', $item->id)" />
                                         <x-pustakawan.button.delete :id="$item->id" :route="route('delete_category', $item->id)" />
                                     </td>

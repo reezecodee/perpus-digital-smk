@@ -14,7 +14,7 @@ class BookDetail extends Controller
     {
         $data = Book::find($id);
 
-        if(!$data){
+        if (!$data) {
             return abort(404);
         }
 
@@ -49,15 +49,17 @@ class BookDetail extends Controller
                 'peminjam_id' => $peminjamId
             ];
 
-            LikedBook::firstOrCreate($credentials);
+            $liked_book = LikedBook::firstOrCreate($credentials);
+            $this->log("Menyukai buku {$liked_book->book->judul}");
             return back();
         } else if ($request->like == 'batal') {
-            $book = LikedBook::where('buku_id', $id)
+            $liked_book = LikedBook::where('buku_id', $id)
                 ->where('peminjam_id', $peminjamId)
                 ->first();
 
-            if ($book) {
-                $book->delete();
+            if ($liked_book) {
+                $this->log("Membatalkan suka buku {$liked_book->book->judul}");
+                $liked_book->delete();
                 return back();
             }
         }

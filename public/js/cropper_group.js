@@ -211,8 +211,8 @@ $modalPopup.on('shown.bs.modal', function() {
 
 $("#crop-popup").click(function() {
     var canvas = cropperPopup.getCroppedCanvas({
-        width: 1216,
-        height: 304,
+        width: 507,
+        height: 336,
     });
 
     canvas.toBlob(function(blob) {

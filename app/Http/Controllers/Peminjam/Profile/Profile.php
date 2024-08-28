@@ -82,7 +82,7 @@ class Profile extends Controller
         $validated_data = $image_request->validated();
         $user = auth()->user();
 
-        $image_result = $this->store_image($image_request);
+        $image_result = $this->store_image($validated_data);
 
         if (!$image_result['success']) {
             return response()->json([
@@ -96,6 +96,7 @@ class Profile extends Controller
 
         $user->update(['photo' => $image_result['name']]);
 
+        $this->log('Memperbarui foto profile-nya');
         return response()->json([
             'message' => 'Data profil berhasil diperbarui'
         ]);
@@ -116,10 +117,11 @@ class Profile extends Controller
 
         if ($has_changes) {
             $user->update($update_data);
-            return redirect()->back()->withSuccess('Data profil berhasil diperbarui');
+            $this->log('Memperbarui data profile-nya');
+            return redirect()->back()->withSuccess('Data profil berhasil diperbarui.');
         }
 
-        return redirect()->back()->withSuccess('Tidak ada perubahan pada data profil');
+        return redirect()->back()->withSuccess('Tidak ada perubahan pada data profil.');
     }
 
     public function update_password(UpdatePasswordRequest $request)
@@ -131,6 +133,7 @@ class Profile extends Controller
             'password' => Hash::make($validatedData['new_password']),
         ]);
 
+        $this->log('Memperbarui password-nya');
         return redirect()->back()->withSuccess('Password berhasil diperbarui.');
     }
 }

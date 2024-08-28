@@ -24,9 +24,12 @@ class ManageSchedule extends Controller
         ]);
     }
 
+    // Logical Backend Here...
+
     public function add_schedule(CalendarRequest $request)
     {
         $validated_data = $request->validated();
+        $this->log('Menambahkan jadwal baru di kalender perpustakaan');
         Calendar::create($validated_data);
         return back()->withSuccess('Berhasil menambahkan jadwal baru pada kalender');
     }
@@ -35,6 +38,7 @@ class ManageSchedule extends Controller
     {
         $schedule = Calendar::findOrFail($id);
         $schedule->delete();
+        $this->log('Menghapus jadwal di kalender perpustakaan');
         return back()->withSuccess('Berhasil menghapus jadwal');
     }
 }

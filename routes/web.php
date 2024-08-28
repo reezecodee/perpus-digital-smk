@@ -340,7 +340,6 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
 
         Route::controller(ManageFineBook::class)->group(function () {
             Route::get('/denda', 'show_data_denda')->name('data-denda');
-            Route::delete('/hapus-denda/{id}', 'delete_fine')->name('delete_fine');
         });
 
         // Master Data Peminjaman Route

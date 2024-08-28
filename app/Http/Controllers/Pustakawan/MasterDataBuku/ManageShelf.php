@@ -45,7 +45,8 @@ class ManageShelf extends Controller
             'kapasitas.max' => 'Panjang maksimal kapasitas adalah 5 karakter',
         ]);
 
-        Shelf::create($validated_data);
+        $shelf = Shelf::create($validated_data);
+        $this->log("Menambahkan rak buku baru dengan nama {$shelf->nama_rak}");
         return redirect()->route('data-rak')->withSuccess('Berhasil menambah data rak');
     }
 
@@ -66,14 +67,16 @@ class ManageShelf extends Controller
 
         $shelf = Shelf::findOrFail($id);
         $shelf->update($validated_data);
+        $this->log("Memperbarui rak buku {$shelf->nama_rak}");
         return redirect()->route('data-rak')->withSuccess('Berhasil memperbarui data rak');
     }
 
     public function delete_shelf($id)
     {
-        $category = Shelf::findOrFail($id);
-        $category->delete();
+        $shelf = Shelf::findOrFail($id);
+        $shelf->delete();
 
+        $this->log("Menghapus rak buku dengan nama rak $shelf->nama_rak");
         return back()->withSuccess('Berhasil menghapus data rak');
     }
 }

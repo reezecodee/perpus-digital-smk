@@ -38,6 +38,8 @@ class ManageCreateArticle extends Controller
         ]);
     }
 
+    // Logical Backend Here...
+
     public function post_article(ArticleRequest $request)
     {
         $validated_data = $request->validated();
@@ -53,7 +55,8 @@ class ManageCreateArticle extends Controller
         }
 
         Article::create($validated_data);
-        return back()->withSuccess('Berhasil membuat artikel baru');
+        $this->log('Membuat artikel baru milik-nya');
+        return back()->withSuccess('Berhasil membuat artikel baru.');
     }
 
     public function update_article(UpdateArticleRequest $request, $id)
@@ -75,7 +78,8 @@ class ManageCreateArticle extends Controller
 
         $article->update($validated_data);
 
-        return back()->withSuccess('Berhasil memperbarui artikel');
+        $this->log('Memperbarui artikel milik-nya');
+        return back()->withSuccess('Berhasil memperbarui artikel.');
     }
 
 
@@ -89,6 +93,7 @@ class ManageCreateArticle extends Controller
 
         $article->delete();
 
-        return back()->withSuccess('Berhasil menghapus artikel dan gambar terkait');
+        $this->log('Menghapus artikel milik-nya');
+        return back()->withSuccess('Berhasil menghapus artikel');
     }
 }

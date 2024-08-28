@@ -54,6 +54,7 @@ class ManageAppWeb extends Controller
             $message = 'Berhasil menambahkan data aplikasi';
         }
 
+        $this->log('Memperbarui data aplikasi web');
         return back()->withSuccess($message);
     }
 }

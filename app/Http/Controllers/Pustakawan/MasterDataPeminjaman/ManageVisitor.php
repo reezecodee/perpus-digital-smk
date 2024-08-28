@@ -25,7 +25,7 @@ class ManageVisitor extends Controller
             'title' => 'Daftarkan Data Kunjungan',
             'heading' => 'Daftarkan Kunjungan',
             'visit' => null,
-            'visitors' => User::role('Peminjam')->get()
+            'visitors' => User::role('Peminjam')->where('status', 'Aktif')->get()
         ]);
     }
 
@@ -35,7 +35,7 @@ class ManageVisitor extends Controller
             'title' => 'Edir Data Kunjungan',
             'heading' => 'Edit Kunjungan',
             'visit' => Visit::find($id),
-            'visitors' => User::role('Peminjam')->get()
+            'visitors' => User::role('Peminjam')->where('status', 'Aktif')->get()
         ]);
     }
 
@@ -44,7 +44,8 @@ class ManageVisitor extends Controller
     public function store_visit(VisitRequest $request)
     {
         $validated_data = $request->validated();
-        Visit::create($validated_data);
+        $visit = Visit::create($validated_data);
+        $this->log("Menambahkan data kunjungan untuk {$visit->peminjam->nama} untuk tanggal {$visit->tanggal_kunjungan}");
         return redirect()->route('data_kunjungan')->withSuccess('Berhasil menambahkan data kunjungan');
     }
 
@@ -53,6 +54,7 @@ class ManageVisitor extends Controller
         $validated_data = $request->validated();
         $visit = Visit::find($id);
         $visit->update($validated_data);
+        $this->log("Memperbarui data kunjungan milik {$visit->peminjam->nama}");
         return back()->withSuccess('Berhasil memperbarui data kunjungan');
     }
 
@@ -60,6 +62,8 @@ class ManageVisitor extends Controller
     {
         $visit = Visit::find($id);
         $visit->delete();
+        
+        $this->log("Menghapus data kunjungan milik {$visit->peminjam->nama}");
         return back()->withSuccess('Berhasil menghapus data kunjungan');
     }
 }

@@ -29,4 +29,6 @@ class NotificationList extends Controller
             'data' => $data,
         ]);
     }
+
+    // ubah status baca buku
 }

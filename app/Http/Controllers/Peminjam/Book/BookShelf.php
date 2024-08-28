@@ -56,15 +56,17 @@ class BookShelf extends Controller
                 'keterangan_denda' => 'Tidak ada',
             ];
 
-            Loan::firstOrCreate($credentials);
+            $loan = Loan::firstOrCreate($credentials);
+            $this->log("Membaca e-book {$loan->book->judul}");
             return redirect('/baca-e-book/' . $id);
         } else if ($request->e_book == 'hapus') {
-            $book = Loan::where('buku_id', $id)
+            $loan = Loan::where('buku_id', $id)
                 ->where('peminjam_id', $peminjamId)
                 ->first();
 
-            if ($book) {
-                $book->delete();
+            if ($loan) {
+                $this->log("Menghapus e-book {$loan->book->judul} dari daftar baca");
+                $loan->delete();
                 return back();
             }
         }
@@ -76,10 +78,11 @@ class BookShelf extends Controller
     {
         $peminjamId = auth()->user()->id;
 
-        Loan::where('buku_id', $id)
+        $loan = Loan::where('buku_id', $id)
             ->where('peminjam_id', $peminjamId)
             ->delete();
 
+        $this->log("Menghapus e-book {$loan->book->judul} dari daftar baca");
         return back()->withSuccess('Buku berhasil menghapus e-book');
     }
 }

@@ -9,6 +9,7 @@
                         <th>Nama pengunjung</th>
                         <th>Tanggal kunjungan</th>
                         <th>Keterangan kunjungan</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -18,6 +19,7 @@
                             <td>{{ $item->peminjam->nama }}</td>
                             <td>{{ $item->tanggal_kunjungan }}</td>
                             <td>{{ $item->keterangan_kunjungan }}</td>
+                            <td>{{ $item->status_kunjungan }}</td>
                             <td>
                                 <x-pustakawan.button.group-visit :item="$item" />
                             </td>

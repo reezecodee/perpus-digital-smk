@@ -30,6 +30,7 @@ class ManageCarousel extends Controller
             Carousel::create($validated_data);
         }
 
+        $this->log('Menambahkan gambar carousel baru');
         return redirect()->back()->withSuccess('Gambar berhasil diupload!');
     }
 
@@ -44,6 +45,7 @@ class ManageCarousel extends Controller
 
         $carousel->delete();
 
+        $this->log('Menghapus data gambar carousel');
         return back()->withSuccess('Carousel berhasil dihapus!');
     }
 }

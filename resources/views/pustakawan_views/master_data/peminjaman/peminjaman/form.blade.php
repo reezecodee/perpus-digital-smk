@@ -28,11 +28,11 @@
                 </div>
                 @if (isset($peminjaman))
                     <div class="col-md-4">
-                        <x-pustakawan.input.status-select />
+                        <x-pustakawan.input.status-select :status="$peminjaman->status" />
                     </div>
                 @endif
                 <div class="col-md-12">
-                    <x-pustakawan.input.textarea label="Keterangan (opsional)" name="keterangan" :value="old('keterangan', $data->keterangan ?? '')" placeholder="Masukkan keterangan pinjam" :isrequired="false" />
+                    <x-pustakawan.input.textarea label="Keterangan (opsional)" name="keterangan" :value="old('keterangan', $peminjaman->keterangan ?? '')" placeholder="Masukkan keterangan pinjam" :isrequired="false" />
                 </div>
                 <div class="col-md-12">
                     <x-pustakawan.input.cnfrm-checkbox />

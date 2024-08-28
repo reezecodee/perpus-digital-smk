@@ -20,9 +20,8 @@
                             <td>{{ $item->denda_terlambat }}</td>
                             <td>{{ $item->denda_rusak }}</td>
                             <td>{{ $item->denda_tidak_kembali }}</td>
-                            <td>
+                            <td align="center">
                                 <x-pustakawan.button.edit :route="route('edit_book', ['format' => 'fisik', 'id' => $item->book->id])" />
-                                <x-pustakawan.button.delete :id="$item->id" :route="route('delete_fine', $item->id)" />
                             </td>
                         </tr>
                     @endforeach

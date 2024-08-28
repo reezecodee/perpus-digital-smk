@@ -19,7 +19,7 @@
                         placeholder="" type="date" :isrequired="true" />
                 </div>
                 <div class="col-md-4">
-                    <x-pustakawan.input.visit-status />
+                    <x-pustakawan.input.visit-status :visit="$visit" />
                 </div>
                 <div class="col-md-12">
                     <x-pustakawan.input.textarea label="Keterangan kunjungan" name="keterangan_kunjungan" :value="old('keterangan_kunjungan', $visit->keterangan_kunjungan ?? '')"

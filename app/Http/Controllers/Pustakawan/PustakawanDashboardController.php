@@ -10,7 +10,7 @@ class PustakawanDashboardController extends Controller
     public function show_dashboard()
     {
         return view('pustakawan_views.dashboard', [
-            'title' => 'Dashboard E-Perpustakaan',
+            'title' => 'Dashboard Control E-Perpustakaan',
             'heading' => 'Dashboard'
         ]);
     }

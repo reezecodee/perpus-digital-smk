@@ -68,6 +68,7 @@ class LogicUserController extends Controller
         $user->assignRole($role);
 
         $role_name = strtolower($role);
+        $this->log("Mendaftarkan {$role_name} baru bernama {$user->nama}");
         return redirect()->route('data-user', $role_name)->withSuccess('Berhasil menambahkan admin baru');
     }
 
@@ -99,9 +100,11 @@ class LogicUserController extends Controller
         $role_name = $user->roles->first()->name;
 
         if($user->id == auth()->user()->id){
+            $this->log('Memperbarui profile-nya');
             return back()->withSuccess('Berhasil memperbarui profil');
         }
 
+        $this->log("Memperbarui data {$role_name} milik {$user->nama}");
         return redirect()->route('data-user', $role_name)->withSuccess('Berhasil memperbarui data ' . $role_name);
     }
 
@@ -113,13 +116,14 @@ class LogicUserController extends Controller
             Storage::delete('public/img/profile/' . $user->photo);
         }
 
-        $roles = $user->roles->pluck('name')->toArray();
-        $roles = implode(', ', $roles);
+        $role = $user->roles->pluck('name')->toArray();
+        $role = implode(', ', $role);
 
         $user->roles()->detach();
         $user->delete();
 
-        return back()->withSuccess('Berhasil menghapus data ' . $roles);
+        $this->log("Menghapus akun milik {$user->nama} - {$role}");
+        return back()->withSuccess('Berhasil menghapus data ' . $role);
     }
 
     public function import_user(Request $request)
@@ -136,6 +140,7 @@ class LogicUserController extends Controller
             if (session()->has('error')) {
                 return back()->with('error', session('error'));
             }
+            $this->log('Menambahkan data user melalui import excel');
             return back()->with('success', 'Data berhasil diimport.');
         } catch (\Exception $e) {
             return back()->withErrors(['error' => $e->getMessage()]);

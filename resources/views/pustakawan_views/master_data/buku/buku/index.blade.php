@@ -25,7 +25,7 @@
                             <td>{{ $item->author }}</td>
                             <td>{{ $item->isbn }}</td>
                             <td>{{ $item->status }}</td>
-                            <td>
+                            <td align="center">
                                 <x-pustakawan.button.detail :route="route('detail_book', ['format' => $format, 'id' => $item->id])" />
                                 <x-pustakawan.button.edit :route="route('edit_book', ['format' => $format, 'id' => $item->id])" />
                                 <x-pustakawan.button.delete :id="$item->id" :route="route('delete_book', $item->id)" />

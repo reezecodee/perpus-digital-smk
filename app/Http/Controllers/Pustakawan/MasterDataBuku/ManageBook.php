@@ -132,8 +132,9 @@ class ManageBook extends Controller
             Fine::create($fine_data);
         }
 
-
-        return redirect()->route('data-buku', lcfirst($book->format))->withSuccess('Berhasil menambahkan buku baru');
+        $lcfirst = lcfirst($book->format);
+        $this->log("Menambahkan buku {$lcfirst} baru berjudul \"{$book->judul}\"");
+        return redirect()->route('data-buku', $lcfirst)->withSuccess('Berhasil menambahkan buku baru');
     }
 
     public function update_book(UpdateBookRequest $request, $format, $id)
@@ -177,7 +178,9 @@ class ManageBook extends Controller
             Fine::updateOrCreate(['buku_id' => $book->id], $fine_data);
         }
 
-        return redirect()->route('data-buku', lcfirst($format))->withSuccess('Berhasil memperbarui buku.');
+        $lcfirst = lcfirst($format);
+        $this->log("Memperbarui data buku {$lcfirst} dengan judul \"{$book->judul}\"");
+        return redirect()->route('data-buku', lcfirst($lcfirst))->withSuccess('Berhasil memperbarui buku.');
     }
 
     public function delete_book($id)
@@ -199,6 +202,8 @@ class ManageBook extends Controller
             $fine->delete();
         }
 
+        $lcfirst = lcfirst($book->format);
+        $this->log("Menghapus data buku {$lcfirst} dengan judul \"{$book->judul}\"");
         return back()->withSuccess('Berhasil menghapus data buku');
     }
 }

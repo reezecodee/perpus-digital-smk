@@ -40,7 +40,7 @@
                                     <td>{{ $item->kode }}</td>
                                     <td>{{ $item->kapasitas }}</td>
                                     <td>{{ $item->seluruh_jumlah_buku }}</td>
-                                    <td>
+                                    <td align="center">
                                         <x-pustakawan.button.edit :route="route('edit_shelf', $item->id)" />
                                         <x-pustakawan.button.delete :id="$item->id" :route="route('delete_shelf', $item->id)" />
                                     </td>

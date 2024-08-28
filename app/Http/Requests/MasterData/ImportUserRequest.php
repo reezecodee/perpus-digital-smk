@@ -31,7 +31,7 @@ class ImportUserRequest extends FormRequest
             'jk' => 'required|in:Laki-laki,Perempuan',
             'password' => 'required|min:8',
             'alamat' => 'required|max:200',
-            'status' => 'required|in:Aktif,Non-aktif',
+            'status' => 'required|in:Aktif,Nonaktif',
             'nisn' => 'nullable|min:10|max:10|unique:users,nisn'
         ];
     }

@@ -19,7 +19,7 @@
                     <td>{{ $item->book->judul }}</td>
                     <td>{{ $item->jumlah_buku }}</td>
                     <td>{{ $item->buku_saat_ini }}</td>
-                    <td>
+                    <td align="center">
                         <x-pustakawan.button.edit :route="route('edit_placement', $item->id)" />
                         <x-pustakawan.button.delete :id="$item->id" :route="route('delete_placement', $item->id)" />
                     </td>
