@@ -204,6 +204,7 @@ Route::middleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group
     // Help/Report Problem
     Route::controller(ReportProblem::class)->group(function(){
         Route::get('/laporkan-masalah', 'report_problem')->name('report_problem');
+        Route::post('/kirim-laporan', 'send_report')->name('send_report');
     });
 
 

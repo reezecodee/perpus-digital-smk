@@ -16,9 +16,7 @@ class AllBooks extends Controller
 
         $booksQuery = Book::with('category')->where('format', $format)
             ->withAvg('review', 'rating')
-            ->limit(12)
-            ->latest()
-            ->get();
+            ->latest();
 
         if (!$request->has('_token')) {
             return view('peminjam_views.buku.semua-buku', [

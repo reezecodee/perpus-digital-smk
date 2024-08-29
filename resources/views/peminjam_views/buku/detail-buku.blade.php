@@ -46,7 +46,7 @@
                                 <form action="{{ route('update_e_book', $data->id) }}" method="post">
                                     @csrf
                                     <button type="submit" value="tambah" name="e_book"
-                                        class="bg-red-primary hover:bg-red-500 rounded-md text-white p-2.5 font-bold">Baca
+                                        class="bg-red-primary hover:bg-red-500 rounded-md text-white p-2.5 font-bold"><i class="fab fa-readme"></i> Baca
                                         E-book</button>
                                 </form>
                             @endif
