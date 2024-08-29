@@ -14,17 +14,19 @@ class AllBooks extends Controller
         $filter = $request->query('filter');
         $query = $request->query('q') ?? '';
 
-        $booksQuery = Book::where('format', $format);
+        $booksQuery = Book::with('category')->where('format', $format)
+            ->withAvg('review', 'rating')
+            ->limit(12)
+            ->latest()
+            ->get();
 
         if (!$request->has('_token')) {
             return view('peminjam_views.buku.semua-buku', [
                 'title' => 'Semua Buku Perpustakaan',
-                'books' => $booksQuery->paginate(10),
+                'books' => $booksQuery,
                 'format' => $format
             ]);
         }
-
-        $booksQuery = Book::where('format', $format);
 
         if (!empty($query)) {
             $booksQuery->where('judul', 'like', '%' . $query . '%');
@@ -38,7 +40,7 @@ class AllBooks extends Controller
             $booksQuery->orderBy('created_at', 'asc');
         }
 
-        $get_books = $booksQuery->paginate(10);
+        $get_books = $booksQuery->get();
 
         return view('peminjam_views.buku.semua-buku', [
             'title' => 'Semua Buku Perpustakaan',

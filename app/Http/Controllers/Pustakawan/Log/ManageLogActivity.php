@@ -11,7 +11,6 @@ class ManageLogActivity extends Controller
 {
     public function show_log() 
     {
-        Carbon::setLocale('id');
         return view('pustakawan_views.log.log-aktivitas', [
             'title' => 'Log Aktivitas',
             'heading' => 'Log Aktivitas',

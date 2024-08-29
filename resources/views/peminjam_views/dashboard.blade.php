@@ -1,6 +1,9 @@
 @extends('layouts.peminjam-layout')
 @section('content')
     <section>
+        <div
+            class="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
+        </div>
         <div class="pt-7 lg:pt-20 mx-auto">
             <div class="flex justify-center mb-1">
                 <div class="w-full py-2 px-3 lg:px-24">
@@ -10,31 +13,31 @@
                             <!-- Item 1 -->
                             <div class="hidden duration-700 ease-in-out" data-carousel-item>
                                 <img src="/img/carousel/banner.jpg"
-                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-56"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-72"
                                     alt="...">
                             </div>
                             <!-- Item 2 -->
                             <div class="hidden duration-700 ease-in-out" data-carousel-item>
                                 <img src="/img/carousel/banner.jpg"
-                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-56"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-72"
                                     alt="...">
                             </div>
                             <!-- Item 3 -->
                             <div class="hidden duration-700 ease-in-out" data-carousel-item>
                                 <img src="/img/carousel/banner.jpg"
-                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-56"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-72"
                                     alt="...">
                             </div>
                             <!-- Item 4 -->
                             <div class="hidden duration-700 ease-in-out" data-carousel-item>
                                 <img src="/img/carousel/banner.jpg"
-                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-56"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-72"
                                     alt="...">
                             </div>
                             <!-- Item 5 -->
                             <div class="hidden duration-700 ease-in-out" data-carousel-item>
                                 <img src="/img/carousel/banner.jpg"
-                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-56"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-72"
                                     alt="...">
                             </div>
                         </div>
@@ -70,12 +73,11 @@
             </div>
             <div class="px-3 lg:px-24 mx-auto">
                 <div class="flex flex-col lg:flex-row justify-between items-center">
-                    <div
-                        class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-5">
+                    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg mb-5">
                         <span class="text-xl lg:text-3xl font-semibold"><i class="fas fa-book text-red-primary"></i> Lihat
                             semua
                             buku</span>
-                        <p class="mb-3 mt-3 font-normal text-gray-500 dark:text-gray-400">Lihat semua buku yang tersedia di
+                        <p class="mb-3 mt-3 font-normal text-gray-500">Lihat semua buku yang tersedia di
                             perpustakaan</p>
                         <a href="{{ route('all_books') }}?format=fisik"
                             class="inline-flex font-medium items-center text-blue-600 hover:underline">
@@ -91,12 +93,11 @@
                         <i class="fas fa-book-open text-5xl text-red-primary"></i>
                         <p class="text-2xl font-bold">Welcome</p>
                     </div>
-                    <div
-                        class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-5">
+                    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg mb-5">
                         <span class="text-xl lg:text-3xl font-semibold"><i class="fas fa-book-reader text-red-primary"></i>
                             Baca via
                             E-book</span>
-                        <p class="mb-3 mt-3 font-normal text-gray-500 dark:text-gray-400">Kamu bisa baca secara online
+                        <p class="mb-3 mt-3 font-normal text-gray-500">Kamu bisa baca secara online
                             dengan E-book</p>
                         <a href="{{ route('all_books') }}?format=elektronik"
                             class="inline-flex font-medium items-center text-blue-600 hover:underline">
@@ -114,18 +115,7 @@
                     <div class="flex lg:block justify-center lg:justify-normal">
                         <div class="grid grid-cols-2 lg:grid-cols-6 gap-9 lg:gap-3">
                             @foreach ($recomendations as $item)
-                                <div class="w-36">
-                                    <a href="{{ route('detail_buku', $item->id) }}">
-                                        <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
-                                            alt="" srcset="" class="rounded-lg mb-2" loading="lazy">
-                                    </a>
-                                    <p class="text-sm font-semibold truncate-text">{{ $item->judul }}</p>
-                                    <p class="text-xs font-medium">Kategori: {{ $item->category->nama_kategori }}
-                                    </p>
-                                    <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i>
-                                        {{ $rating($item->id) }} | Tersedia 5
-                                    </p>
-                                </div>
+                                <x-peminjam.card.book :item="$item" />
                             @endforeach
                         </div>
                         @if ($recomendations->isEmpty())
@@ -144,28 +134,17 @@
                     <h1 class="text-2xl mb-4 font-bold">E-book terbaru</h1>
                     <div class="flex lg:block justify-center lg:justify-normal">
                         <div class="grid grid-cols-2 lg:grid-cols-6 gap-9 lg:gap-3">
-                            @foreach ($recomendations as $item)
-                                <div class="w-36">
-                                    <a href="{{ route('detail_buku', $item->id) }}">
-                                        <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
-                                            alt="" srcset="" class="rounded-lg mb-2" loading="lazy">
-                                    </a>
-                                    <p class="text-sm font-semibold truncate-text">{{ $item->judul }}</p>
-                                    <p class="text-xs font-medium">Kategori: {{ $item->category->nama_kategori }}
-                                    </p>
-                                    <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i>
-                                        {{ $rating($item->id) }} | Tersedia 5
-                                    </p>
-                                </div>
+                            @foreach ($latest_ebooks as $item)
+                                <x-peminjam.card.book :item="$item" />
                             @endforeach
                         </div>
-                        @if ($recomendations->isEmpty())
+                        @if ($latest_ebooks->isEmpty())
                             <div class="flex justify-center">
                                 <div class="text-center">
                                     <img src="/img/assets/oh_no.webp" alt="" srcset=""
                                         class="w-52 inline-block">
-                                    <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan buku
-                                        rekomendasi</h1>
+                                    <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan E-book
+                                        terbaru</h1>
                                 </div>
                             </div>
                         @endif
@@ -178,8 +157,8 @@
                             <div class="flex gap-9 lg:gap-3">
                                 <div class="w-64 flex-shrink-0">
                                     <a href="">
-                                        <img src="https://images.unsplash.com/photo-1566389437851-a35bddb62402?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                            alt="" srcset="" class="rounded-lg mb-2" loading="lazy">
+                                        <img src="" alt="" srcset="" class="rounded-lg mb-2"
+                                            loading="lazy">
                                     </a>
                                     <p class="text-sm font-semibold truncate-text">Lorem ipsum dolor sit amet consectetur
                                         adipisicing elit. Dolorum, beatae?</p>

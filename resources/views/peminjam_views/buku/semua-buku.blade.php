@@ -96,24 +96,14 @@
             <div class="flex lg:block justify-center lg:justify-normal">
                 <div class="grid grid-cols-2 lg:grid-cols-6 gap-9 lg:gap-3">
                     @foreach ($books as $item)
-                        <div class="w-36">
-                            <a href="{{ route('detail_buku', $item->id) }}">
-                                <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
-                                    alt="" srcset="" class="rounded-lg mb-2">
-                            </a>
-                            <p class="text-sm font-semibold truncate-text">{{ $item->judul }}</p>
-                            <p class="text-xs font-medium">Kategori: {{ $item->category->nama_kategori }}
-                            </p>
-                            <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i> 5.0 | Tersedia 5
-                            </p>
-                        </div>
+                        <x-peminjam.card.book :item="$item" />
                     @endforeach
                 </div>
                 @if ($books->isEmpty())
                     <div class="text-center w-full">
                         <div class="flex justify-center">
-                            <img src="/img/assets/search_result_not_found.webp"
-                                alt="" srcset="" width="300" class="block">
+                            <img src="/img/assets/search_result_not_found.webp" alt="" srcset="" width="300"
+                                class="block">
                         </div>
                         <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan pencarian</h1>
                     </div>

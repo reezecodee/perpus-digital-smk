@@ -2,15 +2,15 @@
 @section('content')
     <section class="mx-auto px-3 lg:px-24 text-gray-600">
         <div class="pt-24 lg:pt-36">
-            <div class="flex gap-12 mb-7">
-                <div class="self-start p-4 shadow-lg rounded-xl">
-                    <img src="https://ebooks.gramedia.com/ebook-covers/94048/image_highres/BLK_EST1721993497003.jpg"
+            <div class="flex gap-5 mb-7 shadow-lg p-4 rounded-lg">
+                <div class="self-start p-4">
+                    <img src="{{ asset('storage/img/cover/' . ($data->cover_buku ?? 'unknown_cover.jpg')) }}"
                         class="rounded-2xl shadow-md w-72" alt="" srcset="">
                 </div>
-                <div class="self-start w-full">
+                <div class="self-start p-4 w-full">
                     <div class="w-full self-start">
                         <h1 class="text-3xl font-bold mb-1">{{ $data->judul }}</h1>
-                        <p class="text-sm font-semibold"><i class="fas fa-star text-yellow-300"></i> {{ $rating }}
+                        <p class="text-sm font-semibold"><i class="fas fa-star text-yellow-300"></i> {{ $rating($data->id) }}
                             Rating | Tersedia
                             10</p>
                         <div class="mt-5">
@@ -69,11 +69,11 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-7 hidden lg:block lg:mb-7">
+            <div class="mt-7 hidden lg:block lg:mb-7 shadow-lg p-8 rounded-lg">
                 <div class="font-medium">
                     <ul>
-                        <li class="font-bold text-lg">Sinopsis: </li>
-                        <li class="text-justify">{{ $data->sinopsis }}
+                        <li class="font-bold text-lg mb-3">Sinopsis/Deskripsi Buku: </li>
+                        <li class="text-justify text-sm font-medium">{{ $data->sinopsis }}
                         </li>
                     </ul>
                 </div>
@@ -88,15 +88,16 @@
                 </ul>
             </div>
         </div>
-        <div>
+        <div class="p-8 shadow-lg rounded-lg">
             <h1 class="font-extrabold text-2xl mb-4">Ulasan buku ({{ count($reviews) }})</h1>
             <div class="flex gap-7">
                 <div class="w-full self-start">
-                    @forelse ($reviews as $item)
-                        <div class="border border-gray-400 rounded-xl p-5 shadow-sm mb-5">
+                    @forelse ($reviews as $index => $item)
+                        <div
+                            class="border border-gray-400 rounded-xl p-5 shadow-sm mb-5 review-item @if ($index >= 3) hidden @endif">
                             <div class="flex items-center gap-3 mb-2">
-                                <img src="/img/unknown_profile.jpg" class="rounded-full" width="40" alt=""
-                                    srcset="">
+                                <img src="{{ asset('storage/img/profile/' . ($item->borrower_review->photo ?? 'unknown.jpg')) }}"
+                                    class="rounded-full" width="40" alt="" srcset="" loading="lazy">
                                 <div class="flex justify-between items-center w-full">
                                     <div class="block">
                                         <p class="font-bold text-sm">{{ $item->borrower_review->nama }}</p>
@@ -132,11 +133,13 @@
                                             </svg>
                                         </div>
                                     </div>
-                                    <span class="text-xs font-semibold block">{{ $item->created_at }}</span>
+                                    <span
+                                        class="text-xs font-semibold block">{{ $item->created_at->diffForHumans() }}</span>
                                 </div>
                             </div>
-                            <div class="font-medium flex items-start gap-5 mt-1">
-                                <p>{{ $item->komentar }}</p>
+                            <div class="font-medium flex items-start gap-5 mt-1 text-sm">
+                                <p>{{ $item->komentar }}
+                                </p>
                             </div>
                         </div>
                     @empty
@@ -145,26 +148,22 @@
                         </div>
                         <h1 class="text-black text-center text-lg font-semibold">Belum ada komentar terkait buku ini</h1>
                     @endforelse
+
+                    <!-- Tombol Lihat Semua -->
+                    @if (count($reviews) > 3)
+                        <button id="showMoreBtn" class="btn btn-primary">Lihat Semua</button>
+                        <button id="showLessBtn" class="btn btn-secondary hidden">Lihat Lebih Sedikit</button>
+                    @endif
                 </div>
             </div>
         </div>
+
         <div class="mt-7">
             <h1 class="font-extrabold text-2xl mb-4">Rekomendasi serupa</h1>
             <div class="flex lg:block justify-center lg:justify-normal">
                 <div class="grid grid-cols-2 lg:grid-cols-5 gap-9 lg:gap-3">
                     @foreach ($recomendations as $item)
-                        <div class="w-36">
-                            <a href="{{ route('detail_buku', $item->id) }}">
-                                <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
-                                    alt="" srcset="" class="rounded-lg mb-2">
-                            </a>
-                            <p class="text-sm font-semibold truncate-text">{{ $item->judul }}</p>
-                            <p class="text-xs font-medium">Kategori: {{ $item->category->nama_kategori }}
-                            </p>
-                            <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i>
-                                {{ $rating }} | Tersedia 5
-                            </p>
-                        </div>
+                        <x-peminjam.card.book :item="$item" />
                     @endforeach
                 </div>
             </div>
@@ -175,9 +174,37 @@
                         <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan buku rekomendasi
                             serupa
                         </h1>
-                        </>
                     </div>
+                </div>
             @endif
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const showMoreBtn = document.getElementById('showMoreBtn');
+            const showLessBtn = document.getElementById('showLessBtn');
+            const hiddenReviews = document.querySelectorAll('.review-item.hidden');
+
+            if (showMoreBtn) {
+                showMoreBtn.addEventListener('click', function() {
+                    hiddenReviews.forEach(function(review) {
+                        review.classList.remove('hidden');
+                    });
+                    showMoreBtn.style.display = 'none';
+                    showLessBtn.classList.remove('hidden'); 
+                });
+            }
+
+            if (showLessBtn) {
+                showLessBtn.addEventListener('click', function() {
+                    hiddenReviews.forEach(function(review) {
+                        review.classList.add('hidden');
+                    });
+                    showMoreBtn.style.display = 'block'; 
+                    showLessBtn.classList.add('hidden'); 
+                });
+            }
+        });
+    </script>
 @endsection

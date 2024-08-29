@@ -10,31 +10,28 @@ class SearchResult extends Controller
 {
     public function show_search_result(Request $request)
     {
-        $query = $request->query('q') ?? '';
+        $query = $request->query('q', ''); 
 
-        $booksQuery = Book::query()
-        ->join('categories', 'books.kategori_id', '=', 'categories.id')
-        ->select('books.*');
+        $booksQuery = Book::available()
+            ->join('categories', 'books.kategori_id', '=', 'categories.id')
+            ->select('books.*') 
+            ->with('category') 
+            ->withAvg('review', 'rating') 
+            ->latest(); 
 
-        if (!empty($query)) {
+        if ($query) {
             $booksQuery->where(function ($q) use ($query) {
                 $q->where('books.judul', 'like', '%' . $query . '%')
-                  ->orWhere('categories.nama_kategori', 'like', '%' . $query . '%');
+                    ->orWhere('categories.nama_kategori', 'like', '%' . $query . '%')
+                    ->orWhere('books.format', 'like', '%' . $query . '%'); 
             });
-
-            $booksQuery->orWhere('books.format', 'like', '%' . $query . '%');
         }
 
-        if (!$request->has('_token')) {
-            return view('peminjam_views.buku.hasil-pencarian', [
-                'title' => 'Hasil Pencarian Buku',
-                'books' => $booksQuery->get() 
-            ]);
-        }
+        $books = $request->has('_token') ? $booksQuery->paginate(10) : $booksQuery->limit(12)->get();
 
         return view('peminjam_views.buku.hasil-pencarian', [
             'title' => 'Hasil Pencarian Buku',
-            'books' => $booksQuery->paginate(10)
+            'books' => $books
         ]);
     }
 }

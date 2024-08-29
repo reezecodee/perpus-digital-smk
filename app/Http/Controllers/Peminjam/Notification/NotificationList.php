@@ -12,7 +12,7 @@ class NotificationList extends Controller
     {
         return view('peminjam_views.notifikasi.index', [
             'title' => 'Notifikasi Masuk',
-            'notifications' => Notification::where('penerima_id', auth()->user()->id)->get()
+            'notifications' => Notification::with('receiver')->where('penerima_id', auth()->user()->id)->limit(10)->get()
         ]);
     }
 

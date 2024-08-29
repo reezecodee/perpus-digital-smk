@@ -6,31 +6,38 @@ use App\Http\Controllers\Controller;
 use App\Models\Loan;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Picqer\Barcode\BarcodeGeneratorHTML;
 
 class BookShelf extends Controller
 {
+    private function get_barcode($data, $widthFactor = 2, $height = 30)
+    {
+        $generatorHTML = new BarcodeGeneratorHTML();
+        return $generatorHTML->getBarcode("$data", $generatorHTML::TYPE_CODE_128, $widthFactor, $height);
+    }
+    
     public function show_my_shelf()
     {
         $excluded_statuses = ['Sudah dikembalikan', 'Sudah dibayar', 'Sudah diulas'];
-        $books = Loan::where('peminjam_id', auth()->user()->id)
+        $books = Loan::with('book')->where('peminjam_id', auth()->user()->id)
             ->whereNotIn('status', $excluded_statuses)
             ->whereHas('book', function ($query) {
                 $query->where('format', 'Fisik');
             })->with('book')->get();
 
-        $e_books = Loan::where('peminjam_id', auth()->user()->id)
+        $e_books = Loan::with('book')->where('peminjam_id', auth()->user()->id)
             ->whereHas('book', function ($query) {
                 $query->where('format', 'Elektronik');
             })->with('book')->get();
 
-        $for_reviews = Loan::where('peminjam_id', auth()->user()->id)->where('status', 'Sudah dikembalikan')->get();
+        $for_reviews = Loan::with('book')->where('peminjam_id', auth()->user()->id)->where('status', 'Sudah dikembalikan')->get();
 
         return view('peminjam_views.buku.rak-buku', [
             'title' => 'Rak Buku Saya',
             'books' => $books,
             'e_books' => $e_books,
             'for_reviews' => $for_reviews,
-            'reviews' => Review::where('peminjam_id', auth()->user()->id)->get(),
+            'reviews' => Review::with('book')->where('peminjam_id', auth()->user()->id)->get(),
             'barcode' => function ($data, $widthFactor = 2, $height = 30) {
                 return $this->get_barcode($data, $widthFactor, $height);
             },

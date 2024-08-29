@@ -44,11 +44,16 @@ class Book extends Model
 
     public function scopeAvailable($query)
     {
-        return $query->where('status', 'tersedia');
+        return $query->where('status', 'Tersedia');
     }
 
     public function scopePhysical($query)
     {
         return $query->where('format', 'Fisik');
+    }
+
+    public function scopeElectronic($query)
+    {
+        return $query->where('format', 'Elektronik');
     }
 }
