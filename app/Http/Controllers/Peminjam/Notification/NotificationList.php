@@ -18,10 +18,10 @@ class NotificationList extends Controller
 
     public function show_read_notif($id)
     {
-        $data = Notification::find($id);
-
-        if(!$data){
-            return abort(404);
+        $data = Notification::findOrFail($id);
+        if($data->status == 'Belum dibaca'){
+            $this->log("{$data->receiver->nama} membaca notifikasi yang dikirimkan oleh {$data->sender->nama}");
+            $data->update(['status' => 'Sudah dibaca']);
         }
 
         return view('peminjam_views.notifikasi.baca-notif', [
@@ -29,6 +29,4 @@ class NotificationList extends Controller
             'data' => $data,
         ]);
     }
-
-    // ubah status baca buku
 }

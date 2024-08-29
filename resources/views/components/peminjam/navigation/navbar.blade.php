@@ -8,7 +8,7 @@
                 <form action="{{ route('search_result') }}" method="get" class="relative">
                     @csrf
                     <input type="text" name="q" value="{{ request()->query('q') }}"
-                        class="bg-white py-2.5 px-3 rounded-md w-[17rem] lg:w-[24rem] text-sm placeholder:text-black text-black font-semibold focus:border-none focus:outline-none"
+                        class="bg-white py-2.5 px-3 rounded-md w-[17rem] lg:w-[24rem] text-sm placeholder:text-black text-black font-semibold focus:ring-red-500 focus:border-red-500"
                         placeholder="Cari buku yang kamu sukai..." autocomplete="off">
                     <div class="absolute right-0 top-0" style="margin-top: 4px; margin-right: 8px;">
                         <button type="submit" class="bg-red-primary hover:bg-red-500 rounded-full p-1 w-8 text-center">

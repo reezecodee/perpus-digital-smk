@@ -69,7 +69,7 @@
 /* Animasi saat popup muncul */
 @keyframes popup-slide-in {
   from {
-      transform: translateY(-50%);
+      transform: translateY(-20%);
       opacity: 0;
   }
   to {
@@ -80,5 +80,9 @@
 
 /* Kelas untuk elemen popup yang akan menggunakan animasi */
 .popup-enter {
+  animation: popup-slide-in 0.5s ease-out;
+
+}
+.popup-enter-modal {
   animation: popup-slide-in 0.5s ease-out;
 }

@@ -30,45 +30,7 @@
                                         @endif
                                     </td>
                                 </tr>
-                                <div id="popup-modal{{ $loop->iteration }}" tabindex="-1"
-                                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                    <div class="relative p-4 w-full max-w-md max-h-full">
-                                        <div class="relative bg-white rounded-lg shadow">
-                                            <button type="button"
-                                                class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-                                                data-modal-hide="popup-modal{{ $loop->iteration }}">
-                                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none" viewBox="0 0 14 14">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2"
-                                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                                </svg>
-                                                <span class="sr-only">Close modal</span>
-                                            </button>
-                                            <div class="p-4 md:p-5 text-center">
-                                                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2"
-                                                        d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                                </svg>
-                                                <h3 class="mb-5 text-lg font-normal text-gray-500">Apakah kamu ingin
-                                                    menghapusnya</h3>
-                                                <form action="{{ route('delete_visit', $item->id) }}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button data-modal-hide="popup-modal{{ $loop->iteration }}"
-                                                        type="submit"
-                                                        class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-                                                        Ya, tentu
-                                                    </button>
-                                                </form>
-                                                <button data-modal-hide="popup-modal{{ $loop->iteration }}" type="button"
-                                                    class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Batalkan</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <x-peminjam.modal.delete-visit-modal :id="$item->id" :iteration="$loop->iteration" />
                             @endforeach
                         </tbody>
                     </table>
@@ -82,13 +44,13 @@
                         <div class="mb-3">
                             <label class="block mb-2 font-medium text-gray-900">Tanggal kunjungan</label>
                             <input type="date" value="{{ date('Y-m-d') }}" name="tanggal_kunjungan"
-                                class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500"
+                                class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-red-500 focus:border-red-500"
                                 disabled required>
                         </div>
                         <div class="mb-3">
                             <label class="block mb-2 font-medium text-gray-900">Keterangan kunjungan</label>
                             <textarea rows="5" name="keterangan_kunjungan" placeholder="Keterangan kunjungan Anda"
-                                class="block w-full p-2 text-gray-900 border border-gray-300 @error('keterangan_kunjungan') border-red-primary @enderror rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500"
+                                class="block w-full p-2 text-gray-900 border border-gray-300 @error('keterangan_kunjungan') border-red-primary @enderror rounded-lg bg-gray-50 text-base focus:ring-red-500 focus:border-red-500"
                                 required>{{ old('keterangan_kunjungan') }}</textarea>
                             @error('keterangan_kunjungan')
                                 <span class="text-red-primary font-medium">{{ $message }}</span>
@@ -102,10 +64,12 @@
                                 <b>{{ auth()->user()->nama }}</b> menandatangani kunjungan ini.</label>
                         </div>
                         <div class="flex justify-end">
-                            <button type="submit"
-                                class="bg-red-primary hover:bg-red-500 text-white duration-300 py-2 px-3 rounded-lg font-semibold text-sm">Ajukan
-                                kunjungan</button>
+                            <x-peminjam.button.confirm-btn modaltarget="visit-modal">
+                                Ajukan kunjungan
+                            </x-peminjam.button.confirm-btn>
                         </div>
+                        <x-peminjam.modal.confirm-modal question="Apakah Anda yakin ingin mengajukan permohonan?. Maksimal pengajuan kunjungan adalah 2x sehari"
+                            okbtn="Ya, ajukan" nobtn="Batalkan" modalname="visit-modal" />
                     </form>
                 </div>
             </div>

@@ -30,7 +30,7 @@ class VisitPlan extends Controller
         return back()->withSuccess('Permohonan kunjungan berhasil ditambahkan');
     }
 
-    public function delete_visit($id)
+    public function delete_my_visit($id)
     {
         $visit = Visit::findOrFail($id);
         $visit->delete();

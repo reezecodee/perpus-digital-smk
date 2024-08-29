@@ -1,6 +1,6 @@
-<label for="{{ $name }}" class="font-semibold text-sm mb-1 block">{{ $label }}</label>
+<label for="{{ $name }}" class="font-bold text-sm mb-1 block">{{ $label }}</label>
 <input type="{{ $type }}" name="{{ $name }}"
-    class="border border-gray-400 @error($name) border-red-primary @enderror rounded-sm w-full p-1.5 mb-3"
+    class="border font-semibold border-gray-400 @error($name) border-red-primary @enderror rounded-sm w-full p-1.5 mb-3"
     value="{{ $value }}" placeholder="{{ $placeholder }}" required>
 @error($name)
     <div class="text-red-primary text-sm -mt-3 mb-3">{{ $message }}</div>

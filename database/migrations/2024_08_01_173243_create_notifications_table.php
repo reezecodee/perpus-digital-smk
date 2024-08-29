@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('pengirim_id');
             $table->string('judul');
             $table->text('pesan');
+            $table->enum('status', ['Sudah dibaca', 'Belum dibaca'])->default('Belum dibaca');
             $table->timestamp('tgl_pengiriman');
             $table->timestamps();
 

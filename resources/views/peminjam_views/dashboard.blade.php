@@ -11,9 +11,8 @@
                         <!-- Carousel wrapper -->
                         <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                             @forelse($carousels as $item)
-                                <!-- Item 1 -->
                                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                    <img src="{{ asset('storage/img/carousel/' . ($item->carousel_file ?? 'unknown.jpg')) }}"
+                                    <img src="{{ asset('storage/img/carousel/' . ($item->carousel_file ?? 'unknown_carousel.jpg')) }}"
                                         class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-72"
                                         alt="...">
                                 </div>
@@ -140,15 +139,7 @@
                         <div class="overflow-x-auto scrollbar-hide">
                             <div class="flex gap-9 lg:gap-3">
                                 @foreach ($articles as $item)
-                                    <div class="w-64 flex-shrink-0">
-                                        <a href="">
-                                            <img src="{{ asset('storage/img/thumbnail/' . ($item->thumbnail ?? 'unknown_cover.jpg')) }}"
-                                                alt="" srcset="" class="rounded-lg mb-2" loading="lazy">
-                                        </a>
-                                        <p class="text-sm font-bold mb-1 truncate-text-article">{{ $item->judul }}</p>
-                                        <p class="text-xs font-medium truncate-text-article-dsk">{{ $item->deskripsi }}</p>
-                                        <p class="text-xs font-bold truncate-text-article-dsk">Penulis: {{ $item->author->nama }}</p>
-                                    </div>
+                                    <x-peminjam.card.article :item="$item" />
                                 @endforeach
                             </div>
                         </div>

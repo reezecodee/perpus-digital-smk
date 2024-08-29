@@ -3,11 +3,11 @@
     <div class="self-start w-full border shadow-md rounded-md p-4">
         <h1 class="text-xl font-bold mb-1">Ganti password</h1>
         <hr class="mb-3">
-        @session('success')
+        @if (session('success'))
             <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100" role="alert">
                 <span class="font-medium">{{ session('success') }}</span>
             </div>
-        @endsession
+        @endif
         <div class="flex items-center p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">
             <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor" viewBox="0 0 20 20">
@@ -23,39 +23,18 @@
         <form action="" method="post">
             @csrf
             <div class="grid grid-cols-2 gap-3">
-                <div>
-                    <p class="font-semibold mb-1">Password saat ini</p>
-                    <input type="text"
-                        class="p-2 rounded-md border @error('current_password') border-red-primary @enderror w-full font-medium"
-                        value="{{ old('current_password') }}" name="current_password" placeholder="Password saat ini"
-                        autocomplete="off">
-                    @error('current_password')
-                        <span class="text-red-primary font-medium">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div>
-                    <p class="font-semibold mb-1">Password baru</p>
-                    <input type="password"
-                        class="p-2 rounded-md border @error('new_password') border-red-primary @enderror w-full font-medium"
-                        name="new_password" placeholder="Password baru" autocomplete="off">
-                    @error('new_password')
-                        <span class="text-red-primary font-medium">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div>
-                    <p class="font-semibold mb-1">Konfirmasi password</p>
-                    <input type="password"
-                        class="p-2 rounded-md border @error('new_password_confirmation') border-red-primary @enderror w-full font-medium"
-                        value="" name="new_password_confirmation" placeholder="Konfirmasi password"
-                        autocomplete="off">
-                    @error('new_password_confirmation')
-                        <span class="text-red-primary font-medium">{{ $message }}</span>
-                    @enderror
-                </div>
+                <x-peminjam.input.basic label="Passoword saat ini" name="current_password" type="text" :value="old('current_password')"
+                    placeholder="Masukkan password saat ini" />
+                <x-peminjam.input.basic label="Password baru" name="new_password" type="password" :value="old('new_password')"
+                    placeholder="Masukkan password baru" />
+                <x-peminjam.input.basic label="Konfirmasi password" name="new_password_confirmation" type="password"
+                    :value="old('new_password_confirmation')" placeholder="Konfirmasikan password Anda" />
             </div>
-            <button type="submit"
-                class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2.5 font-bold mt-4">Ganti
-                password</button>
+            <x-peminjam.button.confirm-btn modaltarget="ch-password-modal">
+                Ganti passoword
+            </x-peminjam.button.confirm-btn>
+            <x-peminjam.modal.confirm-modal question="Apakah Anda yakin ingin mengubah password Anda?" okbtn="Ya, tentu"
+                nobtn="Batalkan" modalname="ch-password-modal" />
         </form>
     </div>
 @endsection

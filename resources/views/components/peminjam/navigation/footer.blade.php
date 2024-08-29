@@ -55,10 +55,6 @@
                         <br>
                     <p class="text-sm text-gray-500 lg:max-w-xs text-center lg:text-left">Alamat: Jl. Tujuh Belas Agustus No.17, Senayan, Jakarta Pusat</p>
                 </div>
-                <a href="javascript:;"
-                    class="py-2.5 px-5 h-9 block w-fit bg-red-primary rounded-full shadow-sm text-xs text-white mx-auto transition-all  duration-500 hover:bg-red-500 lg:mx-0">
-                    Contact us
-                </a>
             </div>
             <!--End Col-->
             <div class="lg:mx-auto text-left ">

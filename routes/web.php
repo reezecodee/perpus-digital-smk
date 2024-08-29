@@ -14,6 +14,7 @@ use App\Http\Controllers\Peminjam\Book\ReadEbook;
 use App\Http\Controllers\Peminjam\Book\SearchResult;
 use App\Http\Controllers\Peminjam\Calendar\Schedule;
 use App\Http\Controllers\Peminjam\Dashboard\DashboardController;
+use App\Http\Controllers\Peminjam\Help\ReportProblem;
 use App\Http\Controllers\Peminjam\Notification\NotificationList;
 use App\Http\Controllers\Peminjam\Payment\PaymentFine;
 use App\Http\Controllers\Peminjam\Profile\Profile;
@@ -200,6 +201,13 @@ Route::middleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group
     });
 
 
+    // Help/Report Problem
+    Route::controller(ReportProblem::class)->group(function(){
+        Route::get('/laporkan-masalah', 'report_problem')->name('report_problem');
+    });
+
+
+
     // Payment
 
 
@@ -228,7 +236,7 @@ Route::middleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group
     Route::controller(VisitPlan::class)->group(function () {
         Route::get('/kunjungan', 'show_visit')->name('visit');
         Route::post('/kunjungan', 'add_visit')->name('add_visit');
-        Route::delete('/kunjungan/{id}', 'delete_visit')->name('delete_visit');
+        Route::delete('/kunjungan/{id}', 'delete_my_visit')->name('delete_my_visit');
     });
 });
 

@@ -10,7 +10,8 @@
                     <hr class="mb-3">
                     <div class="border rounded-lg p-2">
                         <div class="flex items-center gap-3">
-                            <img src="https://www.svgrepo.com/show/503852/mail.svg" alt="" srcset="" class="w-16">
+                            <img src="https://www.svgrepo.com/show/503852/mail.svg" alt="" srcset=""
+                                class="w-16">
                             <div>
                                 <h1 class="text-lg font-bold">{{ $data->judul }}
                                 </h1>
@@ -20,8 +21,8 @@
                         <hr class="mt-3 mb-4">
                         <p class="text-justify">{!! $data->pesan !!}</p>
                         <a href="{{ route('notification') }}" class="block mt-6">
-                            <button
-                                class="bg-red-primary p-2.5 text-sm font-semibold rounded-md text-white hover:bg-red-500 text-end"><i class="fas fa-chevron-circle-left"></i> Kembali</button>
+                            <x-peminjam.button.normal-btn><i class="fas fa-chevron-circle-left"></i>
+                                Kembali</x-peminjam.button.normal-btn>
                         </a>
                     </div>
                 </div>
