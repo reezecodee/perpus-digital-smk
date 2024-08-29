@@ -12,5 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
     truncateText('.truncate-text', 25);
     truncateText('.truncate-text-author', 10);
     truncateText('.truncate-text-notif', 100);
-    truncateText('.truncate-text-article', 150);
+    truncateText('.truncate-text-article', 65);
+    truncateText('.truncate-text-article-dsk', 40);
 });

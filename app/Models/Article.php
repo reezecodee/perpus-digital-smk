@@ -11,4 +11,9 @@ class Article extends Model
     use HasFactory, HasUuids;
 
     protected $guarded = ['id'];
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id', 'id');
+    }
 }

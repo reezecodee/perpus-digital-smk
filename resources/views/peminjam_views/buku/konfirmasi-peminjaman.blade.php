@@ -26,19 +26,12 @@
                                     class="fas fa-book text-red-primary"></i></h2>
                             <hr class="mb-4">
                             <div class="flex gap-7 mb-0 lg:mb-3">
-                                <img src="https://ebooks.gramedia.com/ebook-covers/94048/image_highres/BLK_EST1721993497003.jpg"
+                                <img src="{{ asset('storage/img/cover/' . ($data->cover_buku ?? 'unknown_cover.jpg')) }}"
                                     alt="" width="100" class="rounded-md self-start">
-                                <div class="self-start">
+                                <div class="self-start w-full">
                                     <h3 class="font-bold text-lg mb-2">{{ $data->judul }}</h3>
-                                    <p class="text-xs font-medium">Tgl pinjam: 20 Juni 2023</p>
-                                    <p class="text-xs font-medium">Jatuh tempo: 20 Juni 2023</p>
-                                    <div class="p-4 mb-4 mt-4 text-sm text-blue-800 rounded-lg bg-blue-50 font-medium"
-                                        role="alert">
-                                        Anda bisa mengajukan durasi peminjaman,
-                                        namun durasi peminjaman harus menunggu izin dari pustakawan
-                                    </div>
-                                    <p class="font-semibold text-sm mb-1">Durasi pinjam (opsional)</p>
-                                    <input type="date" min="{{ date('Y-m-d') }}"
+                                    <p class="font-semibold text-sm mb-1">Durasi pinjam</p>
+                                    <input type="date" min="{{ date('Y-m-d') }}" value="{{ date('Y-m-d') }}"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-primary focus:border-red-500 block w-full p-2.5">
                                 </div>
                             </div>

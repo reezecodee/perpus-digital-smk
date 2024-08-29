@@ -10,36 +10,20 @@
                     <div id="default-carousel" class="relative w-full" data-carousel="slide">
                         <!-- Carousel wrapper -->
                         <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-                            <!-- Item 1 -->
-                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                <img src="/img/carousel/banner.jpg"
-                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-72"
-                                    alt="...">
-                            </div>
-                            <!-- Item 2 -->
-                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                <img src="/img/carousel/banner.jpg"
-                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-72"
-                                    alt="...">
-                            </div>
-                            <!-- Item 3 -->
-                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                <img src="/img/carousel/banner.jpg"
-                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-72"
-                                    alt="...">
-                            </div>
-                            <!-- Item 4 -->
-                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                <img src="/img/carousel/banner.jpg"
-                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-72"
-                                    alt="...">
-                            </div>
-                            <!-- Item 5 -->
-                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                <img src="/img/carousel/banner.jpg"
-                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-72"
-                                    alt="...">
-                            </div>
+                            @forelse($carousels as $item)
+                                <!-- Item 1 -->
+                                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                    <img src="{{ asset('storage/img/carousel/' . ($item->carousel_file ?? 'unknown.jpg')) }}"
+                                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-72"
+                                        alt="...">
+                                </div>
+                            @empty
+                                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                    <img src="/img/carousel/banner.jpg"
+                                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-72"
+                                        alt="...">
+                                </div>
+                            @endforelse
                         </div>
                         <!-- Slider controls -->
                         <button type="button"
@@ -155,19 +139,17 @@
                     <div class="flex lg:block justify-center lg:justify-normal">
                         <div class="overflow-x-auto scrollbar-hide">
                             <div class="flex gap-9 lg:gap-3">
-                                <div class="w-64 flex-shrink-0">
-                                    <a href="">
-                                        <img src="" alt="" srcset="" class="rounded-lg mb-2"
-                                            loading="lazy">
-                                    </a>
-                                    <p class="text-sm font-semibold truncate-text">Lorem ipsum dolor sit amet consectetur
-                                        adipisicing elit. Dolorum, beatae?</p>
-                                    <p class="text-xs font-medium">Kategori: Lorem, ipsum dolor.</p>
-                                    <p class="text-xs font-medium">
-                                        <i class="fas fa-star text-yellow-300"></i> 5.0 |
-                                        Tersedia 5
-                                    </p>
-                                </div>
+                                @foreach ($articles as $item)
+                                    <div class="w-64 flex-shrink-0">
+                                        <a href="">
+                                            <img src="{{ asset('storage/img/thumbnail/' . ($item->thumbnail ?? 'unknown_cover.jpg')) }}"
+                                                alt="" srcset="" class="rounded-lg mb-2" loading="lazy">
+                                        </a>
+                                        <p class="text-sm font-bold mb-1 truncate-text-article">{{ $item->judul }}</p>
+                                        <p class="text-xs font-medium truncate-text-article-dsk">{{ $item->deskripsi }}</p>
+                                        <p class="text-xs font-bold truncate-text-article-dsk">Penulis: {{ $item->author->nama }}</p>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                         @if ($recomendations->isEmpty())
@@ -175,8 +157,8 @@
                                 <div class="text-center">
                                     <img src="/img/assets/oh_no.webp" alt="" srcset=""
                                         class="w-52 inline-block">
-                                    <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan buku
-                                        rekomendasi</h1>
+                                    <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan artikel
+                                        terbaru</h1>
                                 </div>
                             </div>
                         @endif

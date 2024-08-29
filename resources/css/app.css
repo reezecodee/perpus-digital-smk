@@ -65,3 +65,20 @@
   scrollbar-width: none;
   /* Firefox */
 }
+
+/* Animasi saat popup muncul */
+@keyframes popup-slide-in {
+  from {
+      transform: translateY(-50%);
+      opacity: 0;
+  }
+  to {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+/* Kelas untuk elemen popup yang akan menggunakan animasi */
+.popup-enter {
+  animation: popup-slide-in 0.5s ease-out;
+}

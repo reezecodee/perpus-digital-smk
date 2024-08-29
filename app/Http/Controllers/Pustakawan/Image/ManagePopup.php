@@ -15,7 +15,7 @@ class ManagePopup extends Controller
         return view('pustakawan_views.image.popup', [
             'title' => 'Popup',
             'heading' => 'Popup',
-            'popups' => Popup::all()
+            'popups' => Popup::orderBy('urutan_ke')->get()
         ]);
     }
 

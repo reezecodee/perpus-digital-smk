@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->text('popup_file');
             $table->text('link')->nullable();
+            $table->integer('urutan_ke')->unique();
             $table->timestamps();
         });
     }

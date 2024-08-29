@@ -60,7 +60,7 @@ class AuthController extends Controller
 
             if ($user->hasRole('Peminjam')) {
                 $this->log('Berhasil login ke aplikasi dan redirect ke dashboard peminjam');
-                return redirect('/dashboard');
+                return redirect('/dashboard')->with('show_popup', true);
             } else if ($user->hasRole('Admin') || $user->hasRole('Pustakawan')) {
                 $this->log('Berhasil login ke aplikasi dan redirect ke dashboard control');
                 return redirect('/dashboard-control');
@@ -89,7 +89,8 @@ class AuthController extends Controller
 
         if ($user->hasRole('Peminjam')) {
             $this->log('Berhasil memverifikasi akunnya');
-            return redirect('/dashboard')->withSuccess('Selamat akun kamu berhasil di verifikasi');
+            return redirect('/dashboard')->with('success', 'Selamat akun kamu berhasil di verifikasi')
+            ->with('show_popup', true);
         } else if ($user->hasRole('Admin') || $user->hasRole('Pustakawan')) {
             $this->log('Berhasil memverifikasi akunnya');
             return redirect('/dashboard-control')->withSuccess('Selamat akun kamu berhasil di verifikasi');
