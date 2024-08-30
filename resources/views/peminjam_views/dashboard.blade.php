@@ -13,7 +13,7 @@
                             @forelse($carousels as $item)
                                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
                                     <img src="{{ asset('storage/img/carousel/' . ($item->carousel_file ?? 'unknown_carousel.jpg')) }}"
-                                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-72"
+                                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg h-36 lg:h-72 shadow-lg"
                                         alt="...">
                                 </div>
                             @empty

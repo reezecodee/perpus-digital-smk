@@ -30,9 +30,10 @@
 </head>
 
 <body class="font-quicksand">
-    @if (session('show_popup'))
-        <x-peminjam.alert.popup :popupimages="$popup_images"/>
+    @if (session('show_popup') && isset($popup_images) && count($popup_images) > 0)
+        <x-peminjam.alert.popup :popupimages="$popup_images" />
     @endif
+
 
     <x-peminjam.navigation.navbar />
     @yield('content')

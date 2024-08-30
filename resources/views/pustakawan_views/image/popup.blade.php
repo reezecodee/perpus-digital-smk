@@ -23,6 +23,8 @@
                         </div>
                         <x-pustakawan.input.basic label="Link redirect" name="link" :value="old('link')"
                             placeholder="Link redirect (opsional)" type="text" :isrequired="false" />
+                        <x-pustakawan.input.basic label="Urutan ke" name="urutan_ke" :value="old('urutan_ke')"
+                            placeholder="Urutan ke" type="number" :isrequired="true" />
                         <button type="button" onclick="confirmAdd()" class="btn btn-primary"><i class="fas fa-plus"></i>
                             Tambahkan</button>
                         <a href="{{ route('crop_picture') }}" target="_blank">

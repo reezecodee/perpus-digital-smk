@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Pustakawan\Image;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Information\ImageRequest;
+use App\Http\Requests\Information\PopupRequest;
 use App\Models\Popup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +19,7 @@ class ManagePopup extends Controller
         ]);
     }
 
-    public function upload_popup(ImageRequest $request)
+    public function upload_popup(PopupRequest $request)
     {
         $validated_data = $request->validated();
         if ($request->hasFile('image')) {

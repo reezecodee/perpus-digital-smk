@@ -3,7 +3,7 @@
         <div class="flex justify-between items-center py-3 px-2 lg:px-7">
             <div class="flex gap-5 items-center">
                 <a href="@auth {{ route('dashboard') }} @else / @endauth" class="hidden lg:inline">
-                    <img src="/assets/logo.svg" width="145" alt="" srcset="">
+                    <img src="/assets/logo-perpus.png" width="180" alt="" srcset="">
                 </a>
                 <form action="{{ route('search_result') }}" method="get" class="relative">
                     @csrf
