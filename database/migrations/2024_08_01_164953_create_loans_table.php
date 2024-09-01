@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('pengembalian')->nullable();
             $table->date('jatuh_tempo')->nullable();
             $table->text('keterangan')->nullable();
-            $table->enum('status', ['Masa pinjam', 'Masa pengembalian', 'Terkena denda', 'Sudah dikembalikan', 'Sudah dibayar', 'Sudah diulas', 'Menunggu persetujuan', 'Ditolak', 'Menunggu diambil', 'E-book']);
+            $table->enum('status', ['Masa pinjam', 'Masa pengembalian', 'Terkena denda', 'Sudah dikembalikan', 'Sudah dibayar', 'Sudah diulas', 'Menunggu persetujuan', 'Ditolak', 'Menunggu diambil', 'E-book', 'E-book sudah diulas']);
             $table->enum('keterangan_denda', ['Denda buku rusak', 'Denda buku terlambat', 'Denda buku tidak kembali', 'Tidak ada'])->default('Tidak ada');
             $table->timestamps();
 

@@ -17,6 +17,11 @@ class Loan extends Model
         return $this->belongsTo(Book::class, 'buku_id', 'id');
     }
 
+    public function review() 
+    {
+        return $this->hasOne(Review::class, 'peminjaman_id', 'id');
+    }
+
     public function peminjam()
     {
         return $this->belongsTo(User::class, 'peminjam_id', 'id');

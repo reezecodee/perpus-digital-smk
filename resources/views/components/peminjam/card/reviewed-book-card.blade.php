@@ -19,13 +19,13 @@
                         <label for="star2" title="2">2 stars</label>
                         <input type="radio" id="star1" {{ $item->rating >= 1 ? 'checked' : '' }} disabled />
                         <label for="star1" title="1">1 star</label>
-                    </div>                   
+                    </div>
                     <br><br>
                     <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50">
                         <div class="px-3 bg-white rounded-lg">
                             <textarea id="" rows="2"
-                                class="w-full px-0 text-sm text-gray-900 bg-white border-0 focus:ring-transparent focus:border-transparent" disabled
-                                >{{ $item->komentar }}</textarea>
+                                class="w-full px-0 text-sm text-gray-900 bg-white border-0 focus:ring-transparent focus:border-transparent"
+                                disabled>{{ $item->komentar }}</textarea>
                         </div>
                     </div>
                 </div>

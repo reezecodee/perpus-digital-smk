@@ -12,7 +12,7 @@ class AllBooks extends Controller
     {
         $format = $request->query('format');
         $filter = $request->query('filter');
-        $query = $request->query('q') ?? '';
+        $query = $request->query('s') ?? '';
 
         $booksQuery = Book::with('category')->where('format', $format)
             ->withAvg('review', 'rating')

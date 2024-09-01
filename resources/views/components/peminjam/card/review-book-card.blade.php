@@ -7,10 +7,10 @@
                 <a href="{{ route('detail_buku', $item->book->id) }}" class="inline-block mb-1">
                     <h1 class="text-base lg:text-lg font-bold">{{ $item->book->judul }}</h1>
                 </a>
-                <form method="post" action="{{ route('send_comment') }}">
+                <form method="post" action="{{ route('send_comment', $item->id) }}">
                     @csrf
                     <input type="hidden" value="{{ $item->book->id }}" name="buku_id" id="">
-                    <input type="hidden" value="{{ $item->id }}" name="peminjam_id" id="">
+                    <input type="hidden" value="{{ $item->peminjam->id }}" name="peminjam_id" id="">
                     <div class="rate">
                         <input type="radio" id="star5" name="rating" value="5" required />
                         <label for="star5" title="5">5 stars</label>

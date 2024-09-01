@@ -12,11 +12,7 @@ class BookDetail extends Controller
 {
     public function show_book($id)
     {
-        $data = Book::find($id);
-
-        if (!$data) {
-            return abort(404);
-        }
+        $data = Book::findOrFail($id);
 
         $is_liked = LikedBook::where('peminjam_id', auth()->user()->id)->where('buku_id', $id)->exists();
 
@@ -37,7 +33,7 @@ class BookDetail extends Controller
             'title' => 'Detail Buku',
             'data' => $data,
             'likes' => count(LikedBook::where('buku_id', $id)->get()),
-            'reviews' => Review::with('borrower_review')->where('buku_id', $id)->get(),
+            'reviews' => Review::with('loan')->where('buku_id', $id)->get(),
             'rating' => $rating,
             'is_liked' => $is_liked,
             'recomendations' => $recomendations

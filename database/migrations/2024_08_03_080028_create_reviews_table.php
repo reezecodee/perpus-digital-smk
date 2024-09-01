@@ -15,12 +15,14 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('buku_id');
             $table->uuid('peminjam_id');
+            $table->uuid('peminjaman_id');
             $table->char('rating', 1);
             $table->text('komentar');
             $table->timestamps();
 
             $table->foreign('buku_id')->references('id')->on('books')->onDelete('cascade');
             $table->foreign('peminjam_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('peminjaman_id')->references('id')->on('loans')->onDelete('cascade');
         });
     }
 

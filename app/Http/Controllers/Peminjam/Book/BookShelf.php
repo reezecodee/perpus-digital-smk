@@ -39,7 +39,7 @@ class BookShelf extends Controller
             'books' => $books,
             'e_books' => $e_books,
             'for_reviews' => $for_reviews,
-            'reviews' => Review::with('book')->where('peminjam_id', auth()->user()->id)->get(),
+            'reviews' => Review::with('borrower_review')->where('peminjam_id', auth()->user()->id)->get(),
             'barcode' => function ($data, $widthFactor = 2, $height = 30) {
                 return $this->get_barcode($data, $widthFactor, $height);
             },
@@ -95,12 +95,26 @@ class BookShelf extends Controller
         return back()->withSuccess('Buku berhasil menghapus e-book');
     }
 
-    public function send_comment(RatingRequest $request)
+    public function send_comment(RatingRequest $request, $id)
     {
         $validated_data = $request->validated();
-        $book = Book::find($validated_data->buku_id);
-        $user = auth()->user();
-        $this->log("{$user->nama} memberikan komentar untuk buku \"{$book->judul}\"");
+        $loan = Loan::findOrFail($id);
+        $loan->update(['status' => 'Sudah diulas']);
+
+        $validated_data['peminjaman_id'] = $loan->id;
+        Review::create($validated_data);
+        $this->log("{$loan->peminjam->nama} memberikan komentar untuk buku \"{$loan->book->judul}\"");
         return back()->withSuccess('Berhasil memberikan komentar');
+    }
+
+    public function delete_comment($id)
+    {
+        $review = Review::findOrFail($id);
+        $review->delete();
+        $loan = Loan::find($review->loan->id);
+        $loan->update(['status' => 'Sudah dikembalikan']);
+        $this->log("{$review->borrower_review->nama} menghapus komentarnya terhadap buku \"{$review->book->judul}\"");
+
+        return back()->withSuccess('Berhasil menghapus komentar buku');
     }
 }

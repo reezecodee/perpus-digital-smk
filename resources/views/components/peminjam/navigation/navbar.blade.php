@@ -52,20 +52,24 @@
                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 font-semibold">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDelayButton">
                         <li>
-                            <a href="{{ route('dashboard') }}" class="block px-4 py-2 hover:bg-gray-100"><i class="fas fa-home"></i>
+                            <a href="{{ route('dashboard') }}" class="block px-4 py-2 hover:bg-gray-100"><i
+                                    class="fas fa-home"></i>
                                 Dashboard</a>
                         </li>
                         <li>
-                            <a href="{{ route('calendar') }}" class="block px-4 py-2 hover:bg-gray-100"><i class="fas fa-calendar"></i>
+                            <a href="{{ route('calendar') }}" class="block px-4 py-2 hover:bg-gray-100"><i
+                                    class="fas fa-calendar"></i>
                                 Kalender</a>
                         </li>
                         <li>
-                            <a href="{{ route('overview') }}" class="block px-4 py-2 hover:bg-gray-100"><i class="fas fa-user"></i>
+                            <a href="{{ route('overview') }}" class="block px-4 py-2 hover:bg-gray-100"><i
+                                    class="fas fa-user"></i>
                                 Profile</a>
                         </li>
                         <hr class="border">
                         <li>
-                            <a href="{{ route('logout') }}" class="block px-4 py-2 hover:bg-gray-100"><i class="fas fa-sign-out-alt"></i>
+                            <a href="{{ route('logout') }}" class="block px-4 py-2 hover:bg-gray-100"><i
+                                    class="fas fa-sign-out-alt"></i>
                                 Logout</a>
                         </li>
                     </ul>
@@ -92,18 +96,15 @@
                 </div>
             </div>
             <div class="lg:flex gap-7 text-white hidden">
-                <a href="{{ route('search_result') }}?q=novel" class="hover:text-red-200 duration-150">Novel</a>|
-                <a href="{{ route('search_result') }}?q=komik" class="hover:text-red-200 duration-150">Komik</a>|
-                <a href="{{ route('search_result') }}?q=tutorial" class="hover:text-red-200 duration-150">Tutorial</a>|
-                <a href="{{ route('search_result') }}?q=sejarah" class="hover:text-red-200 duration-150">Sejarah</a>|
-                <a href="{{ route('search_result') }}?q=matematika" class="hover:text-red-200 duration-150">Matematika</a>|
-                <a href="{{ route('search_result') }}?q=buku+bahasa" class="hover:text-red-200 duration-150">Buku bahasa</a>|
-                <a href="{{ route('search_result') }}?q=teknologi" class="hover:text-red-200 duration-150">Teknologi</a>
+                @foreach ($top_categories as $item)
+                    <a href="{{ route('search_result') }}?q={{ $item->nama_kategori }}" class="hover:text-red-200 duration-150">{{ $item->nama_kategori }}</a>@if(!$loop->last) | @endif
+                @endforeach
             </div>
             <div class="bg-white p-2 rounded-tl-md">
                 <div class="flex items-center gap-3 cursor-pointer">
                     <span>Bahasa Indonesia</span>
-                    <img src="/assets/id.svg" width="20" class="border rounded-full" alt="" srcset="">
+                    <img src="/assets/id.svg" width="20" class="border rounded-full" alt=""
+                        srcset="">
                 </div>
             </div>
         </div>

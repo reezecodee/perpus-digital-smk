@@ -17,6 +17,11 @@ class Review extends Model
         return $this->belongsTo(User::class, 'peminjam_id', 'id');
     }
 
+    public function loan()
+    {
+        return $this->belongsTo(Loan::class, 'peminjaman_id', 'id');
+    }
+
     public function book()
     {
         return $this->belongsTo(Book::class, 'buku_id', 'id');

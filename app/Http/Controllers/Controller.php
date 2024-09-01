@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\LogActivity;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -17,7 +18,7 @@ class Controller extends BaseController
         Carbon::setLocale('id');
     }
 
-    protected function log($action) 
+    protected function log($action)
     {
         $credentials = [
             'user_id' => auth()->user()->id,

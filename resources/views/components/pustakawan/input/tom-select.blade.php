@@ -3,7 +3,7 @@
     <select name="{{ $name }}" id="{{ $name }}" class="tom-select @error($name) is-invalid @enderror"
         {{ $isrequired ? 'selected' : '' }}>
         @if (!isset($data))
-            <option selected>Pilih {{ $label }}</option>
+            <option selected>Pilih {{ lcfirst($label) }}</option>
         @endif
         @foreach ($collects as $item)
             @if ($item->nama)

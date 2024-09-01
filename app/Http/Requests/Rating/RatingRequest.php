@@ -23,27 +23,27 @@ class RatingRequest extends FormRequest
     {
         return [
             'buku_id' => 'required|exists:books,id',
-            'peminjam_id' => 'required|exist:users,id',
+            'peminjam_id' => 'required|exists:users,id',
             'rating' => 'required|integer|in:1,2,3,4,5',
-            'komentar' => 'required|min:10|max:100'
+            'komentar' => 'required|min:5|max:100'
         ];
     }
 
     public function messages()
     {
         return [
-            'buku_id.required' => 'Kolom buku harus diisi.',
-            'buku_id.exists' => 'Buku yang dipilih tidak ditemukan dalam sistem.',
-            
-            'peminjam_id.required' => 'Kolom peminjam harus diisi.',
-            'peminjam_id.exists' => 'Peminjam yang dipilih tidak ditemukan dalam sistem.',
-            
+            'buku_id.required' => 'Buku harus di isi',
+            'buku_id.exists' => 'Buku tidak terdaftar di sistem',
+
+            'peminjam_id.required' => 'Peminjam harus ada',
+            'peminjam_id.exists' => 'Peminjam tidak terdaftar di sistem',
+
             'rating.required' => 'Kolom rating harus diisi.',
             'rating.integer' => 'Rating harus berupa angka.',
             'rating.in' => 'Rating hanya boleh antara 1 sampai 5.',
             
             'komentar.required' => 'Kolom komentar harus diisi.',
-            'komentar.min' => 'Komentar harus memiliki minimal 10 karakter.',
+            'komentar.min' => 'Komentar harus memiliki minimal 5 karakter.',
             'komentar.max' => 'Komentar tidak boleh lebih dari 100 karakter.',
         ];        
     }

@@ -105,7 +105,9 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $this->log('Logout dari aplikasi perpustakaan');
+        if(auth()->user()->id ?? false){
+            $this->log('Logout dari aplikasi perpustakaan');
+        }
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
