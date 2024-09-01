@@ -21,7 +21,7 @@ class AllBooks extends Controller
         if (!$request->has('_token')) {
             return view('peminjam_views.buku.semua-buku', [
                 'title' => 'Semua Buku Perpustakaan',
-                'books' => $booksQuery,
+                'books' => $booksQuery->get(),
                 'format' => $format
             ]);
         }

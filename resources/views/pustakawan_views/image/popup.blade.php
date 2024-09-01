@@ -49,7 +49,7 @@
                         <tbody>
                             @foreach ($popups as $item)
                                 <tr>
-                                    <td>
+                                    <td align="center">
                                         <img src="{{ asset('storage/img/popup/' . $item->popup_file) }}" class="w-75"
                                             alt="" srcset="">
                                     </td>

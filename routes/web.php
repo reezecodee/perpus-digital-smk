@@ -154,6 +154,7 @@ Route::middleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group
         Route::get('/rak-buku-saya', 'show_my_shelf')->name('my_shelf');
         Route::post('/baca-e-book/{id}', 'update_e_book')->name('update_e_book');
         Route::delete('/hapus-e-book/{id}', 'delete_e_book')->name('delete_e_book');
+        Route::post('/kirim-komentar', 'send_comment')->name('send_comment');
     });
 
     Route::withoutMiddleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group(function () {
@@ -186,6 +187,7 @@ Route::middleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group
 
 
     // Schedule
+
 
     Route::controller(Schedule::class)->group(function () {
         Route::get('/kalender-perpustakaan', 'show_calendar')->name('calendar');

@@ -48,7 +48,7 @@
                         <tbody>
                             @foreach ($carousels as $item)
                                 <tr>
-                                    <td>
+                                    <td align="center">
                                         <img src="{{ asset('storage/img/carousel/' . $item->carousel_file) }}"
                                             class="w-100" alt="" loading="lazy" srcset="">
                                     </td>

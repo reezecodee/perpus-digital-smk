@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Peminjam\Book;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Rating\RatingRequest;
+use App\Models\Book;
 use App\Models\Loan;
 use App\Models\Review;
 use Illuminate\Http\Request;
@@ -15,7 +17,7 @@ class BookShelf extends Controller
         $generatorHTML = new BarcodeGeneratorHTML();
         return $generatorHTML->getBarcode("$data", $generatorHTML::TYPE_CODE_128, $widthFactor, $height);
     }
-    
+
     public function show_my_shelf()
     {
         $excluded_statuses = ['Sudah dikembalikan', 'Sudah dibayar', 'Sudah diulas'];
@@ -91,5 +93,14 @@ class BookShelf extends Controller
 
         $this->log("Menghapus e-book {$loan->book->judul} dari daftar baca");
         return back()->withSuccess('Buku berhasil menghapus e-book');
+    }
+
+    public function send_comment(RatingRequest $request)
+    {
+        $validated_data = $request->validated();
+        $book = Book::find($validated_data->buku_id);
+        $user = auth()->user();
+        $this->log("{$user->nama} memberikan komentar untuk buku \"{$book->judul}\"");
+        return back()->withSuccess('Berhasil memberikan komentar');
     }
 }
