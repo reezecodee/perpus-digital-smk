@@ -1,24 +1,24 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Auth\PasswordResetController;
+use App\Http\Controllers\Auth\Authentication;
+use App\Http\Controllers\Auth\PasswordReset;
+use App\Http\Controllers\Borrower\Book\AllBooks;
+use App\Http\Controllers\Borrower\Book\BookDetail;
+use App\Http\Controllers\Borrower\Book\BookShelf;
+use App\Http\Controllers\Borrower\Book\DetailRent;
+use App\Http\Controllers\Borrower\Book\LikedBookList;
+use App\Http\Controllers\Borrower\Book\LoanConfirmation;
+use App\Http\Controllers\Borrower\Book\ReadEbook;
+use App\Http\Controllers\Borrower\Book\SearchResult;
+use App\Http\Controllers\Borrower\Calendar\Schedule;
+use App\Http\Controllers\Borrower\Help\ReportProblem;
+use App\Http\Controllers\Borrower\Homepage\Homepage;
+use App\Http\Controllers\Borrower\Notification\NotificationList;
+use App\Http\Controllers\Borrower\Payment\PaymentFine;
+use App\Http\Controllers\Borrower\Profile\Profile;
+use App\Http\Controllers\Borrower\Visit\VisitPlan;
 use App\Http\Controllers\Excel\ExcelController;
 use App\Http\Controllers\PDF\PDFController;
-use App\Http\Controllers\Peminjam\Book\AllBooks;
-use App\Http\Controllers\Peminjam\Book\BookDetail;
-use App\Http\Controllers\Peminjam\Book\BookShelf;
-use App\Http\Controllers\Peminjam\Book\DetailRent;
-use App\Http\Controllers\Peminjam\Book\LikedBookList;
-use App\Http\Controllers\Peminjam\Book\LoanConfirmation;
-use App\Http\Controllers\Peminjam\Book\ReadEbook;
-use App\Http\Controllers\Peminjam\Book\SearchResult;
-use App\Http\Controllers\Peminjam\Calendar\Schedule;
-use App\Http\Controllers\Peminjam\Dashboard\DashboardController;
-use App\Http\Controllers\Peminjam\Help\ReportProblem;
-use App\Http\Controllers\Peminjam\Notification\NotificationList;
-use App\Http\Controllers\Peminjam\Payment\PaymentFine;
-use App\Http\Controllers\Peminjam\Profile\Profile;
-use App\Http\Controllers\Peminjam\Visit\VisitPlan;
 use App\Http\Controllers\Pustakawan\Help\ManageHelp;
 use App\Http\Controllers\Pustakawan\Image\ManageCarousel;
 use App\Http\Controllers\Pustakawan\Image\ManagePopup;
@@ -60,7 +60,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome', [
         'title' => 'Selamat datang di E-perpustakaan SITIKA',
-        'chat_bubble' => false,
     ]);
 });
 
@@ -100,7 +99,7 @@ Route::controller(SiteController::class)->group(function () {
 |
 */
 
-Route::controller(AuthController::class)->group(function () {
+Route::controller(Authentication::class)->group(function () {
     Route::prefix('auth')->middleware('guest')->group(function () {
         Route::get('/login', 'show_login')->name('show_login');
         Route::get('/register', 'show_register')->name('show_register');
@@ -118,7 +117,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/not-activated', 'show_not_activated')->name('show_not_activated');
 });
 
-Route::controller(PasswordResetController::class)->group(function () {
+Route::controller(PasswordReset::class)->group(function () {
     Route::get('/lupa-password', 'show_forgot_password')->name('show_forgot_password');
     Route::post('/lupa-password', 'send_reset_link_email')->name('send_email_reset');
 
@@ -144,7 +143,7 @@ Route::middleware(['auth', 'status_active', 'verified'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group(function () {
-    Route::controller(DashboardController::class)->group(function () {
+    Route::controller(Homepage::class)->group(function () {
         Route::get('/dashboard', 'show_dashboard')->name('dashboard');
     });
 
