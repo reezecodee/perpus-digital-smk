@@ -19,26 +19,26 @@
                         foto</button>
                 </div>
             </div>
-            <x-peminjam.modal.crop-modal />
+            <x-borrower.modal.crop-modal />
             <p class="text-sm mb-3">Ukuran foto maksimal sebesar 2MB dan harus berformat jpg, jpeg, atau png.
             </p>
             <form action="{{ route('update_profile', auth()->user()->id) }}" method="post">
                 @csrf
                 @method('PUT')
                 <div class="grid grid-cols-2 gap-3">
-                    <x-peminjam.input.basic label="Username" name="username" type="text" :value="old('username', auth()->user()->username)" />
-                    <x-peminjam.input.basic label="NIS" name="nip_nis" type="number" :value="old('nip_nis', auth()->user()->nip_nis)" />
-                    <x-peminjam.input.basic label="NISN" name="nisn" type="number" :value="old('nisn', auth()->user()->nisn)" />
-                    <x-peminjam.input.basic label="Email" name="email" type="email" :value="old('email', auth()->user()->email)" />
-                    <x-peminjam.input.basic label="Telepon" name="telepon" type="number" :value="old('telepon', auth()->user()->telepon)" />
-                    <x-peminjam.input.gender-select />
+                    <x-borrower.input.basic label="Username" name="username" type="text" :value="old('username', auth()->user()->username)" />
+                    <x-borrower.input.basic label="NIS" name="nip_nis" type="number" :value="old('nip_nis', auth()->user()->nip_nis)" />
+                    <x-borrower.input.basic label="NISN" name="nisn" type="number" :value="old('nisn', auth()->user()->nisn)" />
+                    <x-borrower.input.basic label="Email" name="email" type="email" :value="old('email', auth()->user()->email)" />
+                    <x-borrower.input.basic label="Telepon" name="telepon" type="number" :value="old('telepon', auth()->user()->telepon)" />
+                    <x-borrower.input.gender-select />
                 </div>
 
-                <x-peminjam.button.confirm-btn modaltarget="profile-modal">
+                <x-borrower.button.confirm-btn modaltarget="profile-modal">
                     Simpan
                     perubahan
-                </x-peminjam.button.confirm-btn>
-                <x-peminjam.modal.confirm-modal question="Apakah Anda yakin ingin mengubah data profile Anda?"
+                </x-borrower.button.confirm-btn>
+                <x-borrower.modal.confirm-modal question="Apakah Anda yakin ingin mengubah data profile Anda?"
                     okbtn="Ya, tentu" nobtn="Batalkan" modalname="profile-modal" />
             </form>
         </div>

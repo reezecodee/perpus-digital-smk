@@ -23,17 +23,17 @@
             <form action="" method="post">
                 @csrf
                 <div class="grid grid-cols-2 gap-3">
-                    <x-peminjam.input.basic label="Passoword saat ini" name="current_password" type="text"
+                    <x-borrower.input.basic label="Passoword saat ini" name="current_password" type="text"
                         :value="old('current_password')" placeholder="Masukkan password saat ini" />
-                    <x-peminjam.input.basic label="Password baru" name="new_password" type="password" :value="old('new_password')"
+                    <x-borrower.input.basic label="Password baru" name="new_password" type="password" :value="old('new_password')"
                         placeholder="Masukkan password baru" />
-                    <x-peminjam.input.basic label="Konfirmasi password" name="new_password_confirmation" type="password"
+                    <x-borrower.input.basic label="Konfirmasi password" name="new_password_confirmation" type="password"
                         :value="old('new_password_confirmation')" placeholder="Konfirmasikan password Anda" />
                 </div>
-                <x-peminjam.button.confirm-btn modaltarget="ch-password-modal">
+                <x-borrower.button.confirm-btn modaltarget="ch-password-modal">
                     Ganti passoword
-                </x-peminjam.button.confirm-btn>
-                <x-peminjam.modal.confirm-modal question="Apakah Anda yakin ingin mengubah password Anda?"
+                </x-borrower.button.confirm-btn>
+                <x-borrower.modal.confirm-modal question="Apakah Anda yakin ingin mengubah password Anda?"
                     okbtn="Ya, tentu" nobtn="Batalkan" modalname="ch-password-modal" />
             </form>
         </div>

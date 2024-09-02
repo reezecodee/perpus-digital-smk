@@ -52,12 +52,12 @@
                         </div>
                         <div class="flex justify-end">
                             <div class="text-end">
-                                <x-peminjam.button.confirm-btn modaltarget="report-modal">
+                                <x-borrower.button.confirm-btn modaltarget="report-modal">
                                     Kirim laporan
-                                </x-peminjam.button.confirm-btn>
+                                </x-borrower.button.confirm-btn>
                             </div>
                         </div>
-                        <x-peminjam.modal.confirm-modal
+                        <x-borrower.modal.confirm-modal
                             question="Apakah Anda yakin ingin mengirimkan laporan ini?. Maksimal pengiriman laporan adalah 2x dalam sehari."
                             okbtn="Ya, kirimkan" nobtn="Batalkan" modalname="report-modal" />
                     </form>

@@ -97,7 +97,7 @@
                     <div class="flex lg:block justify-center lg:justify-normal">
                         <div class="grid grid-cols-2 lg:grid-cols-6 gap-9 lg:gap-3">
                             @foreach ($recomendations as $item)
-                                <x-peminjam.card.book :item="$item" />
+                                <x-borrower.card.book :item="$item" />
                             @endforeach
                         </div>
                         @if ($recomendations->isEmpty())
@@ -117,7 +117,7 @@
                     <div class="flex lg:block justify-center lg:justify-normal">
                         <div class="grid grid-cols-2 lg:grid-cols-6 gap-9 lg:gap-3">
                             @foreach ($latest_ebooks as $item)
-                                <x-peminjam.card.book :item="$item" />
+                                <x-borrower.card.book :item="$item" />
                             @endforeach
                         </div>
                         @if ($latest_ebooks->isEmpty())
@@ -138,7 +138,7 @@
                         <div class="overflow-x-auto scrollbar-hide">
                             <div class="flex gap-9 lg:gap-3">
                                 @foreach ($articles as $item)
-                                    <x-peminjam.card.article :item="$item" />
+                                    <x-borrower.card.article :item="$item" />
                                 @endforeach
                             </div>
                         </div>

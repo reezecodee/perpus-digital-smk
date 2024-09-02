@@ -166,7 +166,7 @@
             <div class="flex lg:block justify-center lg:justify-normal">
                 <div class="grid grid-cols-2 lg:grid-cols-5 gap-9 lg:gap-3">
                     @foreach ($recomendations as $item)
-                        <x-peminjam.card.book :item="$item" />
+                        <x-borrower.card.book :item="$item" />
                     @endforeach
                 </div>
             </div>

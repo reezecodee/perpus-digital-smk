@@ -18,7 +18,7 @@
             </div>
             <div id="slide-display1" class="block">
                 @forelse ($books as $item)
-                    <x-peminjam.card.book-loan-card :item="$item" :barcode="$barcode" />
+                    <x-borrower.card.book-loan-card :item="$item" :barcode="$barcode" />
                 @empty
                     <div class="flex justify-center">
                         <img src="/img/assets/oh_no.webp" alt="" srcset="" width="300" class="block">
@@ -28,7 +28,7 @@
             </div>
             <div id="slide-display2" class="hidden">
                 @forelse ($e_books as $item)
-                    <x-peminjam.card.ebook-card :item="$item" :iteration="$loop->iteration" :barcode="$barcode" />
+                    <x-borrower.card.ebook-card :item="$item" :iteration="$loop->iteration" :barcode="$barcode" />
                 @empty
                     <div class="flex justify-center">
                         <img src="/img/assets/oh_no.webp" alt="" srcset="" width="300" class="block">
@@ -38,7 +38,7 @@
             </div>
             <div id="slide-display3" class="hidden">
                 @forelse ($for_reviews as $item)
-                    <x-peminjam.card.review-book-card :item="$item" :iteration="$loop->iteration" />
+                    <x-borrower.card.review-book-card :item="$item" :iteration="$loop->iteration" />
                 @empty
                     <div class="flex justify-center">
                         <img src="/img/assets/no_review.webp" alt="" srcset="" width="300"
@@ -49,7 +49,7 @@
             </div>
             <div id="slide-display4" class="hidden">
                 @forelse ($reviews as $item)
-                    <x-peminjam.card.reviewed-book-card :item="$item" />
+                    <x-borrower.card.reviewed-book-card :item="$item" />
                 @empty
                     <div class="flex justify-center">
                         <img src="/img/assets/no_review.webp" alt="" srcset="" width="300"

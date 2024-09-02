@@ -29,7 +29,7 @@
                                         @endif
                                     </td>
                                 </tr>
-                                <x-peminjam.modal.delete-visit-modal :id="$item->id" :iteration="$loop->iteration" />
+                                <x-borrower.modal.delete-visit-modal :id="$item->id" :iteration="$loop->iteration" />
                             @endforeach
                         </tbody>
                     </table>
@@ -63,11 +63,11 @@
                                 <b>{{ auth()->user()->nama }}</b> menandatangani kunjungan ini.</label>
                         </div>
                         <div class="flex justify-end">
-                            <x-peminjam.button.confirm-btn modaltarget="visit-modal">
+                            <x-borrower.button.confirm-btn modaltarget="visit-modal">
                                 Ajukan kunjungan
-                            </x-peminjam.button.confirm-btn>
+                            </x-borrower.button.confirm-btn>
                         </div>
-                        <x-peminjam.modal.confirm-modal question="Apakah Anda yakin ingin mengajukan permohonan?. Maksimal pengajuan kunjungan adalah 2x sehari"
+                        <x-borrower.modal.confirm-modal question="Apakah Anda yakin ingin mengajukan permohonan?. Maksimal pengajuan kunjungan adalah 2x sehari"
                             okbtn="Ya, ajukan" nobtn="Batalkan" modalname="visit-modal" />
                     </form>
                 </div>

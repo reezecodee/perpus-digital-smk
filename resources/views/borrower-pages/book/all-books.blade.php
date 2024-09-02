@@ -95,7 +95,7 @@
             <div class="flex lg:block justify-center lg:justify-normal">
                 <div class="grid grid-cols-2 lg:grid-cols-6 gap-9 lg:gap-3">
                     @foreach ($books as $item)
-                        <x-peminjam.card.book :item="$item" />
+                        <x-borrower.card.book :item="$item" />
                     @endforeach
                 </div>
                 @if ($books->isEmpty())
@@ -123,9 +123,9 @@
 
                     formData.forEach((value, key) => {
                         if (key === 'filter') {
-                            queryParams.set(key, value); // Update filter parameter
+                            queryParams.set(key, value); 
                         } else {
-                            queryParams.set(key, value); // Add other parameters
+                            queryParams.set(key, value);
                         }
                     });
 
