@@ -18,30 +18,30 @@ use App\Http\Controllers\Borrower\Payment\PaymentFine;
 use App\Http\Controllers\Borrower\Profile\Profile;
 use App\Http\Controllers\Borrower\Visit\VisitPlan;
 use App\Http\Controllers\Excel\ExcelController;
+use App\Http\Controllers\Librarian\DashboardController;
+use App\Http\Controllers\Librarian\Help\ManageHelp;
+use App\Http\Controllers\Librarian\Image\ManageCarousel;
+use App\Http\Controllers\Librarian\Image\ManagePopup;
+use App\Http\Controllers\Librarian\Information\ManageCreateArticle;
+use App\Http\Controllers\Librarian\Information\ManageNotification;
+use App\Http\Controllers\Librarian\Information\ManageSchedule;
+use App\Http\Controllers\Librarian\Information\ManageSendEmail;
+use App\Http\Controllers\Librarian\Log\ManageLogActivity;
+use App\Http\Controllers\Librarian\MasterDataBook\ManageBook;
+use App\Http\Controllers\Librarian\MasterDataBook\ManageCategory;
+use App\Http\Controllers\Librarian\MasterDataBook\ManageFineBook;
+use App\Http\Controllers\Librarian\MasterDataBook\ManagePlacement;
+use App\Http\Controllers\Librarian\MasterDataBook\ManageShelf;
+use App\Http\Controllers\Librarian\MasterDataLibrary\ManageAppWeb;
+use App\Http\Controllers\Librarian\MasterDataLibrary\ManageLibrary;
+use App\Http\Controllers\Librarian\MasterDataLoan\ManageLoan;
+use App\Http\Controllers\Librarian\MasterDataLoan\ManageLoanFined;
+use App\Http\Controllers\Librarian\MasterDataLoan\ManageLoanReturned;
+use App\Http\Controllers\Librarian\MasterDataLoan\ManageVisitor;
+use App\Http\Controllers\Librarian\MasterDataUsers\LogicUserController;
+use App\Http\Controllers\Librarian\MasterDataUsers\UserController;
+use App\Http\Controllers\Librarian\Profile\ManageProfile;
 use App\Http\Controllers\PDF\PDFController;
-use App\Http\Controllers\Pustakawan\Help\ManageHelp;
-use App\Http\Controllers\Pustakawan\Image\ManageCarousel;
-use App\Http\Controllers\Pustakawan\Image\ManagePopup;
-use App\Http\Controllers\Pustakawan\Information\ManageCreateArticle;
-use App\Http\Controllers\Pustakawan\Information\ManageNotification;
-use App\Http\Controllers\Pustakawan\Information\ManageSchedule;
-use App\Http\Controllers\Pustakawan\Information\ManageSendEmail;
-use App\Http\Controllers\Pustakawan\Log\ManageLogActivity;
-use App\Http\Controllers\Pustakawan\MasterDataBuku\ManageBook;
-use App\Http\Controllers\Pustakawan\MasterDataBuku\ManageCategory;
-use App\Http\Controllers\Pustakawan\MasterDataBuku\ManageFineBook;
-use App\Http\Controllers\Pustakawan\MasterDataBuku\ManagePlacement;
-use App\Http\Controllers\Pustakawan\MasterDataBuku\ManageShelf;
-use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\ManageLoan;
-use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\ManageLoanFined;
-use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\ManageLoanReturned;
-use App\Http\Controllers\Pustakawan\MasterDataPeminjaman\ManageVisitor;
-use App\Http\Controllers\Pustakawan\MasterDataPengguna\LogicUserController;
-use App\Http\Controllers\Pustakawan\MasterDataPengguna\UserController;
-use App\Http\Controllers\Pustakawan\MasterDataPerpustakaan\ManageAppWeb;
-use App\Http\Controllers\Pustakawan\MasterDataPerpustakaan\ManageLibrary;
-use App\Http\Controllers\Pustakawan\Profile\ManageProfile;
-use App\Http\Controllers\Pustakawan\PustakawanDashboardController;
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
 
@@ -255,7 +255,7 @@ Route::middleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group
 */
 
 Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified'])->group(function () {
-    Route::controller(PustakawanDashboardController::class)->group(function () {
+    Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard-control', 'show_dashboard')->name('dashboard.ctrl');
     });
 

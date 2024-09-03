@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        View::composer('*', function ($view) {
+        View::composer(['welcome', 'components.borrower.navigation.navbar'], function ($view) {
             $top_categories = Category::withCount('book')
                 ->orderBy('book_count', 'desc')
                 ->limit(7)

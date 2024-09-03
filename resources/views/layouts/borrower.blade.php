@@ -31,17 +31,17 @@
 
 <body class="font-quicksand">
     @if (session('show_popup') && isset($popup_images) && count($popup_images) > 0)
-        <x-peminjam.alert.popup :popupimages="$popup_images" />
+        <x-borrower.alert.popup :popupimages="$popup_images" />
     @endif
 
 
-    <x-peminjam.navigation.navbar />
+    <x-borrower.navigation.navbar />
     {{ $slot }}
     @if ($bubble)
-        <x-peminjam.navigation.bubble />
+        <x-borrower.navigation.bubble />
     @endif
 
-    <x-peminjam.navigation.footer />
+    <x-borrower.navigation.footer />
 
 
     <!-- CDN JS -->
