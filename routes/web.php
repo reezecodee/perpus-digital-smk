@@ -169,8 +169,10 @@ Route::middleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group
     });
 
     Route::controller(LoanConfirmation::class)->group(function () {
-        Route::get('/konfirmasi-peminjaman/{id}', 'show_confirm')->name('confirm');
-        Route::post('/buat-peminjaman', 'create_loan')->name('create_loan');
+        Route::middleware('check_pending_loan')->group(function () {
+            Route::get('/konfirmasi-peminjaman/{id}', 'show_confirm')->name('confirm');
+            Route::post('/buat-peminjaman', 'create_loan')->name('create_loan');
+        });
         Route::get('/peminjaman-sukses', 'show_success')->name('show_success');
     });
 

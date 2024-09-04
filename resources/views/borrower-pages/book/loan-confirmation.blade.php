@@ -48,25 +48,39 @@
                             <h2 class="text-xl font-bold mb-1.5">Pilih rak buku <i
                                     class="fas fa-table text-red-primary"></i></h2>
                             <hr class="mb-4">
+                            @error('penempatan_id')
+                                <span class="text-sm font-semibold text-red-primary mb-4 block">{{ $message }}</span>
+                            @enderror
                             <ul class="grid w-full gap-6 md:grid-cols-3">
-                                @forelse ($shelves as $item)
+                                @foreach ($shelves as $item)
                                     <li>
                                         <input type="radio" id="shelf-option-{{ $loop->iteration }}"
                                             name="penempatan_id" value="{{ $item['placement']->id }}"
-                                            class="hidden peer" required>
+                                            class="hidden peer"
+                                            {{ $item['placement']->buku_saat_ini == 0 ? 'disabled' : '' }} required>
                                         <label for="shelf-option-{{ $loop->iteration }}"
-                                            class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-red-primary peer-checked:bg-red-50 hover:text-gray-600">
+                                            class="inline-flex items-center justify-between w-full p-5 {{ $item['placement']->buku_saat_ini == 0 ? 'bg-gray-200' : 'cursor-pointer' }} border-2 border-gray-500 rounded-lg peer-checked:border-red-primary peer-checked:bg-red-50">
                                             <div class="block">
                                                 <div class="w-full text-lg font-semibold">
                                                     {{ $item['shelf']->nama_rak }}</div>
-                                                <div class="w-full text-sm">Tersedia:
-                                                    {{ $item['placement']->buku_saat_ini }}</div>
+                                                <div class="w-full text-sm">
+                                                    {{ $item['placement']->buku_saat_ini == 0 ? 'Stock habis' : 'Tersedia: ' . $item['placement']->buku_saat_ini }}
+                                                </div>
                                             </div>
                                         </label>
                                     </li>
-                                @empty
-                                @endforelse
+                                @endforeach
                             </ul>
+                            @if ($shelves->isEmpty())
+                                <div class="text-center w-full">
+                                    <div class="flex justify-center">
+                                        <img src="/img/assets/oh_no.webp" alt="" srcset="" width="150"
+                                            class="block">
+                                    </div>
+                                    <h1 class="text-black text-center font-semibold">Mohon maaf, buku ini belum di
+                                        masukkan ke dalam rak, buku secepat mungkin segera di tambahkan kedalam rak.</h1>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div class="self-start max-w-full lg:max-w-md w-full">

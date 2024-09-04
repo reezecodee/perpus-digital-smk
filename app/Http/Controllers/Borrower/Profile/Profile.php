@@ -19,15 +19,21 @@ class Profile extends Controller
             'title' => 'Overview Profile'
         ]);
     }
-    
+
     public function show_history()
     {
-        $histories = Loan::where('peminjam_id', auth()->user()->id)->whereNotIn('status', ['Terkena denda', 'Sudah dibayar', 'E-book'])->whereHas('book', function($query) {
-            $query->where('format', 'Fisik');
-        })
-        ->with('book')->get();
+        $histories = Loan::where('peminjam_id', auth()->user()->id)
+            ->whereNotIn('status', ['Terkena denda', 'Sudah dibayar', 'E-book'])
+            ->whereHas('placement.book', function ($query) {
+                $query->where('format', 'Fisik');
+            })
+            ->with('placement.book') 
+            ->get();
 
-        $fine_histories = Loan::where('peminjam_id', auth()->user()->id)->whereIn('status', ['Terkena denda', 'Sudah dibayarkan'])->get();
+        $fine_histories = Loan::where('peminjam_id', auth()->user()->id)
+            ->whereIn('status', ['Terkena denda', 'Sudah dibayarkan'])
+            ->with('placement.book') 
+            ->get();
 
         return view('borrower-pages.profile.loan-histories', [
             'title' => 'Riwayat Peminjaman Buku',

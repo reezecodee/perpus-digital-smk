@@ -1,3 +1,9 @@
+@php
+    $user = Auth::user();
+    $pendingLoan = $user->loan()->where('status', 'Menunggu persetujuan')->exists();
+    $loanWithFine = $user->loan()->where('status', 'Terkena denda')->exists();
+@endphp
+
 <x-borrower-layout :title="$title">
     <section class="mx-auto px-3 lg:px-24 text-gray-600">
         <div class="pt-24 lg:pt-36">
@@ -37,11 +43,22 @@
                             {{ $data->format == 'Fisik' ? 'Buku' : 'E-book' }} ini</p>
                         <div class="mt-2 flex gap-3">
                             @if ($data->format == 'Fisik')
-                                <a href="{{ route('confirm', $data->id) }}">
-                                    <button
-                                        class="bg-red-primary hover:bg-red-500 rounded-md text-white p-2.5 font-bold">Pinjam
-                                        buku</button>
-                                </a>
+                                @if ($pendingLoan || $loanWithFine)
+                                    <div>
+                                        <button
+                                            class="bg-gray-400 cursor-not-allowed rounded-md text-white p-2.5 font-bold"
+                                            disabled>
+                                            Tidak dapat meminjam buku
+                                        </button>
+                                    </div>
+                                @else
+                                    <a href="{{ route('confirm', $data->id) }}">
+                                        <button
+                                            class="bg-red-primary hover:bg-red-500 rounded-md text-white p-2.5 font-bold">
+                                            Pinjam buku ini
+                                        </button>
+                                    </a>
+                                @endif
                             @elseif($data->format == 'Elektronik')
                                 <form action="{{ route('update_e_book', $data->id) }}" method="post">
                                     @csrf
@@ -67,6 +84,21 @@
                                 </form>
                             @endif
                         </div>
+                        @if ($pendingLoan)
+                            <span class="text-sm font-semibold text-red-primary mt-1 block">
+                                <i class="fas fa-info-circle"></i> Anda tidak dapat meminjam buku lagi sampai peminjaman
+                                sebelumnya disetujui.
+                            </span>
+                        @elseif($loanWithFine)
+                            <span class="text-sm font-semibold text-red-primary mt-1 block">
+                                <i class="fas fa-info-circle"></i> Anda tidak dapat meminjam buku lagi sampai denda
+                                peminjaman sebelumnya dibayarkan.
+                            </span>
+                        @else
+                            <span class="text-sm font-semibold text-green-500 mt-1 block">
+                                <i class="fas fa-info-circle"></i> Anda dapat meminjam buku.
+                            </span>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         'status_active' => \App\Http\Middleware\CheckAccountStatus::class,
+        'check_pending_loan' => \App\Http\Middleware\CheckPendingLoanStatus::class
     ];
 }

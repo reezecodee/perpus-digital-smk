@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Category;
-use Illuminate\Support\Facades\DB;
+use App\Models\Loan;
+use App\Observers\LoanObserver;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
             
             $view->with('top_categories', $top_categories);
         });
+        Loan::observe(LoanObserver::class);
         
     }
 

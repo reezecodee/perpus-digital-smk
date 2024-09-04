@@ -40,6 +40,10 @@ class LoanConfirmation extends Controller
 
     public function show_success()
     {
+        if (!session('success')) {
+            return redirect()->route('dashboard');
+        }
+
         return view('borrower-pages.book.success', [
             'title' => 'Peminjaman Sukses'
         ]);
@@ -82,11 +86,12 @@ class LoanConfirmation extends Controller
 
             Loan::create($validated_data);
 
+            $this->log("Melakukan pengajuan peminjaman buku berjudul \"{$book->judul}\"");
             return 'Peminjaman berhasil.';
         });
 
         if ($transaction === 'Peminjaman berhasil.') {
-            return redirect()->route('show_success')->withSuccess($transaction);
+            return redirect()->route('show_success')->withSuccess('Peminjaman sukses, terimakasih sudah menggunakan layanan kami');
         } else {
             return redirect()->back()->with('error', $transaction);
         }

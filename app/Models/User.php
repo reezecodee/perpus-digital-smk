@@ -58,7 +58,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(LikedBook::class, 'peminjam_id', 'id');
     }
 
-    public function borrower()
+    public function loan()
     {
         return $this->hasMany(Loan::class, 'peminjam_id', 'id');
     }
