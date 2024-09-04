@@ -17,7 +17,7 @@ class Loan extends Model
         return $this->belongsTo(Book::class, 'buku_id', 'id');
     }
 
-    public function review() 
+    public function review()
     {
         return $this->hasOne(Review::class, 'peminjaman_id', 'id');
     }
@@ -30,5 +30,10 @@ class Loan extends Model
     public function fine_payment()
     {
         return $this->hasOne(FinePayment::class, 'peminjaman_id', 'id');
+    }
+
+    public function placement()
+    {
+        return $this->belongsTo(Placement::class, 'penempatan_id', 'id');
     }
 }

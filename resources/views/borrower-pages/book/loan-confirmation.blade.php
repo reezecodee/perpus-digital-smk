@@ -11,11 +11,11 @@
                             </h2>
                             <hr class="mb-4">
                             <div class="flex justify-between items-center">
-                                <p class="font-semibold text-base">Peminjam : {{ auth()->user()->nama }} |
+                                <p class="font-semibold text-base">{{ auth()->user()->nama }} |
                                     {{ auth()->user()->telepon }}</p>
                             </div>
-                            <p class="text-sm mb-2 font-medium"><i class="fas fa-map-marker-alt text-red-primary"></i>
-                                {{ auth()->user()->alamat }}
+                            <p class="text-sm mb-2 font-medium"><i class="fas fa-envelope text-red-primary"></i>
+                                {{ auth()->user()->email }}
                             </p>
                             <textarea id="message" name="catatan_kurir" rows="3"
                                 class="block p-2.5 w-full text-sm bg-gray-50 rounded-lg border focus:ring-red-500 focus:border-red-500 outline-none"
@@ -37,26 +37,26 @@
                             </div>
                         </div>
                         <div class="w-full rounded-xl border p-4 mb-5">
-                            <h2 class="text-xl font-bold mb-1.5">Lokasi rak buku <i
+                            <h2 class="text-xl font-bold mb-1.5">Pilih rak buku <i
                                     class="fas fa-table text-red-primary"></i></h2>
                             <hr class="mb-4">
-                            <div class="p-4 mb-4 mt-4 text-sm text-blue-800 rounded-lg bg-blue-50 font-medium"
-                                role="alert">
-                                Pastikan Anda mengambil buku di lokasi yang sudah ditentukan
-                            </div>
-                            <div class="flex items-center gap-4 mb-3">
-                                <img src="https://www.svgrepo.com/show/19065/shelves.svg" alt="" srcset=""
-                                    class="w-20">
-                                <div class="text-sm">
-                                    <p class="font-semibold"><span class="text-red-primary">Nama rak:</span> Ambaturak
-                                    </p>
-                                    <p class="font-semibold"><span class="text-red-primary">Kode rak:</span> 19327831
-                                    </p>
-                                    <p class="font-semibold"><span class="text-red-primary">Salinan serupa:</span> 20
-                                        buku
-                                    </p>
-                                </div>
-                            </div>
+                            <ul class="grid w-full gap-6 md:grid-cols-3">
+                                @forelse ($shelves as $item)
+                                    <li>
+                                        <input type="radio" id="shelf-option-{{ $loop->iteration }}" name="penempatan_id" value="{{ $item['placement']->id }}"
+                                            class="hidden peer" required>
+                                        <label for="shelf-option-{{ $loop->iteration }}"
+                                            class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-red-primary peer-checked:bg-red-50 hover:text-gray-600">
+                                            <div class="block">
+                                                <div class="w-full text-lg font-semibold">{{ $item['shelf']->nama_rak }}</div>
+                                                <div class="w-full text-sm">Tersedia: {{ $item['placement']->buku_saat_ini }}</div>
+                                            </div>
+                                        </label>
+                                    </li>
+                                @empty
+
+                                @endforelse
+                            </ul>
                         </div>
                     </div>
                     <div class="self-start max-w-full lg:max-w-md w-full">
@@ -76,7 +76,7 @@
                                 <div class="flex items-center">
                                     <p class="text-sm font-semibold mr-0 lg:mr-40">Denda buku rusak <br><span
                                             class="text-base">
-                                            {{ formatRupiah($data->fine->denda_rusak) }}</span></p>
+                                            {{ formatRupiah($data->fine->denda_rusak ?? 0) }}</span></p>
                                 </div>
                             </div>
                             <div class="flex items-center gap-4 mb-3">
@@ -85,7 +85,7 @@
                                 <div class="flex items-center">
                                     <p class="text-sm font-semibold mr-0 lg:mr-40">Denda buku tidak kembali <br><span
                                             class="text-base">
-                                            {{ formatRupiah($data->fine->denda_tidak_kembali) }}</span></p>
+                                            {{ formatRupiah($data->fine->denda_tidak_kembali ?? 0) }}</span></p>
                                 </div>
                             </div>
                             <div class="flex items-center gap-4 mb-3">
@@ -93,7 +93,7 @@
                                     width="50">
                                 <div class="flex items-center">
                                     <p class="text-sm font-semibold mr-0 lg:mr-40">Denda buku terlambat <br><span
-                                            class="text-base">{{ formatRupiah($data->fine->denda_terlambat) }}</span>
+                                            class="text-base">{{ formatRupiah($data->fine->denda_terlambat ?? 0) }}</span>
                                     </p>
                                 </div>
                             </div>
@@ -119,53 +119,23 @@
                             <hr class="border-2 bg-gray-400 mb-3">
                             <div class="flex items-center mb-4">
                                 <input id="default-checkbox" type="checkbox" value=""
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer"
                                     required>
                                 <label for="default-checkbox"
-                                    class="ms-4 text-sm font-medium text-gray-900 dark:text-gray-300 text-justify">Saya
+                                    class="ms-4 text-sm font-medium text-gray-900 dark:text-gray-300 text-justify cursor-pointer">Saya
                                     <b>{{ auth()->user()->nama }}</b>, bersedia ditindak jalur hukum apabila saya
                                     dengan
                                     sengaja tidak
                                     membayar denda jika saya menghilangkan, merusak, dan terlambat mengembalikan
                                     buku.</label>
                             </div>
-                            <button type="button" data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                class="bg-red-primary hover:bg-red-500 p-2.5 text-white w-full font-bold rounded-lg">Konfirmasi
-                                peminjaman</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="popup-modal" tabindex="-1"
-                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                    <div class="relative p-4 w-full max-w-md max-h-full">
-                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                            <button type="button"
-                                class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center "
-                                data-modal-hide="popup-modal">
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                </svg>
-                                <span class="sr-only">Close modal</span>
-                            </button>
-                            <div class="p-4 md:p-5 text-center">
-                                <svg class="mx-auto mb-4 text-red-primary w-12 h-12" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                </svg>
-                                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Anda akan
-                                    meminjam buku ini? pastikan semuanya sudah benar</h3>
-                                <button data-modal-hide="popup-modal" type="submit"
-                                    class="text-white bg-red-primary hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-                                    Ya, sudah benar
-                                </button>
-                                <button data-modal-hide="popup-modal" type="button"
-                                    class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Belum,
-                                    batalkan</button>
-                            </div>
+                            <x-borrower.button.confirm-loan-btn modaltarget="loan-modal">
+                                Konfirmasi peminjaman
+                            </x-borrower.button.confirm-loan-btn>
+                            <x-borrower.modal.confirm-modal
+                                question="Pastikan Anda sudah membaca aturan dan menyetujui kebijakan peminjaman buku"
+                                okbtn="Ya, pinjam sekarang" :nomargin="true" nobtn="Batalkan"
+                                modalname="loan-modal" />
                         </div>
                     </div>
                 </div>

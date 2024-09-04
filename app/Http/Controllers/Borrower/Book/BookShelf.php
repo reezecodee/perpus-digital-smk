@@ -20,18 +20,29 @@ class BookShelf extends Controller
     public function show_my_shelf()
     {
         $excluded_statuses = ['Sudah dikembalikan', 'Sudah dibayar', 'Sudah diulas'];
-        $books = Loan::with('book')->where('peminjam_id', auth()->user()->id)
+
+        $books = Loan::with(['placement.book'])
+            ->where('peminjam_id', auth()->user()->id)
             ->whereNotIn('status', $excluded_statuses)
-            ->whereHas('book', function ($query) {
+            ->whereHas('placement.book', function ($query) {
                 $query->where('format', 'Fisik');
-            })->with('book')->get();
+            })
+            ->get();
 
-        $e_books = Loan::with('book')->where('peminjam_id', auth()->user()->id)
-            ->whereHas('book', function ($query) {
+
+        $e_books = Loan::with(['placement.book'])
+            ->where('peminjam_id', auth()->user()->id)
+            ->whereHas('placement.book', function ($query) {
                 $query->where('format', 'Elektronik');
-            })->with('book')->get();
+            })
+            ->get();
 
-        $for_reviews = Loan::with('book')->where('peminjam_id', auth()->user()->id)->where('status', 'Sudah dikembalikan')->get();
+
+        $for_reviews = Loan::with(['placement.book'])
+            ->where('peminjam_id', auth()->user()->id)
+            ->where('status', 'Sudah dikembalikan')
+            ->get();
+
 
         return view('borrower-pages.book.book-shelf', [
             'title' => 'Rak Buku Saya',

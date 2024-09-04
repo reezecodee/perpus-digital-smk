@@ -27,7 +27,7 @@ return new class extends Migration
             $table->text('alamat');
             $table->rememberToken();
             $table->timestamps();
-        });
+        }); 
     }
 
     /**

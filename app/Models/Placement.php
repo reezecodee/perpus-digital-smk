@@ -21,4 +21,9 @@ class Placement extends Model
     {
         return $this->belongsTo(Book::class, 'buku_id', 'id');
     }
+
+    public function loan()
+    {
+        return $this->hasMany(Loan::class, 'penempatan_id', 'id');
+    }
 }
