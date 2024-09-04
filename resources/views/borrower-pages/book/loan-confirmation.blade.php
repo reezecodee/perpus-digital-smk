@@ -1,7 +1,8 @@
 <x-borrower-layout :title="$title">
     <section class="mx-auto px-3 lg:px-12 text-gray-600">
         <div class="pt-24 lg:pt-36">
-            <form method="post">
+            {{-- {{ session('error') }} --}}
+            <form method="post" action="{{ route('create_loan') }}">
                 @csrf
                 <div class="flex flex-wrap justify-between">
                     <div class="self-start max-w-2xl w-full">
@@ -17,9 +18,12 @@
                             <p class="text-sm mb-2 font-medium"><i class="fas fa-envelope text-red-primary"></i>
                                 {{ auth()->user()->email }}
                             </p>
-                            <textarea id="message" name="catatan_kurir" rows="3"
-                                class="block p-2.5 w-full text-sm bg-gray-50 rounded-lg border focus:ring-red-500 focus:border-red-500 outline-none"
+                            <textarea id="message" name="keterangan" rows="3"
+                                class="block p-2.5 w-full text-sm bg-gray-50 rounded-lg border @error('keterangan') ring-red-primary border-red-primary @enderror focus:ring-red-500 focus:border-red-500 outline-none"
                                 placeholder="Catatan peminjaman (opsional)"></textarea>
+                            @error('keterangan')
+                                <span class="text-sm font-semibold text-red-primary">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="w-full rounded-xl border p-4 mb-5">
                             <h2 class="text-xl font-bold mb-1.5">Buku yang dipinjam <i
@@ -31,8 +35,12 @@
                                 <div class="self-start w-full">
                                     <h3 class="font-bold text-lg mb-2">{{ $data->judul }}</h3>
                                     <p class="font-semibold text-sm mb-1">Durasi pinjam</p>
-                                    <input type="date" min="{{ date('Y-m-d') }}" value="{{ date('Y-m-d') }}"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-primary focus:border-red-500 block w-full p-2.5">
+                                    <input type="date" name="jatuh_tempo" min="{{ date('Y-m-d') }}"
+                                        value="{{ date('Y-m-d') }}"
+                                        class="bg-gray-50 border border-gray-300 @error('jatuh_tempo') ring-red-primary border-red-primary @enderror text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5">
+                                    @error('jatuh_tempo')
+                                        <span class="text-sm font-semibold text-red-primary">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -43,18 +51,20 @@
                             <ul class="grid w-full gap-6 md:grid-cols-3">
                                 @forelse ($shelves as $item)
                                     <li>
-                                        <input type="radio" id="shelf-option-{{ $loop->iteration }}" name="penempatan_id" value="{{ $item['placement']->id }}"
+                                        <input type="radio" id="shelf-option-{{ $loop->iteration }}"
+                                            name="penempatan_id" value="{{ $item['placement']->id }}"
                                             class="hidden peer" required>
                                         <label for="shelf-option-{{ $loop->iteration }}"
                                             class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-red-primary peer-checked:bg-red-50 hover:text-gray-600">
                                             <div class="block">
-                                                <div class="w-full text-lg font-semibold">{{ $item['shelf']->nama_rak }}</div>
-                                                <div class="w-full text-sm">Tersedia: {{ $item['placement']->buku_saat_ini }}</div>
+                                                <div class="w-full text-lg font-semibold">
+                                                    {{ $item['shelf']->nama_rak }}</div>
+                                                <div class="w-full text-sm">Tersedia:
+                                                    {{ $item['placement']->buku_saat_ini }}</div>
                                             </div>
                                         </label>
                                     </li>
                                 @empty
-
                                 @endforelse
                             </ul>
                         </div>
