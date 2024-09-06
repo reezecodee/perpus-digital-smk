@@ -32,9 +32,9 @@
                 <div class="border p-7 shadow-md rounded-md mb-5">
                     <div class="flex justify-end mb-3">
                         <a href="">
-                            <button
-                                class="bg-red-primary p-2 rounded-md text-white font-semibold hover:bg-red-500 text-sm">Lihat
-                                cara pembayaran</button>
+                            <x-borrower.button.normal-btn>
+                                Lihat cara pembayaran
+                            </x-borrower.button.normal-btn>
                         </a>
                     </div>
                     <div class="mt-0 grow">
@@ -183,7 +183,7 @@
             </div>
             <div class="border p-7 shadow-md rounded-md mb-5">
                 <h3 class="text-xl font-semibold mb-4">Upload bukti pembayaran</h3>
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="{{ route('fine-payment', $data->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="flex justify-center mb-5">
                         <img src="{{ asset('storage/img/pembayaran/' . ($data->fine_payment->bukti_pembayaran ?? '')) }}"
@@ -191,7 +191,7 @@
                     </div>
                     <input
                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 mb-5"
-                        id="imageInput" accept="image/*" type="file" onchange="previewImage(event)">
+                        id="imageInput" name="bukti_pembayaran" accept=".jpg, .jpeg, .png" type="file" onchange="previewImage(event)">
                     <div class="text-end">
                         <x-borrower.button.confirm-btn modaltarget="payment-modal">
                             Kirim bukti pembayaran

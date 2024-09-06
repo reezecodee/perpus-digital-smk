@@ -15,9 +15,9 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('peminjam_id');
             $table->uuid('peminjaman_id');
-            $table->enum('status_bayar', ['Belum dibayar', 'Menunggu konfirmasi', 'Sudah dibayar']);
-            $table->enum('alasan_denda', ['Tidak dikembalikan', 'Terlambat', 'Buku rusak', 'Buku hilang']);
-            $table->text('bukti_pembayaran')->nullable();
+            $table->enum('status_bayar', ['Pembayaran ditolak', 'Menunggu konfirmasi', 'Sudah dibayar'])->default('Menunggu konfirmasi');
+            $table->text('bukti_pembayaran');
+            $table->text('alasan_ditolak')->nullable();
             $table->timestamps();
 
             $table->foreign('peminjam_id')->references('id')->on('users')->onDelete('cascade');
