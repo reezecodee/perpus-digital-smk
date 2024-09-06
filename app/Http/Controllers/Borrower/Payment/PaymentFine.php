@@ -10,7 +10,7 @@ class PaymentFine extends Controller
 {
     public function show_payment($id) 
     {
-        $data = Loan::find($id);
+        $data = Loan::findOrFail($id);
 
         if(!$data || $data->status != 'Terkena denda' || $data->keterangan_denda == 'Tidak ada'){
             abort(404);

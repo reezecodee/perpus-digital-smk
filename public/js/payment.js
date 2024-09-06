@@ -37,3 +37,22 @@ function previewImage(event) {
     }
 }
 
+function copyLoanCode(){
+    let loanCode = document.getElementById("loan-code").innerText;
+    let copyLoanInfo = document.getElementById('copy-loan-info');
+
+    copyLoanInfo.innerHTML = 'Kode disalin';
+    let tempInput = document.createElement("input");
+    tempInput.value = loanCode;
+    document.body.appendChild(tempInput);
+    
+    tempInput.select();
+    document.execCommand("copy");
+    
+    document.body.removeChild(tempInput);
+
+    setTimeout(function() {
+        copyLoanInfo.innerHTML = '';
+    }, 3000);
+}
+
