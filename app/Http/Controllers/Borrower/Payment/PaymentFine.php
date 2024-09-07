@@ -24,6 +24,26 @@ class PaymentFine extends Controller
         ]);
     }
 
+    public function show_payment_histories()
+    {
+        $payment_histories = FinePayment::where('peminjam_id', auth()->user()->id)->get();
+
+        return view('borrower-pages.payment.payment-histories', [
+            'title' => 'Riwayat Pembayaran',
+            'payment_histories' => $payment_histories,
+        ]);
+    }
+
+    public function show_detail_payment($id) 
+    {
+        $fine_payment = FinePayment::findOrFail($id);
+
+        return view('borrower-pages.payment.detail-payment', [
+            'title' => 'Detail Pembayaran',
+            'data' => $fine_payment
+        ]);
+    }
+
     // Logical Backend Here...
 
     public function fine_payment(PaymentRequest $request, $id)

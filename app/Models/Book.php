@@ -39,7 +39,7 @@ class Book extends Model
 
     public function placement()
     {
-        return $this->hasMany(Placement::class, 'bukud_id', 'id');
+        return $this->hasMany(Placement::class, 'buku_id', 'id');
     }
 
     public function scopeAvailable($query)

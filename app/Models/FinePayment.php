@@ -14,6 +14,11 @@ class FinePayment extends Model
 
     public function borrower()
     {
+        return $this->belongsTo(User::class, 'peminjam_id', 'id');
+    }
+
+    public function loan()
+    {
         return $this->belongsTo(Loan::class, 'peminjaman_id', 'id');
     }
 }

@@ -220,6 +220,8 @@ Route::middleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group
     Route::controller(PaymentFine::class)->group(function () {
         Route::get('/pembayaran-denda/{id}', 'show_payment')->name('payment');
         Route::post('/simpan-pembayaran/{id}', 'fine_payment')->name('fine-payment');
+        Route::get('/riwayat-pembayaran', 'show_payment_histories')->name('payment-histories');
+        Route::get('/detail-pembayaran/{id}', 'show_detail_payment')->name('detail-payment');
     });
 
 
