@@ -1,6 +1,11 @@
 <x-borrower-layout :title="$title">
     <section class="mx-auto px-3 lg:px-12 text-gray-600">
         <div class="pt-24 lg:pt-36">
+            @if ($data->fine_payment->status_bayar == 'Sudah dibayar')
+                <div class="p-4 font-medium text-sm text-green-800 rounded-lg bg-green-100 mb-5" role="alert">
+                    Pembayaranmu telah sukses, terimakasih sudah bertanggun jawab.
+                </div>
+            @endif
             <div class="grid grid-cols-2 gap-5">
                 <div class="border p-7 shadow-md rounded-md mb-5">
                     <div class="flex gap-4">
@@ -181,27 +186,39 @@
                     </div>
                 </div>
             </div>
-            <div class="border p-7 shadow-md rounded-md mb-5">
-                <h3 class="text-xl font-semibold mb-4">Upload bukti pembayaran</h3>
-                <form action="{{ route('fine-payment', $data->id) }}" method="post" enctype="multipart/form-data">
-                    @csrf
+            @if ($data->fine_payment->status_bayar != 'Sudah dibayar')
+                <div class="border p-7 shadow-md rounded-md mb-5">
+                    <h3 class="text-xl font-semibold mb-4">Upload bukti pembayaran</h3>
+                    <form action="{{ route('fine-payment', $data->id) }}" method="post"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <div class="flex justify-center mb-5">
+                            <img src="{{ asset('storage/img/pembayaran/' . ($data->fine_payment->bukti_pembayaran ?? '')) }}"
+                                width="400" id="imagePreview" alt="" srcset="">
+                        </div>
+                        <input
+                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 mb-5"
+                            id="imageInput" name="bukti_pembayaran" accept=".jpg, .jpeg, .png" type="file"
+                            onchange="previewImage(event)">
+                        <div class="text-end">
+                            <x-borrower.button.confirm-btn modaltarget="payment-modal">
+                                Kirim bukti pembayaran
+                            </x-borrower.button.confirm-btn>
+                        </div>
+                        <x-borrower.modal.confirm-modal
+                            question="Pastikan bukti bayar sesuai dengan nominal yang ditentukan, jika tidak pembayaran tidak akan diproses!"
+                            okbtn="Kirim bukti" nobtn="Batalkan" modalname="payment-modal" />
+                    </form>
+                </div>
+            @else
+                <div class="border p-7 shadow-md rounded-md mb-5">
+                    <h3 class="text-xl font-semibold mb-4">Bukti pembayaran</h3>
                     <div class="flex justify-center mb-5">
                         <img src="{{ asset('storage/img/pembayaran/' . ($data->fine_payment->bukti_pembayaran ?? '')) }}"
                             width="400" id="imagePreview" alt="" srcset="">
                     </div>
-                    <input
-                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 mb-5"
-                        id="imageInput" name="bukti_pembayaran" accept=".jpg, .jpeg, .png" type="file" onchange="previewImage(event)">
-                    <div class="text-end">
-                        <x-borrower.button.confirm-btn modaltarget="payment-modal">
-                            Kirim bukti pembayaran
-                        </x-borrower.button.confirm-btn>
-                    </div>
-                    <x-borrower.modal.confirm-modal
-                        question="Pastikan bukti bayar sesuai dengan nominal yang ditentukan, jika tidak pembayaran tidak akan diproses!"
-                        okbtn="Kirim bukti" nobtn="Batalkan" modalname="payment-modal" />
-                </form>
-            </div>
+                </div>
+            @endif
         </div>
     </section>
 

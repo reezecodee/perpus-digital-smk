@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Borrower\Book;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\LikedBook;
+use App\Models\Placement;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookDetail extends Controller
 {
@@ -21,6 +23,10 @@ class BookDetail extends Controller
             ->where('id', '!=', $id)
             ->with('category')
             ->withAvg('review', 'rating')
+            ->addSelect([
+                'total_books_available' => Placement::select(DB::raw('SUM(buku_saat_ini)'))
+                    ->whereColumn('buku_id', 'books.id')
+            ])
             ->limit(12)
             ->latest()
             ->get();

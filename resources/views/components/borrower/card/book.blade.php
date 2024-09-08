@@ -8,6 +8,6 @@
         {{ $item->author }}
     </p>
     <p class="text-xs font-medium"><i class="fas fa-star text-yellow-300"></i>
-        {{number_format($item->review_avg_rating, 1) }} - Tersedia 5
+        {{number_format($item->review_avg_rating, 1) }} {{ $item->format == 'Fisik' ? "- Tersedia " . (isset($item->total_books_available) ? $item->total_books_available : 0) : '- E-book' }}
     </p>
 </div>

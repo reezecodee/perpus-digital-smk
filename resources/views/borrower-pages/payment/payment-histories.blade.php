@@ -1,6 +1,14 @@
 <x-borrower-layout :title="$title">
     <section class="mx-auto px-3 lg:px-12 text-gray-600">
         <div class="pt-24 lg:pt-36">
+            @if ($payment_histories->isEmpty())
+            <div class="flex justify-center">
+                <div class="text-center">
+                    <img src="/img/assets/no_fine.webp" alt="" srcset="" class="w-52 inline-block">
+                    <h1 class="text-black text-center text-lg font-semibold">Tidak ada riwayat pembayaran denda</h1>
+                </div>
+            </div>
+            @else
             <div class="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
                 <div class="main-box border border-gray-200 rounded-xl max-w-xl max-lg:mx-auto lg:max-w-full">
                     @foreach ($payment_histories as $item)
@@ -10,7 +18,7 @@
                                 <a href="{{ route('detail-payment', $item->id) }}">
                                     <div class="img-box max-lg:w-full">
                                         <img src="{{ asset('storage/img/pembayaran/' . ($item->bukti_pembayaran ?? '')) }}"
-                                            class="aspect-square w-full lg:max-w-[140px] rounded-xl">
+                                            class="w-full lg:max-w-[140px] rounded-md">
                                     </div>
                                 </a>
                                 <div class="flex flex-row items-center w-full ">
@@ -88,6 +96,7 @@
                     @endforeach
                 </div>
             </div>
+            @endif
         </div>
     </section>
 </x-borrower-layout>

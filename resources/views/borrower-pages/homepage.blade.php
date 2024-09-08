@@ -96,11 +96,11 @@
                     <h1 class="text-2xl mb-4 font-bold">Rekomendasi untuk mu</h1>
                     <div class="flex lg:block justify-center lg:justify-normal">
                         <div class="grid grid-cols-2 lg:grid-cols-6 gap-9 lg:gap-3">
-                            @foreach ($recomendations as $item)
+                            @foreach ($recommendations as $item)
                                 <x-borrower.card.book :item="$item" />
                             @endforeach
                         </div>
-                        @if ($recomendations->isEmpty())
+                        @if ($recommendations->isEmpty())
                             <div class="flex justify-center">
                                 <div class="text-center">
                                     <img src="/img/assets/oh_no.webp" alt="" srcset=""
@@ -142,7 +142,7 @@
                                 @endforeach
                             </div>
                         </div>
-                        @if ($recomendations->isEmpty())
+                        @if ($recommendations->isEmpty())
                             <div class="flex justify-center">
                                 <div class="text-center">
                                     <img src="/img/assets/oh_no.webp" alt="" srcset=""

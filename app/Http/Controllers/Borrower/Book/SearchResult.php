@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Borrower\Book;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\Placement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SearchResult extends Controller
 {
@@ -17,6 +19,10 @@ class SearchResult extends Controller
             ->select('books.*') 
             ->with('category') 
             ->withAvg('review', 'rating') 
+            ->addSelect([
+                'total_books_available' => Placement::select(DB::raw('SUM(buku_saat_ini)'))
+                    ->whereColumn('buku_id', 'books.id')
+            ])
             ->latest(); 
 
         if ($query) {
