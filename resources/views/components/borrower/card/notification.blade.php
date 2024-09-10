@@ -10,7 +10,7 @@
                 {{ $item->judul }}</p>
             <p class="text-xs lg:text-sm truncate-text">{{ strip_tags($item->pesan) }}</p>
             <p class="text-xs font-bold mb-0">Pengirim: {{ $item->sender->nama }}</p>
-            <p class="text-end text-xs font-medium">{{ $item->created_at->diffForHumans() }}</p>
+            <p class="text-end text-xs font-medium">{{ howLongTime($item->tgl_pengiriman) }}</p>
         </a>
     </div>
 </div>

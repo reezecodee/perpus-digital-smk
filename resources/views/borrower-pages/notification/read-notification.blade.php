@@ -3,8 +3,7 @@
         <div class="pt-24 lg:pt-36">
             <div class="flex">
                 <div class="self-start w-full border shadow-md rounded-md p-4">
-                    <h1 class="text-lg lg:text-xl font-bold mb-1">Notifikasi dari
-                        {{ $data->sender->nama }}
+                    <h1 class="text-lg lg:text-xl font-bold mb-1">Baca Notifikasi
                     </h1>
                     <hr class="mb-3">
                     <div class="border rounded-lg p-2">

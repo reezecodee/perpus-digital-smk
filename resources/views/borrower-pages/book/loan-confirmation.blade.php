@@ -1,7 +1,7 @@
 <x-borrower-layout :title="$title">
     <section class="mx-auto px-3 lg:px-12 text-gray-600">
         <div class="pt-24 lg:pt-36">
-            <form method="post" action="{{ route('create_loan') }}">
+            <form method="post" action="{{ route('store.loan') }}">
                 @csrf
                 <div class="flex flex-wrap justify-between">
                     <div class="self-start max-w-2xl w-full">

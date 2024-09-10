@@ -77,7 +77,7 @@ class HandlerLoanConfirmationController extends Controller
     {
         if ($transactionResult === 'Peminjaman berhasil.') {
             return redirect()
-                ->route('show_success')
+                ->route('show.success')
                 ->withSuccess('Peminjaman sukses, terimakasih sudah menggunakan layanan kami');
         }
 

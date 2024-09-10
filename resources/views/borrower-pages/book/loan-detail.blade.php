@@ -1,6 +1,11 @@
 <x-borrower-layout :title="$title">
     <section class="mx-auto px-3 lg:px-12 text-gray-600">
         <div class="pt-24 lg:pt-36">
+            @if ($data->status == 'Terkena denda')
+                <div class="p-4 font-medium text-sm text-red-800 rounded-lg bg-red-100 mb-5" role="alert">
+                    Status peminjaman kamu terkena denda, harap lakukan pembayaran denda.
+                </div>
+            @endif
             @if($data->status !== 'Terkena denda')
             <div class="border p-4 mb-5">
                 <h3 class="text-lg font-bold mb-5">Status peminjaman</h3>
@@ -13,7 +18,7 @@
                     </div>
                     <div class="flex flex-col items-center text-center lg:text-left">
                         <div
-                            class="@if ($data->status == 'Masa pengembalian' || $data->status == 'Sudah dikembalikan') bg-red-primary text-white @else 
+                            class="@if ($data->status == 'Masa pengembalian' || $data->status == 'Sudah dikembalikan') bg-red-primary text-white @else
                             border-4 border-red-primary text-red-primary @endif rounded-full h-16 w-16 flex justify-center items-center mb-3">
                             <i class="fas fa-receipt text-lg"></i>
                         </div>
@@ -21,7 +26,7 @@
                     </div>
                     <div class="flex flex-col items-center text-center lg:text-left">
                         <div
-                            class="@if ($data->status == 'Sudah dikembalikan') bg-red-primary text-white @else 
+                            class="@if ($data->status == 'Sudah dikembalikan') bg-red-primary text-white @else
                             border-4 border-red-primary text-red-primary @endif rounded-full h-16 w-16 flex justify-center items-center mb-3">
                             <i class="fas fa-thumbs-up text-lg"></i>
                         </div>
@@ -47,7 +52,7 @@
             <div class="border p-4 mb-5">
                 <h3 class="text-lg font-bold mb-5">Detail buku</h3>
                 <div class="flex justify-center lg:justify-normal gap-5 mb-4">
-                    <img src="https://ebooks.gramedia.com/ebook-covers/90158/thumb_image_normal/BLK_RDMSTHOMS1706838863836.jpg"
+                    <img src="{{ asset('storage/img/cover/' . ($data->placement->book->cover_buku ?? 'unknown_cover.jpg')) }}"
                         alt="" srcset="" class="rounded-md w-48 self-start">
                     <div class="hidden lg:block">
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
@@ -55,62 +60,62 @@
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     Author
                                 </th>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $data->book->author }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $data->placement->book->author }}</td>
                             </tr>
                             <tr class="border">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     ISBN
                                 </th>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{ $data->book->isbn }}</td>
+                                    {{ $data->placement->book->isbn }}</td>
                             </tr>
                             <tr class="border">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     Penerbit
                                 </th>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $data->book->penerbit }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $data->placement->book->penerbit }}</td>
                             </tr>
                             <tr class="border">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     Tanggal terbit
                                 </th>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{ $data->book->tgl_terbit }}</td>
+                                    {{ $data->placement->book->tgl_terbit }}</td>
                             </tr>
                             <tr class="border">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     Kategori
                                 </th>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{ $data->book->category->nama_kategori }}</td>
+                                    {{ $data->placement->book->category->nama_kategori }}</td>
                             </tr>
                             <tr class="border">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     Jumlah halaman
                                 </th>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{ $data->book->jml_halaman }}</td>
+                                    {{ $data->placement->book->jml_halaman }}</td>
                             </tr>
                             <tr class="border">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     Bahasa
                                 </th>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{ $data->book->bahasa }}</td>
+                                    {{ $data->placement->book->bahasa }}</td>
                             </tr>
                             <tr class="border">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     Format
                                 </th>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{ $data->book->format }}</td>
+                                    {{ $data->placement->book->format }}</td>
                             </tr>
                         </table>
                     </div>
                     <div>
-                        <h1 class="text-3xl font-bold mb-5">{{ $data->book->judul }}</h1>
-                        <h1 class="text-2xl font-bold">Sinopsis</h1>
-                        <p class="text-justify">{{ $data->book->sinopsis }}
+                        <h1 class="text-3xl font-bold mb-5">{{ $data->placement->book->judul }}</h1>
+                        <h1 class="text-2xl font-bold">Sinopsis/Deskripsi</h1>
+                        <p class="text-justify">{{ $data->placement->book->sinopsis }}
                         </p>
                     </div>
                 </div>
@@ -214,10 +219,7 @@
                         <tbody>
                             <tr class="border">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    @if (
-                                        $data->status == 'Denda terlambat' ||
-                                            $data->status == 'Denda buku rusak' ||
-                                            $data->status == 'Denda buku tidak kembali')
+                                    @if ($data->status == 'Terkena denda' && $data->keterangan_denda != 'Tidak ada')
                                         {{ $data->status }}
                                     @else
                                         Anda tidak terkena denda
@@ -227,13 +229,13 @@
                                     {{ $data->keterangan_denda }}
                                 </th>
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ formatRupiah($data->book->fine->denda_terlambat) }}
+                                    {{ formatRupiah($data->placement->book->fine->denda_terlambat) }}
                                 </th>
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ formatRupiah($data->book->fine->denda_rusak) }}
+                                    {{ formatRupiah($data->placement->book->fine->denda_rusak) }}
                                 </th>
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ formatRupiah($data->book->fine->denda_tidak_kembali) }}
+                                    {{ formatRupiah($data->placement->book->fine->denda_tidak_kembali) }}
                                 </th>
                             </tr>
                         </tbody>

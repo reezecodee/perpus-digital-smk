@@ -117,7 +117,7 @@ class HandlerAuthController extends Controller
         $this->log($logMessage);
 
         if ($user->hasRole('Peminjam')) {
-            return redirect()->route('show.homepage')->with([
+            return redirect()->intended(route('show.homepage'))->with([
                 'success' => $successMessage,
                 'show_popup' => true
             ]);

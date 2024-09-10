@@ -36,7 +36,8 @@
         },
         "files": [
             "app/Helpers/CurrencyHelper.php",
-            "app/Helpers/BarcodeHelper.php"
+            "app/Helpers/BarcodeHelper.php",
+            "app/Helpers/FunctionalHelper.php"
         ]
     },
     "autoload-dev": {

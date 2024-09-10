@@ -52,7 +52,7 @@
                                         </button>
                                     </div>
                                 @else
-                                    <a href="{{ route('confirm', $book->id) }}">
+                                    <a href="{{ route('show.loanConfirm', $book->id) }}">
                                         <button
                                             class="bg-red-primary hover:bg-red-500 rounded-md text-white p-2.5 font-bold">
                                             Pinjam buku ini
@@ -90,10 +90,6 @@
                             <span class="text-sm font-semibold text-red-primary mt-1 block">
                                 <i class="fas fa-info-circle"></i> Anda tidak dapat meminjam buku lagi sampai denda
                                 peminjaman sebelumnya dibayarkan.
-                            </span>
-                        @else
-                            <span class="text-sm font-semibold text-green-500 mt-1 block">
-                                <i class="fas fa-info-circle"></i> Anda dapat meminjam buku.
                             </span>
                         @endif
                     </div>

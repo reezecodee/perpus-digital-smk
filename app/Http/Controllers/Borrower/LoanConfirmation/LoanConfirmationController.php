@@ -14,7 +14,7 @@ class LoanConfirmationController extends Controller
 {
     /**
      * Function ini digunkan untuk menampilkan halaman konfirmasi saat proses peminjaman.
-     * 
+     *
      */
 
     public function showConfirmationPage($id)
@@ -56,13 +56,13 @@ class LoanConfirmationController extends Controller
 
     /**
      * Function ini digunakan untuk menampilkan halaman success ketika proses peminjaman berhasil.
-     * 
+     *
      */
 
-    public function showSuccess()
+    public function showSuccessPage()
     {
         if (!session('success')) {
-            return redirect()->route('dashboard');
+            return redirect()->route('show.homepage');
         }
 
         $title = 'Peminjaman Sukeses';

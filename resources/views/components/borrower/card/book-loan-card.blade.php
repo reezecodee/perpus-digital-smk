@@ -42,7 +42,7 @@
                 <div class="flex justify-end text-center">
                     <div class="text-center">
                         <div class="flex justify-center">
-                            <p>{!! $barcode($item->placement->book->isbn, 1, 40) !!}</p>
+                            <p>{!! barcode($item->placement->book->isbn, 1, 40) !!}</p>
                         </div>
                         <p class="font-medium font-ibm-plex-mono text-center">ISBN {{ $item->placement->book->isbn }}</p>
                     </div>

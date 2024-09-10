@@ -18,7 +18,7 @@
             </div>
             <div id="slide-display1" class="block">
                 @forelse ($books as $item)
-                    <x-borrower.card.book-loan-card :item="$item" :barcode="$barcode" />
+                    <x-borrower.card.book-loan-card :item="$item" />
                 @empty
                     <div class="flex justify-center">
                         <img src="/img/assets/oh_no.webp" alt="" srcset="" width="300" class="block">
@@ -27,7 +27,7 @@
                 @endforelse
             </div>
             <div id="slide-display2" class="hidden">
-                @forelse ($e_books as $item)
+                @forelse ($eBooks as $item)
                     <x-borrower.card.ebook-card :item="$item" :iteration="$loop->iteration" :barcode="$barcode" />
                 @empty
                     <div class="flex justify-center">
@@ -37,7 +37,7 @@
                 @endforelse
             </div>
             <div id="slide-display3" class="hidden">
-                @forelse ($for_reviews as $item)
+                @forelse ($forReviews as $item)
                     <x-borrower.card.review-book-card :item="$item" :iteration="$loop->iteration" />
                 @empty
                     <div class="flex justify-center">
