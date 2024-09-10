@@ -1,13 +1,13 @@
 <div class="self-start max-w-sm w-full border shadow-md rounded-md p-4">
-    <a href="{{ route('overview') }}"
+    <a href="{{ route('show.overview') }}"
         class="{{ Request::is('overview-profile*') ? 'bg-red-primary hover:bg-red-500 text-white' : 'hover:bg-red-500 hover:text-white' }} block mb-2 p-2 rounded-md w-full cursor-pointer font-semibold">
         Profile saya
     </a>
-    <a href="{{ route('history') }}"
+    <a href="{{ route('show.history') }}"
         class="{{ Request::is('riwayat-peminjaman*') ? 'bg-red-primary hover:bg-red-500 text-white' : 'hover:bg-red-500 hover:text-white' }} block mb-2 p-2 rounded-md w-full cursor-pointer font-semibold">
         Riwayat peminjaman
     </a>
-    <a href="{{ route('ch_password') }}"
+    <a href="{{ route('show.changePassword') }}"
         class="{{ Request::is('ganti-password*') ? 'bg-red-primary hover:bg-red-500 text-white' : 'hover:bg-red-500 hover:text-white' }} block mb-2 p-2 rounded-md w-full cursor-pointer font-semibold">
         Ganti password
     </a>

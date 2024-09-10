@@ -20,7 +20,7 @@
                 <span class="font-medium">{{ session('status') }}</span>
             </div>
         @endif
-        <form action="" method="post">
+        <form action="{{ route('login.process') }}" method="post">
             @csrf
             <x-auth.input.rectangle name="email" type="email" label="Email" placeholder="Masukkan email"
                 :value="old('email')" />
@@ -30,7 +30,7 @@
                 <div class="flex items-center gap-2">
                     <x-auth.input.remember />
                 </div>
-                <a href="{{ route('show_forgot_password') }}" class="hover:text-red-primary hover:underline">Lupa
+                <a href="{{ route('show.forgotPassword') }}" class="hover:text-red-primary hover:underline">Lupa
                     password?</a>
             </div>
             <x-auth.button.submit>

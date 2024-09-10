@@ -8,7 +8,7 @@
         <img src="{{ asset('storage/img/cover/' . ($item->placement->book->cover_buku ?? 'unknown_cover.jpg')) }}"
             class="rounded-md w-28 self-start" loading="lazy">
         <div class="text-xs ml-5 self-start w-full">
-            <a href="{{ route('detail_buku', $item->placement->book->id) }}">
+            <a href="{{ route('show.bookDetail', $item->placement->book->id) }}">
                 <h1 class="text-base lg:text-lg font-bold mb-1">{{ $item->placement->book->judul }}</h1>
             </a>
             <div class="mb-3 font-medium grid grid-cols-1 lg:grid-cols-4 gap-x-3">
@@ -29,7 +29,7 @@
             </div>
             <div class="flex justify-between mt-4">
                 <div>
-                    <a href="{{ route('detail_rent', $item->id) }}">
+                    <a href="{{ route('show.detailRent', $item->id) }}">
                         <button
                             class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2.5 font-bold mr-2">Lihat
                             detail</button>

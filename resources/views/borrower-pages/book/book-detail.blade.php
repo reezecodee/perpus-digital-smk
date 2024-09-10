@@ -9,40 +9,40 @@
         <div class="pt-24 lg:pt-36">
             <div class="flex gap-5 mb-7 shadow-lg p-4 rounded-lg">
                 <div class="self-start p-4">
-                    <img src="{{ asset('storage/img/cover/' . ($data->cover_buku ?? 'unknown_cover.jpg')) }}"
+                    <img src="{{ asset('storage/img/cover/' . ($book->cover_buku ?? 'unknown_cover.jpg')) }}"
                         class="rounded-2xl shadow-md w-72" alt="" srcset="">
                 </div>
                 <div class="self-start p-4 w-full">
                     <div class="w-full self-start">
-                        <h1 class="text-3xl font-bold mb-1">{{ $data->judul }}</h1>
+                        <h1 class="text-3xl font-bold mb-1">{{ $book->judul }}</h1>
                         <p class="text-sm font-semibold"><i class="fas fa-star text-yellow-300"></i>
-                            {{ $rating($data->id) }}
+                            {{ $averageRating }}
                             Rating | Tersedia
                             10</p>
                         <div class="mt-5">
                             <div class="grid grid-cols-2">
                                 <p class="text-base font-semibold"><span class="text-red-primary">Author:</span>
-                                    {{ $data->author }}</p>
+                                    {{ $book->author }}</p>
                                 <p class="text-base font-semibold"><span class="text-red-primary">Penerbit:</span>
-                                    {{ $data->penerbit }}</p>
+                                    {{ $book->penerbit }}</p>
                                 <p class="text-base font-semibold"><span class="text-red-primary">Tanggal terbit:</span>
-                                    {{ $data->tgl_terbit }}</p>
+                                    {{ $book->tgl_terbit }}</p>
                                 <p class="text-base font-semibold"><span class="text-red-primary">ISBN:</span>
-                                    {{ $data->isbn }}</p>
+                                    {{ $book->isbn }}</p>
                                 <p class="text-base font-semibold"><span class="text-red-primary">Kategori:</span>
-                                    {{ $data->category->nama_kategori }}</p>
+                                    {{ $book->category->nama_kategori }}</p>
                                 <p class="text-base font-semibold"><span class="text-red-primary">Bahasa:</span>
-                                    {{ $data->bahasa }}</p>
+                                    {{ $book->bahasa }}</p>
                                 <p class="text-base font-semibold"><span class="text-red-primary">Format:</span>
-                                    {{ $data->format }}</p>
+                                    {{ $book->format }}</p>
                                 <p class="text-base font-semibold"><span class="text-red-primary">Status:</span>
-                                    {{ $data->status }}</p>
+                                    {{ $book->status }}</p>
                             </div>
                         </div>
-                        <p class="font-bold mt-3">{{ $likes }} Orang menyukai
-                            {{ $data->format == 'Fisik' ? 'Buku' : 'E-book' }} ini</p>
+                        <p class="font-bold mt-3">{{ $likesCount }} Orang menyukai
+                            {{ $book->format == 'Fisik' ? 'Buku' : 'E-book' }} ini</p>
                         <div class="mt-2 flex gap-3">
-                            @if ($data->format == 'Fisik')
+                            @if ($book->format == 'Fisik')
                                 @if ($pendingLoan || $loanWithFine)
                                     <div>
                                         <button
@@ -52,15 +52,15 @@
                                         </button>
                                     </div>
                                 @else
-                                    <a href="{{ route('confirm', $data->id) }}">
+                                    <a href="{{ route('confirm', $book->id) }}">
                                         <button
                                             class="bg-red-primary hover:bg-red-500 rounded-md text-white p-2.5 font-bold">
                                             Pinjam buku ini
                                         </button>
                                     </a>
                                 @endif
-                            @elseif($data->format == 'Elektronik')
-                                <form action="{{ route('update_e_book', $data->id) }}" method="post">
+                            @elseif($book->format == 'Elektronik')
+                                <form action="{{ route('update.eBook', $book->id) }}" method="post">
                                     @csrf
                                     <button type="submit" value="tambah" name="e_book"
                                         class="bg-red-primary hover:bg-red-500 rounded-md text-white p-2.5 font-bold"><i
@@ -68,21 +68,18 @@
                                         E-book</button>
                                 </form>
                             @endif
-                            @if ($is_liked)
-                                <form action="{{ route('update_like', $data->id) }}" method="post">
-                                    @csrf
+                            <form action="{{ route('update.bookLike', $book->id) }}" method="post">
+                                @csrf
+                                @if ($isLiked)
                                     <button value="batal" name="like" type="submit"
                                         class="border bg-red-primary text-white hover:bg-red-500 duration-300 rounded-md p-2.5 font-bold"><i
                                             class="fas fa-heart"></i> Batalkan suka</button>
-                                </form>
-                            @else
-                                <form action="{{ route('update_like', $data->id) }}" method="post">
-                                    @csrf
+                                @else
                                     <button value="suka" name="like" type="submit"
                                         class="border border-red-primary text-red-primary hover:bg-red-primary hover:text-white duration-300 rounded-md p-2.5 font-bold"><i
                                             class="fas fa-heart"></i> Tambah ke daftar suka</button>
-                                </form>
-                            @endif
+                                @endif
+                            </form>
                         </div>
                         @if ($pendingLoan)
                             <span class="text-sm font-semibold text-red-primary mt-1 block">
@@ -106,7 +103,7 @@
                 <div class="font-medium">
                     <ul>
                         <li class="font-bold text-lg mb-3">Sinopsis/Deskripsi Buku: </li>
-                        <li class="text-justify text-sm font-medium">{{ $data->sinopsis }}
+                        <li class="text-justify text-sm font-medium">{{ $book->sinopsis }}
                         </li>
                     </ul>
                 </div>
@@ -197,12 +194,12 @@
             <h1 class="font-extrabold text-2xl mb-4">Rekomendasi serupa</h1>
             <div class="flex lg:block justify-center lg:justify-normal">
                 <div class="grid grid-cols-2 lg:grid-cols-5 gap-9 lg:gap-3">
-                    @foreach ($recomendations as $item)
+                    @foreach ($recommendations as $item)
                         <x-borrower.card.book :item="$item" />
                     @endforeach
                 </div>
             </div>
-            @if ($recomendations->isEmpty())
+            @if ($recommendations->isEmpty())
                 <div class="flex justify-center">
                     <div class="text-center">
                         <img src="/img/assets/oh_no.webp" alt="" srcset="" class="w-52 inline-block">

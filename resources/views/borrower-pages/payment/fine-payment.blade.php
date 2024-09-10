@@ -189,7 +189,7 @@
             @if ($data->fine_payment->status_bayar != 'Sudah dibayar')
                 <div class="border p-7 shadow-md rounded-md mb-5">
                     <h3 class="text-xl font-semibold mb-4">Upload bukti pembayaran</h3>
-                    <form action="{{ route('fine-payment', $data->id) }}" method="post"
+                    <form action="{{ route('store.payment', $data->id) }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="flex justify-center mb-5">

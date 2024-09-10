@@ -4,10 +4,10 @@
             <img src="{{ asset('storage/img/cover/' . ($item->book->cover_buku ?? 'unknown_cover.jpg')) }}"
                 class="rounded-md self-start w-28" loading="lazy">
             <div class="text-xs ml-5 w-full self-start">
-                <a href="{{ route('detail_buku', $item->book->id) }}" class="inline-block mb-1">
+                <a href="{{ route('show.bookDetail', $item->book->id) }}" class="inline-block mb-1">
                     <h1 class="text-base lg:text-lg font-bold">{{ $item->book->judul }}</h1>
                 </a>
-                <form method="post" action="{{ route('send_comment', $item->id) }}">
+                <form method="post" action="{{ route('store.comment', $item->id) }}">
                     @csrf
                     <input type="hidden" value="{{ $item->book->id }}" name="buku_id" id="">
                     <input type="hidden" value="{{ $item->peminjam->id }}" name="peminjam_id" id="">

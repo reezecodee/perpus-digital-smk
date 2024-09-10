@@ -7,21 +7,21 @@ use App\Http\Requests\Help\HelpRequest;
 use App\Models\Help;
 use Illuminate\Http\Request;
 
-class ReportProblem extends Controller
+class HandlerReportProblemController extends Controller
 {
-    public function report_problem()
-    {
-        return view('borrower-pages.help.help-form', [
-            'title' => 'Laporkan Masalah',
-        ]);
-    }
+    /**
+     * Function untuk menyimpan laporan masalah dari user.
+     * 
+     */
 
-    public function send_report(HelpRequest $request)
+    public function sendReport(HelpRequest $request)
     {
-        $validated_data = $request->validated();
+        $validatedData = $request->validated();
         $user = auth()->user();
-        $validated_data['pelapor_id'] = $user->id;
-        Help::create($validated_data);
+
+        $validatedData['pelapor_id'] = $user->id;
+        Help::create($validatedData);
+
         $this->log("{$user->nama} baru saja mengirimkan laporan permintaan bantuan");
         return back()->withSuccess('Berhasil mengirimkan laporan bantuan');
     }

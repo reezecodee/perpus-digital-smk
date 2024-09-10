@@ -22,7 +22,7 @@
                 </svg>
                 <h3 class="mb-5 text-lg font-normal text-gray-500">Apakah kamu ingin
                     menghapusnya</h3>
-                <form action="{{ route('delete_my_visit', $id) }}" method="post">
+                <form action="{{ route('delete.myVisit', $id) }}" method="post">
                     @csrf
                     @method('DELETE')
                     <button data-modal-hide="popup-modal{{ $iteration }}"

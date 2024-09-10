@@ -1,3 +1,21 @@
+@php
+    $buttonRoute = '';
+
+    if (auth()->check()) {
+        if (
+            auth()
+                ->user()
+                ->hasAnyRole(['Admin', 'Pustakawan'])
+        ) {
+            $buttonRoute = route('show.dashboard');
+        } else {
+            $buttonRoute = route('show.homepage');
+        }
+    } else {
+        $buttonRoute = route('show.login');
+    }
+@endphp
+
 <x-borrower-layout :title="$title" :bubble="false">
     <section class="bg-white dark:bg-gray-900">
         <div class="grid max-w-screen-xl px-4 pt-24 mx-auto lg:gap-8 xl:gap-0 lg:py-14 lg:grid-cols-12 lg:pt-32">
@@ -5,19 +23,20 @@
                 <h1
                     class="max-w-2xl mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white">
                     Bangun Generasi Emas, <br class="hidden lg:block">Dengan Membaca Buku</h1>
-                <p class="max-w-2xl mb-6 font-medium text-gray-500 lg:mb-8 md:text-lg lg:text-lg dark:text-gray-400 text-justify lg:text-left">Selamat datang di e-perpus SMK Digital Sistem Informatika. Kami
+                <p
+                    class="max-w-2xl mb-6 font-medium text-gray-500 lg:mb-8 md:text-lg lg:text-lg dark:text-gray-400 text-justify lg:text-left">
+                    Selamat datang di e-perpus SMK Digital Sistem Informatika. Kami
                     berkomitmen menyediakan e-perpus bagi para siswa dan membantu mereka meningkatkan pengetahuan
                     dan kenyamanan dalam proses peminjaman buku perpustakaan.</p>
                 <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
-                    <a href="@auth {{ route('dashboard') }} @else{{ route('show_login') }}@endauth"
+                    <a href="{{ $buttonRoute }}"
                         class="inline-flex items-center justify-center w-full px-5 py-3 text-sm text-center text-white font-semibold border rounded-full sm:w-auto hover:bg-red-500 bg-red-primary">
                         Jelajahi E-perpus
                     </a>
                 </div>
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                <img src="/img/assets/librarians.webp"
-                    alt="">
+                <img src="/img/assets/librarians.webp" alt="">
             </div>
         </div>
     </section>
@@ -40,23 +59,24 @@
                         <li>Menjunjung tinggi etika dan integritas</li>
                     </ul>
                 </div>
-                <img class="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex"
-                    src="/img/assets/team_goals.webp"
+                <img class="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex" src="/img/assets/team_goals.webp"
                     alt="">
             </div>
             <!-- Row -->
             <div class="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16">
-                <img class="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex"
-                    src="/img/assets/remote.webp"
+                <img class="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex" src="/img/assets/remote.webp"
                     alt="feature image 2">
                 <div class="text-gray-500 sm:text-lg dark:text-gray-400">
-                    <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">Komitmen Terhadap
+                    <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">Komitmen
+                        Terhadap
                         Kualitas dan Layanan</h2>
-                    <p class="mb-5 font-medium lg:text-lg text-justify lg:text-left">Kami menerapkan standar kualitas yang ketat dalam setiap aspek
+                    <p class="mb-5 font-medium lg:text-lg text-justify lg:text-left">Kami menerapkan standar kualitas
+                        yang ketat dalam setiap aspek
                         operasional kami, mulai dari peminjaman sampai pengembalian buku. Pustakawan kami yang
                         berpengalaman dan berdedikasi bekerja tanpa henti untuk memantau setiap aktivitas dan memenuhi
                         harapan instansi sekolah dalam mencetak siswa yang unggul.</p>
-                    <p class="font-medium lg:text-lg text-justify lg:text-left">Kami menyadari bahwa pelayanan yang unggul sama pentingnya
+                    <p class="font-medium lg:text-lg text-justify lg:text-left">Kami menyadari bahwa pelayanan yang
+                        unggul sama pentingnya
                         dengan profesi berkualitas. <b>Your satisfaction is our top priority!</b></p>
                 </div>
             </div>
@@ -72,13 +92,17 @@
                         fill="currentColor" />
                 </svg>
                 <blockquote>
-                    <p class="text-xl font-medium text-gray-900 md:text-2xl">"Semakin banyak kamu membaca, semakin banyak hal yang kamu ketahui. Semakin banyak kamu belajar, semakin banyak tempat yang akan kamu datangi."</p>
+                    <p class="text-xl font-medium text-gray-900 md:text-2xl">"Semakin banyak kamu membaca, semakin
+                        banyak hal yang kamu ketahui. Semakin banyak kamu belajar, semakin banyak tempat yang akan kamu
+                        datangi."</p>
                 </blockquote>
                 <figcaption class="flex items-center justify-center mt-6 space-x-3">
-                    <img class="w-10 h-10 lg:w-6 lg:h-6 rounded-full" src="/img/atyla_profile.png" alt="profile picture">
+                    <img class="w-10 h-10 lg:w-6 lg:h-6 rounded-full" src="/img/atyla_profile.png"
+                        alt="profile picture">
                     <div class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
                         <div class="pr-3 font-medium text-gray-900 dark:text-white">Atyla A. Al Harits</div>
-                        <div class="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">Kepala Perpustakaan SMK Digital Sistem Informatika</div>
+                        <div class="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">Kepala Perpustakaan SMK
+                            Digital Sistem Informatika</div>
                     </div>
                 </figcaption>
             </figure>

@@ -15,7 +15,7 @@
                 @forelse ($histories as $item)
                     <div class="flex justify-between items-center border p-3 rounded-md mb-3">
                         <div>
-                            <a href="{{ route('detail_rent', $item->id) }}" class="mb-1 block">
+                            <a href="{{ route('show.detailRent', $item->id) }}" class="mb-1 block">
                                 <h4
                                     class="text-base lg:text-lg font-bold leading-5 lg:leading-none hover:text-red-primary">
                                     {{ $item->book->judul }}
@@ -37,10 +37,10 @@
                 @endforelse
             </div>
             <div id="slide-display2" class="hidden">
-                @forelse ($fine_histories as $item)
+                @forelse ($fineHistories as $item)
                     <div class="flex justify-between items-center border p-3 rounded-md mb-3">
                         <div>
-                            <a href="{{ route('payment', $item->id) }}" class="mb-1 block">
+                            <a href="{{ route('show.payment', $item->id) }}" class="mb-1 block">
                                 <h4
                                     class="text-base lg:text-lg font-bold leading-5 lg:leading-none hover:text-red-primary">
                                     {{ $item->placement->book->judul }}

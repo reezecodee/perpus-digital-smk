@@ -20,7 +20,7 @@
                     transaksi tak terduga.
                 </div>
             </div>
-            <form action="" method="post">
+            <form action="{{ route('update.password') }}" method="post">
                 @csrf
                 <div class="grid grid-cols-2 gap-3">
                     <x-borrower.input.basic label="Passoword saat ini" name="current_password" type="text"

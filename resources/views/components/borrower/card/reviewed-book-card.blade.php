@@ -4,7 +4,7 @@
             <img src="{{ asset('storage/img/cover/' . ($item->book->cover_buku ?? 'unknown_cover.jpg')) }}"
                 class="rounded-md self-start w-28" loading="lazy">
             <div class="text-xs ml-5 w-full self-start">
-                <a href="{{ route('detail_buku', $item->book->id) }}" class="inline-block mb-1">
+                <a href="{{ route('show.bookDetail', $item->book->id) }}" class="inline-block mb-1">
                     <h1 class="text-base lg:text-lg font-bold">{{ $item->book->judul }}</h1>
                 </a>
                 <div>

@@ -23,7 +23,7 @@
                         class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2.5 font-bold mr-2"
                         data-modal-target="popup-modal{{ $iteration }}"
                         data-modal-toggle="popup-modal{{ $iteration }}">Batalkan suka</button>
-                    <a href="{{ route('detail_buku', $item->book->id) }}">
+                    <a href="{{ route('show.bookDetail', $item->book->id) }}">
                         <button
                             class="border border-red-primary text-red-primary hover:bg-red-primary hover:text-white duration-300 rounded-md text-sm p-2.5 font-bold">Lihat
                             buku</button>
@@ -53,7 +53,7 @@
                             stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
                     <h3 class="mb-5 text-lg font-normal text-gray-500">Apakah kamu yakin ingin menghapus buku ini dari daftar suka?</h3>
-                    <form action="{{ route('update_like', $item->book->id) }}" method="post"
+                    <form action="{{ route('update.bookLike', $item->book->id) }}" method="post"
                         class="inline">
                         @csrf
                         <button value="batal" name="like" type="submit"

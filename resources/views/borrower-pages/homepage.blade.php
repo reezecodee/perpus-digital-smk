@@ -61,7 +61,7 @@
                             buku</span>
                         <p class="mb-3 mt-3 font-normal text-gray-500">Lihat semua buku yang tersedia di
                             perpustakaan</p>
-                        <a href="{{ route('all_books') }}?format=fisik"
+                        <a href="{{ route('show.allBooks') }}?format=fisik"
                             class="inline-flex font-medium items-center text-blue-600 hover:underline">
                             Lihat rak perpustakaan
                             <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true"
@@ -81,7 +81,7 @@
                             E-book</span>
                         <p class="mb-3 mt-3 font-normal text-gray-500">Kamu bisa baca secara online
                             dengan E-book</p>
-                        <a href="{{ route('all_books') }}?format=elektronik"
+                        <a href="{{ route('show.allBooks') }}?format=elektronik"
                             class="inline-flex font-medium items-center text-blue-600 hover:underline">
                             Lihat rak E-book
                             <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true"
@@ -116,11 +116,11 @@
                     <h1 class="text-2xl mb-4 font-bold">E-book terbaru</h1>
                     <div class="flex lg:block justify-center lg:justify-normal">
                         <div class="grid grid-cols-2 lg:grid-cols-6 gap-9 lg:gap-3">
-                            @foreach ($latest_ebooks as $item)
+                            @foreach ($latestEbooks as $item)
                                 <x-borrower.card.book :item="$item" />
                             @endforeach
                         </div>
-                        @if ($latest_ebooks->isEmpty())
+                        @if ($latestEbooks->isEmpty())
                             <div class="flex justify-center">
                                 <div class="text-center">
                                     <img src="/img/assets/oh_no.webp" alt="" srcset=""
@@ -142,7 +142,7 @@
                                 @endforeach
                             </div>
                         </div>
-                        @if ($recommendations->isEmpty())
+                        @if ($articles->isEmpty())
                             <div class="flex justify-center">
                                 <div class="text-center">
                                     <img src="/img/assets/oh_no.webp" alt="" srcset=""

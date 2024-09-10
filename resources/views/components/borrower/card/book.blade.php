@@ -1,5 +1,5 @@
 <div class="w-36">
-    <a href="{{ route('detail_buku', $item->id) }}">
+    <a href="{{ route('show.bookDetail', $item->id) }}">
         <img src="{{ asset('storage/img/cover/' . ($item->cover_buku ?? 'unknown_cover.jpg')) }}" alt=""
             srcset="" class="rounded-lg mb-2" loading="lazy">
     </a>

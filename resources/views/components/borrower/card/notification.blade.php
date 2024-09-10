@@ -5,7 +5,7 @@
         @else
             <img src="https://www.svgrepo.com/show/489041/mail-open.svg" class="w-20" alt="" srcset="" loading="lazy">
         @endif
-        <a href="{{ route('read_notif', $item->id) }}" class="w-full">
+        <a href="{{ route('show.readNotif', $item->id) }}" class="w-full">
             <p class="font-bold leading-5 mb-1 group-hover:text-red-primary truncate-text-notif">
                 {{ $item->judul }}</p>
             <p class="text-xs lg:text-sm truncate-text">{{ strip_tags($item->pesan) }}</p>

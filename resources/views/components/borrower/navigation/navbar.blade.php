@@ -2,10 +2,10 @@
     <nav class="bg-red-primary w-full text-white fixed z-40 shadow-lg xl:container xl:mx-auto">
         <div class="flex justify-between items-center py-3 px-2 lg:px-7">
             <div class="flex gap-5 items-center">
-                <a href="@auth {{ route('dashboard') }} @else / @endauth" class="hidden lg:inline">
+                <a href="@auth {{ route('show.homepage') }} @else / @endauth" class="hidden lg:inline">
                     <img src="/assets/logo-perpus.png" width="180" alt="" srcset="">
                 </a>
-                <form action="{{ route('search_result') }}" method="get" class="relative">
+                <form action="{{ route('show.searchResult') }}" method="get" class="relative">
                     @csrf
                     <input type="text" name="q" value="{{ request()->query('q') }}"
                         class="bg-white py-2.5 px-3 rounded-md w-[17rem] lg:w-[24rem] text-sm placeholder:text-black text-black font-semibold focus:ring-red-500 focus:border-red-500"
@@ -16,25 +16,25 @@
                         </button>
                     </div>
                 </form>
-                <a href="{{ route('notification') }}" class="hidden lg:inline" title="Notifikasi">
+                <a href="{{ route('show.notification') }}" class="hidden lg:inline" title="Notifikasi">
                     <div
                         class="bg-red-primary rounded-full p-1 w-9 text-center border-2 border-white hover:border-red-primary duration-500 cursor-pointer">
                         <i class="fas fa-bell text-white text-sm"></i>
                     </div>
                 </a>
-                <a href="{{ route('liked') }}" class="hidden lg:inline" title="Buku disukai">
+                <a href="{{ route('show.bookliked') }}" class="hidden lg:inline" title="Buku disukai">
                     <div
                         class="bg-red-primary rounded-full p-1 w-9 text-center border-2 border-white hover:border-red-primary duration-500 cursor-pointer">
                         <i class="fa-solid fa-heart text-white text-sm"></i>
                     </div>
                 </a>
-                <a href="{{ route('my_shelf') }}" class="hidden lg:inline" title="Rak buku saya">
+                <a href="{{ route('show.myBookShelf') }}" class="hidden lg:inline" title="Rak buku saya">
                     <div
                         class="bg-red-primary rounded-full p-1 w-9 text-center border-2 border-white hover:border-red-primary duration-500 cursor-pointer">
                         <i class="fa-solid fa-book-bookmark text-white text-sm"></i>
                     </div>
                 </a>
-                <a href="{{ route('visit') }}" class="hidden lg:inline" title="Kunjungan perpustakaan">
+                <a href="{{ route('show.visit') }}" class="hidden lg:inline" title="Kunjungan perpustakaan">
                     <div
                         class="bg-red-primary rounded-full p-1 w-9 text-center border-2 border-white hover:border-red-primary duration-500 cursor-pointer">
                         <i class="fa-solid fa-clipboard-list text-white text-sm"></i>
@@ -52,21 +52,21 @@
                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 font-semibold">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDelayButton">
                         <li>
-                            <a href="{{ route('dashboard') }}" class="block px-4 py-2 hover:bg-gray-100"><i
+                            <a href="{{ route('show.homepage') }}" class="block px-4 py-2 hover:bg-gray-100"><i
                                     class="fas fa-home"></i>
-                                Dashboard</a>
+                                Homepage</a>
                         </li>
                         <li>
-                            <a href="{{ route('calendar') }}" class="block px-4 py-2 hover:bg-gray-100"><i
+                            <a href="{{ route('show.calendar') }}" class="block px-4 py-2 hover:bg-gray-100"><i
                                     class="fas fa-calendar"></i>
                                 Kalender</a>
                         </li>
                         <li>
-                            <a href="{{ route('payment-histories') }}" class="block px-4 py-2 hover:bg-gray-100">
+                            <a href="{{ route('show.paymentHistories') }}" class="block px-4 py-2 hover:bg-gray-100">
                                 <i class="fas fa-history"></i> Riwayat</a>
                         </li>
                         <li>
-                            <a href="{{ route('overview') }}" class="block px-4 py-2 hover:bg-gray-100"><i
+                            <a href="{{ route('show.overview') }}" class="block px-4 py-2 hover:bg-gray-100"><i
                                     class="fas fa-user"></i>
                                 Profile</a>
                         </li>
@@ -81,12 +81,12 @@
             @endauth
             @guest
                 <div class="flex items-center gap-2">
-                    <a href="{{ route('show_login') }}">
+                    <a href="{{ route('show.login') }}">
                         <button
                             class="bg-white border-2 border-white hover:bg-transparent hover:text-white duration-300 rounded-lg py-1.5 px-4 text-red-primary text-sm font-bold"><i
                                 class="fas fa-sign-in-alt"></i> Login</button>
                     </a>
-                    <a href="{{ route('show_register') }}" class="hidden lg:inline">
+                    <a href="{{ route('show.register') }}" class="hidden lg:inline">
                         <button
                             class="border-2 border-white hover:bg-white hover:text-red-primary duration-300 text-white rounded-lg py-1.5 px-4 text-sm font-bold">Register</button>
                     </a>
@@ -101,7 +101,7 @@
             </div>
             <div class="lg:flex gap-7 text-white hidden">
                 @foreach ($top_categories as $item)
-                    <a href="{{ route('search_result') }}?q={{ $item->nama_kategori }}"
+                    <a href="{{ route('show.searchResult') }}?q={{ $item->nama_kategori }}"
                         class="hover:text-red-200 duration-150">{{ $item->nama_kategori }}</a>
                     @if (!$loop->last)
                         |

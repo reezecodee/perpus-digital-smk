@@ -19,7 +19,7 @@
             </ol>
         </div>
 
-        <a href="{{ route('show_login') }}" class="text-sm hover:text-red-primary hover:underline">Sudah punya akun?
+        <a href="{{ route('show.login') }}" class="text-sm hover:text-red-primary hover:underline">Sudah punya akun?
             Login!</a>
     </div>
 </x-auth-layout>

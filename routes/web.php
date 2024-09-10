@@ -1,22 +1,22 @@
 <?php
 
-use App\Http\Controllers\Auth\Authentication;
-use App\Http\Controllers\Auth\PasswordReset;
-use App\Http\Controllers\Borrower\Book\AllBooks;
-use App\Http\Controllers\Borrower\Book\BookDetail;
-use App\Http\Controllers\Borrower\Book\BookShelf;
-use App\Http\Controllers\Borrower\Book\DetailRent;
-use App\Http\Controllers\Borrower\Book\LikedBookList;
-use App\Http\Controllers\Borrower\Book\LoanConfirmation;
-use App\Http\Controllers\Borrower\Book\ReadEbook;
-use App\Http\Controllers\Borrower\Book\SearchResult;
-use App\Http\Controllers\Borrower\Calendar\Schedule;
-use App\Http\Controllers\Borrower\Help\ReportProblem;
-use App\Http\Controllers\Borrower\Homepage\Homepage;
-use App\Http\Controllers\Borrower\Notification\NotificationList;
-use App\Http\Controllers\Borrower\Payment\PaymentFine;
-use App\Http\Controllers\Borrower\Profile\Profile;
-use App\Http\Controllers\Borrower\Visit\VisitPlan;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\HandlerAuthController;
+use App\Http\Controllers\Borrower\AllBooks\AllBooksController;
+use App\Http\Controllers\Borrower\BookDetail\BookDetailController;
+use App\Http\Controllers\Borrower\BookLiked\BookLikedListController;
+use App\Http\Controllers\Borrower\BookShelf\BookShelfController;
+use App\Http\Controllers\Borrower\Calendar\ScheduleController;
+use App\Http\Controllers\Borrower\DetailRent\DetailRentController;
+use App\Http\Controllers\Borrower\Help\ReportProblemController;
+use App\Http\Controllers\Borrower\Homepage\HomepageController;
+use App\Http\Controllers\Borrower\LoanConfirmation\LoanConfirmationController;
+use App\Http\Controllers\Borrower\Notification\NotificationListController;
+use App\Http\Controllers\Borrower\Payment\FinePaymentController;
+use App\Http\Controllers\Borrower\Profile\ProfileBorrowerController;
+use App\Http\Controllers\Borrower\ReadEbook\ReadEbookController;
+use App\Http\Controllers\Borrower\SearchResult\SearchResultController;
+use App\Http\Controllers\Borrower\Visit\VisitPlanController;
 use App\Http\Controllers\Excel\ExcelController;
 use App\Http\Controllers\Librarian\DashboardController;
 use App\Http\Controllers\Librarian\Help\ManageHelp;
@@ -41,8 +41,11 @@ use App\Http\Controllers\Librarian\MasterDataLoan\ManageVisitor;
 use App\Http\Controllers\Librarian\MasterDataUsers\LogicUserController;
 use App\Http\Controllers\Librarian\MasterDataUsers\UserController;
 use App\Http\Controllers\Librarian\Profile\ManageProfile;
+use App\Http\Controllers\PasswordReset\HandlerPasswordResetController;
+use App\Http\Controllers\PasswordReset\PasswordResetController;
 use App\Http\Controllers\PDF\PDFController;
 use App\Http\Controllers\Site\SiteController;
+use App\Models\FinePayment;
 use Illuminate\Support\Facades\Route;
 
 
@@ -73,8 +76,8 @@ Route::get('/test', function () {
 |--------------------------------------------------------------------------
 | SiteController Group
 |--------------------------------------------------------------------------
-| SiteController class group memuat route yang dapat diakses tanpa melakukan proses Auth, 
-| Ini merupakan bagian yang memuat informasi mengenai website E-Perpustakaan ini. 
+| SiteController class group memuat route yang dapat diakses tanpa melakukan proses Auth,
+| Ini merupakan bagian yang memuat informasi mengenai website E-Perpustakaan ini.
 |
 */
 
@@ -92,160 +95,173 @@ Route::controller(SiteController::class)->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| AuthController Group
+| Authentication
 |--------------------------------------------------------------------------
-| AuthController class group memuat route yang berkaitan dengan proses Auth. Ini mencakup 
-| http route GET dan POST 
+| memuat route yang berkaitan dengan proses Auth.
 |
 */
 
-Route::controller(Authentication::class)->group(function () {
+Route::controller(AuthController::class)->group(function () {
     Route::prefix('auth')->middleware('guest')->group(function () {
-        Route::get('/login', 'show_login')->name('show_login');
-        Route::get('/register', 'show_register')->name('show_register');
-
-        Route::post('/login', 'logic_login')->name('logic_login');
+        Route::get('/login', 'showLoginPage')->name('show.login');
+        Route::get('/register', 'showRegisterPage')->name('show.register');
     });
 
-    Route::get('/email/verify', 'show_verify_notice')->middleware(['auth'])->name('verification.notice');
-
-    Route::get('/email/verify/{id}/{hash}', 'verify')->middleware(['auth', 'signed'])->name('verification.verify');
-
-    Route::post('/email/verification-notification', 'resend_verify')->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
-
-    Route::get('/logout', 'logout')->name('logout');
-    Route::get('/not-activated', 'show_not_activated')->name('show_not_activated');
+    Route::get('/email/verify', 'showVerifyNoticePage')->middleware(['auth'])->name('show.notice');
+    Route::get('/not-activated', 'showNotActivatedPage')->name('show.notActivated');
 });
 
-Route::controller(PasswordReset::class)->group(function () {
-    Route::get('/lupa-password', 'show_forgot_password')->name('show_forgot_password');
-    Route::post('/lupa-password', 'send_reset_link_email')->name('send_email_reset');
 
-    Route::get('/reset-password/{token}', 'show_reset_password')->name('password.reset');
-    Route::post('/reset-password', 'reset_password')->name('reset_password');
+Route::controller(HandlerAuthController::class)->group(function () {
+    Route::post('/login', 'authLoginHandler')->name('login.process');
+    Route::post('/email/verification-notification', 'resendVerification')->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
+    Route::get('/email/verify/{id}/{hash}', 'verifyUserEmail')->middleware(['auth', 'signed'])->name('verification.verify');
+    Route::get('/logout', 'logout')->name('logout');
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| Password Reset
+|--------------------------------------------------------------------------
+| memuat route yang berkaitan dengan reset password.
+|
+*/
+
+
+Route::controller(PasswordResetController::class)->group(function () {
+    Route::get('/lupa-password', 'showForgotPasswordPage')->name('show.forgotPassword');
+    Route::get('/reset-password/{token}', 'showResetPasswordPage')->name('show.resetPassword');
+});
+
+
+Route::controller(HandlerPasswordResetController::class)->group(function (){
+    Route::post('/lupa-password', 'sendResetLinkEmail')->name('verify.sendResetLink');
+    Route::post('/reset-password', 'resetPassword')->name('password.reset');
 });
 
 
 
 /*
 |--------------------------------------------------------------------------
-| Route Middleware Peminjam
+| Route Middleware User With Role "Peminjam"
 |--------------------------------------------------------------------------
 | Ini merupakan route yang hanya boleh diakses oleh user dengan role peminjam saja,
 |
 */
 
 Route::middleware(['auth', 'status_active', 'verified'])->group(function () {
-    Route::get('/baca-e-book/{id}', [ReadEbook::class, 'show_read_e_book'])->name('read_e_book');
-    Route::controller(Schedule::class)->group(function () {
-        Route::get('/events', 'events')->name('event');
+    Route::get('/baca-e-book/{id}', [ReadEbookController::class, 'showReadEbook'])->name('show.readEbook');
+    Route::controller(ScheduleController::class)->group(function () {
+        Route::get('/events', 'events')->name('event.schedule');
     });
 });
 
 Route::middleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group(function () {
-    Route::controller(Homepage::class)->group(function () {
-        Route::get('/dashboard', 'show_dashboard')->name('dashboard');
+    Route::controller(HomepageController::class)->group(function () {
+        Route::get('/homepage', 'showHomepage')->name('show.homepage');
     });
 
     // Book
 
-    Route::controller(BookShelf::class)->group(function () {
-        Route::get('/rak-buku-saya', 'show_my_shelf')->name('my_shelf');
-        Route::post('/baca-e-book/{id}', 'update_e_book')->name('update_e_book');
-        Route::delete('/hapus-e-book/{id}', 'delete_e_book')->name('delete_e_book');
-        Route::post('/kirim-komentar/{id}', 'send_comment')->name('send_comment');
-        Route::delete('/hapus-komentar/{id}', 'delete_comment')->name('delete_comment');
+    Route::controller(BookShelfController::class)->group(function () {
+        Route::get('/rak-buku-saya', 'showMyBookShelfPage')->name('show.myBookShelf');
+        Route::post('/baca-e-book/{id}', 'updateEbook')->name('update.eBook');
+        Route::delete('/hapus-e-book/{id}', 'deleteEbook')->name('delete.eBook');
+        Route::post('/kirim-komentar/{id}', 'sendComment')->name('store.comment');
+        Route::delete('/hapus-komentar/{id}', 'deleteComment')->name('delete.comment');
     });
 
     Route::withoutMiddleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group(function () {
-        Route::controller(BookDetail::class)->group(function () {
-            Route::get('/buku/{id}', 'show_book')->name('detail_buku');
-            Route::post('/sukai-buku/{id}', 'update_like')->name('update_like');
+        Route::controller(BookDetailController::class)->group(function () {
+            Route::get('/buku/{id}', 'showBookDetailPage')->name('show.bookDetail');
+            Route::post('/sukai-buku/{id}', 'updateBookLike')->name('update.bookLike');
         });
 
-        Route::controller(SearchResult::class)->group(function () {
-            Route::get('/hasil-pencarian', 'show_search_result')->name('search_result');
+        Route::controller(SearchResultController::class)->group(function () {
+            Route::get('/hasil-pencarian', 'showSearchResult')->name('show.searchResult');
         });
     });
 
-    Route::controller(LoanConfirmation::class)->group(function () {
+    Route::controller(LoanConfirmationController::class)->group(function () {
         Route::middleware('check_pending_loan')->group(function () {
-            Route::get('/konfirmasi-peminjaman/{id}', 'show_confirm')->name('confirm');
-            Route::post('/buat-peminjaman', 'create_loan')->name('create_loan');
+            Route::get('/konfirmasi-peminjaman/{id}', 'showConfirmationPage')->name('show.loanConfirm');
+            Route::post('/buat-peminjaman', 'createLoan')->name('store.loan');
         });
-        Route::get('/peminjaman-sukses', 'show_success')->name('show_success');
+        Route::get('/peminjaman-sukses', 'showSuccessPage')->name('show.success');
     });
 
-    Route::controller(DetailRent::class)->group(function () {
-        Route::get('/detail-peminjaman/{id}', 'show_detail_rent')->name('detail_rent');
+    Route::controller(DetailRentController::class)->group(function () {
+        Route::get('/detail-peminjaman/{id}', 'showDetailRentPage')->name('show.detailRent');
     });
 
-    Route::controller(LikedBookList::class)->group(function () {
-        Route::get('/buku-disukai', 'show_liked_book')->name('liked');
+    Route::controller(BookLikedListController::class)->group(function () {
+        Route::get('/buku-disukai', 'showBookLikedPage')->name('show.bookliked');
     });
 
-    Route::controller(AllBooks::class)->group(function () {
-        Route::get('/semua-buku', 'show_all_books')->name('all_books');
+    Route::controller(AllBooksController::class)->group(function () {
+        Route::get('/semua-buku', 'showAllBooksPage')->name('show.allBooks');
     });
 
 
     // Schedule
 
 
-    Route::controller(Schedule::class)->group(function () {
-        Route::get('/kalender-perpustakaan', 'show_calendar')->name('calendar');
+    Route::controller(ScheduleController::class)->group(function () {
+        Route::get('/kalender-perpustakaan', 'showCalendarPage')->name('show.calendar');
     });
 
 
     // Notification
 
 
-    Route::controller(NotificationList::class)->group(function () {
-        Route::get('/notifikasi', 'show_notification')->name('notification');
-        Route::get('/notifikasi/baca/{id}', 'show_read_notif')->name('read_notif');
+    Route::controller(NotificationListController::class)->group(function () {
+        Route::get('/notifikasi', 'showNotification')->name('show.notification');
+        Route::get('/notifikasi/baca/{id}', 'showReadNotification')->name('show.readNotif');
     });
 
 
     // Help/Report Problem
-    Route::controller(ReportProblem::class)->group(function(){
-        Route::get('/laporkan-masalah', 'report_problem')->name('report_problem');
-        Route::post('/kirim-laporan', 'send_report')->name('send_report');
-    });
 
+
+    Route::controller(ReportProblemController::class)->group(function () {
+        Route::get('/laporkan-masalah', 'reportProblemPage')->name('show.reportProblem');
+        Route::post('/kirim-laporan', 'sendReport')->name('store.sendReport');
+    });
 
 
     // Payment
 
 
-    Route::controller(PaymentFine::class)->group(function () {
-        Route::get('/pembayaran-denda/{id}', 'show_payment')->name('payment');
-        Route::post('/simpan-pembayaran/{id}', 'fine_payment')->name('fine-payment');
-        Route::get('/riwayat-pembayaran', 'show_payment_histories')->name('payment-histories');
-        Route::get('/detail-pembayaran/{id}', 'show_detail_payment')->name('detail-payment');
+    Route::controller(FinePaymentController::class)->group(function () {
+        Route::get('/pembayaran-denda/{id}', 'showPaymentPage')->name('show.payment');
+        Route::post('/simpan-pembayaran/{id}', 'finePayment')->name('store.payment');
+        Route::get('/riwayat-pembayaran', 'showPaymentHistoriesPage')->name('show.paymentHistories');
+        Route::get('/detail-pembayaran/{id}', 'showDetailPaymentPage')->name('show.detailPayment');
     });
 
 
     // Profile
 
 
-    Route::controller(Profile::class)->group(function () {
-        Route::get('/overview-profile', 'show_overview')->name('overview');
-        Route::get('/riwayat-peminjaman', 'show_history')->name('history');
-        Route::get('/ganti-password', 'show_ch_password')->name('ch_password');
+    Route::controller(ProfileBorrowerController::class)->group(function () {
+        Route::get('/overview-profile', 'showOverviewPage')->name('show.overview');
+        Route::get('/riwayat-peminjaman', 'showHistoryPage')->name('show.history');
+        Route::get('/ganti-password', 'showChangePasswordPage')->name('show.changePassword');
 
-        Route::post('/overview-profile', 'upload_profile_image');
-        Route::post('/ganti-password', 'update_password')->name('update_password');
-        Route::put('/update-profile', 'update_profile')->name('update_profile');
+        Route::post('/overview-profile', 'upload_profile_image')->name('store.profileImage');
+        Route::post('/ganti-password', 'update_password')->name('update.password');
+        Route::put('/update-profile', 'update_profile')->name('update.profile');
     });
 
 
     // Visit
 
 
-    Route::controller(VisitPlan::class)->group(function () {
-        Route::get('/kunjungan', 'show_visit')->name('visit');
-        Route::post('/kunjungan', 'add_visit')->name('add_visit');
-        Route::delete('/kunjungan/{id}', 'delete_my_visit')->name('delete_my_visit');
+    Route::controller(VisitPlanController::class)->group(function () {
+        Route::get('/kunjungan', 'showVisitPage')->name('show.visit');
+        Route::post('/kunjungan', 'addVisit')->name('store.visitPlan');
+        Route::delete('/kunjungan/{id}', 'deleteMyVisit')->name('delete.myVisit');
     });
 });
 
@@ -262,29 +278,29 @@ Route::middleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group
 
 Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified'])->group(function () {
     Route::controller(DashboardController::class)->group(function () {
-        Route::get('/dashboard-control', 'show_dashboard')->name('dashboard.ctrl');
+        Route::get('/dashboard', 'show_dashboard')->name('show.dashboard');
     });
 
-    Route::controller(ManageCarousel::class)->group(function(){
+    Route::controller(ManageCarousel::class)->group(function () {
         Route::get('/carousel', 'show_carousel')->name('carousel');
         Route::post('/carousel', 'upload_carousel')->name('upload_carousel');
         Route::delete('/hapus-carousel/{id}', 'delete_carousel')->name('delete_carousel');
     });
-    
-    Route::controller(ManagePopup::class)->group(function(){
+
+    Route::controller(ManagePopup::class)->group(function () {
         Route::get('/popup', 'show_popup')->name('popup');
         Route::post('/popup', 'upload_popup')->name('upload_popup');
         Route::delete('/hapus-popup/{id}', 'delete_popup')->name('delete_popup');
     });
 
-    Route::controller(ManageHelp::class)->group(function(){
+    Route::controller(ManageHelp::class)->group(function () {
         Route::get('/manajemen-bantuan', 'show_help')->name('help');
         Route::get('/manajemen-bantuan/detail-bantuan/{id}', 'show_detail_help')->name('detail_help');
         Route::delete('/hapus-bantuan/{id}', 'delete_help')->name('delete_help');
         Route::post('/print-bantuan/{id}', 'print_help_report')->name('print_help_report');
     });
 
-    Route::controller(ManageLogActivity::class)->group(function(){
+    Route::controller(ManageLogActivity::class)->group(function () {
         Route::get('/log-aktivitas', 'show_log')->name('log_activity');
     });
 
@@ -346,7 +362,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
             Route::delete('/hapus-rak/{id}', 'delete_shelf')->name('delete_shelf');
         });
 
-        Route::controller(ManagePlacement::class)->group(function(){
+        Route::controller(ManagePlacement::class)->group(function () {
             Route::get('/penempatan-buku', 'show_placement')->name('data-penempatan');
             Route::get('/penempatan-buku/tambah', 'show_add_placement')->name('add_placement');
             Route::get('/penempatan-buku/edit/{id}', 'show_edit_placement')->name('edit_placement');
@@ -425,7 +441,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
             Route::post('/tambah-jadwal', 'add_schedule')->name('add_schedule');
             Route::delete('/hapus-jadwal/{id}', 'delete_schedule')->name('delete_schedule');
         });
-        
+
         Route::controller(ManageCreateArticle::class)->group(function () {
             Route::get('/buat-artikel', 'show_create_article')->name('buat_artikel');
             Route::get('/artikel-saya', 'show_my_article')->name('artikel_saya');
@@ -442,7 +458,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
         Route::post('/print_helps', 'print_data_helps')->name('print_pdf_helps');
         Route::post('/print_log_aktivitas', 'print_data_logs')->name('print_pdf_logs');
     });
-    
+
     Route::controller(ExcelController::class)->group(function () {
         Route::post('/export_users/{role}', 'export_users')->name('export_users');
         Route::post('/export_helps', 'export_helps')->name('export_helps');

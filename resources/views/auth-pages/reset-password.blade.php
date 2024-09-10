@@ -6,7 +6,7 @@
         <p class="text-justify text-sm mb-3 p-2 bg-gray-200 rounded-md">Masukkan password baru dan konfirmasi password
             untuk
             melanjutkan perubahan password</p>
-        <form action="{{ route('reset_password') }}" method="post">
+        <form action="{{ route('password.reset') }}" method="post">
             @csrf
             <input type="hidden" name="token" value="{{ $token }}">
             <input type="hidden" name="email" value="{{ $email }}">

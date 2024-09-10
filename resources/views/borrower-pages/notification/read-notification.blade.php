@@ -19,7 +19,7 @@
                         </div>
                         <hr class="mt-3 mb-4">
                         <p class="text-justify">{!! $data->pesan !!}</p>
-                        <a href="{{ route('notification') }}" class="block mt-6">
+                        <a href="{{ route('show.notification') }}" class="block mt-6">
                             <x-borrower.button.normal-btn><i class="fas fa-chevron-circle-left"></i>
                                 Kembali</x-borrower.button.normal-btn>
                         </a>

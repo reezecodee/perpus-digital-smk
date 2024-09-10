@@ -3,7 +3,7 @@
         <img src="{{ asset('storage/img/cover/' . ($item->book->cover_buku ?? 'unknown_cover.jpg')) }}"
             class="rounded-md w-28 self-start" loading="lazy">
         <div class="text-xs ml-5 self-start w-full">
-            <a href="{{ route('detail_buku', $item->book->id) }}">
+            <a href="{{ route('show.bookDetail', $item->book->id) }}">
                 <h1 class="text-base lg:text-lg font-bold mb-1">{{ $item->book->judul }}</h1>
             </a>
             <div class="mb-3 font-medium grid grid-cols-1 lg:grid-cols-3 gap-x-3">
@@ -24,7 +24,7 @@
             </div>
             <div class="flex justify-between mt-4">
                 <div>
-                    <a href="{{ route('read_e_book', $item->book->id) }}">
+                    <a href="{{ route('show.readEbook', $item->book->id) }}">
                         <button
                             class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2.5 font-bold mr-2">Baca
                             e-book</button>
@@ -68,7 +68,7 @@
                 </svg>
                 <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Anda ingin
                     menghapus e-book ini dari daftar baca Anda</h3>
-                <form action="{{ route('delete_e_book', $item->book->id) }}" method="post" class="inline">
+                <form action="{{ route('delete.eBook', $item->book->id) }}" method="post" class="inline">
                     @csrf
                     @method('DELETE')
                     <button data-modal-hide="popup-modal2{{ $iteration }}" type="submit"

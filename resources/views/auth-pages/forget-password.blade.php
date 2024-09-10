@@ -13,7 +13,7 @@
             dan
             kami akan mengirimkan link
             verifikasi ke email kamu</p>
-        <form action="{{ route('send_email_reset') }}" method="post">
+        <form action="{{ route('verify.sendResetLink') }}" method="post">
             @csrf
             <x-auth.input.rectangle label="Email terdaftar" name="email" type="email"
                 placeholder="Masukkan email kamu" :value="old('email')" />

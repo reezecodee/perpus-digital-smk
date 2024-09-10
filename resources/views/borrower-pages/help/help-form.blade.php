@@ -6,7 +6,7 @@
                     <h1 class="text-lg lg:text-xl font-bold mb-1">Laporkan Masalah
                     </h1>
                     <hr class="mb-3">
-                    <form action="{{ route('send_report') }}" method="post">
+                    <form action="{{ route('store.sendReport') }}" method="post">
                         @csrf
                         <div class="mb-3">
                             <label for="subject" class="block mb-1 font-semibold text-sm text-gray-900 ">Subject

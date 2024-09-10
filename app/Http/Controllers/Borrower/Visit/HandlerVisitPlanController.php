@@ -7,19 +7,14 @@ use App\Http\Requests\Visit\AddVisitRequest;
 use App\Models\Visit;
 use Illuminate\Http\Request;
 
-class VisitPlan extends Controller
+class HandlerVisitPlanController extends Controller
 {
-    public function show_visit()
-    {
-        return view('borrower-pages.visit.visit-plan', [
-            'title' => 'Form Kunjungan Perpustakaan',
-            'visits' => Visit::where('pengunjung_id', auth()->user()->id)->latest()->get()
-        ]);
-    }
+    /**
+     * Function ini digunakan untuk menambahkan rencana kunjungan user.
+     * 
+     */
 
-    // Logical Backend Here...
-    
-    public function add_visit(AddVisitRequest $request)
+    public function addVisit(AddVisitRequest $request)
     {
         $data = $request->validated();
         $data['pengunjung_id'] = auth()->user()->id;
@@ -32,7 +27,13 @@ class VisitPlan extends Controller
         return back()->withSuccess('Permohonan kunjungan berhasil ditambahkan');
     }
 
-    public function delete_my_visit($id)
+
+    /**
+     * Function ini digunakan untuk menghapus rencana kunjungan user.
+     * 
+     */
+
+    public function deleteMyVisit($id)
     {
         $visit = Visit::findOrFail($id);
         $visit->delete();

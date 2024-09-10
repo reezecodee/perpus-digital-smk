@@ -35,7 +35,7 @@
                                 d="m1 1 4 4 4-4" />
                         </svg>
                     </button>
-                    <a href="{{ route('all_books') }}?format={{ $format }}">
+                    <a href="{{ route('show.allBooks') }}?format={{ $format }}">
                         <button
                             class="text-red-primary hover:text-white border-2 border-red-primary hover:bg-red-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center lg:justify-normal justify-center h-full"
                             type="submit" title="Reset pencarian"><i class="fas fa-repeat"></i>
@@ -123,7 +123,7 @@
 
                     formData.forEach((value, key) => {
                         if (key === 'filter') {
-                            queryParams.set(key, value); 
+                            queryParams.set(key, value);
                         } else {
                             queryParams.set(key, value);
                         }
