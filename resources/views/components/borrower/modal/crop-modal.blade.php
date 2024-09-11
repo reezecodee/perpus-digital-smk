@@ -14,12 +14,13 @@
                 <div class="flex justify-center">
                     <div class="w-80" align="center">
                         <div id="display_image_div">
-                            <img name="display_image_data" id="display_image_data" src="/img/dummy-image.png"
-                                alt="Picture">
+                            <img name="display_image_data" id="display_image_data"
+                                src="/img/dummy-image.png" alt="Picture">
                         </div>
-                        <input type="hidden" name="image" id="cropped_image_data">
+                        <input type="hidden" class="input-image" name="image" id="cropped_image_data">
                         <br>
-                        <input type="file" name="image" id="browse_image" accept=".png, .jpg, .jpeg">
+                        <input type="file" class="input-image" name="image" id="browse_image"
+                            accept=".png, .jpg, .jpeg">
                     </div>
                     <div id="cropped_image_result" class="hidden">
                         <img class="crop-result" src="/img/dummy-image.png" />
@@ -29,12 +30,11 @@
             <!-- Modal footer -->
             <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b">
                 <button data-modal-hide="static-modal" id="crop_button" type="submit"
-                    class="text-white bg-red-primary hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"><i
+                    class="text-white bg-red-primary hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center hvr-shrink"><i
                         class="fas fa-upload"></i> Upload foto</button>
-                <a href="">
-                    <button data-modal-hide="static-modal" type="button"
-                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-red-200 hover:bg-red-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-red-100">Batalkan</button>
-                </a>
+                <button data-modal-hide="static-modal" type="button"
+                    class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-red-200 hover:bg-red-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-red-100 hvr-shrink"
+                    id="close-btn">Batalkan</button>
             </div>
         </div>
     </div>
@@ -42,3 +42,15 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
 <script src="/js/cropper.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let closeBtn = document.getElementById('close-btn');
+        let inputImages = document.querySelectorAll('.input-image');
+
+        closeBtn.addEventListener('click', () => {
+            inputImages.forEach((input) => {
+                input.value = '';
+            });
+        });
+    });
+</script>

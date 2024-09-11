@@ -26,7 +26,9 @@
 
     <!-- css & js -->
     <link href="/css/rating.css" rel="stylesheet" type="text/css">
+    <link href="/css/hover.css" rel="stylesheet" type="text/css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
 
 <body class="font-quicksand">
@@ -53,11 +55,12 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <!-- JavaScript -->
     <script src="/js/swiper.js"></script>
     <script src="/js/title.js"></script>
-    <script src="/js/calendar.js"></script>
     <script>
         $(document).ready(function() {
 

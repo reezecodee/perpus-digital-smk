@@ -11,7 +11,7 @@
                         class="bg-white py-2.5 px-3 rounded-md w-[17rem] lg:w-[24rem] text-sm placeholder:text-black text-black font-semibold focus:ring-red-500 focus:border-red-500"
                         placeholder="Cari buku yang kamu sukai..." autocomplete="off">
                     <div class="absolute right-0 top-0" style="margin-top: 4px; margin-right: 8px;">
-                        <button type="submit" class="bg-red-primary hover:bg-red-500 rounded-full p-1 w-8 text-center">
+                        <button type="submit" class="bg-red-primary hover:bg-red-500 rounded-full p-1 w-8 text-center hvr-shrink">
                             <i class="fas fa-search text-white text-sm"></i>
                         </button>
                     </div>
@@ -19,25 +19,25 @@
                 <a href="{{ route('show.notification') }}" class="hidden lg:inline" title="Notifikasi">
                     <div
                         class="bg-red-primary rounded-full p-1 w-9 text-center border-2 border-white hover:border-red-primary duration-500 cursor-pointer">
-                        <i class="fas fa-bell text-white text-sm"></i>
+                        <i class="fas fa-bell text-white text-sm hvr-grow"></i>
                     </div>
                 </a>
                 <a href="{{ route('show.bookliked') }}" class="hidden lg:inline" title="Buku disukai">
                     <div
                         class="bg-red-primary rounded-full p-1 w-9 text-center border-2 border-white hover:border-red-primary duration-500 cursor-pointer">
-                        <i class="fa-solid fa-heart text-white text-sm"></i>
+                        <i class="fa-solid fa-heart text-white text-sm hvr-grow"></i>
                     </div>
                 </a>
                 <a href="{{ route('show.myBookShelf') }}" class="hidden lg:inline" title="Rak buku saya">
                     <div
                         class="bg-red-primary rounded-full p-1 w-9 text-center border-2 border-white hover:border-red-primary duration-500 cursor-pointer">
-                        <i class="fa-solid fa-book-bookmark text-white text-sm"></i>
+                        <i class="fa-solid fa-book-bookmark text-white text-sm hvr-grow"></i>
                     </div>
                 </a>
                 <a href="{{ route('show.visit') }}" class="hidden lg:inline" title="Kunjungan perpustakaan">
                     <div
                         class="bg-red-primary rounded-full p-1 w-9 text-center border-2 border-white hover:border-red-primary duration-500 cursor-pointer">
-                        <i class="fa-solid fa-clipboard-list text-white text-sm"></i>
+                        <i class="fa-solid fa-clipboard-list text-white text-sm hvr-grow"></i>
                     </div>
                 </a>
             </div>
@@ -46,37 +46,44 @@
                     data-dropdown-toggle="dropdownDelay" data-dropdown-delay="100" data-dropdown-trigger="hover">
                     <span class="font-semibold group-hover:text-red-200 duration-200">{{ auth()->user()->username }}</span>
                     <img src="{{ asset('storage/img/profile/' . (auth()->user()->photo ?? 'unknown.jpg')) }}"
-                        class="rounded-full p-0.5 border-2 border-white" width="45" alt="" srcset="">
+                        class="rounded-full p-0.5 border-2 border-white hvr-grow" width="45" alt="" srcset="">
                 </div>
                 <div id="dropdownDelay"
                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 font-semibold">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDelayButton">
                         <li>
-                            <a href="{{ route('show.homepage') }}" class="block px-4 py-2 hover:bg-gray-100"><i
-                                    class="fas fa-home"></i>
-                                Homepage</a>
+                            <a href="{{ route('show.homepage') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
+                                <i class="fas fa-home mr-2"></i>
+                                <span class="flex-grow">Homepage</span> <!-- Memastikan teks mengambil sisa ruang -->
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('show.calendar') }}" class="block px-4 py-2 hover:bg-gray-100"><i
-                                    class="fas fa-calendar"></i>
-                                Kalender</a>
+                            <a href="{{ route('show.calendar') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
+                                <i class="fas fa-calendar mr-2"></i>
+                                <span class="flex-grow">Kalender</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('show.paymentHistories') }}" class="block px-4 py-2 hover:bg-gray-100">
-                                <i class="fas fa-history"></i> Riwayat</a>
+                            <a href="{{ route('show.paymentHistories') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
+                                <i class="fas fa-history mr-2"></i>
+                                <span class="flex-grow">Riwayat</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('show.overview') }}" class="block px-4 py-2 hover:bg-gray-100"><i
-                                    class="fas fa-user"></i>
-                                Profile</a>
+                            <a href="{{ route('show.overview') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
+                                <i class="fas fa-user mr-2"></i>
+                                <span class="flex-grow">Profile</span>
+                            </a>
                         </li>
                         <hr class="border">
                         <li>
-                            <a href="{{ route('logout') }}" class="block px-4 py-2 hover:bg-gray-100"><i
-                                    class="fas fa-sign-out-alt"></i>
-                                Logout</a>
+                            <a href="{{ route('logout') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
+                                <i class="fas fa-sign-out-alt mr-2"></i>
+                                <span class="flex-grow">Logout</span>
+                            </a>
                         </li>
                     </ul>
+
                 </div>
             @endauth
             @guest
@@ -102,7 +109,7 @@
             <div class="lg:flex gap-7 text-white hidden">
                 @foreach ($top_categories as $item)
                     <a href="{{ route('show.searchResult') }}?q={{ $item->nama_kategori }}"
-                        class="hover:text-red-200 duration-150">{{ $item->nama_kategori }}</a>
+                        class="hover:text-red-200 duration-150 hvr-shrink">{{ $item->nama_kategori }}</a>
                     @if (!$loop->last)
                         |
                     @endif

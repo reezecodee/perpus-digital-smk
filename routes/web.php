@@ -279,9 +279,9 @@ Route::middleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group
     });
 
     Route::controller(HandlerProfileBorrowerController::class)->group(function(){
-        Route::post('/overview-profile', 'upload_profile_image')->name('store.profileImage');
-        Route::post('/ganti-password', 'update_password')->name('update.password');
-        Route::put('/update-profile', 'update_profile')->name('update.profile');
+        Route::post('/overview-profile', 'uploadProfileImage')->name('store.profileImage');
+        Route::post('/ganti-password', 'updatePassword')->name('update.password');
+        Route::put('/update-profile', 'updateProfile')->name('update.profile');
     });
 
 

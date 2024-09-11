@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="px-3 lg:px-24 mx-auto">
-                <div class="flex flex-col lg:flex-row justify-between items-center">
+                {{-- <div class="flex flex-col lg:flex-row justify-between items-center">
                     <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg mb-5">
                         <span class="text-xl lg:text-3xl font-semibold"><i class="fas fa-book text-red-primary"></i> Lihat
                             semua
@@ -91,6 +91,58 @@
                             </svg>
                         </a>
                     </div>
+                </div> --}}
+                <div
+                    class="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-full p-6">
+                    <div class="flex items-center mb-4">
+                        <h5 class="ml-3 text-slate-800 text-xl font-semibold">
+                            E-Perpustakaan Menu
+                        </h5>
+                    </div>
+                    <div class="flex flex-wrap justify-around gap-3">
+                        <a href="" class="flex flex-col items-center text-center">
+                            <div class="p-2 bg-red-100 rounded-lg inline-block mb-1 hvr-shrink">
+                                <img src="https://www.svgrepo.com/show/298470/book.svg" class="w-10" alt="">
+                            </div>
+                            <span class="text-xs text-center font-medium block w-full max-w-[100px] whitespace-normal">Lihat semua buku</span>
+                        </a>
+                        <a href="" class="flex flex-col items-center text-center">
+                            <div class="p-2 bg-amber-100 rounded-lg inline-block mb-1 hvr-shrink">
+                                <img src="https://www.svgrepo.com/show/263069/ebook.svg" class="w-10" alt="">
+                            </div>
+                            <span class="text-xs text-center font-medium block w-full max-w-[100px] whitespace-normal">Lihat semua ebook</span>
+                        </a>
+                        <a href="" class="flex flex-col items-center text-center">
+                            <div class="p-2 bg-green-100 rounded-lg inline-block mb-1 hvr-shrink">
+                                <img src="https://www.svgrepo.com/show/477129/label.svg" class="w-10" alt="">
+                            </div>
+                            <span class="text-xs text-center font-medium block w-full max-w-[100px] whitespace-normal">Lihat semua kategori</span>
+                        </a>
+                        <a href="" class="flex flex-col items-center text-center">
+                            <div class="p-2 bg-blue-100 rounded-lg inline-block mb-1 hvr-shrink">
+                                <img src="https://www.svgrepo.com/show/382165/book-shelf-books-education-learning-school-study.svg" class="w-10" alt="">
+                            </div>
+                            <span class="text-xs text-center font-medium block w-full max-w-[100px] whitespace-normal">Lihat semua rak buku</span>
+                        </a>
+                        <a href="" class="flex flex-col items-center text-center">
+                            <div class="p-2 bg-gray-200 rounded-lg inline-block mb-1 hvr-shrink">
+                                <img src="https://www.svgrepo.com/show/343850/blog-seo-optimization-search.svg" class="w-10" alt="">
+                            </div>
+                            <span class="text-xs text-center font-medium block w-full max-w-[100px] whitespace-normal">Baca artikel</span>
+                        </a>
+                        <a href="" class="flex flex-col items-center text-center">
+                            <div class="p-2 bg-orange-100 rounded-lg inline-block mb-1 hvr-shrink">
+                                <img src="https://www.svgrepo.com/show/287711/ticket.svg" class="w-10" alt="">
+                            </div>
+                            <span class="text-xs text-center font-medium block w-full max-w-[100px] whitespace-normal">Informasi denda</span>
+                        </a>
+                        <a href="" class="flex flex-col items-center text-center">
+                            <div class="p-2 bg-green-100 rounded-lg inline-block mb-1 hvr-shrink">
+                                <img src="https://www.svgrepo.com/show/475413/information.svg" class="w-10" alt="">
+                            </div>
+                            <span class="text-xs text-center font-medium block w-full max-w-[100px] whitespace-normal">FAQ</span>
+                        </a>
+                    </div>
                 </div>
                 <div class="mt-5">
                     <h1 class="text-2xl mb-4 font-bold">Rekomendasi untuk mu</h1>
@@ -125,7 +177,8 @@
                                 <div class="text-center">
                                     <img src="/img/assets/oh_no.webp" alt="" srcset=""
                                         class="w-52 inline-block">
-                                    <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan E-book
+                                    <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan
+                                        E-book
                                         terbaru</h1>
                                 </div>
                             </div>
@@ -147,7 +200,8 @@
                                 <div class="text-center">
                                     <img src="/img/assets/oh_no.webp" alt="" srcset=""
                                         class="w-52 inline-block">
-                                    <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan artikel
+                                    <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan
+                                        artikel
                                         terbaru</h1>
                                 </div>
                             </div>

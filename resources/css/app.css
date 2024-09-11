@@ -3,86 +3,110 @@
 @tailwind utilities;
 
 .store-bg {
-  background-image: url('https://img.freepik.com/free-vector/gradient-abstract-hexagon-shapes-background_23-2149120168.jpg?t=st=1718884828~exp=1718888428~hmac=d015153552d184fe6809ed37bb3db268157ec5742d789caf51fda7ae9d8a12a0&w=826');
-  background-size: cover;
-  position: bottom;
+    background-image: url('https://img.freepik.com/free-vector/gradient-abstract-hexagon-shapes-background_23-2149120168.jpg?t=st=1718884828~exp=1718888428~hmac=d015153552d184fe6809ed37bb3db268157ec5742d789caf51fda7ae9d8a12a0&w=826');
+    background-size: cover;
+    position: bottom;
 }
 
 .container-envelope {
-  margin: 0 auto;
-  background-image: repeating-linear-gradient(135deg, #F29B91 0px, #F09290 30px, transparent 10px, transparent 50px, #83B3DB 50px, #84ADCB 80px, transparent 80px, transparent 100px);
-  padding: 4px;
+    margin: 0 auto;
+    background-image: repeating-linear-gradient(135deg, #F29B91 0px, #F09290 30px, transparent 10px, transparent 50px, #83B3DB 50px, #84ADCB 80px, transparent 80px, transparent 100px);
+    padding: 4px;
 }
 
 .container-envelope .inner-envelope {
-  background: white;
-  width: 100%;
-  height: 100%;
+    background: white;
+    width: 100%;
+    height: 100%;
 }
 
 .printable {
-  padding: 20px;
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
-  width: 600px;
-  margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    width: 600px;
+    margin: 0 auto;
 }
 
 .print-button {
-  width: 600px;
+    width: 600px;
 }
 
 #display_image_div img {
-  max-width: 100%;
+    max-width: 100%;
 }
 
 #cropped_image_result img {
-  max-width: 70%;
+    max-width: 70%;
 }
 
 .cropper-view-box,
 .cropper-face {
-  border-radius: 50%;
+    border-radius: 50%;
 }
 
 .crop_result {
-  width: 1px !important;
+    width: 1px !important;
 }
 
 /* The css styles for `outline` do not follow `border-radius` on iOS/Safari (#979). */
 .cropper-view-box {
-  outline: 0;
-  box-shadow: 0 0 0 1px #39f;
+    outline: 0;
+    box-shadow: 0 0 0 1px #39f;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .scrollbar-hide {
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
 /* Animasi saat popup muncul */
 @keyframes popup-slide-in {
-  from {
-      transform: translateY(-20%);
-      opacity: 0;
-  }
-  to {
-      transform: translateY(0);
-      opacity: 1;
-  }
+    from {
+        transform: translateY(-20%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 /* Kelas untuk elemen popup yang akan menggunakan animasi */
 .popup-enter {
-  animation: popup-slide-in 0.5s ease-out;
+    animation: popup-slide-in 0.5s ease-out;
 
 }
+
 .popup-enter-modal {
-  animation: popup-slide-in 0.5s ease-out;
+    animation: popup-slide-in 0.5s ease-out;
 }
+
+
+/* Animasi saat popup ditutup */
+@keyframes popup-slide-out {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(-20%);
+        opacity: 0;
+    }
+}
+
+.popup-exit-modal {
+    animation: popup-slide-out 0.5s ease-out;
+}
+
+
+
+

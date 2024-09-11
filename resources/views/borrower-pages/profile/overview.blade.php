@@ -14,7 +14,7 @@
                     id="preview-profile" class="rounded-full">
                 <div>
                     <button type="button" data-modal-target="static-modal" data-modal-toggle="static-modal"
-                        class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2 font-bold"><i
+                        class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2 font-bold hvr-shrink"><i
                             class="fas fa-upload"></i> Upload
                         foto</button>
                 </div>
@@ -25,7 +25,7 @@
             <form action="{{ route('update.profile', auth()->user()->id) }}" method="post">
                 @csrf
                 @method('PUT')
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-2 gap-3 mb-2">
                     <x-borrower.input.basic label="Username" name="username" type="text" :value="old('username', auth()->user()->username)" />
                     <x-borrower.input.basic label="NIS" name="nip_nis" type="number" :value="old('nip_nis', auth()->user()->nip_nis)" />
                     <x-borrower.input.basic label="NISN" name="nisn" type="number" :value="old('nisn', auth()->user()->nisn)" />
@@ -33,7 +33,7 @@
                     <x-borrower.input.basic label="Telepon" name="telepon" type="number" :value="old('telepon', auth()->user()->telepon)" />
                     <x-borrower.input.gender-select />
                 </div>
-
+                <x-borrower.input.textarea label="Alamat" name="alamat" :value="old('alamat', auth()->user()->alamat)" />
                 <x-borrower.button.confirm-btn modaltarget="profile-modal">
                     Simpan
                     perubahan

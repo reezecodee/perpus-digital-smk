@@ -5,3 +5,4 @@
         </div>
     </section>
 </x-borrower-layout>
+<script src="/js/calendar.js"></script>

@@ -18,7 +18,7 @@
                             <a href="{{ route('show.detailRent', $item->id) }}" class="mb-1 block">
                                 <h4
                                     class="text-base lg:text-lg font-bold leading-5 lg:leading-none hover:text-red-primary">
-                                    {{ $item->book->judul }}
+                                    {{ $item->placement->book->judul }}
                                 </h4>
                             </a>
                             <p class="text-xs">Status: {{ $item->status }}</p>

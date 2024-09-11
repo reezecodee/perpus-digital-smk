@@ -14,7 +14,7 @@ class HandlerProfileBorrowerController extends Controller
 {
     /**
      * Function ini digunakan untuk memperbarui foto profile user.
-     * 
+     *
      */
 
     public function uploadProfileImage(StoreImageRequest $request)
@@ -53,7 +53,7 @@ class HandlerProfileBorrowerController extends Controller
         $folderPath = 'public/img/profile/';
 
         // Memisahkan bagian data image base64
-        $image_parts = explode(";base64,", $request->image);
+        $image_parts = explode(";base64,", $request['image']);
         $image_type_aux = explode("image/", $image_parts[0]);
         $image_type = $image_type_aux[1];
         $image_base64 = base64_decode($image_parts[1]);

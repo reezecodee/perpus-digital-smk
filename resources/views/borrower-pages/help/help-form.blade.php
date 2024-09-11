@@ -13,7 +13,8 @@
                                 laporan</label>
                             <input type="text" id="subject"
                                 class="bg-gray-50 font-semibold border border-gray-300 text-gray-900 text-sm rounded-lg @error('subject') ring-red-primary border-red-primary @enderror focus:ring-red-500 focus:border-red-500 block w-full p-2.5"
-                                name="subject" value="{{ old('subject') }}" placeholder="Masukkan subject laporan" autocomplete="off" required />
+                                name="subject" value="{{ old('subject') }}" placeholder="Masukkan subject laporan"
+                                autocomplete="off" required />
                             @error('subject')
                                 <span class="text-red-primary text-sm font-semibold">{{ $message }}</span>
                             @enderror
@@ -23,7 +24,8 @@
                                 kategori</label>
                             <select id="kategori" name="kategori"
                                 class="bg-gray-50 font-semibold border border-gray-300 text-gray-900 text-sm rounded-lg @error('kategori') ring-red-primary border-red-primary @enderror focus:ring-red-500 focus:border-red-500 block w-full p-2.5">
-                                <option value="{{ old('kategori') ? old('kategori') : '' }}" selected>{{ old('kategori') ? old('kategori') : 'Pilih kategori' }}</option>
+                                <option value="{{ old('kategori') ? old('kategori') : '' }}" selected>
+                                    {{ old('kategori') ? old('kategori') : 'Pilih kategori' }}</option>
                                 <option value="Fitur aplikasi">Fitur aplikasi</option>
                                 <option value="Bug">Bug</option>
                                 <option value="Saran">Saran</option>
@@ -37,8 +39,8 @@
                             <label for="message" class="block mb-1 text-sm font-semibold text-gray-900">Keterangan
                                 laporan</label>
                             <textarea id="message" name="laporan" rows="4"
-                                class="block font-semibold p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border @error('laporan') ring-red-primary border-red-primary @enderror border-gray-300 focus:ring-red-500 focus:border-red-500" autocomplete="off"
-                                placeholder="Masukkan keterangan laporan Anda">{{ old('laporan') }}</textarea>
+                                class="block font-semibold p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border @error('laporan') ring-red-primary border-red-primary @enderror border-gray-300 focus:ring-red-500 focus:border-red-500"
+                                autocomplete="off" placeholder="Masukkan keterangan laporan Anda">{{ old('laporan') }}</textarea>
                             @error('laporan')
                                 <span class="text-red-primary text-sm font-semibold">{{ $message }}</span>
                             @enderror
@@ -46,7 +48,8 @@
                         <div class="flex items-center">
                             <input id="default-checkbox" type="checkbox" value=""
                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer">
-                            <label for="default-checkbox" class="ms-2 text-sm font-medium cursor-pointer text-gray-900">Saya
+                            <label for="default-checkbox"
+                                class="ms-2 text-sm font-medium cursor-pointer text-gray-900">Saya
                                 yakin
                                 data tersebut sudah benar</label>
                         </div>
