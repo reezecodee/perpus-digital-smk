@@ -66,7 +66,7 @@ class UserSeeder extends Seeder
             'nip_nis' => '19230829',
             'nisn' => '23432432425',
             'nama' => 'Ambatukam ambaleon',
-            'email' => 'amba@amba.com',
+            'email' => 'azfaalharits25@gmail.com',
             'telepon' => '081298897309',
             'jk' => 'Laki-laki',
             'password' => bcrypt('12345678'),

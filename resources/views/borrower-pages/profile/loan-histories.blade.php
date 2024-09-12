@@ -46,7 +46,7 @@
                                     {{ $item->placement->book->judul }}
                                 </h4>
                             </a>
-                            <p class="text-xs">Status: {{ $item->status }} - {{ $item->keterangan_denda }}</p>
+                            <p class="text-xs">Status: Terkena denda - {{ $item->keterangan_denda }}</p>
                         </div>
                         <div class="py-1 px-3 rounded-lg lg:text-sm font-semibold text-white bg-red-primary text-xs">
                             {{ $item->status != 'Terkena denda' ? $item->status : 'Belum dibayar' }}

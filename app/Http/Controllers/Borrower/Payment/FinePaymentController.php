@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Borrower\Payment;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Payment\PaymentRequest;
+use App\Models\Account;
+use App\Models\Application;
 use App\Models\FinePayment;
 use App\Models\Loan;
 use Illuminate\Http\Request;
@@ -20,8 +22,10 @@ class FinePaymentController extends Controller
     {
         $data = Loan::findOrFail($id);
         $title = "Pembayaran Denda Buku {$data->placement->book->judul}";
+        $accounts = Account::all();
+        $qrisPerpus = Application::pluck('qris_perpus')->first();
 
-        return view('borrower-pages.payment.fine-payment', compact('title', 'data'));
+        return view('borrower-pages.payment.fine-payment', compact('title', 'data', 'accounts', 'qrisPerpus'));
     }
 
 

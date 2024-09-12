@@ -92,7 +92,7 @@
             <div class="border p-7 shadow-md rounded-md mb-5">
                 <div class="flex justify-between gap-3">
                     <div class="flex gap-5">
-                        <img src="https://assets.kompasiana.com/items/album/2020/06/05/qris-baznas-5eda34a3d541df43ac060963.png?t=o&v=300"
+                        <img src="{{ asset('storage/img/qris/' . ($qrisPerpus ?? 'qris_not_found.png')) }}"
                             class="w-52 border-2 rounded-md" alt="" srcset="">
                         <div class="mb-3">
                             <h3 class="text-lg font-semibold mb-1">Bayar Via Qris</h3>
@@ -128,97 +128,91 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold mb-1">Bayar Via Transfer</h3>
-                        <div class="space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-4">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead>
-                                    <tr>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-base font-normal text-gray-500">Bank</th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-base font-normal text-gray-500">Nomor
-                                            Rekening</th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-base font-normal text-gray-500">Atas Nama
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-200">
-                                    <tr>
-                                        <td class="px-6 py-4 text-base font-medium text-gray-900">Bank BRI</td>
-                                        <td class="px-6 py-4 text-base font-medium text-gray-900">
-                                            <span class="no-rekening">283487238423</span>
-                                            <button class="copy-rekening relative">
-                                                <i class="far fa-copy"></i>
-                                                <span class="text-xs absolute top-1 left-4 copy-rekening-info"
-                                                    style="display: none">Copied</span>
-                                            </button>
-                                        </td>
-                                        <td class="px-6 py-4 text-base font-medium text-gray-900">Perpustakaan SMK</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 text-base font-medium text-gray-900">Bank BCA</td>
-                                        <td class="px-6 py-4 text-base font-medium text-gray-900">
-                                            <span class="no-rekening">283487238428</span>
-                                            <button class="copy-rekening">
-                                                <i class="far fa-copy"></i>
-                                                <span class="text-xs copy-rekening-info"
-                                                    style="display: none">Copied</span>
-                                            </button>
-                                        </td>
-                                        <td class="px-6 py-4 text-base font-medium text-gray-900">Perpustakaan SMK</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 text-base font-medium text-gray-900">Bank Mandiri</td>
-                                        <td class="px-6 py-4 text-base font-medium text-gray-900">
-                                            <span class="no-rekening">283487238433</span>
-                                            <button class="copy-rekening">
-                                                <i class="far fa-copy"></i>
-                                                <span class="text-xs copy-rekening-info"
-                                                    style="display: none">Copied</span>
-                                            </button>
-                                        </td>
-                                        <td class="px-6 py-4 text-base font-medium text-gray-900">Perpustakaan SMK</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        @if ($accounts->isEmpty())
+                            <div class="text-center">
+                                <div class="flex justify-center">
+                                    <img src="/img/assets/oh_no.webp" class="w-40" alt="" srcset="">
+                                </div>
+                                <p class="text-base font-semibold text-red-primary">Mohon maaf, pembayaran via
+                                    transfer bank tidak tersedia saat ini.</p>
+                            </div>
+                        @else
+                            <div class="space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-4">
+
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-base font-normal text-gray-500">Bank
+                                            </th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-base font-normal text-gray-500">Nomor
+                                                Rekening</th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-base font-normal text-gray-500">Atas
+                                                Nama
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200">
+                                        @foreach ($accounts as $item)
+                                            <tr>
+                                                <td class="px-6 py-4 text-base font-medium text-gray-900">
+                                                    {{ $item->nama_bank }}</td>
+                                                <td class="px-6 py-4 text-base font-medium text-gray-900">
+                                                    <span class="no-rekening">{{ $item->no_rekening }}</span>
+                                                    <button class="copy-rekening relative">
+                                                        <i class="far fa-copy"></i>
+                                                        <span class="text-xs absolute top-1 left-4 copy-rekening-info"
+                                                            style="display: none">Copied</span>
+                                                    </button>
+                                                </td>
+                                                <td class="px-6 py-4 text-base font-medium text-gray-900">
+                                                    {{ $item->atas_nama }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
                     </div>
                 </div>
-                <x-borrower.modal.qris-modal />
             </div>
-            @if (($data->fine_payment->status_bayar ?? false) != 'Sudah dibayar')
-                <div class="border p-7 shadow-md rounded-md mb-5">
-                    <h3 class="text-xl font-semibold mb-4">Upload bukti pembayaran</h3>
-                    <form action="{{ route('store.payment', $data->id) }}" method="post"
-                        enctype="multipart/form-data">
-                        @csrf
-                        <div class="flex justify-center mb-5">
-                            <img src="{{ asset('storage/img/pembayaran/' . ($data->fine_payment->bukti_pembayaran ?? '')) }}"
-                                width="400" id="imagePreview" alt="" srcset="">
-                        </div>
-                        <input
-                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 mb-5"
-                            id="imageInput" name="bukti_pembayaran" accept=".jpg, .jpeg, .png" type="file"
-                            onchange="previewImage(event)">
-                        <div class="text-end">
-                            <x-borrower.button.confirm-btn modaltarget="payment-modal">
-                                Kirim bukti pembayaran
-                            </x-borrower.button.confirm-btn>
-                        </div>
-                        <x-borrower.modal.confirm-modal
-                            question="Pastikan bukti bayar sesuai dengan nominal yang ditentukan, jika tidak pembayaran tidak akan diproses!"
-                            okbtn="Kirim bukti" nobtn="Batalkan" modalname="payment-modal" />
-                    </form>
-                </div>
-            @else
-                <div class="border p-7 shadow-md rounded-md mb-5">
-                    <h3 class="text-xl font-semibold mb-4">Bukti pembayaran</h3>
+            <x-borrower.modal.qris-modal :qrisPerpus="$qrisPerpus" />
+        </div>
+        @if (($data->fine_payment->status_bayar ?? false) != 'Sudah dibayar')
+            <div class="border p-7 shadow-md rounded-md mb-5">
+                <h3 class="text-xl font-semibold mb-4">Upload bukti pembayaran</h3>
+                <form action="{{ route('store.payment', $data->id) }}" method="post" enctype="multipart/form-data">
+                    @csrf
                     <div class="flex justify-center mb-5">
                         <img src="{{ asset('storage/img/pembayaran/' . ($data->fine_payment->bukti_pembayaran ?? '')) }}"
                             width="400" id="imagePreview" alt="" srcset="">
                     </div>
+                    <input
+                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 mb-5"
+                        id="imageInput" name="bukti_pembayaran" accept=".jpg, .jpeg, .png" type="file"
+                        onchange="previewImage(event)">
+                    <div class="text-end">
+                        <x-borrower.button.confirm-btn modaltarget="payment-modal">
+                            Kirim bukti pembayaran
+                        </x-borrower.button.confirm-btn>
+                    </div>
+                    <x-borrower.modal.confirm-modal
+                        question="Pastikan bukti bayar sesuai dengan nominal yang ditentukan, jika tidak pembayaran tidak akan diproses!"
+                        okbtn="Kirim bukti" nobtn="Batalkan" modalname="payment-modal" />
+                </form>
+            </div>
+        @else
+            <div class="border p-7 shadow-md rounded-md mb-5">
+                <h3 class="text-xl font-semibold mb-4">Bukti pembayaran</h3>
+                <div class="flex justify-center mb-5">
+                    <img src="{{ asset('storage/img/pembayaran/' . ($data->fine_payment->bukti_pembayaran ?? '')) }}"
+                        width="400" id="imagePreview" alt="" srcset="">
                 </div>
-            @endif
+            </div>
+        @endif
         </div>
     </section>
 

@@ -115,7 +115,7 @@ Route::controller(AuthController::class)->group(function () {
         Route::get('/register', 'showRegisterPage')->name('show.register');
     });
 
-    Route::get('/email/verify', 'showVerifyNoticePage')->middleware(['auth'])->name('show.notice');
+    Route::get('/email/verify', 'showVerifyNoticePage')->middleware(['auth'])->name('verification.notice');
     Route::get('/not-activated', 'showNotActivatedPage')->name('show.notActivated');
 });
 
@@ -260,9 +260,9 @@ Route::middleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group
 
     Route::controller(FinePaymentController::class)->group(function () {
         Route::get('/pembayaran-denda/{id}', 'showPaymentPage')->name('show.payment');
-        Route::get('/riwayat-pembayaran', 'showPaymentHistoriesPage')->name('show.paymentHistories');
-        Route::get('/detail-pembayaran/{id}', 'showDetailPaymentPage')->name('show.detailPayment');
-        Route::get('/tutorial-pembayaran', 'showTutorialPage')->name('show.paymentTutorial');
+        Route::get('/riwayat-pembayaran-denda', 'showPaymentHistoriesPage')->name('show.paymentHistories');
+        Route::get('/detail-pembayaran-denda/{id}', 'showDetailPaymentPage')->name('show.detailPayment');
+        Route::get('/tutorial-pembayaran-denda', 'showTutorialPage')->name('show.paymentTutorial');
     });
 
     Route::controller(HandlerFinePaymentController::class)->group(function () {

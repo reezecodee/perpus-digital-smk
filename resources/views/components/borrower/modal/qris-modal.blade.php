@@ -21,7 +21,7 @@
             </div>
             <!-- Modal body -->
             <div class="p-4 md:p-5 space-y-4 flex justify-center">
-                <img src="https://assets.kompasiana.com/items/album/2020/06/05/qris-baznas-5eda34a3d541df43ac060963.png?t=o&v=300"
+                <img src="{{ asset('storage/img/qris/' . ($qrisPerpus ?? 'qris_not_found.png')) }}"
                     class="w-72 border-2 rounded-md" alt="" srcset="">
             </div>
             <!-- Modal footer -->

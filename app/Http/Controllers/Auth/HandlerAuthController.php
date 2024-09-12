@@ -32,7 +32,7 @@ class HandlerAuthController extends Controller
         // jika user belum verifikasi email maka redirect ke halaman verifikasi
         if (!$user->hasVerifiedEmail()) {
             $user->sendEmailVerificationNotification();
-            return redirect()->route('show.notice');
+            return redirect()->route('verification.notice');
         }
 
         // kembalikan hasil proses dari function handleUserRoleRedirect

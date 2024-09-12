@@ -14,11 +14,20 @@ return new class extends Migration
         Schema::create('applications', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nama_sekolah');
+            $table->string('nama_perpustakaan');
+            $table->string('email');
+            $table->string('telepon');
             $table->string('keyword');
-            $table->string('hak_cipta');
-            $table->string('web_sekolah');
+            $table->string('website');
+            $table->string('jam_buka');
+            $table->string('jam_tutup');
+            $table->string('hari_libur');
             $table->text('deskripsi');
+            $table->text('alamat');
             $table->text('favicon');
+            $table->text('logo_sekolah');
+            $table->text('logo_perpus');
+            $table->text('qris_perpus');
             $table->timestamps();
         });
     }
