@@ -1,6 +1,6 @@
 <x-profile-layout :title="$title">
     <x-slot name="content">
-        <div class="self-start w-full border shadow-md rounded-md p-4">
+        <div class="self-start w-full border shadow-md rounded-md p-4 overflow-hidden">
             <h1 class="text-xl font-bold mb-1">History peminjaman buku</h1>
             <hr class="mb-3">
             <div class="mb-5">
@@ -11,7 +11,7 @@
                     <p id="slide2" class="cursor-pointer hover:text-red-primary">Denda</p>
                 </div>
             </div>
-            <div id="slide-display1" class="block">
+            <div id="slide-display1" class="block animate__animated animate__fadeInRight">
                 @forelse ($histories as $item)
                     <div class="flex justify-between items-center border p-3 rounded-md mb-3">
                         <div>
@@ -24,7 +24,7 @@
                             <p class="text-xs">Status: {{ $item->status }}</p>
                         </div>
                         <div class="py-1 px-3 rounded-lg lg:text-sm font-semibold text-white bg-red-primary text-xs">
-                            {{ $item->pengembalian ?? 'Belum dikembalikan' }}
+                            {{ $item->pengembalian ?? 'Belum ada' }}
                         </div>
                     </div>
                 @empty
@@ -36,7 +36,7 @@
                     </div>
                 @endforelse
             </div>
-            <div id="slide-display2" class="hidden">
+            <div id="slide-display2" class="hidden animate__animated animate__fadeInRight">
                 @forelse ($fineHistories as $item)
                     <div class="flex justify-between items-center border p-3 rounded-md mb-3">
                         <div>
@@ -46,10 +46,10 @@
                                     {{ $item->placement->book->judul }}
                                 </h4>
                             </a>
-                            <p class="text-xs">Status: {{ $item->status }}</p>
+                            <p class="text-xs">Status: {{ $item->status }} - {{ $item->keterangan_denda }}</p>
                         </div>
                         <div class="py-1 px-3 rounded-lg lg:text-sm font-semibold text-white bg-red-primary text-xs">
-                            {{ $item->pengembalian ?? 'Belum dibayar' }}
+                            {{ $item->status != 'Terkena denda' ? $item->status : 'Belum dibayar' }}
                         </div>
                     </div>
                 @empty

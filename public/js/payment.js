@@ -10,10 +10,10 @@ function copyNominal() {
     let tempInput = document.createElement("input");
     tempInput.value = filteredNominal;
     document.body.appendChild(tempInput);
-    
+
     tempInput.select();
     document.execCommand("copy");
-    
+
     document.body.removeChild(tempInput);
 
     setTimeout(function() {
@@ -45,14 +45,46 @@ function copyLoanCode(){
     let tempInput = document.createElement("input");
     tempInput.value = loanCode;
     document.body.appendChild(tempInput);
-    
+
     tempInput.select();
     document.execCommand("copy");
-    
+
     document.body.removeChild(tempInput);
 
     setTimeout(function() {
         copyLoanInfo.innerHTML = '';
     }, 3000);
 }
+
+let noRekening = document.querySelectorAll('.no-rekening');
+let copyRekening = document.querySelectorAll('.copy-rekening');
+let copyRekeningInfo = document.querySelectorAll('.copy-rekening-info');
+
+document.querySelectorAll('.copy-rekening').forEach((btnCopy) => {
+    btnCopy.addEventListener('click', function() {
+        // Temukan elemen nomor rekening di elemen `td` yang sama
+        const rekeningNumber = this.closest('td').querySelector('.no-rekening').textContent.trim();
+
+        // Jika elemen no-rekening ditemukan, salin teks ke clipboard
+        if (rekeningNumber) {
+            navigator.clipboard.writeText(rekeningNumber).then(() => {
+                // Tampilkan pesan bahwa nomor rekening telah disalin
+                const infoMessage = this.querySelector('.copy-rekening-info');
+                infoMessage.style.display = 'inline';
+
+                // Sembunyikan pesan setelah beberapa detik
+                setTimeout(() => {
+                    infoMessage.style.display = 'none';
+                }, 2000);
+            }).catch((error) => {
+                console.error('Gagal menyalin nomor rekening:', error);
+            });
+        } else {
+            console.error('Nomor rekening tidak ditemukan.');
+        }
+    });
+});
+
+
+
 

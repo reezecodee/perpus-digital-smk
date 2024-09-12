@@ -30,7 +30,7 @@ class ProfileBorrowerController extends Controller
         $userId = auth()->user()->id;
 
         $histories = $this->getLoanHistories($userId, ['Terkena denda', 'Sudah dibayar', 'E-book'], false);
-        $fineHistories = $this->getLoanHistories($userId, ['Terkena denda', 'Sudah dibayarkan'], true);
+        $fineHistories = $this->getLoanHistories($userId, ['Terkena denda', 'Sudah dibayar'], true);
         $title = 'Riwayat Peminjaman Buku';
 
         return view(

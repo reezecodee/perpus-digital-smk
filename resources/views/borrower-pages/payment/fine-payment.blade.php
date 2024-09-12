@@ -1,9 +1,17 @@
 <x-borrower-layout :title="$title">
     <section class="mx-auto px-3 lg:px-12 text-gray-600">
         <div class="pt-24 lg:pt-36">
-            @if ($data->fine_payment->status_bayar == 'Sudah dibayar')
+            @if (($data->fine_payment->status_bayar ?? false) == 'Sudah dibayar')
                 <div class="p-4 font-medium text-sm text-green-800 rounded-lg bg-green-100 mb-5" role="alert">
                     Pembayaranmu telah sukses, terimakasih sudah bertanggun jawab.
+                </div>
+            @elseif (($data->fine_payment->status_bayar ?? false) == 'Pembayaran ditolak')
+                <div class="p-4 font-medium text-sm text-red-800 rounded-lg bg-red-100 mb-5" role="alert">
+                    Pembayaranmu ditolak harap bayar denda sesuai nominal dan kirimkan bukti yang benar.
+                </div>
+            @elseif (($data->fine_payment->status_bayar ?? false) == 'Menunggu konfirmasi')
+                <div class="p-4 font-medium text-sm text-yellow-800 rounded-lg bg-yellow-50 mb-5" role="alert">
+                    Pembayaranmu dalam antrian, harap bersabar ini mungkin perlu memakan beberapa waktu.
                 </div>
             @endif
             <div class="grid grid-cols-2 gap-5">
@@ -35,10 +43,17 @@
                     </div>
                 </div>
                 <div class="border p-7 shadow-md rounded-md mb-5">
-                    <div class="flex justify-end mb-3">
-                        <a href="">
+                    <div class="flex justify-end gap-3 mb-3">
+                        @if ($data->fine_payment)
+                            <a href="{{ route('show.detailPayment', $data->fine_payment->id) }}">
+                                <x-borrower.button.normal-btn>
+                                    <i class="fa-solid fa-receipt"></i> Lihat pembayaran
+                                </x-borrower.button.normal-btn>
+                            </a>
+                        @endif
+                        <a href="{{ route('show.paymentTutorial') }}" target="_blank">
                             <x-borrower.button.normal-btn>
-                                Lihat cara pembayaran
+                                <i class="fa-solid fa-circle-info"></i> Cara pembayaran
                             </x-borrower.button.normal-btn>
                         </a>
                     </div>
@@ -130,63 +145,48 @@
                                 <tbody class="divide-y divide-gray-200">
                                     <tr>
                                         <td class="px-6 py-4 text-base font-medium text-gray-900">Bank BRI</td>
-                                        <td class="px-6 py-4 text-base font-medium text-gray-900">283487238423</td>
+                                        <td class="px-6 py-4 text-base font-medium text-gray-900">
+                                            <span class="no-rekening">283487238423</span>
+                                            <button class="copy-rekening relative">
+                                                <i class="far fa-copy"></i>
+                                                <span class="text-xs absolute top-1 left-4 copy-rekening-info"
+                                                    style="display: none">Copied</span>
+                                            </button>
+                                        </td>
                                         <td class="px-6 py-4 text-base font-medium text-gray-900">Perpustakaan SMK</td>
                                     </tr>
                                     <tr>
                                         <td class="px-6 py-4 text-base font-medium text-gray-900">Bank BCA</td>
-                                        <td class="px-6 py-4 text-base font-medium text-gray-900">283487238423</td>
+                                        <td class="px-6 py-4 text-base font-medium text-gray-900">
+                                            <span class="no-rekening">283487238428</span>
+                                            <button class="copy-rekening">
+                                                <i class="far fa-copy"></i>
+                                                <span class="text-xs copy-rekening-info"
+                                                    style="display: none">Copied</span>
+                                            </button>
+                                        </td>
                                         <td class="px-6 py-4 text-base font-medium text-gray-900">Perpustakaan SMK</td>
                                     </tr>
                                     <tr>
                                         <td class="px-6 py-4 text-base font-medium text-gray-900">Bank Mandiri</td>
-                                        <td class="px-6 py-4 text-base font-medium text-gray-900">283487238423</td>
+                                        <td class="px-6 py-4 text-base font-medium text-gray-900">
+                                            <span class="no-rekening">283487238433</span>
+                                            <button class="copy-rekening">
+                                                <i class="far fa-copy"></i>
+                                                <span class="text-xs copy-rekening-info"
+                                                    style="display: none">Copied</span>
+                                            </button>
+                                        </td>
                                         <td class="px-6 py-4 text-base font-medium text-gray-900">Perpustakaan SMK</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
-                <div id="default-modal" tabindex="-1" aria-hidden="true"
-                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                    <div class="relative p-4 w-full max-w-2xl max-h-full">
-                        <!-- Modal content -->
-                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                            <!-- Modal header -->
-                            <div
-                                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                    Bayar Via Qris
-                                </h3>
-                                <button type="button"
-                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                    data-modal-hide="default-modal">
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 14 14">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                    </svg>
-                                    <span class="sr-only">Close modal</span>
-                                </button>
-                            </div>
-                            <!-- Modal body -->
-                            <div class="p-4 md:p-5 space-y-4 flex justify-center">
-                                <img src="https://assets.kompasiana.com/items/album/2020/06/05/qris-baznas-5eda34a3d541df43ac060963.png?t=o&v=300"
-                                    class="w-72 border-2 rounded-md" alt="" srcset="">
-                            </div>
-                            <!-- Modal footer -->
-                            <div
-                                class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                <button data-modal-hide="default-modal" type="button"
-                                    class="py-2.5 px-5 ms-3 text-sm font-medium focus:outline-none bg-red-primary rounded-lg border border-gray-200 hover:bg-red-500 text-white focus:z-10 focus:ring-4 focus:ring-gray-100">Tutup</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <x-borrower.modal.qris-modal />
             </div>
-            @if ($data->fine_payment->status_bayar != 'Sudah dibayar')
+            @if (($data->fine_payment->status_bayar ?? false) != 'Sudah dibayar')
                 <div class="border p-7 shadow-md rounded-md mb-5">
                     <h3 class="text-xl font-semibold mb-4">Upload bukti pembayaran</h3>
                     <form action="{{ route('store.payment', $data->id) }}" method="post"

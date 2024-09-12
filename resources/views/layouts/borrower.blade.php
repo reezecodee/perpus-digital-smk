@@ -24,6 +24,8 @@
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <!-- css & js -->
     <link href="/css/rating.css" rel="stylesheet" type="text/css">
@@ -62,13 +64,17 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
     <!-- JavaScript -->
     <script src="/js/swiper.js"></script>
     <script src="/js/title.js"></script>
     <script>
-        $(document).ready(function() {
+        // inisialisasi AOS
+        AOS.init();
 
+        // inisialisasi datatable
+        $(document).ready(function() {
             var table = $('#data-table').DataTable({
                     responsive: true
                 })
@@ -76,6 +82,7 @@
                 .responsive.recalc();
         });
 
+        // animasi loading
         function showLoader() {
             document.getElementById('loader').classList.remove('hidden');
         }

@@ -13,7 +13,7 @@ class FinePaymentController extends Controller
     /**
      * Function ini digunakan untuk menampilkan halaman pembayran denda.
      * @param $id -> berisi ID Loan
-     * 
+     *
      */
 
     public function showPaymentPage($id)
@@ -21,17 +21,13 @@ class FinePaymentController extends Controller
         $data = Loan::findOrFail($id);
         $title = "Pembayaran Denda Buku {$data->placement->book->judul}";
 
-        if (!$data || $data->status != 'Terkena denda' || $data->keterangan_denda == 'Tidak ada') {
-            abort(404);
-        }
-
         return view('borrower-pages.payment.fine-payment', compact('title', 'data'));
     }
 
 
     /**
      * Function ini digunakan untuk menampilkan halaman list riwayar pembayaran denda.
-     * 
+     *
      */
 
     public function showPaymentHistoriesPage()
@@ -45,7 +41,7 @@ class FinePaymentController extends Controller
 
     /**
      * Function ini digunakan untuk menampilkan halaman detail pembayaran yang sudah dilakukan.
-     * 
+     *
      */
 
     public function showDetailPaymentPage($id)
@@ -54,5 +50,18 @@ class FinePaymentController extends Controller
         $title = "Detail Pembayaran Denda Buku {$finePayment->loan->placement->book->judul}";
 
         return view('borrower-pages.payment.detail-payment', compact('title', 'finePayment'));
+    }
+
+
+    /**
+     * Function ini digunakan untuk menampilkan halaman detail pembayaran yang sudah dilakukan.
+     *
+     */
+
+    public function showTutorialPage()
+    {
+        $title = "Tutorial Pembayaran Denda";
+
+        return view('borrower-pages.payment.tutorial-payment', compact('title'));
     }
 }

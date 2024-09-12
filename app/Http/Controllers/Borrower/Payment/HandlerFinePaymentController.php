@@ -13,7 +13,7 @@ class HandlerFinePaymentController extends Controller
     /**
      * Function ini digunakan untuk menyimpan atau memperbarui pembayaran denda.
      * @param $id -> berisi ID Loan
-     * 
+     *
      */
 
     public function finePayment(PaymentRequest $request, $id)
@@ -27,9 +27,11 @@ class HandlerFinePaymentController extends Controller
             $filename = $this->handleFileUpload($request->file('bukti_pembayaran'), $finePayment);
 
             $validatedData = array_merge($validatedData, [
+                'status_bayar' => 'Menunggu konfirmasi',
                 'bukti_pembayaran' => $filename,
                 'peminjaman_id' => $loan->id,
                 'peminjam_id' => auth()->user()->id,
+                'alasan_ditolak' => null
             ]);
 
             $this->saveOrUpdateFinePayment($finePayment, $validatedData);

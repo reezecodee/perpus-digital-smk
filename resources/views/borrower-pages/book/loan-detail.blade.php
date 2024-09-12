@@ -6,48 +6,63 @@
                     Status peminjaman kamu terkena denda, harap lakukan pembayaran denda.
                 </div>
             @endif
-            @if($data->status !== 'Terkena denda')
-            <div class="border p-4 mb-5">
-                <h3 class="text-lg font-bold mb-5">Status peminjaman</h3>
-                <div class="flex justify-between lg:justify-around items-center">
-                    <div class="flex flex-col items-center text-center lg:text-left">
-                        <div class="bg-red-primary text-white rounded-full h-16 w-16 flex justify-center items-center mb-3">
-                            <i class="fas fa-hourglass-start text-lg"></i>
-                        </div>
-                        <div class="text-sm">Masa peminjaman</div>
-                    </div>
-                    <div class="flex flex-col items-center text-center lg:text-left">
-                        <div
-                            class="@if ($data->status == 'Masa pengembalian' || $data->status == 'Sudah dikembalikan') bg-red-primary text-white @else
-                            border-4 border-red-primary text-red-primary @endif rounded-full h-16 w-16 flex justify-center items-center mb-3">
-                            <i class="fas fa-receipt text-lg"></i>
-                        </div>
-                        <div class="text-sm">Masa pengembalian</div>
-                    </div>
-                    <div class="flex flex-col items-center text-center lg:text-left">
-                        <div
-                            class="@if ($data->status == 'Sudah dikembalikan') bg-red-primary text-white @else
-                            border-4 border-red-primary text-red-primary @endif rounded-full h-16 w-16 flex justify-center items-center mb-3">
-                            <i class="fas fa-thumbs-up text-lg"></i>
-                        </div>
-                        <div class="text-sm">Telah dikembalikan</div>
-                    </div>
-                </div>
-                @if ($data->status == 'Masa pinjam')
-                    <div class="p-4 mt-5 text-sm text-blue-800 rounded-lg bg-blue-50" role="alert">
-                        Saat ini status peminjaman masih dalam masa peminjaman, silahkan nikmati membaca bukumu.
-                    </div>
-                @elseif($data->status == 'Masa pengembalian')
-                    <div class="p-4 mt-5 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">
-                        Sudah saatnya kamu mengembalikan buku, ayo kembalikan bukumu sebelum jatuh tempo dan terhindar dari
-                        denda keterlambatan,
-                    </div>
-                @else
-                    <div class="p-4 mt-5 text-sm text-green-800 rounded-lg bg-green-100" role="alert">
-                        Terimakasih sudah mengembalikan bukumu, semoga apa yang kamu baca menjadi ilmu yang bermanfaat.
-                    </div>
-                @endif
+            <div class="flex justify-between mb-5">
+                <a href="{{ route('show.myBookShelf') }}">
+                    <x-borrower.button.normal-btn>
+                        <i class="fa-solid fa-circle-chevron-left"></i> Kembali ke rak
+                    </x-borrower.button.normal-btn>
+                </a>
+                <a href="{{ route('show.history') }}">
+                    <x-borrower.button.normal-btn>
+                        Kembali ke riwayat <i class="fa-solid fa-circle-chevron-right"></i>
+                    </x-borrower.button.normal-btn>
+                </a>
             </div>
+            @if ($data->status !== 'Terkena denda')
+                <div class="border p-4 mb-5">
+                    <h3 class="text-lg font-bold mb-5">Status peminjaman</h3>
+                    <div class="flex justify-between lg:justify-around items-center">
+                        <div class="flex flex-col items-center text-center lg:text-left">
+                            <div
+                                class="bg-red-primary text-white rounded-full h-16 w-16 flex justify-center items-center mb-3">
+                                <i class="fas fa-hourglass-start text-lg"></i>
+                            </div>
+                            <div class="text-sm">Masa peminjaman</div>
+                        </div>
+                        <div class="flex flex-col items-center text-center lg:text-left">
+                            <div
+                                class="@if ($data->status == 'Masa pengembalian' || $data->status == 'Sudah dikembalikan') bg-red-primary text-white @else
+                            border-4 border-red-primary text-red-primary @endif rounded-full h-16 w-16 flex justify-center items-center mb-3">
+                                <i class="fas fa-receipt text-lg"></i>
+                            </div>
+                            <div class="text-sm">Masa pengembalian</div>
+                        </div>
+                        <div class="flex flex-col items-center text-center lg:text-left">
+                            <div
+                                class="@if ($data->status == 'Sudah dikembalikan') bg-red-primary text-white @else
+                            border-4 border-red-primary text-red-primary @endif rounded-full h-16 w-16 flex justify-center items-center mb-3">
+                                <i class="fas fa-thumbs-up text-lg"></i>
+                            </div>
+                            <div class="text-sm">Telah dikembalikan</div>
+                        </div>
+                    </div>
+                    @if ($data->status == 'Masa pinjam')
+                        <div class="p-4 mt-5 text-sm text-blue-800 rounded-lg bg-blue-50" role="alert">
+                            Saat ini status peminjaman masih dalam masa peminjaman, silahkan nikmati membaca bukumu.
+                        </div>
+                    @elseif($data->status == 'Masa pengembalian')
+                        <div class="p-4 mt-5 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">
+                            Sudah saatnya kamu mengembalikan buku, ayo kembalikan bukumu sebelum jatuh tempo dan
+                            terhindar dari
+                            denda keterlambatan,
+                        </div>
+                    @else
+                        <div class="p-4 mt-5 text-sm text-green-800 rounded-lg bg-green-100" role="alert">
+                            Terimakasih sudah mengembalikan bukumu, semoga apa yang kamu baca menjadi ilmu yang
+                            bermanfaat.
+                        </div>
+                    @endif
+                </div>
             @endif
             <div class="border p-4 mb-5">
                 <h3 class="text-lg font-bold mb-5">Detail buku</h3>

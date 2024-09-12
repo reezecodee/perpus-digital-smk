@@ -262,6 +262,7 @@ Route::middleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group
         Route::get('/pembayaran-denda/{id}', 'showPaymentPage')->name('show.payment');
         Route::get('/riwayat-pembayaran', 'showPaymentHistoriesPage')->name('show.paymentHistories');
         Route::get('/detail-pembayaran/{id}', 'showDetailPaymentPage')->name('show.detailPayment');
+        Route::get('/tutorial-pembayaran', 'showTutorialPage')->name('show.paymentTutorial');
     });
 
     Route::controller(HandlerFinePaymentController::class)->group(function () {
