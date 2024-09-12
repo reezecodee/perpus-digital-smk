@@ -3,8 +3,8 @@
     <select
         class="p-2 rounded-md cursor-pointer border @error('jk') ring-red-primary border-red-primary @enderror w-full font-medium focus:ring-red-500 focus:border-red-500"
         name="jk" autocomplete="off">
-        <option value="{{ auth()->user()->jk }}" selected>
-            {{ auth()->user()->jk }}
+        <option value="{{ old('jk', auth()->user()->jk) }}" selected>
+            {{ old('jk', auth()->user()->jk) }}
         </option>
         <option value="Laki-laki">Laki-laki</option>
         <option value="Perempuan">Perempuan</option>

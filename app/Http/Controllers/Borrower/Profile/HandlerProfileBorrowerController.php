@@ -7,7 +7,9 @@ use App\Http\Requests\Profile\StoreImageRequest;
 use App\Http\Requests\Profile\UpdatePasswordRequest;
 use App\Http\Requests\Profile\UpdatePeminjamRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class HandlerProfileBorrowerController extends Controller
@@ -82,31 +84,32 @@ class HandlerProfileBorrowerController extends Controller
 
 
     /**
-     * Function ini digunakan untuk memperbarui profile user.
+     * Function ini digunakan untuk memperbarui data profile user.
      *
      */
 
+
     public function updateProfile(UpdatePeminjamRequest $request)
     {
-        $updateData = $request->validated();
-        $user = $this->user;
+        try {
+            $updateData = $request->validated();
+            $user = Auth::user();
 
-        $hasChanges = false;
-        foreach ($updateData as $key => $value) {
-            if ($user->$key != $value) {
-                $hasChanges = true;
-                break;
+            $user->fill($updateData);
+
+            if ($user->isDirty()) {
+                $user->save();
+                $this->log('Memperbarui data profile-nya');
+                return redirect()->back()->withSuccess('Data profil berhasil diperbarui.');
             }
-        }
 
-        if ($hasChanges) {
-            $user->update($updateData);
-            $this->log('Memperbarui data profile-nya');
-            return redirect()->back()->withSuccess('Data profil berhasil diperbarui.');
+            return redirect()->back()->withSuccess('Tidak ada perubahan pada data profil.');
+        } catch (\Exception $e) {
+            Log::error('Error saat memperbarui profil: ' . $e->getMessage());
+            return redirect()->back()->withErrors('Terjadi kesalahan saat memperbarui profil.');
         }
-
-        return redirect()->back()->withSuccess('Tidak ada perubahan pada data profil.');
     }
+
 
     /**
      * Function ini digunakan untuk memperbarui password user.

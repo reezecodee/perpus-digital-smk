@@ -15,9 +15,9 @@ class ProfileBorrowerController extends Controller
 {
     /**
      * Tiga function pertama untuk mengatur munculnya tampilan dari halaman blade.
-     * 
+     *
      */
-    
+
     public function showOverviewPage()
     {
         $title = 'Overview Profile';

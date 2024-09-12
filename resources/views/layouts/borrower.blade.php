@@ -23,6 +23,7 @@
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
     <!-- css & js -->
     <link href="/css/rating.css" rel="stylesheet" type="text/css">
@@ -38,6 +39,9 @@
 
 
     <x-borrower.navigation.navbar />
+    <div id="loader" class="loader-container hidden">
+        <div class="loader"></div>
+    </div>
     {{ $slot }}
     @if ($bubble)
         <x-borrower.navigation.bubble />
@@ -55,6 +59,7 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
@@ -69,6 +74,22 @@
                 })
                 .columns.adjust()
                 .responsive.recalc();
+        });
+
+        function showLoader() {
+            document.getElementById('loader').classList.remove('hidden');
+        }
+
+        function hideLoader() {
+            document.getElementById('loader').classList.add('hidden');
+        }
+
+        window.addEventListener('beforeunload', function(event) {
+            showLoader()
+
+            window.addEventListener("load", function() {
+                hideLoader();
+            });
         });
     </script>
 </body>
