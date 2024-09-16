@@ -10,6 +10,7 @@ use App\Http\Controllers\Borrower\BookShelf\BookShelfController;
 use App\Http\Controllers\Borrower\BookShelf\HandlerBookShelfController;
 use App\Http\Controllers\Borrower\Calendar\HandlerScheduleController;
 use App\Http\Controllers\Borrower\Calendar\ScheduleController;
+use App\Http\Controllers\Borrower\Category\CategoryController;
 use App\Http\Controllers\Borrower\DetailRent\DetailRentController;
 use App\Http\Controllers\Borrower\Help\HandlerReportProblemController;
 use App\Http\Controllers\Borrower\Help\ReportProblemController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\Borrower\Profile\HandlerProfileBorrowerController;
 use App\Http\Controllers\Borrower\Profile\ProfileBorrowerController;
 use App\Http\Controllers\Borrower\ReadEbook\ReadEbookController;
 use App\Http\Controllers\Borrower\SearchResult\SearchResultController;
+use App\Http\Controllers\Borrower\Shelf\ShelfController;
 use App\Http\Controllers\Borrower\Visit\HandlerVisitPlanController;
 use App\Http\Controllers\Borrower\Visit\VisitPlanController;
 use App\Http\Controllers\Excel\ExcelController;
@@ -223,6 +225,24 @@ Route::middleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group
 
     Route::controller(AllBooksController::class)->group(function () {
         Route::get('/semua-buku', 'showAllBooksPage')->name('show.allBooks');
+    });
+
+
+
+    // Category
+
+
+    Route::controller(CategoryController::class)->group(function(){
+        Route::get('/semua-kategori', 'showAllCategory')->name('show.allCategories');
+    });
+
+
+    // Shelf
+
+
+    Route::controller(ShelfController::class)->group(function(){
+        Route::get('/semua-rak-buku', 'showAllShelves')->name('show.allShelves');
+        Route::get('/lihat-rak-buku/{id}', 'showShelf')->name('show.shelf');
     });
 
 

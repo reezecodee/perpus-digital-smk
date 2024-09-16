@@ -54,44 +54,6 @@
                 </div>
             </div>
             <div class="px-3 lg:px-24 mx-auto">
-                {{-- <div class="flex flex-col lg:flex-row justify-between items-center">
-                    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg mb-5">
-                        <span class="text-xl lg:text-3xl font-semibold"><i class="fas fa-book text-red-primary"></i> Lihat
-                            semua
-                            buku</span>
-                        <p class="mb-3 mt-3 font-normal text-gray-500">Lihat semua buku yang tersedia di
-                            perpustakaan</p>
-                        <a href="{{ route('show.allBooks') }}?format=fisik"
-                            class="inline-flex font-medium items-center text-blue-600 hover:underline">
-                            Lihat rak perpustakaan
-                            <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778" />
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="text-center hidden lg:block">
-                        <i class="fas fa-book-open text-5xl text-red-primary"></i>
-                        <p class="text-2xl font-bold">Welcome</p>
-                    </div>
-                    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg mb-5">
-                        <span class="text-xl lg:text-3xl font-semibold"><i class="fas fa-book-reader text-red-primary"></i>
-                            Baca via
-                            E-book</span>
-                        <p class="mb-3 mt-3 font-normal text-gray-500">Kamu bisa baca secara online
-                            dengan E-book</p>
-                        <a href="{{ route('show.allBooks') }}?format=elektronik"
-                            class="inline-flex font-medium items-center text-blue-600 hover:underline">
-                            Lihat rak E-book
-                            <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778" />
-                            </svg>
-                        </a>
-                    </div>
-                </div> --}}
                 <div
                     class="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-full p-6">
                     <div class="flex items-center mb-4">
@@ -100,48 +62,35 @@
                         </h5>
                     </div>
                     <div class="flex flex-wrap justify-around gap-3">
-                        <a href="" class="flex flex-col items-center text-center">
-                            <div class="p-2 bg-red-100 rounded-lg inline-block mb-1 hvr-shrink">
-                                <img src="https://www.svgrepo.com/show/298470/book.svg" class="w-10" alt="">
-                            </div>
-                            <span class="text-xs text-center font-medium block w-full max-w-[100px] whitespace-normal">Lihat semua buku</span>
-                        </a>
-                        <a href="" class="flex flex-col items-center text-center">
-                            <div class="p-2 bg-amber-100 rounded-lg inline-block mb-1 hvr-shrink">
-                                <img src="https://www.svgrepo.com/show/263069/ebook.svg" class="w-10" alt="">
-                            </div>
-                            <span class="text-xs text-center font-medium block w-full max-w-[100px] whitespace-normal">Lihat semua ebook</span>
-                        </a>
-                        <a href="" class="flex flex-col items-center text-center">
-                            <div class="p-2 bg-green-100 rounded-lg inline-block mb-1 hvr-shrink">
-                                <img src="https://www.svgrepo.com/show/477129/label.svg" class="w-10" alt="">
-                            </div>
-                            <span class="text-xs text-center font-medium block w-full max-w-[100px] whitespace-normal">Lihat semua kategori</span>
-                        </a>
-                        <a href="" class="flex flex-col items-center text-center">
-                            <div class="p-2 bg-blue-100 rounded-lg inline-block mb-1 hvr-shrink">
-                                <img src="https://www.svgrepo.com/show/382165/book-shelf-books-education-learning-school-study.svg" class="w-10" alt="">
-                            </div>
-                            <span class="text-xs text-center font-medium block w-full max-w-[100px] whitespace-normal">Lihat semua rak buku</span>
-                        </a>
-                        <a href="" class="flex flex-col items-center text-center">
-                            <div class="p-2 bg-gray-200 rounded-lg inline-block mb-1 hvr-shrink">
-                                <img src="https://www.svgrepo.com/show/343850/blog-seo-optimization-search.svg" class="w-10" alt="">
-                            </div>
-                            <span class="text-xs text-center font-medium block w-full max-w-[100px] whitespace-normal">Baca artikel</span>
-                        </a>
-                        <a href="" class="flex flex-col items-center text-center">
-                            <div class="p-2 bg-orange-100 rounded-lg inline-block mb-1 hvr-shrink">
-                                <img src="https://www.svgrepo.com/show/287711/ticket.svg" class="w-10" alt="">
-                            </div>
-                            <span class="text-xs text-center font-medium block w-full max-w-[100px] whitespace-normal">Informasi denda</span>
-                        </a>
-                        <a href="" class="flex flex-col items-center text-center">
-                            <div class="p-2 bg-green-100 rounded-lg inline-block mb-1 hvr-shrink">
-                                <img src="https://www.svgrepo.com/show/475413/information.svg" class="w-10" alt="">
-                            </div>
-                            <span class="text-xs text-center font-medium block w-full max-w-[100px] whitespace-normal">FAQ</span>
-                        </a>
+                        <x-borrower.button.menu-btn background="bg-red-100" menuTitle="Lihat semua buku"
+                            :url="route('show.allBooks') . '?format=fisik'">
+                            <img src="https://www.svgrepo.com/show/298470/book.svg" class="w-10" alt="">
+                        </x-borrower.button.menu-btn>
+                        <x-borrower.button.menu-btn background="bg-amber-100" menuTitle="Lihat semua ebook"
+                            :url="route('show.allBooks') . '?format=elektronik'">
+                            <img src="https://www.svgrepo.com/show/263069/ebook.svg" class="w-10" alt="">
+                        </x-borrower.button.menu-btn>
+                        <x-borrower.button.menu-btn background="bg-green-100" menuTitle="Lihat semua kategori"
+                            :url="route('show.allCategories')">
+                            <img src="https://www.svgrepo.com/show/477129/label.svg" class="w-10" alt="">
+                        </x-borrower.button.menu-btn>
+                        <x-borrower.button.menu-btn background="bg-blue-100" menuTitle="Lihat rak buku"
+                            :url="route('show.allShelves')">
+                            <img src="https://www.svgrepo.com/show/382165/book-shelf-books-education-learning-school-study.svg"
+                                class="w-10" alt="">
+                        </x-borrower.button.menu-btn>
+                        <x-borrower.button.menu-btn background="bg-gray-200" menuTitle="Baca artikel" :url="route('show.allBooks')">
+                            <img src="https://www.svgrepo.com/show/343850/blog-seo-optimization-search.svg"
+                                class="w-10" alt="">
+                        </x-borrower.button.menu-btn>
+                        <x-borrower.button.menu-btn background="bg-orange-100" menuTitle="Informasi denda"
+                            :url="route('show.allBooks')">
+                            <img src="https://www.svgrepo.com/show/287711/ticket.svg" class="w-10" alt="">
+                        </x-borrower.button.menu-btn>
+                        <x-borrower.button.menu-btn background="bg-green-100" menuTitle="FAQ" :url="route('show.allBooks')">
+                            <img src="https://www.svgrepo.com/show/475413/information.svg" class="w-10"
+                                alt="">
+                        </x-borrower.button.menu-btn>
                     </div>
                 </div>
                 <div class="mt-5">
