@@ -17,7 +17,7 @@ class ShelfController extends Controller
     public function showAllShelves()
     {
         $title = 'Semua Rak Buku Perpustakaan';
-        $shelves = Shelf::with('placement')->get();
+        $shelves = Shelf::withCount('placement')->get();
 
         return view('borrower-pages.shelf.all-shelves', compact('title', 'shelves'));
     }

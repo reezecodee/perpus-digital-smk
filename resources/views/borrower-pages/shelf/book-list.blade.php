@@ -5,6 +5,11 @@
                 <h2 class="mb-2 text-center text-2xl font-bold text-gray-800 lg:mb-0 lg:text-3xl">Rak Buku:
                     {{ $shelf->nama_rak }}
                 </h2>
+                <a href="{{ route('show.allShelves') }}">
+                    <x-borrower.button.normal-btn>
+                        <i class="fas fa-chevron-circle-left"></i> Kembali ke rak
+                    </x-borrower.button.normal-btn>
+                </a>
             </div>
             <div class="flex justify-center">
                 <div>
@@ -21,6 +26,15 @@
                             </div>
                             <img class="z-0 h-auto max-w-5xl w-full align-top mt-[-30px]" src="/img/rack/rack-c.jpg">
                         @endforeach
+                        @if ($placements->isEmpty())
+                            <div class="flex justify-center">
+                                <div class="text-center">
+                                    <img src="/img/assets/oh_no.webp" alt="" srcset=""
+                                        class="w-52 inline-block">
+                                    <h1 class="text-black text-center text-lg font-semibold">Rak ini belum terisi buku, petugas akan segera mengisinya.</h1>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

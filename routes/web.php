@@ -92,14 +92,14 @@ Route::get('/test', function () {
 */
 
 Route::controller(SiteController::class)->group(function () {
-    Route::get('/syarat-dan-ketentuan', 'terms_conditions')->name('terms_conditions');
-    Route::get('/kebijakan-privasi', 'privacy_policy')->name('privacy_policy');
-    Route::get('/tentang-kami', 'about_us')->name('about_us');
-    Route::get('/kontak-kami', 'contact_us')->name('contact_us');
-    Route::get('/artikel', 'article')->name('article');
-    Route::get('/crop-picture', 'crop_picture')->name('crop_picture');
+    Route::get('/syarat-dan-ketentuan', 'showTermsConditionsPage')->name('show.termsConditions');
+    Route::get('/kebijakan-privasi', 'showPrivacyPolicyPage')->name('show.privacyPolicy');
+    Route::get('/tentang-kami', 'showAboutUsPage')->name('show.aboutUs');
+    Route::get('/kontak-kami', 'showContactUsPage')->name('show.contactUs');
+    Route::get('/list-artikel-perpustakaan', 'showArticlePage')->name('show.articles');
+    Route::get('/baca-artikel/{id}', 'showReadArticlePage')->name('show.readArticle');
+    Route::get('/crop-picture', 'showCropPicturePage')->name('show.cropPicture');
 });
-
 
 
 

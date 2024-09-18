@@ -79,7 +79,7 @@
                             <img src="https://www.svgrepo.com/show/382165/book-shelf-books-education-learning-school-study.svg"
                                 class="w-10" alt="">
                         </x-borrower.button.menu-btn>
-                        <x-borrower.button.menu-btn background="bg-gray-200" menuTitle="Baca artikel" :url="route('show.allBooks')">
+                        <x-borrower.button.menu-btn background="bg-gray-200" menuTitle="Baca artikel" :url="route('show.articles')">
                             <img src="https://www.svgrepo.com/show/343850/blog-seo-optimization-search.svg"
                                 class="w-10" alt="">
                         </x-borrower.button.menu-btn>
