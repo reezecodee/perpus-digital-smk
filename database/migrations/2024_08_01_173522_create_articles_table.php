@@ -14,10 +14,8 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('author_id');
-            $table->text('thumbnail');
+            $table->text('thumbnail')->nullable();
             $table->string('judul');
-            $table->string('penulis');
-            $table->string('keyword');
             $table->text('deskripsi');
             $table->text('konten_artikel');
             $table->enum('visibilitas', ['Publik', 'Privasi']);

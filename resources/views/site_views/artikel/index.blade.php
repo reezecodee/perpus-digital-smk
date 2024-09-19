@@ -1,6 +1,6 @@
-<x-borrower-layout :title="$title">
-    <section class="mx-auto px-3 lg:px-12 text-gray-600">
-        <div class="pt-24 lg:pt-36">
+<x-article-layout :title="$title">
+    <section class="mx-auto px-3 lg:px-16 text-gray-600">
+        <div class="pt-24 lg:pt-16">
             <aside aria-label="Artikel terbaru">
                 <div class="mx-auto max-w-screen-xl">
                     <h2 class="mb-8 text-2xl font-bold text-gray-900">Artikel Terbaru</h2>
@@ -8,11 +8,11 @@
                         @foreach ($articles as $item)
                             <article class="max-w-xs">
                                 <a href="{{ route('show.readArticle', $item->id) }}">
-                                    <img src="{{ asset('storage/img/thumbnail/' . ($item->thumbnail ?? 'unknown_thumbnail.png')) }}"
-                                        class="mb-5 rounded-lg" alt="Image 1" loading="lazy">
+                                    <img src="{{ asset('storage/img/thumbnail/' .  ($item->thumbnail ?? 'unknown_thumbnail.png')) }}"
+                                        class="mb-5 rounded-lg" alt="" loading="lazy">
                                 </a>
                                 <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900">
-                                    <a href="#">{{ $item->judul }}</a>
+                                    <a href="{{ route('show.readArticle', $item->id) }}">{{ $item->judul }}</a>
                                 </h2>
                                 <p class="mb-4 text-gray-500">{{ $item->deskripsi }}</p>
                             </article>
@@ -31,4 +31,4 @@
             </aside>
         </div>
     </section>
-</x-borrower-layout>
+</x-article-layout>
