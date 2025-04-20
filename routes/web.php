@@ -55,7 +55,6 @@ use App\Http\Controllers\PasswordReset\HandlerPasswordResetController;
 use App\Http\Controllers\PasswordReset\PasswordResetController;
 use App\Http\Controllers\PDF\PDFController;
 use App\Http\Controllers\Site\SiteController;
-use App\Models\FinePayment;
 use Illuminate\Support\Facades\Route;
 
 

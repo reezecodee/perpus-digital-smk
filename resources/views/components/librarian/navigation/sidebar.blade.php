@@ -14,7 +14,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item">
-                    <a href="{{ route('dashboard.ctrl') }}"
+                    <a href="{{ route('show.dashboard') }}"
                         class="nav-link {{ Request::is('dashboard-control*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-chart-line"></i>
                         <p>
