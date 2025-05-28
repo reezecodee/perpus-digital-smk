@@ -61,10 +61,10 @@ class UserSeeder extends Seeder
 
         $peminjam = User::create([
             'id' => Str::uuid(),
-            'username' => 'Ambasingh',
+            'username' => 'Azfaal',
             'nip_nis' => '19230829',
             'nisn' => '23432432425',
-            'nama' => 'Ambatukam ambaleon',
+            'nama' => 'Azfa Al',
             'email' => 'azfaalharits25@gmail.com',
             'telepon' => '081298897309',
             'jk' => 'Laki-laki',

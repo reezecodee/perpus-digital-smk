@@ -46,8 +46,12 @@
             <div class="lg:mx-auto text-left ">
                 <h4 class="text-lg text-red-primary font-bold mb-7">Informasi</h4>
                 <ul class="text-sm  transition-all duration-500">
-                    <li class="mb-6"><a href="" class="text-gray-600 hover:text-red-primary">Artikel</a></li>
-                    <li class="mb-6"><a href="" class=" text-gray-600 hover:text-red-primary">Kontak Kami</a></li>
+                    <li class="mb-6">
+                        <a href="" class="text-gray-600 hover:text-red-primary">Artikel</a>
+                    </li>
+                    <li class="mb-6">
+                        <a href="" class=" text-gray-600 hover:text-red-primary">Kontak Kami</a>
+                    </li>
                 </ul>
             </div>
             <!--End Col-->
@@ -55,7 +59,7 @@
         <!--Grid-->
         <div class="py-7 border-t border-gray-200">
             <div class="flex items-center justify-center flex-col lg:justify-between lg:flex-row">
-                <span class="text-sm text-gray-500 ">©<a href="https://pagedone.io/">pagedone</a> 2024, All rights
+                <span class="text-sm text-gray-500 ">©<a href="">E-Perpustakaan</a> {{ date('Y') }}, All rights
                     reserved.</span>
             </div>
         </div>

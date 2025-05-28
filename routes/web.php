@@ -32,7 +32,6 @@ use App\Http\Controllers\Librarian\DashboardController;
 use App\Http\Controllers\Librarian\Help\ManageHelp;
 use App\Http\Controllers\Librarian\Image\ManageCarousel;
 use App\Http\Controllers\Librarian\Image\ManagePopup;
-use App\Http\Controllers\Librarian\Information\ManageCreateArticle;
 use App\Http\Controllers\Librarian\Information\ManageNotification;
 use App\Http\Controllers\Librarian\Information\ManageSchedule;
 use App\Http\Controllers\Librarian\Information\ManageSendEmail;
@@ -95,8 +94,6 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/kebijakan-privasi', 'showPrivacyPolicyPage')->name('show.privacyPolicy');
     Route::get('/tentang-kami', 'showAboutUsPage')->name('show.aboutUs');
     Route::get('/kontak-kami', 'showContactUsPage')->name('show.contactUs');
-    Route::get('/list-artikel-perpustakaan', 'showArticlePage')->name('show.articles');
-    Route::get('/baca-artikel/{id}', 'showReadArticlePage')->name('show.readArticle');
     Route::get('/crop-picture', 'showCropPicturePage')->name('show.cropPicture');
 });
 
@@ -493,15 +490,6 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
             Route::get('/atur-kalender', 'show_set_calendar')->name('atur_kalender');
             Route::post('/tambah-jadwal', 'add_schedule')->name('add_schedule');
             Route::delete('/hapus-jadwal/{id}', 'delete_schedule')->name('delete_schedule');
-        });
-
-        Route::controller(ManageCreateArticle::class)->group(function () {
-            Route::get('/buat-artikel', 'show_create_article')->name('buat_artikel');
-            Route::get('/artikel-saya', 'show_my_article')->name('artikel_saya');
-            Route::get('/edit-artikel/{id}', 'show_edit_article')->name('edit_article');
-            Route::post('/buat-artikel', 'post_article')->name('post_article');
-            Route::put('/update-artikel/{id}', 'update_article')->name('update_article');
-            Route::delete('/hapus-artikel/{id}', 'delete_article')->name('delete_article');
         });
     });
 

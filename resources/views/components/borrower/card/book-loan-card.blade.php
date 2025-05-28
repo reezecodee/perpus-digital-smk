@@ -34,10 +34,6 @@
                             class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2.5 font-bold mr-2">Lihat
                             detail</button>
                     </a>
-                    <button type="button"
-                        class="border border-red-primary text-red-primary hover:bg-red-primary hover:text-white duration-300 rounded-md text-sm p-2.5 font-bold"
-                        data-modal-target="popup-modal" data-modal-toggle="popup-modal">Kembalikan
-                        buku</button>
                 </div>
                 <div class="flex justify-end text-center">
                     <div class="text-center">

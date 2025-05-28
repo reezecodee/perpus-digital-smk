@@ -79,10 +79,6 @@
                             <img src="https://www.svgrepo.com/show/382165/book-shelf-books-education-learning-school-study.svg"
                                 class="w-10" alt="">
                         </x-borrower.button.menu-btn>
-                        <x-borrower.button.menu-btn background="bg-gray-200" menuTitle="Baca artikel" :url="route('show.articles')">
-                            <img src="https://www.svgrepo.com/show/343850/blog-seo-optimization-search.svg"
-                                class="w-10" alt="">
-                        </x-borrower.button.menu-btn>
                         <x-borrower.button.menu-btn background="bg-orange-100" menuTitle="Informasi denda"
                             :url="route('show.allBooks')">
                             <img src="https://www.svgrepo.com/show/287711/ticket.svg" class="w-10" alt="">
@@ -128,29 +124,6 @@
                                         class="w-52 inline-block">
                                     <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan
                                         E-book
-                                        terbaru</h1>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-                <div class="mt-7">
-                    <h1 class="text-2xl mb-4 font-bold">Artikel terbaru</h1>
-                    <div class="flex lg:block justify-center lg:justify-normal">
-                        <div class="overflow-x-auto scrollbar-hide">
-                            <div class="flex gap-9 lg:gap-3">
-                                @foreach ($articles as $item)
-                                    <x-borrower.card.article :item="$item" />
-                                @endforeach
-                            </div>
-                        </div>
-                        @if ($articles->isEmpty())
-                            <div class="flex justify-center">
-                                <div class="text-center">
-                                    <img src="/img/assets/oh_no.webp" alt="" srcset=""
-                                        class="w-52 inline-block">
-                                    <h1 class="text-black text-center text-lg font-semibold">Tidak dapat menemukan
-                                        artikel
                                         terbaru</h1>
                                 </div>
                             </div>

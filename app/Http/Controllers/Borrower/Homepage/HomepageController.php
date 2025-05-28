@@ -25,11 +25,10 @@ class HomepageController extends Controller
         $latestEbooks = $this->getLatestEbooks();
         $popupImages = $this->getPopupImages();
         $carousels = $this->getCarousels();
-        $articles = $this->getLatestArticles();
 
         return view(
             'borrower-pages.homepage',
-            compact('title', 'recommendations', 'latestEbooks', 'popupImages', 'carousels', 'articles')
+            compact('title', 'recommendations', 'latestEbooks', 'popupImages', 'carousels')
         );
     }
 
@@ -85,18 +84,5 @@ class HomepageController extends Controller
     private function getCarousels()
     {
         return Carousel::all();
-    }
-
-
-    /**
-     * Mendapatkan artikel terbaru dengan visibilitas publik.
-     */
-
-    private function getLatestArticles()
-    {
-        return Article::with('author')
-            ->where('visibilitas', 'Publik')
-            ->limit(10)
-            ->get();
     }
 }

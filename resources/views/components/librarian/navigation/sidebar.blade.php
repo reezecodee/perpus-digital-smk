@@ -230,33 +230,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link {{ Request::is('informasi/buat-artikel*', 'informasi/artikel-saya*', 'informasi/edit-artikel*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-paste"></i>
-                        <p>
-                            Artikel
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('buat_artikel') }}"
-                                class="nav-link {{ Request::is('informasi/buat-artikel*') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Buat Artikel
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('artikel_saya') }}"
-                                class="nav-link {{ Request::is('informasi/artikel-saya*') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Artikel Saya</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
                     <a href="{{ route('atur_kalender') }}"
                         class="nav-link {{ Request::is('informasi/atur-kalender*') ? 'active' : '' }}">
                         <i class="nav-icon far fa-calendar-alt"></i>

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('loans', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('peminjam_id');
-            // $table->uuid('buku_id');
+            $table->uuid('buku_id');
             $table->uuid('penempatan_id');
             $table->string('kode_peminjaman')->unique()->nullable();
             $table->date('peminjaman')->nullable();
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('peminjam_id')->references('id')->on('users')->onDelete('cascade');
-            // $table->foreign('buku_id')->references('id')->on('books')->onDelete('cascade');
+            $table->foreign('buku_id')->references('id')->on('books')->onDelete('cascade');
             $table->foreign('penempatan_id')->references('id')->on('placements')->onDelete('cascade');
         });
     }
