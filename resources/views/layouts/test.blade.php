@@ -2,86 +2,90 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>
-        {{ $title }}
-    </title>
-    <link rel="shortcut icon" href="/images/" type="image/x-icon">
-    <link href="{{ asset('librarian/css/tabler.min.css?1684106062') }}" rel="stylesheet" />
-    <style>
-        @import url('https://rsms.me/inter/inter.css');
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>
+    {{ $title }}
+  </title>
+  <link rel="shortcut icon" href="/images/" type="image/x-icon">
+  <link href="{{ asset('librarian/css/tabler.min.css?1684106062') }}" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.min.css">
+  <style>
+    @import url('https://rsms.me/inter/inter.css');
 
-        :root {
-            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-        }
+    :root {
+      --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+    }
 
-        body {
-            font-feature-settings: "cv03", "cv04", "cv11";
-        }
+    body {
+      font-feature-settings: "cv03", "cv04", "cv11";
+    }
 
-        .circle-wrapper {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
+    .circle-wrapper {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
 
-        .circle-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+    .circle-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js">
 
-    </script>
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js">
+  </script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js">
 
-    </script>
+  </script>
 </head>
 
 <body>
-    <script src="{{ asset('librarian/js/demo-theme.min.js?1684106062') }}">
+  <script src="{{ asset('librarian/js/demo-theme.min.js?1684106062') }}">
 
-    </script>
-    <div class="page">
-        {{-- @!component('components/navigation/admin/navbar') --}}
-        <x-librarian.navigation.navbartest />
-        <div class="page-wrapper">
-            <x-librarian.navigation.page-header :pageTitle="$pageTitle" :name="$name" :type="$type"
-                :btn-name="$btnName" />
-            <div class="page-body">
-                <div class="container-xl">
-                    {{-- @flashMessage('info')
-                    <div class="alert {{ $message.type }}">
-                        {{ $message.message }}
-                    </div>
-                    @end --}}
-                    {{-- {{{ await $slots.main() }}} --}}
-                    {{ $slot }}
-                </div>
-            </div>
+  </script>
+  <div class="page">
+    {{-- @!component('components/navigation/admin/navbar') --}}
+    <x-librarian.navigation.navbartest />
+    <div class="page-wrapper">
+      <x-librarian.navigation.page-header :pageTitle="$pageTitle" :name="$name" :type="$type" :btn-name="$btnName" />
+      <div class="page-body">
+        <div class="container-xl">
+          {{ $slot }}
         </div>
+      </div>
     </div>
+  </div>
 
-    <script src="{{ asset('librarian/js/tabler.min.js?1684106062') }}" defer>
+  <script src="{{ asset('librarian/js/tabler.min.js?1684106062') }}" defer>
 
-    </script>
-    <script src="{{ asset('librarian/js/apexcharts.min.js?1684106062') }}" defer>
+  </script>
+  <script src="{{ asset('librarian/js/apexcharts.min.js?1684106062') }}" defer>
 
-    </script>
-    <script src="{{ asset('librarian/js/sweet-alert.js') }}" defer>
+  </script>
+  <script src="{{ asset('librarian/js/sweet-alert.js') }}" defer>
 
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
 
-    </script>
+  </script>
 
-    <script>
-        // @formatter:off
+  <!-- CDN JS -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+  <script src="https://cdn.datatables.net/2.1.2/js/dataTables.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    // @formatter:off
       document.addEventListener("DOMContentLoaded", function() {
         window.ApexCharts && new ApexCharts(document.getElementById("chart-revenue-bg"), {
           chart: {
@@ -142,9 +146,9 @@
         }).render();
       });
       // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
+  </script>
+  <script>
+    // @formatter:off
       document.addEventListener("DOMContentLoaded", function() {
         window.ApexCharts && new ApexCharts(document.getElementById("chart-new-clients"), {
           chart: {
@@ -202,9 +206,9 @@
         }).render();
       });
       // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
+  </script>
+  <script>
+    // @formatter:off
       document.addEventListener("DOMContentLoaded", function() {
         window.ApexCharts && new ApexCharts(document.getElementById("chart-active-users"), {
           chart: {
@@ -264,9 +268,9 @@
         }).render();
       });
       // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
+  </script>
+  <script>
+    // @formatter:off
       document.addEventListener("DOMContentLoaded", function() {
         window.ApexCharts && new ApexCharts(document.getElementById("chart-mentions"), {
           chart: {
@@ -345,9 +349,9 @@
         }).render();
       });
       // @formatter:on
-    </script>
-    <script>
-        // @formatter:on
+  </script>
+  <script>
+    // @formatter:on
       document.addEventListener("DOMContentLoaded", function() {
         const map = new jsVectorMap({
           selector: "#map-world",
@@ -556,9 +560,9 @@
         });
       });
       // @formatter:off
-    </script>
-    <script>
-        // @formatter:off
+  </script>
+  <script>
+    // @formatter:off
       document.addEventListener("DOMContentLoaded", function() {
         window.ApexCharts && new ApexCharts(document.getElementById("sparkline-activity"), {
           chart: {
@@ -595,9 +599,9 @@
         }).render();
       });
       // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
+  </script>
+  <script>
+    // @formatter:off
       document.addEventListener("DOMContentLoaded", function() {
         window.ApexCharts && new ApexCharts(document.getElementById("chart-development-activity"), {
           chart: {
@@ -661,9 +665,9 @@
         }).render();
       });
       // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
+  </script>
+  <script>
+    // @formatter:off
       document.addEventListener("DOMContentLoaded", function() {
         window.ApexCharts && new ApexCharts(document.getElementById("sparkline-bounce-rate-1"), {
           chart: {
@@ -691,9 +695,9 @@
         }).render();
       });
       // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
+  </script>
+  <script>
+    // @formatter:off
       document.addEventListener("DOMContentLoaded", function() {
         window.ApexCharts && new ApexCharts(document.getElementById("sparkline-bounce-rate-2"), {
           chart: {
@@ -721,9 +725,9 @@
         }).render();
       });
       // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
+  </script>
+  <script>
+    // @formatter:off
       document.addEventListener("DOMContentLoaded", function() {
         window.ApexCharts && new ApexCharts(document.getElementById("sparkline-bounce-rate-3"), {
           chart: {
@@ -751,9 +755,9 @@
         }).render();
       });
       // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
+  </script>
+  <script>
+    // @formatter:off
       document.addEventListener("DOMContentLoaded", function() {
         window.ApexCharts && new ApexCharts(document.getElementById("sparkline-bounce-rate-4"), {
           chart: {
@@ -781,9 +785,9 @@
         }).render();
       });
       // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
+  </script>
+  <script>
+    // @formatter:off
       document.addEventListener("DOMContentLoaded", function() {
         window.ApexCharts && new ApexCharts(document.getElementById("sparkline-bounce-rate-5"), {
           chart: {
@@ -811,9 +815,9 @@
         }).render();
       });
       // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
+  </script>
+  <script>
+    // @formatter:off
       document.addEventListener("DOMContentLoaded", function() {
         window.ApexCharts && new ApexCharts(document.getElementById("sparkline-bounce-rate-6"), {
           chart: {
@@ -841,7 +845,7 @@
         }).render();
       });
       // @formatter:on
-    </script>
+  </script>
 </body>
 
 </html>
