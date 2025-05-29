@@ -21,10 +21,17 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    return view('test', ['title' => 'Test only']);
+    return view('test_views/dashboard', [
+        'title' => 'Test only',
+        'name' => 'Test',
+        'pageTitle' => 'Dashboard',
+        'type' => '',
+        'btnName' => 'Tambah Admin'
+    ]);
 });
 
 require __DIR__ . '/site.php';
 require __DIR__ . '/auth.php';
 require __DIR__ . '/borrower.php';
 require __DIR__ . '/librarian.php';
+require __DIR__ . '/datatables.php';

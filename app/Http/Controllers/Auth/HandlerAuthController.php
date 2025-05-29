@@ -59,8 +59,8 @@ class HandlerAuthController extends Controller
 
     private function handleUserRoleRedirect($user, $request)
     {
-        if ($user->hasRole('Peminjam')) {
-            $this->log('Berhasil login ke aplikasi dan redirect ke dashboard peminjam');
+        if ($user->hasRole('Siswa')) {
+            $this->log('Berhasil login ke aplikasi dan redirect ke dashboard siswa');
             return redirect()->route('show.homepage');
         }
 
@@ -116,7 +116,7 @@ class HandlerAuthController extends Controller
         // logging verifikasi akun
         $this->log($logMessage);
 
-        if ($user->hasRole('Peminjam')) {
+        if ($user->hasRole('Siswa')) {
             return redirect()->intended(route('show.homepage'))->with([
                 'success' => $successMessage,
             ]);
