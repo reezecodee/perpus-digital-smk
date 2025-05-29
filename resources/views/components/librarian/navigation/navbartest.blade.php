@@ -162,9 +162,6 @@
                                         E-Book
                                     </a>
                                     <a class="dropdown-item" href="">
-                                        Denda
-                                    </a>
-                                    <a class="dropdown-item" href="">
                                         Rak Buku
                                     </a>
                                     <a class="dropdown-item" href="">
@@ -205,7 +202,7 @@
                                         Pengembalian Buku
                                     </a>
                                     <a class="dropdown-item" href="">
-                                        Terkena Denda
+                                        Denda Peminjaman
                                     </a>
                                     <a class="dropdown-item" href="">
                                         Kunjungan Perpus

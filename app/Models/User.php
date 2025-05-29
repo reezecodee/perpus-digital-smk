@@ -48,9 +48,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function notification()
+    public function sender()
     {
         return $this->hasMany(Notification::class, 'pengirim_id', 'id');
+    }
+
+    public function receiver()
+    {
+        return $this->hasMany(Notification::class, 'penerima', 'id');
     }
 
     public function liked_book()
@@ -81,10 +86,5 @@ class User extends Authenticatable implements MustVerifyEmail
     public function log()
     {
         return $this->hasMany(LogActivity::class, 'user_id', 'id');
-    }
-
-    public function article()
-    {
-        return $this->hasMany(Article::class, 'author_id', 'id');
     }
 }
