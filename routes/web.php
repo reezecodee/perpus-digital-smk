@@ -21,7 +21,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    return view('test_views/help-management/index', [
+    return view('test_views/profile/index', [
         'title' => 'Test only',
         'name' => 'Test',
         'pageTitle' => 'Dashboard',
