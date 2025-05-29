@@ -37,10 +37,6 @@
 </head>
 
 <body class="font-quicksand">
-    @if (session('show_popup') && isset($popup_images) && count($popup_images) > 0)
-        <x-borrower.alert.popup :popupimages="$popup_images" />
-    @endif
-
 
     <x-borrower.navigation.navbar />
     <div id="loader" class="loader-container hidden">

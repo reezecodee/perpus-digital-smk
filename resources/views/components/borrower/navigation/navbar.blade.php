@@ -93,10 +93,6 @@
                             class="bg-white border-2 border-white hover:bg-transparent hover:text-white duration-300 rounded-lg py-1.5 px-4 text-red-primary text-sm font-bold"><i
                                 class="fas fa-sign-in-alt"></i> Login</button>
                     </a>
-                    <a href="{{ route('show.register') }}" class="hidden lg:inline">
-                        <button
-                            class="border-2 border-white hover:bg-white hover:text-red-primary duration-300 text-white rounded-lg py-1.5 px-4 text-sm font-bold">Register</button>
-                    </a>
                 </div>
             @endguest
         </div>

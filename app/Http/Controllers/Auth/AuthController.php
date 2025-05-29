@@ -20,19 +20,6 @@ class AuthController extends Controller
 
 
     /**
-     * Function ini digunakan untuk menampilkan halaman register.
-     *
-     */
-
-    public function showRegisterPage()
-    {
-        $title = 'Register ke E-Perpustakaan';
-
-        return view('auth-pages.register', compact('title'));
-    }
-
-
-    /**
      * Function ini digunakan untuk menampilkan halaman verifikasi email.
      *
      */

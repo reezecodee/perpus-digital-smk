@@ -61,7 +61,7 @@ class HandlerAuthController extends Controller
     {
         if ($user->hasRole('Peminjam')) {
             $this->log('Berhasil login ke aplikasi dan redirect ke dashboard peminjam');
-            return redirect()->route('show.homepage')->with('show_popup', true);
+            return redirect()->route('show.homepage');
         }
 
         if (in_array($user->getRoleNames()->first(), ['Admin', 'Pustakawan'])) {
@@ -119,7 +119,6 @@ class HandlerAuthController extends Controller
         if ($user->hasRole('Peminjam')) {
             return redirect()->intended(route('show.homepage'))->with([
                 'success' => $successMessage,
-                'show_popup' => true
             ]);
         } elseif ($user->hasRole('Admin') || $user->hasRole('Pustakawan')) {
             return redirect()->route('show.dashboard')->with('success', $successMessage);

@@ -48,14 +48,6 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('popup') }}" class="nav-link {{ Request::is('popup*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-flag"></i>
-                        <p>
-                            Popup
-                        </p>
-                    </a>
-                </li>
                 <li class="nav-header">Master Data</li>
                 <li class="nav-item">
                     <a href="#" class="nav-link {{ Request::is('master-data/user*') ? 'active' : '' }}">
