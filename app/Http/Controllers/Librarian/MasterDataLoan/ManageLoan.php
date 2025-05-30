@@ -13,34 +13,41 @@ class ManageLoan extends Controller
 {
     public function show_data_peminjam()
     {
-        $ucfirst_filter = ucfirst(request('filter'));
-        $status = [
-            'Masa pinjam',
-            'Masa pengembalian',
-            'Menunggu persetujuan',
-            'Ditolak',
-            'Menunggu diambil',
-        ];
+        // $ucfirst_filter = ucfirst(request('filter'));
+        // $status = [
+        //     'Masa pinjam',
+        //     'Masa pengembalian',
+        //     'Menunggu persetujuan',
+        //     'Ditolak',
+        //     'Menunggu diambil',
+        // ];
 
-        if ($ucfirst_filter && !in_array($ucfirst_filter, $status)) {
-            abort(404); 
-        }
+        // if ($ucfirst_filter && !in_array($ucfirst_filter, $status)) {
+        //     abort(404); 
+        // }
 
-        $borrowersQuery = Loan::query();
+        // $borrowersQuery = Loan::query();
 
-        if ($ucfirst_filter) {
-            $borrowersQuery->where('status', $ucfirst_filter);
-        } else {
-            $borrowersQuery->whereIn('status', $status);
-        }
+        // if ($ucfirst_filter) {
+        //     $borrowersQuery->where('status', $ucfirst_filter);
+        // } else {
+        //     $borrowersQuery->whereIn('status', $status);
+        // }
 
-        $borrowers = $borrowersQuery->latest()->get();
+        // $borrowers = $borrowersQuery->latest()->get();
 
-        return view('librarian-pages.master-data.loan-management.loan.index', [
-            'title' => 'Data Peminjaman Buku',
-            'heading' => 'Peminjaman Buku',
-            'borrowers' => $borrowers,
-        ]);
+        // return view('librarian-pages.master-data.loan-management.loan.index', [
+        //     'title' => 'Data Peminjaman Buku',
+        //     'heading' => 'Peminjaman Buku',
+        //     'borrowers' => $borrowers,
+        // ]);
+        $title = 'Manajemen Peminjaman';
+        $name = 'Overview';
+        $pageTitle = 'Manajemen Peminjaman';
+        $type = 'btn-modal';
+        $btnName = 'Tambah Peminjaman';
+
+        return view('test_views.loan-management.loan.index', compact('title', 'name', 'pageTitle', 'type', 'btnName'));
     }
 
     public function show_add_peminjaman()

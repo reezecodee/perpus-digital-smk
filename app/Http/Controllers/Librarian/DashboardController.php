@@ -9,9 +9,15 @@ class DashboardController extends Controller
 {
     public function show_dashboard()
     {
-        return view('librarian-pages.dashboard', [
-            'title' => 'Dashboard Control E-Perpustakaan',
-            'heading' => 'Dashboard'
-        ]);
+        // return view('librarian-pages.dashboard', [
+        //     'title' => 'Dashboard Control E-Perpustakaan',
+        //     'heading' => 'Dashboard'
+        // ]);
+
+        $title = 'Dashboard';
+        $name = 'Overview';
+        $pageTitle = 'Dashboard';
+
+        return view('test_views.dashboard', compact('title', 'name', 'pageTitle'));
     }
 }

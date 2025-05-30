@@ -12,16 +12,24 @@ class ManageSchedule extends Controller
 {
     public function show_set_calendar()
     {
-        $currentYear = Carbon::now()->year;
-        $events = Calendar::whereYear('tanggal_mulai', $currentYear)
-            ->latest()
-            ->get();
+        // $currentYear = Carbon::now()->year;
+        // $events = Calendar::whereYear('tanggal_mulai', $currentYear)
+        //     ->latest()
+        //     ->get();
 
-        return view('librarian-pages.information.set-schedule', [
-            'title' => 'Atur Kalender',
-            'heading' => 'Atur Kalender',
-            'schedules' => $events
-        ]);
+        // return view('librarian-pages.information.set-schedule', [
+        //     'title' => 'Atur Kalender',
+        //     'heading' => 'Atur Kalender',
+        //     'schedules' => $events
+        // ]);
+
+        $title = 'Kalender Perpustakaan';
+        $name = 'Overview';
+        $pageTitle = 'Kalender Perpustakaan';
+        $type = 'btn-modal';
+        $btnName = 'Buat Jadwal';
+
+        return view('test_views.information-management.calendar.index', compact('title', 'name', 'pageTitle', 'type', 'btnName'));
     }
 
     // Logical Backend Here...

@@ -9,12 +9,18 @@ use Illuminate\Support\Facades\Hash;
 
 class ManageProfile extends Controller
 {
-    public function show_overview_profile() 
+    public function show_overview_profile()
     {
-        return view('librarian-pages.profile.overview', [
-            'title' => 'Overview Profile',
-            'heading' => 'Overview Profile'
-        ]);
+        // return view('librarian-pages.profile.overview', [
+        //     'title' => 'Overview Profile',
+        //     'heading' => 'Overview Profile'
+        // ]);
+
+        $title = 'Profile Saya';
+        $name = 'Overview';
+        $pageTitle = 'Profile Saya';
+
+        return view('test_views.profile.index', compact('title', 'name', 'pageTitle'));
     }
 
     public function update_password(UpdatePasswordRequest $request)

@@ -10,11 +10,19 @@ class ManageShelf extends Controller
 {
     public function show_data_rak_buku()
     {
-        return view('librarian-pages.master-data.book-management.book-shelf.index', [
-            'title' => 'Daftar Data Rak Buku',
-            'heading' => 'Daftar Rak Buku',
-            'shelves' => Shelf::all(),
-        ]);
+        // return view('librarian-pages.master-data.book-management.book-shelf.index', [
+        //     'title' => 'Daftar Data Rak Buku',
+        //     'heading' => 'Daftar Rak Buku',
+        //     'shelves' => Shelf::all(),
+        // ]);
+
+        $title = 'Manajemen Rak Buku';
+        $name = 'Overview';
+        $pageTitle = 'Manajemen Rak Buku';
+        $type = 'btn-modal';
+        $btnName = 'Tambah Rak Buku';
+
+        return view('test_views.book-management.shelf.index', compact('title', 'name', 'pageTitle', 'type', 'btnName'));
     }
 
     public function show_edit_shelf($id)

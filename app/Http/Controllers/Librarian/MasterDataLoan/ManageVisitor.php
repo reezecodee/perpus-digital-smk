@@ -12,11 +12,19 @@ class ManageVisitor extends Controller
 {
     public function show_data_visit()
     {
-        return view('librarian-pages.master-data.loan-management.visit.index', [
-            'title' => 'Data Kunjungan',
-            'heading' => 'Kunjungan',
-            'visits' => Visit::orderBy('created_at', 'desc')->limit(10)->get(),
-        ]);
+        // return view('librarian-pages.master-data.loan-management.visit.index', [
+        //     'title' => 'Data Kunjungan',
+        //     'heading' => 'Kunjungan',
+        //     'visits' => Visit::orderBy('created_at', 'desc')->limit(10)->get(),
+        // ]);
+
+        $title = 'Manajemen Kunjungan';
+        $name = 'Overview';
+        $pageTitle = 'Manajemen Kunjungan';
+        $type = 'btn-modal';
+        $btnName = 'Tambah Kunjungan';
+
+        return view('test_views.loan-management.visit.index', compact('title', 'name', 'pageTitle', 'type', 'btnName'));
     }
 
     public function show_add_visit()

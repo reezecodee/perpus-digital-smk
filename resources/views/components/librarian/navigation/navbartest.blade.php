@@ -12,7 +12,7 @@
         <div class="navbar-nav flex-row order-md-last">
             <div class="nav-item d-none d-md-flex me-3">
                 <div class="btn-list">
-                    <a href="https://github.com/tabler/tabler" class="btn btn-5" target="_blank" rel="noreferrer">
+                    <a href="{{ route('setting') }}" class="btn btn-5" rel="noreferrer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="icon icon-tabler icons-tabler-outline icon-tabler-settings">
@@ -66,7 +66,7 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="" class="dropdown-item">Profile</a>
+                    <a href="{{ route('profile.overview') }}" class="dropdown-item">Profile</a>
                     <form action="" method="POST" id="logout-form">
                         <button type="button" onclick="logout()" class="dropdown-item">Logout</button>
                     </form>
@@ -81,7 +81,7 @@
             <div class="container-xl">
                 <ul class="navbar-nav">
                     <li class="nav-item {{ Request::is('dashboard*') ? 'active' : '' }}">
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="{{ route('show.dashboard') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -121,13 +121,13 @@
                         <div class="dropdown-menu">
                             <div class="dropdown-menu-columns">
                                 <div class="dropdown-menu-column">
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('data-user', 'Admin') }}">
                                         Admin
                                     </a>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('data-user', 'Pustakawan') }}">
                                         Pustakawan
                                     </a>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('data-user', 'Siswa') }}">
                                         Siswa
                                     </a>
                                 </div>
@@ -155,16 +155,16 @@
                         <div class="dropdown-menu">
                             <div class="dropdown-menu-columns">
                                 <div class="dropdown-menu-column">
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('data-buku', 'fisik') }}">
                                         Buku
                                     </a>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('data-buku', 'elektronik') }}">
                                         E-Book
                                     </a>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('data-rak') }}">
                                         Rak Buku
                                     </a>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('data-kategori') }}">
                                         Kategori
                                     </a>
                                 </div>
@@ -195,17 +195,17 @@
                         <div class="dropdown-menu">
                             <div class="dropdown-menu-columns">
                                 <div class="dropdown-menu-column">
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('data_perpinjaman') }}">
                                         Peminjaman Buku
                                     </a>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('data_pengembalian') }}">
                                         Pengembalian Buku
                                     </a>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('data_terkena_denda') }}">
                                         Denda Peminjaman
                                     </a>
-                                    <a class="dropdown-item" href="">
-                                        Kunjungan Perpus
+                                    <a class="dropdown-item" href="{{ route('data_kunjungan') }}">
+                                        Kunjungan Perpustakaan
                                     </a>
                                 </div>
                             </div>
@@ -236,21 +236,21 @@
                         <div class="dropdown-menu">
                             <div class="dropdown-menu-columns">
                                 <div class="dropdown-menu-column">
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('buat_notifikasi') }}">
                                         Notifikasi
                                     </a>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('kirim_email') }}">
                                         Kirim Email
                                     </a>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('atur_kalender') }}">
                                         Kalender Perpustakaan
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item {{ Request::is('bantuan*') ? 'active' : '' }}">
-                        <a class="nav-link" href="">
+                    <li class="nav-item {{ Request::is('manajemen-bantuan*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('help') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="currentColor"

@@ -11,11 +11,19 @@ class ManageCategory extends Controller
 {
     public function show_data_kategori()
     {
-        return view('librarian-pages.master-data.book-management.category.index', [
-            'title' => 'Daftar Data Kategori',
-            'heading' => 'Daftar Kategori',
-            'categories' => Category::withCount('book')->get(),
-        ]);
+        // return view('librarian-pages.master-data.book-management.category.index', [
+        //     'title' => 'Daftar Data Kategori',
+        //     'heading' => 'Daftar Kategori',
+        //     'categories' => Category::withCount('book')->get(),
+        // ]);
+
+        $title = 'Manajemen Kategori';
+        $name = 'Overview';
+        $pageTitle = 'Manajemen Kategori';
+        $type = 'btn-modal';
+        $btnName = 'Tambah Kategori';
+
+        return view('test_views.book-management.category.index', compact('title', 'name', 'pageTitle', 'type', 'btnName'));
     }
 
     public function show_edit_category($id)

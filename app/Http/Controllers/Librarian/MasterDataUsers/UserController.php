@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function show_data_user($role)
     {
-        $validRoles = ['Admin', 'Pustakawan', 'Peminjam'];
+        $validRoles = ['Admin', 'Pustakawan', 'Siswa'];
         $uc_first = ucfirst($role);
 
         if (in_array($uc_first, $validRoles)) {
@@ -21,12 +21,20 @@ class UserController extends Controller
             abort(404);
         }
 
-        return view('librarian-pages.master-data.users-management.index', [
-            'title' => "Daftar Data $uc_first",
-            'heading' => "Daftar $uc_first",
-            'users' => $users,
-            'role' => strtolower(basename(url()->current()))
-        ]);
+        // return view('librarian-pages.master-data.users-management.index', [
+        //     'title' => "Daftar Data $uc_first",
+        //     'heading' => "Daftar $uc_first",
+        //     'users' => $users,
+        //     'role' => strtolower(basename(url()->current()))
+        // ]);
+
+        $title = "Manajemen {$role}";
+        $name = 'Overview';
+        $pageTitle = "Manajemen {$role}";
+        $type = 'btn-modal';
+        $btnName = "Tambah {$role}";
+
+        return view('test_views.user-management.index', compact('title', 'name', 'pageTitle', 'type', 'btnName'));
     }
 
     public function show_add_user($role_param)

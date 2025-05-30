@@ -16,14 +16,16 @@ class TestLayout extends Component
     public $name;
     public $type;
     public $btnName;
+    public $url;
 
-    public function __construct($title = '', $pageTitle = '', $name = 'Overview', $type = 'btn-modal', $btnName = 'Tambah')
+    public function __construct($title = '', $pageTitle = '', $name = 'Overview', $type = '', $btnName = '', $url = '')
     {
         $this->title = $title;
         $this->pageTitle = $pageTitle;
         $this->name = $name;
         $this->type = $type;
         $this->btnName = $btnName;
+        $this->url = $url;
     }
 
     /**

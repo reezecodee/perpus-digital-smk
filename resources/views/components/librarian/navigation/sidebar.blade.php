@@ -153,7 +153,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('data_pengembali') }}"
+                            <a href="{{ route('data_pengembalian') }}"
                                 class="nav-link {{ Request::is('master-data/pengembalian*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pengembalian</p>

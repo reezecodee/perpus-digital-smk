@@ -12,11 +12,17 @@ class ManageSendEmail extends Controller
 {
     public function show_send_email()
     {
-        return view('librarian-pages.information.send-email', [
-            'title' => 'Kirim Email',
-            'heading' => 'Kirim Email',
-            'receivers' => User::role('Peminjam')->where('status', 'Aktif')->latest()->get(),
-        ]);
+        // return view('librarian-pages.information.send-email', [
+        //     'title' => 'Kirim Email',
+        //     'heading' => 'Kirim Email',
+        //     'receivers' => User::role('Peminjam')->where('status', 'Aktif')->latest()->get(),
+        // ]);
+
+        $title = 'Kirim Email';
+        $name = 'Overview';
+        $pageTitle = 'Kirim Email';
+
+        return view('test_views.information-management.email.index', compact('title', 'name', 'pageTitle'));
     }
 
     public function send_email(Request $request)

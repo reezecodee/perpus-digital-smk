@@ -22,6 +22,7 @@ use App\Http\Controllers\Librarian\MasterDataLoan\ManageVisitor;
 use App\Http\Controllers\Librarian\MasterDataUsers\LogicUserController;
 use App\Http\Controllers\Librarian\MasterDataUsers\UserController;
 use App\Http\Controllers\Librarian\Profile\ManageProfile;
+use App\Http\Controllers\Librarian\Setting\SettingController;
 use App\Http\Controllers\PDF\PDFController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,36 +61,34 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
         Route::post('/ganti-pw-pustakawan', 'update_password')->name('update_pw_pustakawan');
     });
 
-    Route::prefix('master-data')->group(function () {
 
-        // Master Data User Route
+    // Master Data User Route
 
-        Route::controller(UserController::class)->group(function () {
-            Route::get('/user/{role}', 'show_data_user')->name('data-user');
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/data-pengguna/{role}', 'show_data_user')->name('data-user');
 
-            Route::prefix('user')->group(function () {
-                Route::get('/{role}/tambah/', 'show_add_user')->name('add_user');
-                Route::get('/{role}/edit/{id}', 'show_edit_user')->name('edit_user');
-                Route::get('/{role}/detail/{id}', 'show_detail_user')->name('detail_user');
+        Route::prefix('data-pengguna')->group(function () {
+            Route::get('/{role}/tambah/', 'show_add_user')->name('add_user');
+            Route::get('/{role}/edit/{id}', 'show_edit_user')->name('edit_user');
+            Route::get('/{role}/detail/{id}', 'show_detail_user')->name('detail_user');
 
-                Route::controller(LogicUserController::class)->group(function () {
-                    Route::post('/tambah/{role}', 'store_user')->name('store_user');
-                    Route::put('/perbarui/{id}', 'update_user')->name('update_user');
-                    Route::delete('/hapus-user/{id}', 'delete_user')->name('delete_user');
-                    Route::post('/import-user', 'import_user')->name('direct_import_user');
-                });
+            Route::controller(LogicUserController::class)->group(function () {
+                Route::post('/tambah/{role}', 'store_user')->name('store_user');
+                Route::put('/perbarui/{id}', 'update_user')->name('update_user');
+                Route::delete('/hapus-user/{id}', 'delete_user')->name('delete_user');
+                Route::post('/import-user', 'import_user')->name('direct_import_user');
             });
         });
+    });
 
-        // Master Data Buku Route
+    // Master Data Buku Route
 
+    Route::prefix('data-buku')->group(function () {
         Route::controller(ManageBook::class)->group(function () {
-            Route::get('/buku/{format}', 'show_data_buku')->name('data-buku');
-            Route::prefix('buku')->group(function () {
-                Route::get('/{format}/tambah/', 'show_add_book')->name('add_book');
-                Route::get('/{format}/edit/{id}', 'show_edit_book')->name('edit_book');
-                Route::get('/{format}/detail/{id}', 'show_detail_book')->name('detail_book');
-            });
+            Route::get('/format/{format}', 'show_data_buku')->name('data-buku');
+            Route::get('/format/{format}/tambah/', 'show_add_book')->name('add_book');
+            Route::get('/format/{format}/edit/{id}', 'show_edit_book')->name('edit_book');
+            Route::get('/format/{format}/detail/{id}', 'show_detail_book')->name('detail_book');
 
             Route::post('/tambah/{format}', 'store_book')->name('store_book');
             Route::put('/{format}/edit/{id}', 'update_book')->name('update_book');
@@ -106,28 +105,30 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
         });
 
         Route::controller(ManageShelf::class)->group(function () {
-            Route::get('/rak-buku', 'show_data_rak_buku')->name('data-rak');
+            Route::get('/rak', 'show_data_rak_buku')->name('data-rak');
             Route::get('/edit-rak/{id}', 'show_edit_shelf')->name('edit_shelf');
             Route::post('/tambah-rak', 'add_shelf')->name('add_shelf');
             Route::put('/edit-rak/{id}', 'update_shelf')->name('update_shelf');
             Route::delete('/hapus-rak/{id}', 'delete_shelf')->name('delete_shelf');
         });
+    });
 
-        Route::controller(ManagePlacement::class)->group(function () {
-            Route::get('/penempatan-buku', 'show_placement')->name('data-penempatan');
-            Route::get('/penempatan-buku/tambah', 'show_add_placement')->name('add_placement');
-            Route::get('/penempatan-buku/edit/{id}', 'show_edit_placement')->name('edit_placement');
-            Route::post('/penempatan-buku/tambah', 'store_placement')->name('store_placement');
-            Route::put('/penempatan-buku/update/{id}', 'update_placement')->name('update_placement');
-            Route::delete('/hapus-penempatan/{id}', 'delete_placement')->name('delete_placement');
-        });
+    Route::controller(ManagePlacement::class)->group(function () {
+        Route::get('/penempatan-buku', 'show_placement')->name('data-penempatan');
+        Route::get('/penempatan-buku/tambah', 'show_add_placement')->name('add_placement');
+        Route::get('/penempatan-buku/edit/{id}', 'show_edit_placement')->name('edit_placement');
+        Route::post('/penempatan-buku/tambah', 'store_placement')->name('store_placement');
+        Route::put('/penempatan-buku/update/{id}', 'update_placement')->name('update_placement');
+        Route::delete('/hapus-penempatan/{id}', 'delete_placement')->name('delete_placement');
+    });
 
-        Route::controller(ManageFineBook::class)->group(function () {
-            Route::get('/denda', 'show_data_denda')->name('data-denda');
-        });
+    Route::controller(ManageFineBook::class)->group(function () {
+        Route::get('/denda', 'show_data_denda')->name('data-denda');
+    });
 
-        // Master Data Peminjaman Route
+    // Master Data Peminjaman Route
 
+    Route::prefix('data-peminjaman')->group(function () {
         Route::controller(ManageLoan::class)->group(function () {
             Route::prefix('perpinjaman')->group(function () {
                 Route::get('/daftar-peminjam', 'show_data_peminjam')->name('data_perpinjaman');
@@ -142,7 +143,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
         });
 
         Route::controller(ManageLoanReturned::class)->group(function () {
-            Route::get('/pengembalian', 'show_data_pengembali')->name('data_pengembali');
+            Route::get('/pengembalian', 'show_data_pengembali')->name('data_pengembalian');
         });
 
         Route::controller(ManageLoanFined::class)->group(function () {
@@ -160,19 +161,21 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
             Route::put('/edit-kunjungan/{id}', 'update_visit')->name('update_visit');
             Route::delete('/delete-kunjungan/{id}', 'delete_visit')->name('delete_visit');
         });
-
-        // Master Data Perpustakaan Route
-
-        Route::controller(ManageAppWeb::class)->group(function () {
-            Route::get('/aplikasi', 'show_data_aplikasi')->name('data-aplikasi');
-            Route::post('/aplikasi', 'update_data_app')->name('update_app');
-        });
-
-        Route::controller(ManageLibrary::class)->group(function () {
-            Route::get('/perpustakaan', 'show_data_perpus')->name('data-perpustakaan');
-            Route::post('/perpustakaan', 'update_data_perpus')->name('update_perpus');
-        });
     });
+
+    Route::get('/pengaturan-aplikasi', [SettingController::class, 'index'])->name('setting');
+
+    // Master Data Perpustakaan Route
+
+    // Route::controller(ManageAppWeb::class)->group(function () {
+    //     Route::get('/aplikasi', 'show_data_aplikasi')->name('data-aplikasi');
+    //     Route::post('/aplikasi', 'update_data_app')->name('update_app');
+    // });
+
+    // Route::controller(ManageLibrary::class)->group(function () {
+    //     Route::get('/perpustakaan', 'show_data_perpus')->name('data-perpustakaan');
+    //     Route::post('/perpustakaan', 'update_data_perpus')->name('update_perpus');
+    // });
 
     Route::prefix('informasi')->group(function () {
         Route::controller(ManageNotification::class)->group(function () {

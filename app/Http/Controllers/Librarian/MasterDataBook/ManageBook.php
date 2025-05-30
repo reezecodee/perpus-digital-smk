@@ -23,12 +23,20 @@ class ManageBook extends Controller
 
         $uc_first_format = ucfirst($format);
 
-        return view('librarian-pages.master-data.book-management.book.index', [
-            'title' => 'Daftar Data Buku ' . $uc_first_format,
-            'heading' => 'Daftar Buku ' . $uc_first_format,
-            'books' => Book::where('format', $uc_first_format)->latest()->get(),
-            'format' => $format
-        ]);
+        // return view('librarian-pages.master-data.book-management.book.index', [
+        //     'title' => 'Daftar Data Buku ' . $uc_first_format,
+        //     'heading' => 'Daftar Buku ' . $uc_first_format,
+        //     'books' => Book::where('format', $uc_first_format)->latest()->get(),
+        //     'format' => $format
+        // ]);
+
+        $title = "Manajemen {$uc_first_format}";
+        $name = 'Overview';
+        $pageTitle = "Manajemen {$uc_first_format}";
+        $type = 'btn-modal';
+        $btnName = "Tambah Buku {$uc_first_format}";
+
+        return view('test_views.book-management.book.index', compact('title', 'name', 'pageTitle', 'type', 'btnName'));
     }
 
     public function show_add_book($format)
