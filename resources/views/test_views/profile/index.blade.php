@@ -5,12 +5,14 @@
             <form action="" enctype="multipart/form-data" method="post">
                 @csrf
                 @method('PUT')
+                <x-librarian.input.upload-profile :photo="auth()->user()->photo ?? 'unknown.jpg'" />
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Username</label>
-                            <input type="text" class="form-control @error('username') is-invalid @enderror"
-                                name="username" placeholder="Masukkan username">
+                            <input type="text" value="{{ old('username', auth()->user()->username) }}"
+                                class="form-control @error('username') is-invalid @enderror" name="username"
+                                placeholder="Masukkan username">
                             @error('username')
                             <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -19,7 +21,8 @@
                     <div class="col-md-6">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Nama Lengkap</label>
-                            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
+                            <input type="text" value="{{ old('nama', auth()->user()->nama) }}"
+                                class="form-control @error('nama') is-invalid @enderror" name="nama"
                                 placeholder="Masukkan nama">
                             @error('nama')
                             <span class="invalid-feedback">{{ $message }}</span>
@@ -29,14 +32,16 @@
                     <div class="col-md-6">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Jabatan</label>
-                            <input type="text" class="form-control" readonly disabled>
+                            <input type="text" value="{{ auth()->user()->getRoleNames()->first() }}"
+                                class="form-control" readonly disabled>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Nomor Induk Pegawai</label>
-                            <input type="text" class="form-control @error('nip_nis') is-invalid @enderror"
-                                name="nip_nis" placeholder="Masukkan NIP">
+                            <input type="text" value="{{ old('nip_nis', auth()->user()->nip_nis) }}"
+                                class="form-control @error('nip_nis') is-invalid @enderror" name="nip_nis"
+                                placeholder="Masukkan NIP">
                             @error('nip_nis')
                             <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -45,8 +50,9 @@
                     <div class="col-md-6">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Telepon</label>
-                            <input type="text" class="form-control @error('telepon') is-invalid @enderror"
-                                name="telepon" placeholder="Masukkan nomor telepon">
+                            <input type="text" value="{{ old('telepon', auth()->user()->telepon) }}"
+                                class="form-control @error('telepon') is-invalid @enderror" name="telepon"
+                                placeholder="Masukkan nomor telepon">
                             @error('telepon')
                             <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -55,7 +61,8 @@
                     <div class="col-md-6">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Email</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
+                            <input type="email" value="{{ old('email', auth()->user()->email) }}"
+                                class="form-control @error('email') is-invalid @enderror" name="email"
                                 placeholder="Masukkan email">
                             @error('email')
                             <span class="invalid-feedback">{{ $message }}</span>
@@ -67,9 +74,11 @@
                             <label for="" class="form-label">Jenis Kelamin</label>
                             <select name="jk" class="form-select @error('jk') is-invalid @enderror">
                                 <option value="">-- Pilih Jenis Kelamin --</option>
-                                <option value="Laki-laki" {{ old('jk')=='Laki-laki' ? 'selected' : '' }}>
+                                <option value="Laki-laki" {{ old('jk', auth()->user()->jk) == 'Laki-laki' ? 'selected' :
+                                    '' }}>
                                     Laki-laki</option>
-                                <option value="Perempuan" {{ old('jk')=='Perempuan' ? 'selected' : '' }}>
+                                <option value="Perempuan" {{ old('jk', auth()->user()->jk) == 'Perempuan' ? 'selected' :
+                                    '' }}>
                                     Perempuan</option>
                             </select>
                             @error('jk')
@@ -81,7 +90,8 @@
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Alamat</label>
                             <textarea cols="5" rows="5" class="form-control @error('alamat') is-invalid @enderror"
-                                name="alamat" placeholder="Masukkan alamat perpustakaan"></textarea>
+                                name="alamat"
+                                placeholder="Masukkan alamat perpustakaan">{{ old('alamat', auth()->user()->alamat) }}</textarea>
                             @error('alamat')
                             <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -92,6 +102,7 @@
                 <div class="d-flex justify-content-end">
                     <button class="btn btn-primary">Simpan Perubahan</button>
                 </div>
+                <x-librarian.modal.crop-profile />
             </form>
         </div>
     </div>

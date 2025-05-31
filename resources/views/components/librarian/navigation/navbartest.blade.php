@@ -43,10 +43,10 @@
                         style="background-image: url(/librarian/images/profile/profile.webp)"></span>
                     <div class="d-none d-xl-block ps-2">
                         <div>
-                            Azfa Al Harits
+                            {{ auth()->user()->nama }}
                         </div>
                         <div class="mt-1 small text-muted">
-                            Admin
+                            {{ auth()->user()->getRoleNames()->first() }}
                         </div>
                     </div>
                 </a>
