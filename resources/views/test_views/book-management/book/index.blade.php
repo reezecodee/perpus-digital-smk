@@ -107,4 +107,172 @@
             });
         });
     </script>
+
+    <div class="modal modal-blur fade" id="modal-report" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah Buku {{ $format }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center mb-3">
+                        <img id="preview" src="/img/unknown_cover.png"
+                            style="width: 100%; max-width: 200px; height: auto; aspect-ratio: 650 / 974; object-fit: contain; border: 1px solid #ccc;" />
+                    </div>
+                    <div class="d-flex justify-content-center mb-3">
+                        <input type="file" name="cover_buku" id="fileInput" accept=".jpg, .jpeg, .png"
+                            style="display: none">
+                        <button type="button" class="btn btn-primary"
+                            onclick="document.getElementById('fileInput').click()">Upload
+                            Cover</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">Judul Buku</label>
+                                <input type="text" class="form-control @error('judul') is-invalid @enderror"
+                                    name="judul" placeholder="Masukkan judul">
+                                @error('judul')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">Author Buku</label>
+                                <input type="text" class="form-control @error('author') is-invalid @enderror"
+                                    name="author" placeholder="Masukkan author">
+                                @error('author')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">Penerbit Buku</label>
+                                <input type="text" class="form-control @error('penerbit') is-invalid @enderror"
+                                    name="penerbit" placeholder="Masukkan penerbit">
+                                @error('penerbit')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">ISBN</label>
+                                <input type="text" class="form-control @error('isbn') is-invalid @enderror" name="isbn"
+                                    placeholder="Masukkan ISBN">
+                                @error('isbn')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">Jumlah Halaman</label>
+                                <input type="number" class="form-control @error('jml_halaman') is-invalid @enderror"
+                                    name="jml_halaman" placeholder="Masukkan jumlah halaman">
+                                @error('jml_halaman')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">Kategori</label>
+                                <select name="kategori_id"
+                                    class="form-select @error('kategori_id') is-invalid @enderror">
+                                    <option value="">-- Pilih Kategori --</option>
+                                </select>
+                                @error('kategori_id')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">Terbit</label>
+                                <input type="text" class="form-control @error('tgl_terbit') is-invalid @enderror"
+                                    name="tgl_terbit" placeholder="Masukkan tahun/tanggal terbit">
+                                @error('tgl_terbit')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">Bahasa</label>
+                                <input type="text" class="form-control @error('bahasa') is-invalid @enderror"
+                                    name="bahasa" placeholder="Masukkan bahasa buku">
+                                @error('bahasa')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">Status Buku</label>
+                                <select name="status" class="form-select @error('status') is-invalid @enderror">
+                                    <option value="">-- Pilih Status Buku --</option>
+                                    <option value="Tersedia" {{ old('status')=='Tersedia' ? 'selected' : '' }}>
+                                        Tersedia</option>
+                                    <option value="Tidak tersedia" {{ old('status')=='Tidak tersedia' ? 'selected' : ''
+                                        }}>
+                                        Tidak tersedia</option>
+                                </select>
+                                @error('status')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">Sinopsis/Deskripsi buku</label>
+                                <textarea cols="5" rows="5" class="form-control @error('sinopsis') is-invalid @enderror"
+                                    name="sinopsis" placeholder="Masukkan sinopsis buku"></textarea>
+                                @error('sinopsis')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <x-librarian.input.cnfrm-checkbox />
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                        Batalkan
+                    </a>
+                    <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M12 5l0 14"></path>
+                            <path d="M5 12l14 0"></path>
+                        </svg>
+                        Tambah Buku {{ $format }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const preview = document.getElementById('preview');
+
+        fileInput.addEventListener('change', function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+            preview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '/img/unknown_cover.png';
+        }
+        });
+    </script>
 </x-test-layout>

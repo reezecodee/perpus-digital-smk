@@ -7,6 +7,17 @@
                 <div class="card">
                     <div class="card-body">
                         <h2>Data Buku</h2>
+                        <div class="d-flex justify-content-center mb-3">
+                            <img id="preview" src="/img/unknown_cover.png"
+                                style="width: 100%; max-width: 200px; height: auto; aspect-ratio: 650 / 974; object-fit: contain; border: 1px solid #ccc;" />
+                        </div>
+                        <div class="d-flex justify-content-center mb-3">
+                            <input type="file" name="cover_buku" id="fileInput" accept=".jpg, .jpeg, .png"
+                                style="display: none">
+                            <button type="button" class="btn btn-primary"
+                                onclick="document.getElementById('fileInput').click()">Upload
+                                Cover</button>
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-2">
@@ -180,4 +191,21 @@
             </form>
         </div>
     </div>
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const preview = document.getElementById('preview');
+
+        fileInput.addEventListener('change', function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+            preview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '/img/unknown_cover.png';
+        }
+        });
+    </script>
 </x-test-layout>

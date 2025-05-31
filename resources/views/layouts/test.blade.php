@@ -37,6 +37,7 @@
       object-fit: cover;
     }
   </style>
+  <link rel="stylesheet" href="/css/cropper.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js">
 
@@ -51,7 +52,6 @@
 
   </script>
   <div class="page">
-    {{-- @!component('components/navigation/admin/navbar') --}}
     <x-librarian.navigation.navbartest />
     <div class="page-wrapper">
       <x-librarian.navigation.page-header :pageTitle="$pageTitle" :name="$name" :type="$type" :btn-name="$btnName" />
@@ -75,6 +75,8 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
 
   </script>
+  <script src="/assets/plugins/jquery/jquery.min.js"></script>
+
 
   <!-- CDN JS -->
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
@@ -83,6 +85,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script src="/js/pure_cropper.js"></script>
+
 
   <script>
     // @formatter:off

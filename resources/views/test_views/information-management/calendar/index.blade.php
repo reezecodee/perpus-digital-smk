@@ -1,4 +1,4 @@
-<x-test-layout :title="$title" :pageTitle="$pageTitle" :name="$name">
+<x-test-layout :title="$title" :page-title="$pageTitle" :name="$name" :type="$type" :btn-name="$btnName">
     <div class="card">
         <div class="card-body">
             <div id="calendar"></div>

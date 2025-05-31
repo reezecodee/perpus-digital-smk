@@ -105,4 +105,138 @@
             });
         });
     </script>
+
+    <div class="modal modal-blur fade" id="modal-report" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah {{ $role }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <x-librarian.input.upload-profile :photo="$data->photo ?? 'unknown.jpg'" />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">Username</label>
+                                <input type="text" class="form-control @error('username') is-invalid @enderror"
+                                    name="username" placeholder="Masukkan username">
+                                @error('username')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">Nama Lengkap</label>
+                                <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
+                                    placeholder="Masukkan nama lengkap">
+                                @error('nama')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">{{ $role == 'Siswa' ? 'Nomor Induk Siswa (NIS)' :
+                                    'Nomor Induk Pegawai (NIP)' }}</label>
+                                <input type="text" class="form-control @error('nip_nis') is-invalid @enderror"
+                                    name="nip_nis" placeholder="Masukkan {{ $role == 'Siswa' ? 'NIS' : 'NIP' }}">
+                                @error('nip_nis')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">Telepon</label>
+                                <input type="text" class="form-control @error('telepon') is-invalid @enderror"
+                                    name="telepon" placeholder="Masukkan telepon">
+                                @error('telepon')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">Email</label>
+                                <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                    name="email" placeholder="Masukkan email">
+                                @error('email')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">NISN</label>
+                                <input type="text" class="form-control @error('nisn') is-invalid @enderror" name="nisn"
+                                    placeholder="Masukkan NISN">
+                                @error('nisn')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">Jenis Kelamin</label>
+                                <select name="jk" class="form-select @error('jk') is-invalid @enderror">
+                                    <option value="">-- Pilih Jenis Kelamin --</option>
+                                    <option value="Laki-laki" {{ old('jk')=='Laki-laki' ? 'selected' : '' }}>
+                                        Laki-laki</option>
+                                    <option value="Perempuan" {{ old('jk')=='Perempuan' ? 'selected' : '' }}>
+                                        Perempuan</option>
+                                </select>
+                                @error('jk')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">Status Akun</label>
+                                <select name="status" class="form-select @error('jk') is-invalid @enderror">
+                                    <option value="">-- Pilih Status --</option>
+                                    <option value="Aktif" {{ old('status')=='Aktif' ? 'selected' : '' }}>
+                                        Aktif</option>
+                                    <option value="Nonaktif" {{ old('jk')=='Nonaktif' ? 'selected' : '' }}>
+                                        Nonaktif</option>
+                                </select>
+                                @error('jk')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group mb-2">
+                                <label for="" class="form-label">Alamat</label>
+                                <textarea cols="5" rows="5" class="form-control @error('alamat') is-invalid @enderror"
+                                    name="alamat" placeholder="Masukkan alamat perpustakaan"></textarea>
+                                @error('alamat')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <x-librarian.input.cnfrm-checkbox />
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                        Batalkan
+                    </a>
+                    <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M12 5l0 14"></path>
+                            <path d="M5 12l14 0"></path>
+                        </svg>
+                        Tambah {{ $role }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <x-librarian.modal.crop-profile />
 </x-test-layout>

@@ -11,9 +11,9 @@ class UserController extends Controller
     public function show_data_user($role)
     {
         $validRoles = ['Admin', 'Pustakawan', 'Siswa'];
-        $uc_first = ucfirst($role);
+        $role = ucfirst($role);
 
-        if (in_array($uc_first, $validRoles)) {
+        if (in_array($role, $validRoles)) {
             $users = User::role($role)
                 ->where('id', '!=', auth()->id())->latest()
                 ->get();
@@ -22,8 +22,8 @@ class UserController extends Controller
         }
 
         // return view('librarian-pages.master-data.users-management.index', [
-        //     'title' => "Daftar Data $uc_first",
-        //     'heading' => "Daftar $uc_first",
+        //     'title' => "Daftar Data $role",
+        //     'heading' => "Daftar $role",
         //     'users' => $users,
         //     'role' => strtolower(basename(url()->current()))
         // ]);
@@ -34,7 +34,7 @@ class UserController extends Controller
         $type = 'btn-modal';
         $btnName = "Tambah {$role}";
 
-        return view('test_views.user-management.index', compact('title', 'name', 'pageTitle', 'type', 'btnName'));
+        return view('test_views.user-management.index', compact('title', 'name', 'pageTitle', 'type', 'btnName', 'role'));
     }
 
     public function show_add_user($role_param)

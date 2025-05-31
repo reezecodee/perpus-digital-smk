@@ -4,6 +4,8 @@
             <form action="" enctype="multipart/form-data" method="post">
                 @csrf
                 @method('PUT')
+                <x-librarian.input.upload-profile :photo="$data->photo ?? 'unknown.jpg'" />
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group mb-2">
@@ -113,4 +115,5 @@
             </form>
         </div>
     </div>
+    <x-librarian.modal.crop-profile />
 </x-test-layout>
