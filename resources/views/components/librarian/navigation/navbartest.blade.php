@@ -189,7 +189,7 @@
                                     <a class="dropdown-item" href="{{ route('data_terkena_denda') }}">
                                         Denda Peminjaman
                                     </a>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('data_pembayaran_denda') }}">
                                         Pembayaran Denda
                                     </a>
                                     <a class="dropdown-item" href="{{ route('data_kunjungan') }}">

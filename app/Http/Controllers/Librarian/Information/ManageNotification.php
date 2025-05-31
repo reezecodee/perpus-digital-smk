@@ -17,7 +17,7 @@ class ManageNotification extends Controller
         $pageTitle = 'Manajemen Notifikasi';
         $type = 'btn-modal';
         $btnName = 'Buat Notifikasi';
-        $students = User::role('Siswa')->get();
+        $students = User::role('Siswa')->where('status', 'Aktif')->latest()->get();
 
         return view('test_views.information-management.notification.index', compact('title', 'name', 'pageTitle', 'type', 'btnName', 'students'));
     }

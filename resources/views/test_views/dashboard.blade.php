@@ -117,7 +117,7 @@
                                         10
                                     </div>
                                     <div class="text-muted">
-                                        Siswa Anggota
+                                        Siswa Anggota Aktif
                                     </div>
                                 </div>
                             </div>

@@ -16,7 +16,8 @@ class ReturnController extends Controller
     {
         if ($request->ajax()) {
             $loans = Loan::query()
-                ->select(['peminjam_id', 'buku_id', 'kode_peminjaman', 'status'])
+                ->select(['id', 'peminjam_id', 'buku_id', 'kode_peminjaman', 'status'])
+                ->whereIn('status', ['Sudah dikembalikan', 'Sudah diulas'])
                 ->latest();
 
             return DataTables::of($loans)

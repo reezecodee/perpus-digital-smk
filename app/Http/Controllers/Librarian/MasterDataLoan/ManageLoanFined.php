@@ -41,4 +41,15 @@ class ManageLoanFined extends Controller
 
         return view('test_views.loan-management.fine.index', compact('title', 'name', 'pageTitle', 'type', 'btnName'));
     }
+
+    public function show_pembayaran_denda()
+    {
+        $title = 'Pembayaran Denda';
+        $name = 'Overview';
+        $pageTitle = 'Pembayaran Denda';
+        $type = '';
+        $btnName = 'Tambah Denda';
+
+        return view('test_views.loan-management.fine-payment.index', compact('title', 'name', 'pageTitle', 'type', 'btnName'));
+    }
 }

@@ -148,6 +148,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
 
         Route::controller(ManageLoanFined::class)->group(function () {
             Route::get('/terkena-denda', 'show_data_terkena_denda')->name('data_terkena_denda');
+            Route::get('/pembayaran-denda', 'show_pembayaran_denda')->name('data_pembayaran_denda');
         });
 
         Route::controller(ManageVisitor::class)->group(function () {

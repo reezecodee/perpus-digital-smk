@@ -16,7 +16,8 @@ class LoanController extends Controller
     {
         if ($request->ajax()) {
             $loans = Loan::query()
-                ->select(['peminjam_id', 'buku_id', 'kode_peminjaman', 'peminjaman', 'pengembalian', 'status'])
+                ->select(['id', 'peminjam_id', 'buku_id', 'kode_peminjaman', 'peminjaman', 'pengembalian', 'status'])
+                ->whereIn('status', ['Menunggu persetujuan', 'Masa pinjam', 'Masa pengembalian', 'Menunggu diambil'])
                 ->latest();
 
             return DataTables::of($loans)

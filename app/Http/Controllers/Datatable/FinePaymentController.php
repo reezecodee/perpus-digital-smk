@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Datatable;
 
 use App\Http\Controllers\Controller;
-use App\Models\Loan;
+use App\Models\FinePayment;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class FineController extends Controller
+class FinePaymentController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -15,30 +15,25 @@ class FineController extends Controller
     public function __invoke(Request $request)
     {
         if ($request->ajax()) {
-            $loans = Loan::query()
-                ->select(['id', 'peminjam_id', 'buku_id', 'kode_peminjaman', 'peminjaman', 'status', 'keterangan_denda'])
-                ->whereIn('status', ['Terkena denda', 'Sudah dibayar'])
+            $payments = FinePayment::query()
+                ->select(['id', 'peminjam_id', 'peminjaman_id', 'status_bayar', 'created_at'])
+                ->with('user')
                 ->latest();
 
-            return DataTables::of($loans)
+            return DataTables::of($payments)
                 ->addIndexColumn()
-                ->addColumn('nama', function ($loan) {
-                    return $loan->user->nama;
+                ->addColumn('nama', function ($payment) {
+                    return $payment->user->nama;
                 })
                 ->filterColumn('nama', function ($query, $keyword) {
                     $query->whereHas('user', function ($q) use ($keyword) {
                         $q->where('nama', 'like', "%{$keyword}%");
                     });
                 })
-                ->addColumn('buku', function ($loan) {
-                    return $loan->book->judul;
+                ->addColumn('created_at', function ($payment) {
+                    return $payment->created_at->translatedFormat('d F Y H:i:s');
                 })
-                ->filterColumn('buku', function ($query, $keyword) {
-                    $query->whereHas('book', function ($q) use ($keyword) {
-                        $q->where('judul', 'like', "%{$keyword}%");
-                    });
-                })
-                ->addColumn('action', function ($loan) {
+                ->addColumn('action', function ($payment) {
                     $editUrl = '';
                     $showUrl = '';
 

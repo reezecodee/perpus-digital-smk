@@ -95,4 +95,93 @@
             });
         });
     </script>
+
+    <form action="" method="post">
+        @csrf
+        <div class="modal modal-blur fade" id="modal-report" tabindex="-1" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Tambah Kunjungan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Pengungjung</label>
+                                    <select name="pengunjung_id"
+                                        class="form-select @error('pengunjung_id') is-invalid @enderror">
+                                        <option value="">-- Pilih Pengunjung --</option>
+                                        @foreach($students as $item)
+                                        <option value="{{ $item->id }}" {{ old('pengunjung_id')==$item->id ? 'selected' :
+                                            '' }}>{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('pengunjung_id')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Tanggal Kunjungan</label>
+                                    <input type="date" value="{{ old('tanggal_kunjungan') }}"
+                                        class="form-control @error('tanggal_kunjungan') is-invalid @enderror" name="tanggal_kunjungan"
+                                        placeholder="Masukkan tanggal kunjungan">
+                                    @error('tanggal_kunjungan')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Keterangan Kunjungan</label>
+                                    <input type="text" value="{{ old('keterangan_kunjungan') }}"
+                                        class="form-control @error('keterangan_kunjungan') is-invalid @enderror" name="keterangan_kunjungan"
+                                        placeholder="Masukkan keterangan kunjungan">
+                                    @error('keterangan_kunjungan')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Status Kunjungan</label>
+                                    <select name="status_kunjungan" class="form-select @error('status_kunjungan') is-invalid @enderror">
+                                        <option value="">-- Pilih Status Kunjungan --</option>
+                                        <option value="Menunggu Persetujuan" {{ old('status_kunjungan') == 'Menunggu Persetujuan' ? 'selected' : '' }}>
+                                            Menunggu Persetujuan</option>
+                                        <option value="Diterima" {{ old('status_kunjungan') == 'Diterima' ? 'selected' : '' }}>
+                                            Diterima</option>
+                                        <option value="Ditolak" {{ old('status_kunjungan') == 'Ditolak' ? 'selected' : '' }}>
+                                            Ditolak</option>
+                                    </select>
+                                    @error('jk')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <x-librarian.input.cnfrm-checkbox />
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                            Batalkan
+                        </a>
+                        <button type="submit" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M12 5l0 14"></path>
+                                <path d="M5 12l14 0"></path>
+                            </svg>
+                            Tambah Kunjungan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </x-test-layout>
