@@ -22,40 +22,16 @@ class ManageBook extends Controller
         }
 
         $format = ucfirst($format);
-
-        // return view('librarian-pages.master-data.book-management.book.index', [
-        //     'title' => 'Daftar Data Buku ' . $format,
-        //     'heading' => 'Daftar Buku ' . $format,
-        //     'books' => Book::where('format', $format)->latest()->get(),
-        //     'format' => $format
-        // ]);
+        $lowerCaseFormat = strtolower($format);
 
         $title = "Manajemen Buku {$format}";
         $name = 'Overview';
         $pageTitle = "Manajemen Buku {$format}";
         $type = 'btn-modal';
         $btnName = "Tambah Buku {$format}";
+        $categories = Category::all();
 
-        return view('test_views.book-management.book.index', compact('title', 'name', 'pageTitle', 'type', 'btnName', 'format'));
-    }
-
-    public function show_add_book($format)
-    {
-        $formats = ['elektronik', 'fisik'];
-
-        if (!in_array($format, $formats)) {
-            abort(404);
-        }
-
-        $uc_first_format = ucfirst($format);
-
-        return view('librarian-pages.master-data.book-management.book.form', [
-            'title' => 'Tambah Buku ' . $uc_first_format,
-            'heading' => 'Tambah Buku ' . $uc_first_format,
-            'categories' => Category::all(),
-            'data' => null,
-            'format' => $format
-        ]);
+        return view('test_views.book-management.book.index', compact('title', 'name', 'pageTitle', 'type', 'btnName', 'format', 'lowerCaseFormat', 'categories'));
     }
 
     public function show_edit_book($format, $id)
@@ -66,16 +42,18 @@ class ManageBook extends Controller
             abort(404);
         }
 
-        $book = Book::findOrFail($id);
-        $uc_first_format = ucfirst($format);
+        $book = Book::with('fine')->findOrFail($id);
+        $format = ucfirst($format);
 
-        return view('librarian-pages.master-data.book-management.book.form', [
-            'title' => 'Edit Buku ' . $uc_first_format,
-            'heading' => 'Edit Buku ' . $uc_first_format,
-            'data' => $book,
-            'format' => $format,
-            'categories' => Category::all(),
-        ]);
+        $title = "Edit Buku {$format}";
+        $name = 'Edit';
+        $pageTitle = "Edit Buku {$format}";
+        $type = 'btn-back';
+        $btnName = 'Kembali';
+        $url = route('data-buku', strtolower($format));
+        $categories = Category::all();
+
+        return view('test_views.book-management.book.edit', compact('title', 'name', 'pageTitle', 'type', 'btnName', 'url', 'format', 'book', 'categories'));
     }
 
     public function show_detail_book($format, $id)

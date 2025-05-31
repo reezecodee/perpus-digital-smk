@@ -12,30 +12,19 @@ class ManageNotification extends Controller
 {
     public function show_create_notif()
     {
-        // return view('librarian-pages.information.create-notification', [
-        //     'title' => 'Buat Notifikasi',
-        //     'heading' => 'Buat Notifikasi',
-        //     'receivers' => User::role('Peminjam')->where('status', 'Aktif')->latest()->get(),
-        //     'notifications' => Notification::with('receiver')->where('pengirim_id', auth()->user()->id)->latest()->get(),
-        // ]);
-
         $title = 'Manajemen Notifikasi';
         $name = 'Overview';
         $pageTitle = 'Manajemen Notifikasi';
         $type = 'btn-modal';
         $btnName = 'Buat Notifikasi';
+        $students = User::role('Siswa')->get();
 
-        return view('test_views.information-management.notification.index', compact('title', 'name', 'pageTitle', 'type', 'btnName'));
+        return view('test_views.information-management.notification.index', compact('title', 'name', 'pageTitle', 'type', 'btnName', 'students'));
     }
 
     public function detail_notif($id)
     {
         $notification = Notification::findOrFail($id);
-        // return view('librarian-pages.information.detail-notification', [
-        //     'title' => 'Detail Notifikasi',
-        //     'heading' => 'Detail Notifikasi',
-        //     'data' => $notification
-        // ]);
 
         $title = 'Detail Notifikasi';
         $name = 'Detail';

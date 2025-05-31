@@ -12,6 +12,7 @@ class UserController extends Controller
     {
         $validRoles = ['Admin', 'Pustakawan', 'Siswa'];
         $role = ucfirst($role);
+        $roleLowerCase = lcfirst($role);
 
         if (in_array($role, $validRoles)) {
             $users = User::role($role)
@@ -34,48 +35,33 @@ class UserController extends Controller
         $type = 'btn-modal';
         $btnName = "Tambah {$role}";
 
-        return view('test_views.user-management.index', compact('title', 'name', 'pageTitle', 'type', 'btnName', 'role'));
-    }
-
-    public function show_add_user($role_param)
-    {
-        if (!in_array($role_param, ['admin', 'pustakawan', 'peminjam'])) {
-            abort(404);
-        }
-
-        $user = null;
-        $role = ucfirst($role_param);
-
-        return view('librarian-pages.master-data.users-management.form', [
-            'title' => "Tambah $role baru",
-            'heading' => "Tambah $role",
-            'data' => $user,
-            'role' => strtolower($role)
-        ]);
+        return view('test_views.user-management.index', compact('title', 'name', 'pageTitle', 'type', 'btnName', 'role', 'roleLowerCase'));
     }
 
     public function show_edit_user($role_param, $id)
     {
         $user = User::findOrFail($id);
         $role = $user->getRoleNames()->implode(', ');
-        
+
         if ($role_param != strtolower($role)) {
             abort(404);
         }
-        
-        return view('librarian-pages.master-data.users-management.form', [
-            'title' => "Perbarui Data $role",
-            'heading' => "Perbarui $role",
-            'data' => $user,
-            'role' => strtolower($role)
-        ]);
+
+        $title = "Edit {$role}";
+        $name = 'Edit';
+        $pageTitle = "Edit {$role}";
+        $type = 'btn-back';
+        $btnName = "Kembali";
+        $url = route('data-user', strtolower($role));
+
+        return view('test_views.user-management.edit', compact('title', 'name', 'pageTitle', 'type', 'btnName', 'role', 'url', 'user'));
     }
 
     public function show_detail_user($role_param, $id)
     {
         $user = User::findOrFail($id);
         $role = $user->getRoleNames()->implode(', ');
-        if($role_param != strtolower($role)){
+        if ($role_param != strtolower($role)) {
             abort(404);
         }
 

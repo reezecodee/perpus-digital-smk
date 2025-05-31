@@ -1,4 +1,4 @@
-<x-test-layout :title="$title" :pageTitle="$pageTitle" :name="$name" :type="$type" :btn-name="$btnName">
+<x-test-layout :title="$title" :pageTitle="$pageTitle" :name="$name" :type="$type" :btn-name="$btnName" :url="$url">
     <div class="card">
         <div class="card-body">
             <form action="" method="post">
@@ -8,7 +8,7 @@
                     <div class="col-md-6">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Nama Kategori</label>
-                            <input type="text" class="form-control @error('nama_kategori') is-invalid @enderror"
+                            <input type="text" value="{{ old('nama_kategori', $category->nama_kategori) }}" class="form-control @error('nama_kategori') is-invalid @enderror"
                                 name="nama_kategori" placeholder="Masukkan nama kategori">
                             @error('nama_kategori')
                             <span class="invalid-feedback">{{ $message }}</span>
@@ -18,7 +18,7 @@
                     <div class="col-md-6">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Keterangan</label>
-                            <input type="text" class="form-control @error('keterangan') is-invalid @enderror"
+                            <input type="text" value="{{ old('keterangan', $category->keterangan) }}" class="form-control @error('keterangan') is-invalid @enderror"
                                 name="keterangan" placeholder="Masukkan keterangan">
                             @error('keterangan')
                             <span class="invalid-feedback">{{ $message }}</span>

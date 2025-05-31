@@ -16,7 +16,7 @@ class BookController extends Controller
     {
         if ($request->ajax()) {
             $books = Book::query()
-                ->select(['id', 'kategori_id', 'judul', 'author', 'isbn', 'cover_buku', 'status'])->where('format', $format)
+                ->select(['id', 'kategori_id', 'judul', 'author', 'isbn', 'cover_buku', 'status', 'format'])->where('format', $format)
                 ->latest();
 
             return DataTables::of($books)
@@ -33,8 +33,8 @@ class BookController extends Controller
                     return '<img src="/storage/img/cover/' . $book->cover_buku . '" width=70 />';
                 })
                 ->addColumn('action', function ($book) use ($format) {
-                    $editUrl = '';
-                    $showUrl = '';
+                    $editUrl = route('edit_book', ['id' => $book->id, 'format' => lcfirst($format)]);
+                    $showUrl = route('detail_book', ['id' => $book->id, 'format' => lcfirst($format)]);
 
                     return '
                         <div class="dropdown">

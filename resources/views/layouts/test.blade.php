@@ -54,7 +54,7 @@
   <div class="page">
     <x-librarian.navigation.navbartest />
     <div class="page-wrapper">
-      <x-librarian.navigation.page-header :pageTitle="$pageTitle" :name="$name" :type="$type" :btn-name="$btnName" />
+      <x-librarian.navigation.page-header :pageTitle="$pageTitle" :name="$name" :type="$type" :btn-name="$btnName" :url="$url" />
       <div class="page-body">
         <div class="container-xl">
           {{ $slot }}

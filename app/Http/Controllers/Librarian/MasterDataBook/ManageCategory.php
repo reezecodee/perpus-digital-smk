@@ -11,12 +11,6 @@ class ManageCategory extends Controller
 {
     public function show_data_kategori()
     {
-        // return view('librarian-pages.master-data.book-management.category.index', [
-        //     'title' => 'Daftar Data Kategori',
-        //     'heading' => 'Daftar Kategori',
-        //     'categories' => Category::withCount('book')->get(),
-        // ]);
-
         $title = 'Manajemen Kategori';
         $name = 'Overview';
         $pageTitle = 'Manajemen Kategori';
@@ -30,12 +24,14 @@ class ManageCategory extends Controller
     {
         $category = Category::findOrFail($id);
 
-        return view('librarian-pages.master-data.book-management.category.edit', [
-            'title' => 'Edit Data Kategori',
-            'heading' => 'Edit Kategori',
-            'books' => Book::where('kategori_id', $id)->latest()->get(),
-            'data' => $category
-        ]);
+        $title = 'Edit Kategori';
+        $name = 'Edit';
+        $pageTitle = 'Edit Kategori';
+        $type = 'btn-back';
+        $btnName = 'Kembali';
+        $url = route('data-kategori');
+
+        return view('test_views.book-management.category.edit', compact('title', 'name', 'pageTitle', 'type', 'btnName', 'url', 'category'));
     }
 
     // Logical Backend Here...

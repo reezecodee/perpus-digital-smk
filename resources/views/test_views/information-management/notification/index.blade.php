@@ -100,4 +100,75 @@
             });
         });
     </script>
+
+    <form action="" autocomplete="off" method="post">
+        @csrf
+        <div class="modal modal-blur fade" id="modal-report" tabindex="-1" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Kirim Notifikasi</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Judul Notifikasi</label>
+                                    <input type="text" value="{{ old('judul') }}"
+                                        class="form-control @error('judul') is-invalid @enderror" name="judul"
+                                        placeholder="Masukkan judul">
+                                    @error('judul')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Penerima</label>
+                                    <select name="penerima_id"
+                                        class="form-select @error('penerima_id') is-invalid @enderror">
+                                        <option value="">-- Pilih Penerima --</option>
+                                        @foreach($students as $item)
+                                        <option value="{{ $item->id }}" {{ old('penerima_id') == $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('penerima_id')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Pesan</label>
+                                    <textarea cols="5" rows="5"
+                                        class="form-control @error('pesan') is-invalid @enderror" name="pesan"
+                                        placeholder="Masukkan pesan notifikasi">{{ old('pesan') }}</textarea>
+                                    @error('pesan')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <x-librarian.input.cnfrm-checkbox />
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                            Batalkan
+                        </a>
+                        <button type="submit" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M12 5l0 14"></path>
+                                <path d="M5 12l14 0"></path>
+                            </svg>
+                            Kirim Notifikasi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </x-test-layout>

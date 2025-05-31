@@ -13,13 +13,13 @@ class BookSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public static function run(): void
     {
         // Seeder untuk buku fisik
         Book::insert([
             [
                 'id' => Str::uuid(),
-                'kategori_id' => $this->getBookCategory('Tutorial'),
+                'kategori_id' => self::getBookCategory('Tutorial'),
                 'judul' => '100 Juta Pertama Dari Toko Online',
                 'author' => 'Fahmi Hakim',
                 'penerbit' => 'kelasbos.com',
@@ -35,7 +35,7 @@ class BookSeeder extends Seeder
             ],
             [
                 'id' => Str::uuid(),
-                'kategori_id' => $this->getBookCategory('Tutorial'),
+                'kategori_id' => self::getBookCategory('Tutorial'),
                 'judul' => 'Think and Grow Rich',
                 'author' => 'Napoleon Hill',
                 'penerbit' => 'Gramedia Pustaka Utama',
@@ -51,7 +51,7 @@ class BookSeeder extends Seeder
             ],
             [
                 'id' => Str::uuid(),
-                'kategori_id' => $this->getBookCategory('Tutorial'),
+                'kategori_id' => self::getBookCategory('Tutorial'),
                 'judul' => 'Bisnis Pasti Sukses dengan Creative Marketing!',
                 'author' => 'Andrew Griffiths',
                 'penerbit' => 'Tangga Pustaka',
@@ -67,7 +67,7 @@ class BookSeeder extends Seeder
             ],
             [
                 'id' => Str::uuid(),
-                'kategori_id' => $this->getBookCategory('Tutorial'),
+                'kategori_id' => self::getBookCategory('Tutorial'),
                 'judul' => '30 Hari Jago Jualan',
                 'author' => 'Dewa Eka Prayoga',
                 'penerbit' => 'Delta Saputra',
@@ -83,7 +83,7 @@ class BookSeeder extends Seeder
             ],
             [
                 'id' => Str::uuid(),
-                'kategori_id' => $this->getBookCategory('Tutorial'),
+                'kategori_id' => self::getBookCategory('Tutorial'),
                 'judul' => 'The Smart Selling Book',
                 'author' => 'Mark Edwards',
                 'penerbit' => 'LID Publishing Limited',
@@ -103,7 +103,7 @@ class BookSeeder extends Seeder
         Book::insert([
             [
                 'id' => Str::uuid(),
-                'kategori_id' => $this->getBookCategory('Tutorial'),
+                'kategori_id' => self::getBookCategory('Tutorial'),
                 'judul' => '100 Juta Pertama Dari Toko Online',
                 'author' => 'Fahmi Hakim',
                 'penerbit' => 'kelasbos.com',
@@ -119,7 +119,7 @@ class BookSeeder extends Seeder
             ],
             [
                 'id' => Str::uuid(),
-                'kategori_id' => $this->getBookCategory('Tutorial'),
+                'kategori_id' => self::getBookCategory('Tutorial'),
                 'judul' => 'Think and Grow Rich',
                 'author' => 'Napoleon Hill',
                 'penerbit' => 'Gramedia Pustaka Utama',
@@ -135,7 +135,7 @@ class BookSeeder extends Seeder
             ],
             [
                 'id' => Str::uuid(),
-                'kategori_id' => $this->getBookCategory('Tutorial'),
+                'kategori_id' => self::getBookCategory('Tutorial'),
                 'judul' => 'Bisnis Pasti Sukses dengan Creative Marketing!',
                 'author' => 'Andrew Griffiths',
                 'penerbit' => 'Tangga Pustaka',
@@ -151,7 +151,7 @@ class BookSeeder extends Seeder
             ],
             [
                 'id' => Str::uuid(),
-                'kategori_id' => $this->getBookCategory('Tutorial'),
+                'kategori_id' => self::getBookCategory('Tutorial'),
                 'judul' => '30 Hari Jago Jualan',
                 'author' => 'Dewa Eka Prayoga',
                 'penerbit' => 'Delta Saputra',
@@ -167,7 +167,7 @@ class BookSeeder extends Seeder
             ],
             [
                 'id' => Str::uuid(),
-                'kategori_id' => $this->getBookCategory('Tutorial'),
+                'kategori_id' => self::getBookCategory('Tutorial'),
                 'judul' => 'The Smart Selling Book',
                 'author' => 'Mark Edwards',
                 'penerbit' => 'LID Publishing Limited',
@@ -184,7 +184,7 @@ class BookSeeder extends Seeder
         ]);
     }
 
-    public function getBookCategory($categoryName)
+    public static function getBookCategory($categoryName)
     {
         return Category::where('nama_kategori', $categoryName)->firstOrFail()->id;
     }

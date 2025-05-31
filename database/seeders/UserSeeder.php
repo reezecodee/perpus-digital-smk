@@ -11,7 +11,7 @@ class UserSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public static function run(): void
     {
         $admin = User::create([
             'id' => Str::uuid(),
@@ -59,7 +59,7 @@ class UserSeeder extends Seeder
 
         $pustakawanWithPermission->assignRole('Pustakawan');
 
-        $peminjam = User::create([
+        $siswa = User::create([
             'id' => Str::uuid(),
             'username' => 'Azfaal',
             'nip_nis' => '19230829',
@@ -72,6 +72,6 @@ class UserSeeder extends Seeder
             'status' => 'Aktif',
             'alamat' => 'Jl Raya Banjar - Sidaharja, Tambakreja, Lakbok, Ciamis, Jawa barat. 46385'
         ]);
-        $peminjam->assignRole('Peminjam');
+        $siswa->assignRole('Siswa');
     }
 }

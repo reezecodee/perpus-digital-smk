@@ -21,11 +21,11 @@ class CategoryController extends Controller
 
             return DataTables::of($categories)
                 ->addIndexColumn()
-                ->addColumn('keterangan', function ($shelf) {
-                    return $shelf->keterangan ?? 'Tidak ada keterangan';
+                ->addColumn('keterangan', function ($category) {
+                    return $category->keterangan ?? 'Tidak ada keterangan';
                 })
-                ->addColumn('action', function ($shelf) {
-                    $editUrl = '';
+                ->addColumn('action', function ($category) {
+                    $editUrl = route('edit_category', $category->id);
                     $showUrl = '';
 
                     return '

@@ -10,12 +10,6 @@ class ManageShelf extends Controller
 {
     public function show_data_rak_buku()
     {
-        // return view('librarian-pages.master-data.book-management.book-shelf.index', [
-        //     'title' => 'Daftar Data Rak Buku',
-        //     'heading' => 'Daftar Rak Buku',
-        //     'shelves' => Shelf::all(),
-        // ]);
-
         $title = 'Manajemen Rak Buku';
         $name = 'Overview';
         $pageTitle = 'Manajemen Rak Buku';
@@ -29,11 +23,14 @@ class ManageShelf extends Controller
     {
         $shelf = Shelf::findOrFail($id);
 
-        return view('librarian-pages.master-data.book-management.book-shelf.edit', [
-            'title' => 'Edit Data Rak',
-            'heading' => 'Edit Rak',
-            'data' => $shelf
-        ]);
+        $title = 'Edit Rak Buku';
+        $name = 'Edit';
+        $pageTitle = 'Edit Rak Buku';
+        $type = 'btn-back';
+        $btnName = 'Kembali';
+        $url = route('data-rak');
+
+        return view('test_views.book-management.shelf.edit', compact('title', 'name', 'pageTitle', 'type', 'btnName', 'url', 'shelf'));
     }
 
     // Logical Backend Here

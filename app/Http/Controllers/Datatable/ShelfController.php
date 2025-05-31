@@ -15,15 +15,15 @@ class ShelfController extends Controller
     public function __invoke(Request $request)
     {
         if ($request->ajax()) {
-            $sheves = Shelf::query()
+            $shelves = Shelf::query()
                 ->select(['id', 'nama_rak', 'kode', 'kapasitas'])
                 ->latest();
 
-            return DataTables::of($sheves)
+            return DataTables::of($shelves)
                 ->addIndexColumn()
                 ->addColumn('action', function ($shelf) {
-                    $editUrl = '';
-                    $showUrl = '';
+                    $editUrl = route('edit_shelf', $shelf->id);
+                    $showUrl = route('detail_shelf', $shelf->id);
 
                     return '
                         <div class="dropdown">
