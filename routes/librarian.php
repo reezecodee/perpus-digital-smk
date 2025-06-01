@@ -57,8 +57,9 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
     });
 
     Route::controller(ManageProfile::class)->group(function () {
-        Route::get('/overview-data-profile', 'show_overview_profile')->name('profile.overview');
-        Route::post('/ganti-pw-pustakawan', 'update_password')->name('update_pw_pustakawan');
+        Route::get('/profile-petugas', 'show_overview_profile')->name('profile.overview');
+        Route::put('/update-profile-petugas', 'update_profile')->name('profile.update_profile');
+        Route::put('/ganti-pw-petugas', 'update_password')->name('profile.update_pw_petugas');
     });
 
 
@@ -75,7 +76,6 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
             Route::controller(LogicUserController::class)->group(function () {
                 Route::post('/tambah/{role}', 'store_user')->name('store_user');
                 Route::put('/perbarui/{id}', 'update_user')->name('update_user');
-                Route::delete('/hapus-user/{id}', 'delete_user')->name('delete_user');
                 Route::post('/import-user', 'import_user')->name('direct_import_user');
             });
         });
@@ -91,16 +91,16 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
             Route::get('/format/{format}/detail/{id}', 'show_detail_book')->name('detail_book');
 
             Route::post('/tambah/{format}', 'store_book')->name('store_book');
-            Route::put('/{format}/edit/{id}', 'update_book')->name('update_book');
+            Route::put('/edit/{id}', 'update_book')->name('update_book');
             Route::delete('/hapus-buku/{id}', 'delete_book')->name('delete_book');
             Route::post('/import-buku', 'import_books')->name('direct_import_books');
         });
 
         Route::controller(ManageCategory::class)->group(function () {
             Route::get('/kategori', 'show_data_kategori')->name('data-kategori');
-            Route::get('/kategori/edit-kategori/{id}', 'show_edit_category')->name('edit_category');
+            Route::get('/edit-kategori/{id}', 'show_edit_category')->name('edit_category');
             Route::post('/tambah-kategori', 'add_category')->name('add_category');
-            Route::put('/edit-kategori/{id}', 'update_category')->name('update_category');
+            Route::put('/update-kategori/{id}', 'update_category')->name('update_category');
             Route::delete('/delete-kategori/{id}', 'delete_category')->name('delete_category');
         });
 
@@ -165,18 +165,8 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
     });
 
     Route::get('/pengaturan-aplikasi', [SettingController::class, 'index'])->name('setting');
-
-    // Master Data Perpustakaan Route
-
-    // Route::controller(ManageAppWeb::class)->group(function () {
-    //     Route::get('/aplikasi', 'show_data_aplikasi')->name('data-aplikasi');
-    //     Route::post('/aplikasi', 'update_data_app')->name('update_app');
-    // });
-
-    // Route::controller(ManageLibrary::class)->group(function () {
-    //     Route::get('/perpustakaan', 'show_data_perpus')->name('data-perpustakaan');
-    //     Route::post('/perpustakaan', 'update_data_perpus')->name('update_perpus');
-    // });
+    Route::put('/update-pengaturan', [SettingController::class, 'updateSettingApp'])->name('setting.update');
+    Route::post('/store-carousel', [SettingController::class, 'storeCarousel'])->name('setting.storeCarousel');
 
     Route::prefix('informasi')->group(function () {
         Route::controller(ManageNotification::class)->group(function () {

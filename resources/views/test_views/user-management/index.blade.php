@@ -106,7 +106,7 @@
         });
     </script>
 
-    <form action="" enctype="multipart/form-data" autocomplete="off" method="post">
+    <form action="{{ route('store_user', $roleLowerCase) }}" enctype="multipart/form-data" autocomplete="off" method="post">
         @csrf
         <div class="modal modal-blur fade" id="modal-report" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -222,6 +222,28 @@
                                         class="form-control @error('alamat') is-invalid @enderror" name="alamat"
                                         placeholder="Masukkan alamat perpustakaan">{{ old('alamat') }}</textarea>
                                     @error('alamat')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Password Sementara</label>
+                                    <input type="password" value="{{ old('password_temporary') }}"
+                                        class="form-control @error('password_temporary') is-invalid @enderror" name="password_temporary"
+                                        placeholder="Masukkan password sementara">
+                                    @error('password_temporary')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Konfirmasi Password</label>
+                                    <input type="password" value="{{ old('confirm_password') }}"
+                                        class="form-control @error('confirm_password') is-invalid @enderror" name="confirm_password"
+                                        placeholder="Masukkan konfirmasi password">
+                                    @error('confirm_password')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>

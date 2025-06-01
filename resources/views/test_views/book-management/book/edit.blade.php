@@ -1,5 +1,5 @@
 <x-test-layout :title="$title" :pageTitle="$pageTitle" :name="$name" :type="$type" :btn-name="$btnName" :url="$url">
-    <form action="" enctype="multipart/form-data" method="post" autocomplete="off">
+    <form action="{{ route('update_book', $book->id) }}" enctype="multipart/form-data" method="post" autocomplete="off">
         @csrf
         @method('PUT')
         <div class="card">
@@ -115,10 +115,10 @@
                             <label for="" class="form-label">Status Buku</label>
                             <select name="status" class="form-select @error('status') is-invalid @enderror">
                                 <option value="">-- Pilih Status Buku --</option>
-                                <option value="Tersedia" {{ old('status', $book->status) =='Tersedia' ?
+                                <option value="Tersedia" {{ old('status', $book->status) == 'Tersedia' ?
                                     'selected' : '' }}>
                                     Tersedia</option>
-                                <option value="Tidak tersedia" {{ old('status', $book->status) =='Tidak
+                                <option value="Tidak tersedia" {{ old('status', $book->status) == 'Tidak
                                     tersedia' ? 'selected'
                                     : '' }}>
                                     Tidak tersedia</option>

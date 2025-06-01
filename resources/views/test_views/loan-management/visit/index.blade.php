@@ -96,7 +96,7 @@
         });
     </script>
 
-    <form action="" method="post">
+    <form action="{{ route('store_visit') }}" method="post">
         @csrf
         <div class="modal modal-blur fade" id="modal-report" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -157,7 +157,7 @@
                                         <option value="Ditolak" {{ old('status_kunjungan') == 'Ditolak' ? 'selected' : '' }}>
                                             Ditolak</option>
                                     </select>
-                                    @error('jk')
+                                    @error('status_kunjungan')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>

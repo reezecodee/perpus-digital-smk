@@ -62,7 +62,7 @@
         });
     </script>
 
-    <form action="" autocomplete="off" method="post">
+    <form action="{{ route('add_schedule') }}" autocomplete="off" method="post">
         @csrf
         <div class="modal modal-blur fade" id="modal-report" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -87,8 +87,8 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-2">
                                     <label for="" class="form-label">Warna Tanda Kalender</label>
-                                    <select name="warna" class="form-select" id="">
-                                        <option value="">-- Pilih Warna Tanda --</option>
+                                    <select name="warna" class="form-select @error('warna') is-invalid @enderror" id="">
+                                        <option>-- Pilih Warna Tanda --</option>
                                         <option value="Merah" {{ old('warna') == 'Merah' }}>Merah</option>
                                         <option value="Kuning" {{ old('warna') == 'Kuning' }}>Kuning</option>
                                         <option value="Hijau" {{ old('warna') == 'Hijau' }}>Hijau</option>

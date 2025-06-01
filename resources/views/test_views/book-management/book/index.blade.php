@@ -108,7 +108,7 @@
         });
     </script>
 
-    <form action="" enctype="multipart/form-data" autocomplete="off" method="post">
+    <form action="{{ route('store_book', $format) }}" enctype="multipart/form-data" autocomplete="off" method="post">
         @csrf
         <div class="modal modal-blur fade" id="modal-report" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -192,7 +192,8 @@
                                         class="form-select @error('kategori_id') is-invalid @enderror">
                                         <option value="">-- Pilih Kategori --</option>
                                         @foreach($categories as $item)
-                                        <option value="{{ $item->id }}" {{ old('kategori_id') == $item->id ? 'selected' : '' }}>{{ $item->nama_kategori }}</option>
+                                        <option value="{{ $item->id }}" {{ old('kategori_id')==$item->id ? 'selected' :
+                                            '' }}>{{ $item->nama_kategori }}</option>
                                         @endforeach
                                     </select>
                                     @error('kategori_id')
@@ -255,6 +256,41 @@
                                     <label for="" class="form-label">Upload E-Book File</label>
                                     <input type="file" accept=".pdf" class="form-control" name="e_book_file" id="">
                                     @error('e_book_file')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            @endif
+                            @if($format !== 'Elektronik')
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Denda Terlambat (Rp)</label>
+                                    <input type="number" value="{{ old('denda_terlambat') }}"
+                                        class="form-control @error('denda_terlambat') is-invalid @enderror" name="denda_terlambat"
+                                        placeholder="Masukkan denda terlambat">
+                                    @error('denda_terlambat')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Denda Buku Rusak (Rp)</label>
+                                    <input type="number" value="{{ old('denda_rusak') }}"
+                                        class="form-control @error('denda_rusak') is-invalid @enderror" name="denda_rusak"
+                                        placeholder="Masukkan denda buku rusak">
+                                    @error('denda_rusak')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Denda Buku Tidak Kembali (Rp)</label>
+                                    <input type="number" value="{{ old('denda_tidak_kembali') }}"
+                                        class="form-control @error('denda_tidak_kembali') is-invalid @enderror" name="denda_tidak_kembali"
+                                        placeholder="Masukkan denda buku tidak kembali">
+                                    @error('denda_tidak_kembali')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>

@@ -1,5 +1,5 @@
 <x-test-layout :title="$title" :pageTitle="$pageTitle" :name="$name" :type="$type" :btn-name="$btnName" :url="$url">
-    <form action="" enctype="multipart/form-data" method="post" autocomplete="off">
+    <form action="{{ route('update_user', $user->id) }}" enctype="multipart/form-data" method="post" autocomplete="off">
         @csrf
         @method('PUT')
         <div class="card">

@@ -2,7 +2,7 @@
     <div class="card mb-2">
         <div class="card-body">
             <h2>Pengaturan Aplikasi</h2>
-            <form action="" enctype="multipart/form-data" method="post">
+            <form action="{{ route('setting.update') }}" enctype="multipart/form-data" method="post">
                 @csrf
                 @method('PUT')
                 <div class="row">
@@ -209,7 +209,7 @@
         </div>
     </div>
 
-    <form action="" enctype="multipart/form-data" autocomplete="off" method="post">
+    <form action="{{ route('setting.storeCarousel') }}" enctype="multipart/form-data" autocomplete="off" method="post">
         @csrf
         <div class="modal modal-blur fade" id="modal-report" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -243,7 +243,7 @@
                                 </div>
                             </div>
                         </div>
-                        <x-librarian.input.cnfrm-checkbox />
+                        <x-librarian.input.cnfrm-checkbox :identity="'checkbox-carousel'"/>
                     </div>
                     <div class="modal-footer">
                         <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">

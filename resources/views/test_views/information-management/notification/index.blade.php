@@ -101,7 +101,7 @@
         });
     </script>
 
-    <form action="" autocomplete="off" method="post">
+    <form action="{{ route('send_notification') }}" autocomplete="off" method="post">
         @csrf
         <div class="modal modal-blur fade" id="modal-report" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">

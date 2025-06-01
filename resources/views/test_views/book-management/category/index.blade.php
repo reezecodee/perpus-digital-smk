@@ -86,7 +86,7 @@
         });
     </script>
 
-    <form action="" method="post">
+    <form action="{{ route('add_category') }}" method="post">
         @csrf
         <div class="modal modal-blur fade" id="modal-report" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">

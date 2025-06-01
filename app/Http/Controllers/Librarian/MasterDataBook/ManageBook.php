@@ -95,11 +95,12 @@ class ManageBook extends Controller
         return $file_name;
     }
 
-    public function store_book(StoreBookRequest $request)
+    public function store_book(StoreBookRequest $request, $format)
     {
         $validated_data = $request->validated();
 
         $validated_data['cover_buku'] = $this->book_cover_handler($request->file('cover_buku'));
+        $validated_data['format'] = ucfirst($format);
 
         if ($request->hasFile('e_book_file')) {
             $validated_data['e_book_file'] = $this->pdf_file_handler($request->file('e_book_file'));
@@ -152,17 +153,6 @@ class ManageBook extends Controller
         }
 
         $book->update($validated_data);
-
-        if (isset($validated_data['denda_terlambat'], $validated_data['denda_rusak'], $validated_data['denda_tidak_kembali'])) {
-            $fine_data = [
-                'buku_id' => $book->id,
-                'denda_terlambat' => $validated_data['denda_terlambat'] ?? $book->fine->denda_terlambat,
-                'denda_rusak' => $validated_data['denda_rusak'] ?? $book->fine->denda_rusak,
-                'denda_tidak_kembali' => $validated_data['denda_tidak_kembali'] ?? $book->fine->denda_tidak_kembali,
-            ];
-
-            Fine::updateOrCreate(['buku_id' => $book->id], $fine_data);
-        }
 
         $lcfirst = lcfirst($format);
         $this->log("Memperbarui data buku {$lcfirst} dengan judul \"{$book->judul}\"");

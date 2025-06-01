@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-body">
             <h2>Data Diri</h2>
-            <form action="" enctype="multipart/form-data" method="post">
+            <form action="{{ route('profile.update_profile') }}" enctype="multipart/form-data" method="post">
                 @csrf
                 @method('PUT')
                 <x-librarian.input.upload-profile :photo="auth()->user()->photo ?? 'unknown.jpg'" />
@@ -96,16 +96,16 @@
     <div class="card mt-3">
         <div class="card-body">
             <h2>Ganti Password</h2>
-            <form action="" method="post">
+            <form action="{{ route('profile.update_pw_petugas') }}" method="post">
                 @csrf
                 @method('PUT')
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group mb-2">
-                            <label for="" class="form-label">Password Lama</label>
-                            <input type="text" class="form-control @error('old_password') is-invalid @enderror"
-                                name="old_password" placeholder="Masukkan password lama">
-                            @error('old_password')
+                            <label for="" class="form-label">Password Saat Ini</label>
+                            <input type="text" class="form-control @error('current_password') is-invalid @enderror"
+                                name="current_password" placeholder="Masukkan password saat ini">
+                            @error('current_password')
                             <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>

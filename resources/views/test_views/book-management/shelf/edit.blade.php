@@ -1,7 +1,7 @@
 <x-test-layout :title="$title" :pageTitle="$pageTitle" :name="$name" :type="$type" :btn-name="$btnName" :url="$url">
     <div class="card">
         <div class="card-body">
-            <form action="" method="post">
+            <form action="{{ route('update_shelf', $shelf->id) }}" method="post">
                 @csrf
                 @method('PUT')
                 <div class="row">

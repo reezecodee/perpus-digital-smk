@@ -108,24 +108,6 @@ class LogicUserController extends Controller
         return redirect()->route('data-user', $role_name)->withSuccess('Berhasil memperbarui data ' . $role_name);
     }
 
-    public function delete_user($id)
-    {
-        $user = User::findOrFail($id);
-
-        if ($user->photo) {
-            Storage::delete('public/img/profile/' . $user->photo);
-        }
-
-        $role = $user->roles->pluck('name')->toArray();
-        $role = implode(', ', $role);
-
-        $user->roles()->detach();
-        $user->delete();
-
-        $this->log("Menghapus akun milik {$user->nama} - {$role}");
-        return back()->withSuccess('Berhasil menghapus data ' . $role);
-    }
-
     public function import_user(Request $request)
     {
         $request->validate([

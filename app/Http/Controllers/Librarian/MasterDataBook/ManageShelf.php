@@ -44,7 +44,7 @@ class ManageShelf extends Controller
         ], [
             'kode.unique' => 'Kode rak sudah digunakan.',
             'kode.required' => 'Kode rak wajib di isi.',
-            'nama_rak.required' => 'Nama rak wajin di isi',
+            'nama_rak.required' => 'Nama rak wajib di isi',
             'nama_rak.max' => 'Panjang maksimal nama rak adalah 30 karakter',
             'kapasitas.required' => 'Kapasitas wajib di isi',
             'kapasitas.max' => 'Panjang maksimal kapasitas adalah 5 karakter',

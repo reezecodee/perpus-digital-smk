@@ -23,7 +23,7 @@ class CalendarRequest extends FormRequest
     {
         return [
             'tanggal_mulai' => 'required|date',
-            'tanggal_selesai' => 'nullable|date|after_or_equal:tanggal_mulai',
+            'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
             'keterangan' => 'required|max:20',
             'warna' => 'required|in:Merah,Kuning,Hijau'
         ];

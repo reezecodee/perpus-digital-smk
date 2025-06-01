@@ -35,9 +35,6 @@ class UpdateBookRequest extends FormRequest
             'sinopsis' => 'required|max:600',
             'format' => 'required|in:Fisik,Elektronik',
             'status' => 'required|in:Tersedia,Tidak tersedia',
-            'denda_terlambat' => 'nullable|min:5|max:10',
-            'denda_rusak' => 'nullable|min:5|max:10',
-            'denda_tidak_kembali' => 'nullable|min:5|max:10'
         ];
     }
 
