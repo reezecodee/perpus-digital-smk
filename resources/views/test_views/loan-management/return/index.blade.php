@@ -1,4 +1,4 @@
-<x-test-layout :title="$title" :pageTitle="$pageTitle" :name="$name" :type="$type" :btn-name="$btnName">
+<x-test-layout :title="$title" :pageTitle="$pageTitle" :name="$name">
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between mb-3">

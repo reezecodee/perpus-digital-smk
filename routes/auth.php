@@ -29,7 +29,7 @@ Route::controller(HandlerAuthController::class)->group(function () {
     Route::post('/login', 'authLoginHandler')->name('login.process');
     Route::post('/email/verification-notification', 'resendVerification')->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
     Route::get('/email/verify/{id}/{hash}', 'verifyUserEmail')->middleware(['auth', 'signed'])->name('verification.verify');
-    Route::get('/logout', 'logout')->name('logout');
+    Route::post('/logout', 'logout')->name('logout');
 });
 
 

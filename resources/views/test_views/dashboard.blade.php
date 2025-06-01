@@ -222,6 +222,7 @@
         </div>
     </div>
 
+    @role('Admin')
     <div class="card mt-3">
         <div class="card-body">
             <table id="data-table" class="display">
@@ -265,4 +266,5 @@
             });
         });
     </script>
+    @endrole
 </x-test-layout>

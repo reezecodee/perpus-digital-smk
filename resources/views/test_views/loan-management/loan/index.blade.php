@@ -105,4 +105,141 @@
             });
         });
     </script>
+
+    <form action="" autocomplete="off" method="post">
+        @csrf
+        <div class="modal modal-blur fade" id="modal-report" tabindex="-1" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Buat Peminjaman Buku</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Siswa Peminjam</label>
+                                    <select name="peminjam_id"
+                                        class="form-select @error('peminjam_id') is-invalid @enderror">
+                                        <option value="">-- Pilih Peminjam --</option>
+                                        @foreach($students as $item)
+                                        <option value="{{ $item->id }}" {{ old('peminjam_id')==$item->id ? 'selected' :
+                                            '' }}>{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('peminjam_id')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Buku yang Ingin Dipinjam</label>
+                                    <select name="buku_id" class="form-select @error('buku_id') is-invalid @enderror">
+                                        <option value="">-- Pilih Buku --</option>
+                                        @foreach($books as $item)
+                                        <option value="{{ $item->id }}" {{ old('buku_id')==$item->id ? 'selected' :
+                                            '' }}>{{ $item->judul }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('buku_id')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Ambil Di Rak</label>
+                                    <select name="penempatan_id"
+                                        class="form-select @error('penempatan_id') is-invalid @enderror">
+                                        <option value="">-- Pilih Rak --</option>
+                                        @foreach($placements as $item)
+                                        <option value="{{ $item->id }}" {{ old('penempatan_id')==$item->id ? 'selected'
+                                            :
+                                            '' }}>{{ $item->shelf->nama_rak }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('penempatan_id')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Tanggal Peminjaman</label>
+                                    <input type="date" value="{{ old('peminjaman') }}"
+                                        class="form-control @error('peminjaman') is-invalid @enderror" name="peminjaman"
+                                        placeholder="Masukkan tanggal peminjaman">
+                                    @error('peminjaman')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Tanggal Pengembalian</label>
+                                    <input type="date" value="{{ old('pengembalian') }}"
+                                        class="form-control @error('pengembalian') is-invalid @enderror"
+                                        name="pengembalian" placeholder="Masukkan tanggal pengembalian">
+                                    @error('pengembalian')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Keterangan</label>
+                                    <textarea cols="5" rows="5"
+                                        class="form-control @error('keterangan') is-invalid @enderror" name="keterangan"
+                                        placeholder="Masukkan keterangan peminjaman">{{ old('keterangan') }}</textarea>
+                                    @error('keterangan')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Status Peminjaman</label>
+                                    <select name="status" class="form-select @error('status') is-invalid @enderror">
+                                        <option value="">-- Pilih Status Peminjaman --</option>
+                                        <option value="Menunggu persetujuan" {{ old('status')=='Menunggu persetujuan'
+                                            ? 'selected' : '' }}>
+                                            Menunggu persetujuan</option>
+                                        <option value="Masa pinjam" {{ old('status')=='Masa pinjam' ? 'selected' : ''
+                                            }}>
+                                            Masa pinjam</option>
+                                        <option value="Menunggu diambil" {{ old('status')=='Menunggu diambil'
+                                            ? 'selected' : '' }}>
+                                            Menunggu diambil</option>
+                                        <option value="Ditolak" {{ old('status')=='Ditolak' ? 'selected' : '' }}>
+                                            Ditolak</option>
+                                    </select>
+                                    @error('jk')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <x-librarian.input.cnfrm-checkbox />
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                            Batalkan
+                        </a>
+                        <button type="submit" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M12 5l0 14"></path>
+                                <path d="M5 12l14 0"></path>
+                            </svg>
+                            Buat Data Peminjaman
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </x-test-layout>

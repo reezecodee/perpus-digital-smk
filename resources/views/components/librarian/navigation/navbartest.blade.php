@@ -12,7 +12,8 @@
         <div class="navbar-nav flex-row order-md-last">
             <div class="nav-item d-none d-md-flex me-3">
                 <div class="btn-list">
-                    <a href="{{ route('show.cropPicture') }}" target="_blank" class="btn btn-5 btn-danger" rel="noreferrer">
+                    <a href="{{ route('show.cropPicture') }}" target="_blank" class="btn btn-5 btn-danger"
+                        rel="noreferrer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="icon icon-tabler icons-tabler-outline icon-tabler-camera">
@@ -23,6 +24,7 @@
                         </svg>
                         Edit Gambar
                     </a>
+                    @role('Admin')
                     <a href="{{ route('setting') }}" class="btn btn-5" rel="noreferrer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -34,6 +36,7 @@
                         </svg>
                         Pengaturan
                     </a>
+                    @endrole
                 </div>
             </div>
             <div class="nav-item dropdown">
@@ -52,7 +55,8 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <a href="{{ route('profile.overview') }}" class="dropdown-item">Profile</a>
-                    <form action="" method="POST" id="logout-form">
+                    <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                        @csrf
                         <button type="button" onclick="logout()" class="dropdown-item">Logout</button>
                     </form>
                 </div>
@@ -82,6 +86,7 @@
                             </span>
                         </a>
                     </li>
+                    @role('Admin')
                     <li class="nav-item dropdown {{ Request::is('data-pengguna*') ? 'active' : '' }}">
                         <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
                             data-bs-auto-close="outside" role="button" aria-expanded="false">
@@ -119,6 +124,7 @@
                             </div>
                         </div>
                     </li>
+                    @endrole
                     <li class="nav-item dropdown {{ Request::is('data-buku*') ? 'active' : '' }}">
                         <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
                             data-bs-auto-close="outside" role="button" aria-expanded="false">
@@ -227,9 +233,11 @@
                                     <a class="dropdown-item" href="{{ route('buat_notifikasi') }}">
                                         Notifikasi
                                     </a>
+                                    @role('Admin')
                                     <a class="dropdown-item" href="{{ route('kirim_email') }}">
                                         Kirim Email
                                     </a>
+                                    @endrole
                                     <a class="dropdown-item" href="{{ route('atur_kalender') }}">
                                         Kalender Perpustakaan
                                     </a>
