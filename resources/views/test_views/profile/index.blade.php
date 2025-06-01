@@ -38,13 +38,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group mb-2">
-                            <label for="" class="form-label">Nomor Induk Pegawai</label>
-                            <input type="text" value="{{ old('nip_nis', auth()->user()->nip_nis) }}"
-                                class="form-control @error('nip_nis') is-invalid @enderror" name="nip_nis"
-                                placeholder="Masukkan NIP">
-                            @error('nip_nis')
-                            <span class="invalid-feedback">{{ $message }}</span>
-                            @enderror
+                            <label for="" class="form-label">Nomor Induk Pegawai (NIP)</label>
+                            <input type="text" value="{{ auth()->user()->nip_nis }}"
+                                class="form-control" readonly disabled>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -72,18 +68,8 @@
                     <div class="col-md-6">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Jenis Kelamin</label>
-                            <select name="jk" class="form-select @error('jk') is-invalid @enderror">
-                                <option value="">-- Pilih Jenis Kelamin --</option>
-                                <option value="Laki-laki" {{ old('jk', auth()->user()->jk) == 'Laki-laki' ? 'selected' :
-                                    '' }}>
-                                    Laki-laki</option>
-                                <option value="Perempuan" {{ old('jk', auth()->user()->jk) == 'Perempuan' ? 'selected' :
-                                    '' }}>
-                                    Perempuan</option>
-                            </select>
-                            @error('jk')
-                            <span class="invalid-feedback">{{ $message }}</span>
-                            @enderror
+                            <input type="text" value="{{ auth()->user()->jk }}"
+                                class="form-control" readonly disabled>
                         </div>
                     </div>
                     <div class="col-md-12">

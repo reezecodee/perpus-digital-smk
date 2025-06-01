@@ -1,5 +1,5 @@
 <x-test-layout :title="$title" :pageTitle="$pageTitle" :name="$name">
-    <div class="card">
+    <div class="card mb-2">
         <div class="card-body">
             <h2>Pengaturan Aplikasi</h2>
             <form action="" enctype="multipart/form-data" method="post">
@@ -188,8 +188,132 @@
         </div>
     </div>
 
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Carousel Perpus</h2>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#modal-report">Tambah
+                    Carousel</button>
+            </div>
+            <table id="data-table" class="display">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Carousel</th>
+                        <th>Urutan</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <form action="" enctype="multipart/form-data" autocomplete="off" method="post">
+        @csrf
+        <div class="modal modal-blur fade" id="modal-report" tabindex="-1" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Tambah Carousel</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-center mb-3">
+                            <img id="preview-carousel" src="/img/unknown_carousel.png"
+                                style="width: 100%; max-width: 700px; height: auto; aspect-ratio: 1216 / 304; object-fit: contain; border: 1px solid #ccc;" />
+                        </div>
+                        <div class="d-flex justify-content-center mb-3">
+                            <input type="file" name="carousel_file" id="fileInput" accept=".jpg, .jpeg, .png"
+                                style="display: none">
+                            <button type="button" class="btn btn-primary"
+                                onclick="document.getElementById('fileInput').click()">Upload
+                                Carousel</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group mb-2">
+                                    <label for="" class="form-label">Urutan</label>
+                                    <input type="number" value="{{ old('urutan') }}"
+                                        class="form-control @error('urutan') is-invalid @enderror" name="urutan"
+                                        placeholder="Masukkan urutan carousel">
+                                    @error('urutan')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <x-librarian.input.cnfrm-checkbox />
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                            Batalkan
+                        </a>
+                        <button type="submit" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M12 5l0 14"></path>
+                                <path d="M5 12l14 0"></path>
+                            </svg>
+                            Tambah Carousel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        $(document).ready(function() {
+            $('#data-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('datatable.carousel') }}",
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'carousel',
+                        name: 'carousel'
+                    },
+                    {
+                        data: 'urutan',
+                        name: 'urutan'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false, 
+                        searchable: false
+                    },
+                ]
+            });
+        });
+    </script>
+
+    <script>
+    const fileInput = document.getElementById('fileInput');
+    const preview = document.getElementById('preview-carousel');
+
+    fileInput.addEventListener('change', function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+            preview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '/img/unknown_cover.png';
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('input[type="file"]').forEach(input => {
         input.addEventListener('change', function () {
             const file = this.files[0];

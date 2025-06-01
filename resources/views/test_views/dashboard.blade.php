@@ -15,7 +15,7 @@
                     </div>
                     <div class="d-flex align-items-baseline">
                         <div class="h1 mb-0 me-2">
-                            10
+                            {{ $loan7DaysAgo }}
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="d-flex align-items-baseline">
                         <div class="h1 mb-3 me-2">
-                            10
+                            {{ $student7DaysAgo }}
                         </div>
                     </div>
                     <div id="chart-new-clients" class="chart-sm" style="pointer-events: none;">
@@ -61,7 +61,7 @@
                     </div>
                     <div class="d-flex align-items-baseline">
                         <div class="h1 mb-3 me-2">
-                            10
+                            {{ $book7DaysAgo }}
                         </div>
                     </div>
                     <div id="chart-active-users" class="chart-sm" style="pointer-events: none;">
@@ -84,7 +84,7 @@
                     </div>
                     <div class="d-flex align-items-baseline">
                         <div class="h1 mb-3 me-2">
-                            10
+                            {{ $help7DaysAgo }}
                         </div>
                     </div>
                     <div id="chart-visitors" class="chart-sm" style="pointer-events: none;">
@@ -114,7 +114,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">
-                                        10
+                                        {{ $totalStudentActive }}
                                     </div>
                                     <div class="text-muted">
                                         Siswa Anggota Aktif
@@ -149,7 +149,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">
-                                        10
+                                        {{ $totalLibrarian }}
                                     </div>
                                     <div class="text-muted">
                                         Pustakawan
@@ -179,7 +179,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">
-                                        10
+                                        {{ $totalEBook }}
                                     </div>
                                     <div class="text-muted">
                                         E-Book
@@ -208,7 +208,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">
-                                        10
+                                        {{ $totalBook }}
                                     </div>
                                     <div class="text-muted">
                                         Buku Fisik

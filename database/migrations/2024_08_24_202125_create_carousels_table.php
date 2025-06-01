@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('carousels', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->text('carousel_file');
-            $table->text('link')->nullable();
+            $table->string('carousel_file');
+            $table->string('urutan');
             $table->timestamps();
         });
     }

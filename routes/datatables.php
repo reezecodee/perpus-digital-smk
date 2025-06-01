@@ -12,6 +12,7 @@ use App\Http\Controllers\Datatable\FineController;
 use App\Http\Controllers\Datatable\HelpController;
 use App\Http\Controllers\Datatable\CalendarController;
 use App\Http\Controllers\Datatable\FinePaymentController;
+use App\Http\Controllers\Datatable\CarouselController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/data/log-activity', LogActivityController::class)->name('datatable.logActivity');
@@ -27,3 +28,4 @@ Route::get('/data/notification', VisitController::class)->name('datatable.notifi
 Route::get('/data/help', HelpController::class)->name('datatable.help');
 Route::get('/data/calendar', CalendarController::class)->name('datatable.calendar');
 Route::get('/data/fine-payment', FinePaymentController::class)->name('datatable.finePayment');
+Route::get('/data/carousel', CarouselController::class)->name('datatable.carousel');
