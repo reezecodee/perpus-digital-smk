@@ -110,16 +110,10 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
             Route::post('/tambah-rak', 'add_shelf')->name('add_shelf');
             Route::put('/edit-rak/{id}', 'update_shelf')->name('update_shelf');
             Route::delete('/hapus-rak/{id}', 'delete_shelf')->name('delete_shelf');
-        });
-    });
 
-    Route::controller(ManagePlacement::class)->group(function () {
-        Route::get('/penempatan-buku', 'show_placement')->name('data-penempatan');
-        Route::get('/penempatan-buku/tambah', 'show_add_placement')->name('add_placement');
-        Route::get('/penempatan-buku/edit/{id}', 'show_edit_placement')->name('edit_placement');
-        Route::post('/penempatan-buku/tambah', 'store_placement')->name('store_placement');
-        Route::put('/penempatan-buku/update/{id}', 'update_placement')->name('update_placement');
-        Route::delete('/hapus-penempatan/{id}', 'delete_placement')->name('delete_placement');
+            Route::get('/detail-rak/{id}', 'show_detail_shelf')->name('detail_shelf');
+            Route::post('/tambah-tempat/{id}', 'store_placement')->name('add_placement');
+        });
     });
 
     Route::controller(ManageFineBook::class)->group(function () {

@@ -22,7 +22,6 @@ class PlacementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'rak_id' => 'required|exists:shelves,id',
             'buku_id' => 'required|exists:books,id',
             'jumlah_buku' => 'required|min:1|max:5',
             'buku_saat_ini' => 'required|min:1|max:5|lte:jumlah_buku'
@@ -32,9 +31,6 @@ class PlacementRequest extends FormRequest
     public function messages()
     {
         return [
-            'rak_id.required' => 'Rak buku harus dipilih.',
-            'rak_id.exists' => 'Rak buku yang dipilih tidak valid.',
-
             'buku_id.required' => 'Buku harus dipilih.',
             'buku_id.exists' => 'Buku yang dipilih tidak valid.',
 

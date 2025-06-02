@@ -121,7 +121,7 @@ class ManageBook extends Controller
 
         $lcfirst = lcfirst($book->format);
         $this->log("Menambahkan buku {$lcfirst} baru berjudul \"{$book->judul}\"");
-        return redirect()->route('data-buku', $lcfirst)->withSuccess('Berhasil menambahkan buku baru');
+        return redirect()->route('data-buku', $lcfirst)->withSuccess('Berhasil menambahkan buku baru.');
     }
 
     public function update_book(UpdateBookRequest $request, $format, $id)
