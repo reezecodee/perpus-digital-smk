@@ -23,12 +23,11 @@ class HomepageController extends Controller
         $title = 'Homepage E-Perpustakaan';
         $recommendations = $this->getRecommendationBooks();
         $latestEbooks = $this->getLatestEbooks();
-        $popupImages = $this->getPopupImages();
         $carousels = $this->getCarousels();
 
         return view(
             'borrower-pages.homepage',
-            compact('title', 'recommendations', 'latestEbooks', 'popupImages', 'carousels')
+            compact('title', 'recommendations', 'latestEbooks', 'carousels')
         );
     }
 
@@ -65,17 +64,6 @@ class HomepageController extends Controller
             ->latest()
             ->get();
     }
-
-
-    /**
-     * Mendapatkan gambar popup yang diurutkan berdasarkan urutan.
-     */
-
-    private function getPopupImages()
-    {
-        return Popup::orderBy('urutan_ke')->get();
-    }
-
 
     /**
      * Mendapatkan data carousel.

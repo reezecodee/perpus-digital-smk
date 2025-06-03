@@ -43,13 +43,20 @@ class HandlerBookShelfController extends Controller
 
     private function addEBookToLoan($bookId, $borrowerId)
     {
-        $loan = Loan::firstOrCreate([
-            'buku_id' => $bookId,
-            'peminjam_id' => $borrowerId,
-            'kode_peminjaman' => str_pad(mt_rand(0, 999999999999), 12, '0', STR_PAD_LEFT),
-            'status' => 'E-book',
-            'keterangan_denda' => 'Tidak ada',
-        ]);
+        $loan = Loan::where('buku_id', $bookId)
+            ->where('peminjam_id', $borrowerId)
+            ->whereIn('status', ['E-book', 'E-book sudah diulas'])
+            ->first();
+
+        if (!$loan) {
+            $loan = Loan::create([
+                'buku_id' => $bookId,
+                'peminjam_id' => $borrowerId,
+                'kode_peminjaman' => str_pad(mt_rand(0, 999999999999), 12, '0', STR_PAD_LEFT),
+                'status' => 'E-book',
+                'keterangan_denda' => 'Tidak ada',
+            ]);
+        }
 
         $this->log("Membaca e-book {$loan->book->judul}");
         return redirect('/baca-e-book/' . $bookId);
@@ -88,9 +95,11 @@ class HandlerBookShelfController extends Controller
 
         $loan = Loan::where('buku_id', $id)
             ->where('peminjam_id', $userId)
-            ->delete();
+            ->first();
 
         $this->log("Menghapus e-book {$loan->book->judul} dari daftar baca");
+        $loan->delete();
+        
         return back()->withSuccess('Buku berhasil menghapus e-book');
     }
 

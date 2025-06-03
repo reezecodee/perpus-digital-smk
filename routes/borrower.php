@@ -43,7 +43,7 @@ Route::middleware(['auth', 'status_active', 'verified'])->group(function () {
     });
 });
 
-Route::middleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group(function () {
+Route::middleware(['auth', 'role:Siswa', 'status_active', 'verified'])->group(function () {
     Route::controller(HomepageController::class)->group(function () {
         Route::get('/homepage', 'showHomepage')->name('show.homepage');
     });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Borrower\BookShelf;
 use App\Http\Controllers\Controller;
 use App\Models\Loan;
 use App\Models\Review;
+use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class BookShelfController extends Controller
 {
@@ -22,12 +23,17 @@ class BookShelfController extends Controller
         $eBooks = $this->getBooksByFormat($userId, 'Elektronik');
         $forReviews = $this->getBooksForReview($userId);
         $reviews = $this->getReviewsByBorrower($userId);
+        $barcode = function ($code, $scale = 1, $height = 40) {
+            $generator = new BarcodeGeneratorPNG();
+            $image = $generator->getBarcode($code, $generator::TYPE_CODE_128, $scale, $height);
+            return '<img src="data:image/png;base64,' . base64_encode($image) . '">';
+        };
 
         $title = 'Rak Buku Saya';
 
         return view(
             'borrower-pages.book.book-shelf',
-            compact('title', 'books', 'eBooks', 'forReviews', 'reviews')
+            compact('title', 'books', 'eBooks', 'forReviews', 'reviews', 'barcode')
         );
     }
 
@@ -41,10 +47,10 @@ class BookShelfController extends Controller
 
     private function getBooksByFormat($userId, $format, $excludedStatuses = [])
     {
-        return Loan::with(['placement.book'])
+        return Loan::with(['placement.book', 'book'])
             ->where('peminjam_id', $userId)
             ->when($excludedStatuses, fn($query) => $query->whereNotIn('status', $excludedStatuses))
-            ->whereHas('placement.book', fn($query) => $query->where('format', $format))
+            ->whereHas('book', fn($query) => $query->where('format', $format))
             ->get();
     }
 

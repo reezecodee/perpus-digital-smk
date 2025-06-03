@@ -62,7 +62,8 @@
                             @elseif($book->format == 'Elektronik')
                                 <form action="{{ route('update.eBook', $book->id) }}" method="post">
                                     @csrf
-                                    <button type="submit" value="tambah" name="e_book"
+                                    <input type="hidden" value="tambah" name="e_book">
+                                    <button type="submit" 
                                         class="bg-red-primary hover:bg-red-500 rounded-md text-white p-2.5 font-bold"><i
                                             class="fab fa-readme"></i> Baca
                                         E-book</button>

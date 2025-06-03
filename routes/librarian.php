@@ -11,10 +11,7 @@ use App\Http\Controllers\Librarian\Log\ManageLogActivity;
 use App\Http\Controllers\Librarian\MasterDataBook\ManageBook;
 use App\Http\Controllers\Librarian\MasterDataBook\ManageCategory;
 use App\Http\Controllers\Librarian\MasterDataBook\ManageFineBook;
-use App\Http\Controllers\Librarian\MasterDataBook\ManagePlacement;
 use App\Http\Controllers\Librarian\MasterDataBook\ManageShelf;
-use App\Http\Controllers\Librarian\MasterDataLibrary\ManageAppWeb;
-use App\Http\Controllers\Librarian\MasterDataLibrary\ManageLibrary;
 use App\Http\Controllers\Librarian\MasterDataLoan\ManageLoan;
 use App\Http\Controllers\Librarian\MasterDataLoan\ManageLoanFined;
 use App\Http\Controllers\Librarian\MasterDataLoan\ManageLoanReturned;
@@ -158,9 +155,11 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
         });
     });
 
-    Route::get('/pengaturan-aplikasi', [SettingController::class, 'index'])->name('setting');
-    Route::put('/update-pengaturan', [SettingController::class, 'updateSettingApp'])->name('setting.update');
-    Route::post('/store-carousel', [SettingController::class, 'storeCarousel'])->name('setting.storeCarousel');
+    Route::prefix('pengaturan')->controller(SettingController::class)->group(function(){
+        Route::get('/pengaturan-aplikasi', 'index')->name('setting');
+        Route::put('/update-pengaturan', 'updateSettingApp')->name('setting.update');
+        Route::post('/store-carousel', 'storeCarousel')->name('setting.storeCarousel');
+    });
 
     Route::prefix('informasi')->group(function () {
         Route::controller(ManageNotification::class)->group(function () {

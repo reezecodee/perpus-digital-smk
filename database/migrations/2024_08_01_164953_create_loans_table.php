@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('peminjam_id');
             $table->uuid('buku_id');
-            $table->uuid('penempatan_id');
+            $table->uuid('penempatan_id')->nullable();
             $table->string('kode_peminjaman')->unique()->nullable();
             $table->date('peminjaman')->nullable();
             $table->date('pengembalian')->nullable();
