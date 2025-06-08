@@ -1,5 +1,5 @@
 <x-borrower-layout :title="$title">
-    <form action="" method="POST">
+    <form action="{{ route('store.createFinePayment', $data->id) }}" method="POST">
         @csrf
         <section class="mx-auto px-3 lg:px-12 text-gray-600">
             <div class="pt-24 lg:pt-36">
@@ -37,9 +37,7 @@
                                 </div>
                                 <div class="mb-2">
                                     <label for="" class="block font-semibold text-xs">Kode peminjaman</label>
-                                    <p class="font-bold"><span id="loan-code">{{ $data->kode_peminjaman }}</span>
-                                        <button onclick="copyLoanCode()"><i class="far fa-copy"></i> <span
-                                                class="text-xs" id="copy-loan-info"></span></button>
+                                    <p class="font-bold">{{ $data->kode_peminjaman }}
                                     </p>
                                 </div>
                             </div>
@@ -86,7 +84,7 @@
                         @foreach ($items as $item)
                         <label
                             class="group relative cursor-pointer border rounded-xl p-4 flex items-center gap-4 transition-all hover:shadow-md">
-                            <input type="radio" name="payment_method" value="{{ $item['code'] }}" class="peer hidden">
+                            <input type="radio" name="method" value="{{ $item['code'] }}" class="peer hidden">
 
                             <img src="{{ $item['icon_url'] ?? 'https://via.placeholder.com/40' }}"
                                 alt="{{ $item['name'] }}" class="w-12 h-12 object-contain">

@@ -4,21 +4,22 @@
 
             <div class="space-y-1 border-b pb-4 mb-3">
                 <h1 class="text-3xl font-bold">Detail Pembayaran</h1>
-                <p class="text-sm text-gray-500">Referensi: <span
-                        class="font-medium text-black">T0001000000000000006</span></p>
+                <p class="text-sm text-gray-500">Referensi: <span class="font-medium text-black">{{
+                        $detailPayment['merchant_ref'] }}</span></p>
                 <span
-                    class="inline-block mt-2 px-3 py-1 text-sm font-semibold bg-green-100 text-green-700 rounded-full">PAID</span>
+                    class="inline-block mt-2 px-3 py-1 text-sm font-semibold {{ $detailPayment['status'] == 'PAID' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }} rounded-full">{{
+                    $detailPayment['status'] }}</span>
             </div>
 
             <!-- Metode Pembayaran -->
             <div class="space-y-1">
                 <h2 class="text-xl font-semibold">Metode Pembayaran</h2>
-                <div class="flex justify-center items-center gap-4">
-                    <img src="https://tripay.co.id/icon/briva.png" alt="BRIVA" class="w-10 h-10 object-contain">
+                <div class="flex justify-center items-center">
+                    <img src="{{ $logo }}" class="w-20 h-20 object-contain">
                 </div>
                 <div class="text-center">
-                    <p class="font-semibold">BRI Virtual Account</p>
-                    <p class="font-bold text-2xl">57585748548596587</p>
+                    <p class="font-semibold">{{ $detailPayment['payment_name'] }}</p>
+                    <p class="font-bold text-2xl">{{ $detailPayment['pay_code'] }}</p>
                 </div>
             </div>
 
@@ -73,15 +74,15 @@
             <div class="space-y-2 py-4 text-base mb-5 border-b">
                 <div class="flex justify-between text-gray-600">
                     <span>Subtotal</span>
-                    <span>Rp1.000.000</span>
+                    <span>Rp.{{ $detailPayment['amount_received'] }}</span>
                 </div>
                 <div class="flex justify-between text-gray-600">
-                    <span>Biaya Merchant</span>
-                    <span>Rp1.500</span>
+                    <span>Biaya Layanan</span>
+                    <span>Rp.{{ $detailPayment['total_fee'] }}</span>
                 </div>
                 <div class="flex justify-between text-lg font-bold">
                     <span>Total Bayar</span>
-                    <span>Rp1.000.000</span>
+                    <span>Rp.{{ $detailPayment['amount'] }}</span>
                 </div>
             </div>
 
@@ -89,30 +90,16 @@
             <div>
                 <h2 class="text-xl font-semibold mb-4">Petunjuk Pembayaran</h2>
 
-                <div class="space-y-6">
-                    <!-- Instruction 1 -->
-                    <div>
-                        <h3 class="font-semibold mb-2">Internet Banking</h3>
-                        <ol class="list-decimal space-y-1 ml-5 text-sm text-gray-700 leading-relaxed">
-                            <li>Login ke internet banking Bank BRI Anda</li>
-                            <li>Pilih menu <strong>Pembayaran</strong> lalu klik menu <strong>BRIVA</strong></li>
-                            <li>Masukkan Kode Bayar <strong>57585748548596587</strong></li>
-                            <li>Periksa detail transaksi, lalu konfirmasi</li>
-                            <li>Masukkan mPIN dan selesaikan transaksi</li>
-                        </ol>
-                    </div>
-
-                    <!-- Instruction 2 -->
-                    <div>
-                        <h3 class="font-semibold mb-2">Aplikasi BRImo</h3>
-                        <ol class="list-decimal space-y-1 ml-5 text-sm text-gray-700 leading-relaxed">
-                            <li>Login ke aplikasi BRImo</li>
-                            <li>Pilih menu <strong>BRIVA</strong></li>
-                            <li>Masukkan Nomor Pembayaran <strong>57585748548596587</strong></li>
-                            <li>Periksa detail lalu konfirmasi dan selesaikan</li>
-                        </ol>
-                    </div>
+                @foreach ($detailPayment['instructions'] as $instruction)
+                <div>
+                    <h3 class="font-semibold mb-2">{{ $instruction['title'] }}</h3>
+                    <ol class="list-decimal space-y-1 ml-5 text-sm text-gray-700 leading-relaxed">
+                        @foreach ($instruction['steps'] as $step)
+                        <li>{!! $step !!}</li>
+                        @endforeach
+                    </ol>
                 </div>
+                @endforeach
             </div>
         </div>
     </section>

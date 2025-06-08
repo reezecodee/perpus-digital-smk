@@ -49,22 +49,28 @@ class FinePaymentController extends Controller
 
     public function showDetailPaymentPage($id)
     {
-        // $finePayment = FinePayment::findOrFail($id);
+        $finePayment = FinePayment::findOrFail($id);
         $title = "Detail Pembayaran Denda Buku";
+        $tripay = new TripayHelper();
+        $detailPayment = $tripay->sendRequest('transaction/detail', 'GET', [
+            'reference' => $finePayment->no_reference
+        ]);
+        $logo = $tripay->sendRequest('merchant/payment-channel', 'GET', [
+            'code' => $detailPayment['payment_method']
+        ])[0]['icon_url'];
 
-        return view('borrower-pages.payment.detail-payment', compact('title'));
+        return view('borrower-pages.payment.detail-payment', compact('title', 'finePayment', 'detailPayment', 'logo'));
     }
-
 
     /**
      * Function ini digunakan untuk menampilkan halaman detail pembayaran yang sudah dilakukan.
      *
      */
 
-    public function showTutorialPage()
+    public function showPaymentSuccess($id)
     {
-        $title = "Tutorial Pembayaran Denda";
+        $title = "Berhasil Membayar Denda Buku";
 
-        return view('borrower-pages.payment.tutorial-payment', compact('title'));
+        return view('borrower-pages.payment.status-payment', compact('title'));
     }
 }

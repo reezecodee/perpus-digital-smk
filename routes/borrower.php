@@ -157,11 +157,12 @@ Route::middleware(['auth', 'role:Siswa', 'status_active', 'verified'])->group(fu
         Route::get('/pembayaran-denda/{id}', 'showPaymentPage')->name('show.payment');
         Route::get('/riwayat-pembayaran-denda', 'showPaymentHistoriesPage')->name('show.paymentHistories');
         Route::get('/detail-pembayaran-denda/{id}', 'showDetailPaymentPage')->name('show.detailPayment');
-        Route::get('/tutorial-pembayaran-denda', 'showTutorialPage')->name('show.paymentTutorial');
+        Route::get('/pembayaran-sukses/{id}', 'showPaymentSuccess')->name('show.successPayment');
     });
 
     Route::controller(HandlerFinePaymentController::class)->group(function () {
         Route::post('/simpan-pembayaran/{id}', 'finePayment')->name('store.payment');
+        Route::post('/buat-pembayaran/{id}', 'createFinePayment')->name('store.createFinePayment');
     });
 
 

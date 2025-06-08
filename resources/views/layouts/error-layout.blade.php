@@ -4,7 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @if(isset($exception))
     <title>Error {{ $exception->getStatusCode() }} - {{ $exception->getMessage() }}</title>
+    @endif
+    @if(!isset($exception))
+    <title>{{ $title }}</title>
+    @endif
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,8 +31,21 @@
             <div class="flex justify-center">
                 @yield('content')
             </div>
+            @if(isset($exception))
             <h2 class="text-center font-bold text-lg">{{ $exception->getStatusCode() }} - {{ $exception->getMessage() }}
             </h2>
+            @endif
+
+            @if(!isset($exception))
+            <h2 class="text-center font-bold text-lg mb-2">
+                Berhasil Melakukan Pembayaran Denda.
+            </h2>
+            <div class="flex justify-center">
+                <a href="">
+                    <x-borrower.button.normal-btn>Kembali ke Detail Pembayaran</x-borrower.button.normal-btn>
+                </a>
+            </div>
+            @endif
         </div>
     </div>
 </body>

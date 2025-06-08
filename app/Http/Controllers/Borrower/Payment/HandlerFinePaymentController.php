@@ -2,98 +2,58 @@
 
 namespace App\Http\Controllers\Borrower\Payment;
 
+use App\Helpers\TripayHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Payment\PaymentRequest;
+use App\Models\Book;
+use App\Models\Fine;
 use App\Models\FinePayment;
 use App\Models\Loan;
 use Illuminate\Http\Request;
 
 class HandlerFinePaymentController extends Controller
 {
-    /**
-     * Function ini digunakan untuk menyimpan atau memperbarui pembayaran denda.
-     * @param $id -> berisi ID Loan
-     *
-     */
-
-    public function finePayment(PaymentRequest $request, $id)
+    public function createFinePayment(Request $request, $loanId)
     {
-        $validatedData = $request->validated();
-        $loan = Loan::findOrFail($id);
+        $loan = Loan::findOrFail($loanId);
+        $fine = Fine::where('buku_id', $loan->buku_id)->first();
+        $merchatRef = 'SIPDSMK-' . time() . rand(100, 999);
 
-        $finePayment = FinePayment::where('peminjaman_id', $loan->id)->first();
-
-        if ($request->hasFile('bukti_pembayaran')) {
-            $filename = $this->handleFileUpload($request->file('bukti_pembayaran'), $finePayment);
-
-            $validatedData = array_merge($validatedData, [
-                'status_bayar' => 'Menunggu konfirmasi',
-                'bukti_pembayaran' => $filename,
-                'peminjaman_id' => $loan->id,
-                'peminjam_id' => auth()->user()->id,
-                'alasan_ditolak' => null
-            ]);
-
-            $this->saveOrUpdateFinePayment($finePayment, $validatedData);
-
-            return back()->withSuccess('Pembayaran berhasil disimpan.');
-        }
-
-        return back()->with('error', 'Gagal mengunggah bukti pembayaran.');
-    }
-
-    /**
-     * Mengunggah file bukti pembayaran dan menghapus file lama jika ada.
-     *
-     * @param  \Illuminate\Http\UploadedFile  $file
-     * @param  FinePayment|null  $finePayment
-     * @return string  Nama file yang diunggah
-     */
-
-    private function handleFileUpload($file, $finePayment)
-    {
-        $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-        $destinationPath = 'img/pembayaran';
-
-        if ($finePayment && $finePayment->bukti_pembayaran) {
-            $this->deleteOldFile($destinationPath, $finePayment->bukti_pembayaran);
-        }
-
-        $file->storeAs($destinationPath, $filename, 'public');
-
-        return $filename;
-    }
-
-    /**
-     * Menghapus file lama dari penyimpanan.
-     *
-     * @param  string  $destinationPath
-     * @param  string  $oldFilename
-     * @return void
-     */
-
-    private function deleteOldFile($destinationPath, $oldFilename)
-    {
-        $oldFilePath = public_path('storage/' . $destinationPath . '/' . $oldFilename);
-        if (file_exists($oldFilePath)) {
-            unlink($oldFilePath);
-        }
-    }
-
-    /**
-     * Menyimpan atau memperbarui data pembayaran denda.
-     *
-     * @param  FinePayment|null  $finePayment
-     * @param  array  $validatedData
-     * @return void
-     */
-
-    private function saveOrUpdateFinePayment($finePayment, array $validatedData)
-    {
-        if ($finePayment) {
-            $finePayment->update($validatedData);
+        if ($loan->keterangan_denda == 'Denda buku rusak') {
+            $amount = $fine->denda_rusak;
+        } else if ($loan->keterangan_denda == 'Denda buku terlambat') {
+            $amount = $fine->denda_tidak_kembali;
         } else {
-            FinePayment::create($validatedData);
+            $amount = $fine->denda_terlambat;
         }
+
+        $tripay = new TripayHelper();
+        $sendRequest = $tripay->sendRequest('transaction/create', 'POST', [
+            'method'         => $request->input('method'),
+            'merchant_ref'   => $merchatRef,
+            'amount'         => $amount,
+            'customer_name'  => auth()->user()->nama,
+            'customer_email' => auth()->user()->email,
+            'customer_phone' => auth()->user()->telepon,
+            'order_items'    => [
+                [
+                    'name'        => $loan->book->judul,
+                    'price'       => $amount,
+                    'quantity'    => 1,
+                ],
+            ],
+            'return_url'   => 'http://127.0.0.1:8000/detail-pembayaran-denda/9f10a3c6-5fea-4f95-893e-92675bb85bdd',
+            'expired_time' => (time() + (24 * 60 * 60)),
+            'signature'    => $tripay->generateSignature($merchatRef, $amount),
+        ]);
+
+        $finePayment = FinePayment::create([
+            'peminjam_id' => auth()->user()->id,
+            'peminjaman_id' => $loan->id,
+            'no_reference' => $sendRequest['reference'],
+            'amount' => $sendRequest['amount'],
+        ]);
+
+        return redirect()->route('show.detailPayment', $finePayment->id);
     }
 }

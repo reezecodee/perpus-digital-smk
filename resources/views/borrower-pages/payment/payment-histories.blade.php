@@ -17,7 +17,7 @@
                                     class="flex flex-col lg:flex-row items-center py-6 border-b border-gray-200 gap-6 w-full">
                                     <a href="{{ route('show.detailPayment', $item->id) }}">
                                         <div class="img-box max-lg:w-full">
-                                            <img src="{{ asset('storage/img/pembayaran/' . ($item->bukti_pembayaran ?? '')) }}"
+                                            <img src="{{ asset('storage/img/cover/' . ($item->loan->book->cover_buku ?? '')) }}"
                                                 class="w-full lg:max-w-[140px] rounded-md">
                                         </div>
                                     </a>
