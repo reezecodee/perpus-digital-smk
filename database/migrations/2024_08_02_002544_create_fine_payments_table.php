@@ -17,7 +17,7 @@ return new class extends Migration
             $table->uuid('peminjaman_id');
             $table->string('no_reference');
             $table->string('amount');
-            $table->enum('status_bayar', ['PAID', 'UNPAID'])->default('UNPAID');
+            $table->enum('status_bayar', ['PAID', 'UNPAID', 'REFUND', 'EXPIRED', 'FAILED'])->default('UNPAID');
             $table->timestamps();
 
             $table->foreign('peminjam_id')->references('id')->on('users')->onDelete('cascade');

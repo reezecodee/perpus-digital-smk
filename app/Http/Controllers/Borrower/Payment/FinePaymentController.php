@@ -7,6 +7,7 @@ use App\Models\FinePayment;
 use App\Models\Loan;
 use Illuminate\Http\Request;
 use App\Helpers\TripayHelper;
+use Illuminate\Support\Facades\Response;
 
 class FinePaymentController extends Controller
 {
@@ -23,13 +24,22 @@ class FinePaymentController extends Controller
         $tripay = new TripayHelper();
         $payments = $tripay->sendRequest('merchant/payment-channel', 'GET', []);
         $payments = collect($payments)->groupBy('group');
+        $finePayment = FinePayment::where('peminjaman_id', $data->id)->latest()->first();
+        $createNewPayment = false;
 
-        return view('borrower-pages.payment.fine-payment', compact('title', 'data', 'payments'));
+        if (
+            !$finePayment ||
+            in_array($finePayment->status_bayar, ['REFUND', 'EXPIRED', 'FAILED'])
+        ) {
+            $createNewPayment = true;
+        }
+
+        return view('borrower-pages.payment.fine-payment', compact('title', 'data', 'payments', 'createNewPayment', 'finePayment'));
     }
 
 
     /**
-     * Function ini digunakan untuk menampilkan halaman list riwayar pembayaran denda.
+     * Function ini digunakan untuk menampilkan halaman list riwayat pembayaran denda.
      *
      */
 
@@ -50,6 +60,7 @@ class FinePaymentController extends Controller
     public function showDetailPaymentPage($id)
     {
         $finePayment = FinePayment::findOrFail($id);
+        $loan = Loan::findOrFail($finePayment->peminjaman_id);
         $title = "Detail Pembayaran Denda Buku";
         $tripay = new TripayHelper();
         $detailPayment = $tripay->sendRequest('transaction/detail', 'GET', [
@@ -59,18 +70,8 @@ class FinePaymentController extends Controller
             'code' => $detailPayment['payment_method']
         ])[0]['icon_url'];
 
-        return view('borrower-pages.payment.detail-payment', compact('title', 'finePayment', 'detailPayment', 'logo'));
-    }
+        // dd($detailPayment);
 
-    /**
-     * Function ini digunakan untuk menampilkan halaman detail pembayaran yang sudah dilakukan.
-     *
-     */
-
-    public function showPaymentSuccess($id)
-    {
-        $title = "Berhasil Membayar Denda Buku";
-
-        return view('borrower-pages.payment.status-payment', compact('title'));
+        return view('borrower-pages.payment.detail-payment', compact('title', 'finePayment', 'detailPayment', 'logo', 'loan'));
     }
 }

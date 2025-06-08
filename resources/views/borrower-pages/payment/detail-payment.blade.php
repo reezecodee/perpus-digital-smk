@@ -17,10 +17,26 @@
                 <div class="flex justify-center items-center">
                     <img src="{{ $logo }}" class="w-20 h-20 object-contain">
                 </div>
+                @if(isset($detailPayment['pay_code']))
                 <div class="text-center">
                     <p class="font-semibold">{{ $detailPayment['payment_name'] }}</p>
                     <p class="font-bold text-2xl">{{ $detailPayment['pay_code'] }}</p>
                 </div>
+                @endif
+                @if(isset($detailPayment['qr_url']))
+                <div class="flex justify-center">
+                    <img src="{{ $detailPayment['qr_url'] ?? '' }}" width="200" alt="" srcset="">
+                </div>
+                @endif
+                @if(isset($detailPayment['pay_url']))
+                <div class="flex justify-center">
+                    <a href="{{ $detailPayment['pay_url'] }}" target="_blank">
+                        <x-borrower.button.normal-btn>
+                            Bayar Sekarang
+                        </x-borrower.button.normal-btn>
+                    </a>
+                </div>
+                @endif
             </div>
 
             <!-- Rincian Pesanan -->
@@ -28,42 +44,48 @@
                 <h2 class="text-xl font-semibold mb-4">Rincian Denda</h2>
                 <div class="divide-y rounded-lg border">
                     <div class="flex gap-5 p-4">
-                        <img src="{{ asset('storage/img/cover/' . ($data->book->cover_buku ?? 'unknown_cover.png')) }}"
+                        <img src="{{ asset('storage/img/cover/' . ($loan->book->cover_buku ?? 'unknown_cover.png')) }}"
                             class="w-32 rounded-lg" alt="" srcset="">
                         <div class="grid grid-cols-4 gap-5">
                             <div class="mb-2">
                                 <label for="" class="block font-semibold text-xs">Judul</label>
-                                <p class="font-bold">Buku Test SNBT</p>
+                                <p class="font-bold">{{ $loan->book->judul }}</p>
                             </div>
                             <div class="mb-2">
                                 <label for="" class="block font-semibold text-xs">Tangal Pinjam</label>
-                                <p class="font-bold">20 Mei 2025</p>
+                                <p class="font-bold">{{ $loan->peminjaman }}</p>
                             </div>
                             <div class="mb-2">
                                 <label for="" class="block font-semibold text-xs">Pengembalian/Jatuh
                                     Tempo</label>
-                                <p class="font-bold">25 Mei 2025</p>
+                                <p class="font-bold">{{ $loan->pengembalian }}</p>
                             </div>
                             <div class="mb-2">
                                 <label for="" class="block font-semibold text-xs">Kode Peminjaman</label>
-                                <p class="font-bold">0912930123
+                                <p class="font-bold">{{ $loan->kode_peminjaman }}
                                 </p>
                             </div>
                             <div class="mb-2">
                                 <label for="" class="block font-semibold text-xs">Diambil Dirak</label>
-                                <p class="font-bold">Gatot Kaca</p>
+                                <p class="font-bold">{{ $loan->placement->shelf->nama_rak }}</p>
                             </div>
                             <div class="mb-2">
                                 <label for="" class="block font-semibold text-xs">Nominal Denda</label>
-                                <p class="font-bold">Rp. 300000</p>
+                                @if($loan->keterangan_denda === 'Denda buku rusak')
+                                <p class="font-bold">Rp. {{ $loan->book->fine->denda_rusak }}</p>
+                                @elseif($loan->keterangan_denda === 'Denda buku terlambat')
+                                <p class="font-bold">Rp. {{ $loan->book->fine->denda_terlambat }}</p>
+                                @else
+                                <p class="font-bold">Rp. {{ $loan->book->fine->denda_tidak_kembali }}</p>
+                                @endif
                             </div>
                             <div class="mb-2">
                                 <label for="" class="block font-semibold text-xs">Status</label>
-                                <p class="font-bold">Terkena Denda</p>
+                                <p class="font-bold">{{ $loan->status }}</p>
                             </div>
                             <div class="mb-2">
                                 <label for="" class="block font-semibold text-xs">Jenis Denda</label>
-                                <p class="font-bold">Buku Hilang</p>
+                                <p class="font-bold">{{ $loan->keterangan_denda }}</p>
                             </div>
                         </div>
                     </div>
@@ -83,6 +105,13 @@
                 <div class="flex justify-between text-lg font-bold">
                     <span>Total Bayar</span>
                     <span>Rp.{{ $detailPayment['amount'] }}</span>
+                </div>
+                <div class="flex justify-end">
+                    <form action="{{ route('update.checkStatusPayment', $loan->id) }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <x-borrower.button.normal-btn type="'submit'">Cek Status Pembayaran</x-borrower.button.normal-btn>
+                    </form>
                 </div>
             </div>
 

@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Borrower\Payment;
 
 use App\Helpers\TripayHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Payment\PaymentRequest;
-use App\Models\Book;
 use App\Models\Fine;
 use App\Models\FinePayment;
 use App\Models\Loan;
@@ -37,12 +35,12 @@ class HandlerFinePaymentController extends Controller
             'customer_phone' => auth()->user()->telepon,
             'order_items'    => [
                 [
-                    'name'        => $loan->book->judul,
+                    'name'        => 'Buku: ' . $loan->book->judul,
                     'price'       => $amount,
                     'quantity'    => 1,
                 ],
             ],
-            'return_url'   => 'http://127.0.0.1:8000/detail-pembayaran-denda/9f10a3c6-5fea-4f95-893e-92675bb85bdd',
+            'return_url'   => 'http://127.0.0.1:8000/detail-pembayaran-denda/' . $loan->id,
             'expired_time' => (time() + (24 * 60 * 60)),
             'signature'    => $tripay->generateSignature($merchatRef, $amount),
         ]);
@@ -52,8 +50,39 @@ class HandlerFinePaymentController extends Controller
             'peminjaman_id' => $loan->id,
             'no_reference' => $sendRequest['reference'],
             'amount' => $sendRequest['amount'],
+            'status_bayar' => 'UNPAID',
         ]);
 
         return redirect()->route('show.detailPayment', $finePayment->id);
+    }
+
+    public function canclePayment($id)
+    {
+        $finePayment = FinePayment::findOrFail($id);
+
+        $finePayment->status_bayar = 'FAILED';
+        $finePayment->save();
+
+        return redirect()->back();
+    }
+
+    public function checkStatusPayment($loanId)
+    {
+        $loan = Loan::findOrFail($loanId);
+        $finePayment = FinePayment::where('peminjaman_id', $loan->id)->latest()->first();
+        $tripay = new TripayHelper();
+        $status = $tripay->sendRequest('transaction/detail', 'GET', [
+            'reference' => $finePayment->no_reference
+        ])['status'];
+
+        if ($status === 'PAID') {
+            $loan->status = 'Sudah dibayar';
+            $finePayment->status_bayar = 'PAID';
+
+            $loan->save();
+            $finePayment->save();
+        }
+
+        return redirect()->back();
     }
 }
