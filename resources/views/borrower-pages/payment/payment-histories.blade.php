@@ -29,7 +29,7 @@
                                                     <a href="{{ route('show.detailPayment', $item->id) }}">
                                                         <h2
                                                             class="font-semibold text-xl leading-8 text-black mb-3 hover:text-red-primary">
-                                                            {{ $item->loan->placement->book->judul }}
+                                                            {{ $item->loan->book->judul }}
                                                         </h2>
                                                     </a>
                                                     @if ($item->status_bayar == 'Menunggu konfirmasi')
@@ -59,11 +59,11 @@
                                                         <p
                                                             class="font-medium text-base whitespace-nowrap leading-7 lg:mt-3">
                                                             @if ($item->loan->keterangan_denda == 'Denda buku rusak')
-                                                                {{ formatRupiah($item->loan->placement->book->fine->denda_rusak ?? 0) }}
+                                                                {{ formatRupiah($item->loan->book->fine->denda_rusak ?? 0) }}
                                                             @elseif($item->loan->keterangan_denda == 'Denda buku terlambat')
-                                                                {{ formatRupiah($item->loan->placement->book->fine->denda_terlambat ?? 0) }}
+                                                                {{ formatRupiah($item->loan->book->fine->denda_terlambat ?? 0) }}
                                                             @elseif($item->loan->keterangan_denda == 'Denda buku tidak kembali')
-                                                                {{ formatRupiah($item->loan->placement->book->fine->denda_tidak_kembali ?? 0) }}
+                                                                {{ formatRupiah($item->loan->book->fine->denda_tidak_kembali ?? 0) }}
                                                             @endif
                                                         </p>
                                                     </div>

@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Borrower\Payment;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Payment\PaymentRequest;
-use App\Models\Account;
-use App\Models\Application;
 use App\Models\FinePayment;
 use App\Models\Loan;
 use Illuminate\Http\Request;
+use App\Helpers\TripayHelper;
 
 class FinePaymentController extends Controller
 {
@@ -21,11 +19,12 @@ class FinePaymentController extends Controller
     public function showPaymentPage($id)
     {
         $data = Loan::findOrFail($id);
-        $title = "Pembayaran Denda Buku {$data->placement->book->judul}";
-        $accounts = Account::all();
-        $qrisPerpus = Application::pluck('qris_perpus')->first();
+        $title = "Pembayaran Denda Buku {$data->book->judul}";
+        $tripay = new TripayHelper();
+        $payments = $tripay->sendRequest('merchant/payment-channel', 'GET', []);
+        $payments = collect($payments)->groupBy('group');
 
-        return view('borrower-pages.payment.fine-payment', compact('title', 'data', 'accounts', 'qrisPerpus'));
+        return view('borrower-pages.payment.fine-payment', compact('title', 'data', 'payments'));
     }
 
 
@@ -50,10 +49,10 @@ class FinePaymentController extends Controller
 
     public function showDetailPaymentPage($id)
     {
-        $finePayment = FinePayment::findOrFail($id);
-        $title = "Detail Pembayaran Denda Buku {$finePayment->loan->placement->book->judul}";
+        // $finePayment = FinePayment::findOrFail($id);
+        $title = "Detail Pembayaran Denda Buku";
 
-        return view('borrower-pages.payment.detail-payment', compact('title', 'finePayment'));
+        return view('borrower-pages.payment.detail-payment', compact('title'));
     }
 
 

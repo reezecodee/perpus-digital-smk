@@ -18,7 +18,7 @@
                             <a href="{{ route('show.detailRent', $item->id) }}" class="mb-1 block">
                                 <h4
                                     class="text-base lg:text-lg font-bold leading-5 lg:leading-none hover:text-red-primary">
-                                    {{ $item->placement->book->judul }}
+                                    {{ $item->book->judul }}
                                 </h4>
                             </a>
                             <p class="text-xs">Status: {{ $item->status }}</p>
@@ -43,7 +43,7 @@
                             <a href="{{ route('show.payment', $item->id) }}" class="mb-1 block">
                                 <h4
                                     class="text-base lg:text-lg font-bold leading-5 lg:leading-none hover:text-red-primary">
-                                    {{ $item->placement->book->judul }}
+                                    {{ $item->book->judul }}
                                 </h4>
                             </a>
                             <p class="text-xs">Status: Terkena denda - {{ $item->keterangan_denda }}</p>

@@ -3,13 +3,7 @@
 namespace App\Http\Controllers\Borrower\Profile;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Profile\StoreImageRequest;
-use App\Http\Requests\Profile\UpdatePasswordRequest;
-use App\Http\Requests\Profile\UpdatePeminjamRequest;
 use App\Models\Loan;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
 class ProfileBorrowerController extends Controller
 {
