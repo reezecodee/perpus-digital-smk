@@ -14,24 +14,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome', [
-        'title' => 'Selamat datang di E-perpustakaan',
-    ]);
-});
+Route::middleware(['global_var'])->group(function () {
+    Route::get('/', function () {
+        return view('welcome', [
+            'title' => 'Selamat datang di E-perpustakaan',
+        ]);
+    });
 
-Route::get('/test', function () {
-    return view('test_views/help-management/index', [
-        'title' => 'Test only',
-        'name' => 'Test',
-        'pageTitle' => 'Dashboard',
-        'type' => '',
-        'btnName' => 'Tambah Admin'
-    ]);
-});
+    Route::get('/test', function () {
+        return view('test_views/help-management/index', [
+            'title' => 'Test only',
+            'name' => 'Test',
+            'pageTitle' => 'Dashboard',
+            'type' => '',
+            'btnName' => 'Tambah Admin'
+        ]);
+    });
 
-require __DIR__ . '/site.php';
-require __DIR__ . '/auth.php';
-require __DIR__ . '/borrower.php';
-require __DIR__ . '/librarian.php';
-require __DIR__ . '/datatables.php';
+    require __DIR__ . '/site.php';
+    require __DIR__ . '/auth.php';
+    require __DIR__ . '/borrower.php';
+    require __DIR__ . '/librarian.php';
+    require __DIR__ . '/datatables.php';
+});

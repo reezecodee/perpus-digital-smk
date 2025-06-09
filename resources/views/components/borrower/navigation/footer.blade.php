@@ -4,7 +4,8 @@
             class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3 gap-y-8 md:gap-8 py-10 max-w-sm mx-auto sm:max-w-3xl lg:max-w-full">
             <div class="col-span-full mb-10 lg:col-span-2 lg:mb-0">
                 <a href="" class="flex justify-center lg:justify-start">
-                    <img src="/assets/logo-footer.png" class="w-72" alt="" srcset="">
+                    {{-- <img src="/assets/logo-footer.png" class="w-72" alt="" srcset=""> --}}
+                    <img src="{{ $app->logo_perpus ? '/img/'.$app->logo_perpus : '' }}" class="w-72" alt="" srcset="">
                 </a>
                 <div class="py-8">
                     <p class="text-sm text-gray-500 lg:max-w-xs text-center lg:text-left">E-perpustakan Berbasis Web SMK Sistem
