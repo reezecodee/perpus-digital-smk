@@ -33,7 +33,6 @@ class UpdateBookRequest extends FormRequest
             'cover_buku' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'e_book_file' => 'nullable|file|mimes:pdf',
             'sinopsis' => 'required|max:5000',
-            'format' => 'required|in:Fisik,Elektronik',
             'status' => 'required|in:Tersedia,Tidak tersedia',
         ];
     }
@@ -62,17 +61,11 @@ class UpdateBookRequest extends FormRequest
             'e_book_file.file' => 'File e-book harus diunggah.',
             'e_book_file.mimes' => 'File e-book harus bertipe pdf.',
             'sinopsis.required' => 'Sinopsis harus diisi.',
-            'sinopsis.max' => 'Sinopsis tidak boleh lebih dari 600 karakter.',
+            'sinopsis.max' => 'Sinopsis tidak boleh lebih dari 5000 karakter.',
             'format.required' => 'Format buku harus dipilih.',
             'format.in' => 'Format buku harus salah satu dari Fisik atau Elektronik.',
             'status.required' => 'Status buku harus dipilih.',
             'status.in' => 'Status buku harus salah satu dari Tersedia atau Tidak tersedia.',
-            'denda_terlambat.min' => 'Denda terlambat harus terdiri dari minimal 5 karakter.',
-            'denda_terlambat.max' => 'Denda terlambat tidak boleh lebih dari 10 karakter.',
-            'denda_rusak.min' => 'Denda rusak harus terdiri dari minimal 5 karakter.',
-            'denda_rusak.max' => 'Denda rusak tidak boleh lebih dari 10 karakter.',
-            'denda_tidak_kembali.min' => 'Denda tidak kembali harus terdiri dari minimal 5 karakter.',
-            'denda_tidak_kembali.max' => 'Denda tidak kembali tidak boleh lebih dari 10 karakter.',
         ];
     }
 }

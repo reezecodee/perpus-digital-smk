@@ -1,5 +1,6 @@
 <x-test-layout :title="$title" :pageTitle="$pageTitle" :name="$name" :type="$type" :btn-name="$btnName" :url="$url">
-    <form action="{{ route('update_book', $book->id) }}" enctype="multipart/form-data" method="post" autocomplete="off">
+    <form action="{{ route('update_book', ['format' => $format, 'id' => $book->id]) }}" enctype="multipart/form-data"
+        method="post" autocomplete="off">
         @csrf
         @method('PUT')
         <div class="card">
@@ -79,7 +80,8 @@
                             <select name="kategori_id" class="form-select @error('kategori_id') is-invalid @enderror">
                                 <option value="">-- Pilih Kategori --</option>
                                 @foreach($categories as $item)
-                                <option value="{{ $item->id }}" {{ old('kategori_id', $book->category->id) == $item->id ? 'selected' : '' }}>{{
+                                <option value="{{ $item->id }}" {{ old('kategori_id', $book->category->id) == $item->id
+                                    ? 'selected' : '' }}>{{
                                     $item->nama_kategori }}</option>
                                 @endforeach
                             </select>
@@ -173,11 +175,13 @@
         </div>
     </form>
 
+    @if($book->format === 'Fisik')
     <div class="card mt-3">
         <div class="card-body">
             <h2>Biaya Denda Buku</h2>
-            <form action="" method="post">
+            <form action="{{ route('update_fine', $book->fine->id) }}" method="post">
                 @csrf
+                @method('PUT')
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group mb-2">
@@ -222,6 +226,7 @@
             </form>
         </div>
     </div>
+    @endif
     <script>
         const fileInput = document.getElementById('fileInput');
         const preview = document.getElementById('preview');

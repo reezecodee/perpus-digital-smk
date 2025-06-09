@@ -88,7 +88,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
             Route::get('/format/{format}/detail/{id}', 'show_detail_book')->name('detail_book');
 
             Route::post('/tambah/{format}', 'store_book')->name('store_book');
-            Route::put('/edit/{id}', 'update_book')->name('update_book');
+            Route::put('/edit/{format}/{id}', 'update_book')->name('update_book');
             Route::delete('/hapus-buku/{id}', 'delete_book')->name('delete_book');
             Route::post('/import-buku', 'import_books')->name('direct_import_books');
         });
@@ -117,6 +117,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
 
     Route::controller(ManageFineBook::class)->group(function () {
         Route::get('/denda', 'show_data_denda')->name('data-denda');
+        Route::put('/update-denda/{id}', 'update_fine')->name('update_fine');
     });
 
     // Master Data Peminjaman Route
