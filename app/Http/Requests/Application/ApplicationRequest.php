@@ -33,10 +33,9 @@ class ApplicationRequest extends FormRequest
             'hari_libur' => 'required|max:255',
             'deskripsi' => 'required|max:255',
             'alamat' => 'required|max:255',
-            'favicon' => 'required|mimes:png,ico',
-            'logo_sekolah' => 'required|mimes:png,jpg,jpeg',
-            'logo_perpus' => 'required|mimes:png,jpg,jpeg',
-            'qris_perpus' => 'required|mimes:png,jpg,jpeg',
+            'favicon' => 'nullable|mimes:png,ico',
+            'logo_sekolah' => 'nullable|mimes:png,jpg,jpeg',
+            'logo_perpus' => 'nullable|mimes:png,jpg,jpeg',
         ];
     }
 
@@ -85,9 +84,6 @@ class ApplicationRequest extends FormRequest
 
             'logo_perpus.required' => 'Logo perpustakaan wajib diunggah.',
             'logo_perpus.mimes' => 'Logo perpustakaan harus berupa file PNG, JPG, atau JPEG.',
-
-            'qris_perpus.required' => 'QRIS perpustakaan wajib diunggah.',
-            'qris_perpus.mimes' => 'QRIS perpustakaan harus berupa file PNG, JPG, atau JPEG.',
         ];
     }
 }

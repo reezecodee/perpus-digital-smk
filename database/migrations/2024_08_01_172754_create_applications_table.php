@@ -24,10 +24,9 @@ return new class extends Migration
             $table->string('hari_libur');
             $table->text('deskripsi');
             $table->text('alamat');
-            $table->text('favicon');
-            $table->text('logo_sekolah');
-            $table->text('logo_perpus');
-            $table->text('qris_perpus');
+            $table->text('favicon')->nullable();
+            $table->text('logo_sekolah')->nullable();
+            $table->text('logo_perpus')->nullable();
             $table->timestamps();
         });
     }

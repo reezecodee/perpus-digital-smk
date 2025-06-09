@@ -18,8 +18,9 @@ class SettingController extends Controller
         $title = "Pengaturan Aplikasi";
         $name = 'Overview';
         $pageTitle = "Pengaturan Aplikasi";
+        $setting = Application::latest()->first() ?? new Application();
 
-        return view('test_views.setting.index', compact('title', 'name', 'pageTitle'));
+        return view('test_views.setting.index', compact('title', 'name', 'pageTitle', 'setting'));
     }
 
     public function updateSettingApp(ApplicationRequest $request)
@@ -32,7 +33,7 @@ class SettingController extends Controller
             $app->id = (string) Str::uuid();
         }
 
-        foreach (['favicon', 'logo_sekolah', 'logo_perpus', 'qris_perpus'] as $field) {
+        foreach (['favicon', 'logo_sekolah', 'logo_perpus'] as $field) {
             if ($request->hasFile($field)) {
                 $old_path = public_path('img/' . $app->{$field});
 

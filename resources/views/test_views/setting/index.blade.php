@@ -9,7 +9,7 @@
                     <div class="col-md-6">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Nama Sekolah</label>
-                            <input type="text" class="form-control @error('nama_sekolah') is-invalid @enderror"
+                            <input type="text" value="{{ old('nama_sekolah', $setting->nama_sekolah) }}" class="form-control @error('nama_sekolah') is-invalid @enderror"
                                 name="nama_sekolah" placeholder="Masukkan nama sekolah">
                             @error('nama_sekolah')
                             <span class="invalid-feedback">{{ $message }}</span>
@@ -19,7 +19,7 @@
                     <div class="col-md-6">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Nama Perpustakaan</label>
-                            <input type="text" class="form-control @error('nama_perpustakaan') is-invalid @enderror"
+                            <input type="text" value="{{ old('nama_perpustakaan', $setting->nama_perpustakaan) }}" class="form-control @error('nama_perpustakaan') is-invalid @enderror"
                                 name="nama_perpustakaan" placeholder="Masukkan nama perpustakaan">
                             @error('nama_perpustakaan')
                             <span class="invalid-feedback">{{ $message }}</span>
@@ -29,7 +29,7 @@
                     <div class="col-md-4">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Email</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
+                            <input type="email" value="{{ old('email', $setting->email) }} " class="form-control @error('email') is-invalid @enderror" name="email"
                                 placeholder="Masukkan email perpustakaan">
                             @error('email')
                             <span class="invalid-feedback">{{ $message }}</span>
@@ -39,7 +39,7 @@
                     <div class="col-md-4">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Telepon</label>
-                            <input type="text" class="form-control @error('telepon') is-invalid @enderror"
+                            <input type="text" value="{{ old('telepon', $setting->telepon) }} " class="form-control @error('telepon') is-invalid @enderror"
                                 name="telepon" placeholder="Masukkan telepon perpustakaan">
                             @error('telepon')
                             <span class="invalid-feedback">{{ $message }}</span>
@@ -49,7 +49,7 @@
                     <div class="col-md-4">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Keyword</label>
-                            <input type="text" class="form-control @error('keyword') is-invalid @enderror"
+                            <input type="text" value="{{ old('keyword', $setting->keyword) }} " class="form-control @error('keyword') is-invalid @enderror"
                                 name="keyword" placeholder="Masukkan keyword perpustakaan">
                             @error('keyword')
                             <span class="invalid-feedback">{{ $message }}</span>
@@ -59,7 +59,7 @@
                     <div class="col-md-4">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Website</label>
-                            <input type="text" class="form-control @error('website') is-invalid @enderror"
+                            <input type="text" value="{{ old('website', $setting->website) }} " class="form-control @error('website') is-invalid @enderror"
                                 name="website" placeholder="Masukkan website perpustakaan">
                             @error('website')
                             <span class="invalid-feedback">{{ $message }}</span>
@@ -69,7 +69,7 @@
                     <div class="col-md-4">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Jam Buka</label>
-                            <input type="time" class="form-control @error('jam_buka') is-invalid @enderror"
+                            <input type="time" value="{{ old('jam_buka', $setting->jam_buka) }}" class="form-control @error('jam_buka') is-invalid @enderror"
                                 name="jam_buka" placeholder="Masukkan jam buka perpustakaan">
                             @error('jam_buka')
                             <span class="invalid-feedback">{{ $message }}</span>
@@ -79,7 +79,7 @@
                     <div class="col-md-4">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Jam Tutup</label>
-                            <input type="time" class="form-control @error('jam_tutup') is-invalid @enderror"
+                            <input type="time" value="{{ old('jam_tutup', $setting->jam_tutup) }}" class="form-control @error('jam_tutup') is-invalid @enderror"
                                 name="jam_tutup" placeholder="Masukkan jam tutup perpustakaan">
                             @error('jam_tutup')
                             <span class="invalid-feedback">{{ $message }}</span>
@@ -89,7 +89,7 @@
                     <div class="col-md-4">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Hari Libur</label>
-                            <input type="text" class="form-control @error('hari_libur') is-invalid @enderror"
+                            <input type="text" value="{{ old('hari_libur', $setting->hari_libur) }} " class="form-control @error('hari_libur') is-invalid @enderror"
                                 name="hari_libur" placeholder="Masukkan hari libur perpustakaan">
                             @error('hari_libur')
                             <span class="invalid-feedback">{{ $message }}</span>
@@ -100,7 +100,7 @@
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Deskripsi</label>
                             <textarea cols="5" rows="5" class="form-control @error('deskripsi') is-invalid @enderror"
-                                name="deskripsi" placeholder="Masukkan deskripsi perpustakaan"></textarea>
+                                name="deskripsi" placeholder="Masukkan deskripsi perpustakaan">{{ old('deskripsi', $setting->deskripsi) }}</textarea>
                             @error('deskripsi')
                             <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -110,7 +110,7 @@
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Alamat</label>
                             <textarea cols="5" rows="5" class="form-control @error('alamat') is-invalid @enderror"
-                                name="alamat" placeholder="Masukkan alamat perpustakaan"></textarea>
+                                name="alamat" placeholder="Masukkan alamat perpustakaan">{{ old('alamat', $setting->alamat) }}</textarea>
                             @error('alamat')
                             <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -121,7 +121,7 @@
                             <div class="col-md-4">
                                 <label class="form-label">Favicon</label>
                                 <div class="d-flex justify-content-center">
-                                    <img src="/assets/app/{{ $data->favicon ?? 'img_not_found.svg' }}" class="w-25"
+                                    <img src="{{ $setting->favicon ? '/img/'.$setting->favicon :'/assets/app/img_not_found.svg' }}" class="w-25"
                                         id="preview-favicon">
                                 </div>
                                 <div class="my-3">
@@ -136,7 +136,7 @@
                             <div class="col-md-4">
                                 <label class="form-label">Logo Sekolah</label>
                                 <div class="d-flex justify-content-center">
-                                    <img src="/assets/app/{{ $data->logo_sekolah ?? 'img_not_found.svg' }}" class="w-25"
+                                    <img src="{{ $setting->logo_sekolah ? '/img/'.$setting->logo_sekolah :'/assets/app/img_not_found.svg' }}" class="w-25"
                                         id="preview-logo_sekolah">
                                 </div>
                                 <div class="my-3">
@@ -151,7 +151,7 @@
                             <div class="col-md-4">
                                 <label class="form-label">Logo Perpustakaan</label>
                                 <div class="d-flex justify-content-center">
-                                    <img src="/assets/app/{{ $data->logo_perpus ?? 'img_not_found.svg' }}" class="w-25"
+                                    <img src="{{ $setting->logo_perpus ? '/img/'.$setting->logo_perpus :'/assets/app/img_not_found.svg' }}" class="w-25"
                                         id="preview-logo_perpus">
                                 </div>
                                 <div class="my-3">
@@ -159,21 +159,6 @@
                                         data-preview="preview-logo_perpus">
                                 </div>
                                 @error('logo_perpus')
-                                <span class="invalid-feedback d-block">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-4">
-                                <label class="form-label">QRIS Perpustakaan</label>
-                                <div class="d-flex justify-content-center">
-                                    <img src="/assets/app/{{ $data->qris_perpus ?? 'img_not_found.svg' }}" class="w-25"
-                                        id="preview-qris_perpus">
-                                </div>
-                                <div class="my-3">
-                                    <input type="file" accept="image/*" id="upload-qris_perpus" name="qris_perpus"
-                                        data-preview="preview-qris_perpus">
-                                </div>
-                                @error('qris_perpus')
                                 <span class="invalid-feedback d-block">{{ $message }}</span>
                                 @enderror
                             </div>
