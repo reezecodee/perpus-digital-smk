@@ -50,6 +50,7 @@ class HandlerLoanConfirmationController extends Controller
         $this->decrementBookStock($placement);
 
         $validatedData['peminjam_id'] = auth()->user()->id;
+        $validatedData['buku_id'] = $book->id;
         Loan::create($validatedData);
 
         $this->log("Melakukan pengajuan peminjaman buku berjudul \"{$book->judul}\"");

@@ -99,7 +99,7 @@ class HandlerBookShelfController extends Controller
 
         $this->log("Menghapus e-book {$loan->book->judul} dari daftar baca");
         $loan->delete();
-        
+
         return back()->withSuccess('Buku berhasil menghapus e-book');
     }
 
@@ -138,5 +138,16 @@ class HandlerBookShelfController extends Controller
 
         $this->log("{$review->borrower->nama} menghapus komentarnya terhadap buku \"{$review->book->judul}\"");
         return back()->withSuccess('Berhasil menghapus komentar buku');
+    }
+
+    public function cancleLoan($id)
+    {
+        $loan = Loan::findOrFail($id);
+
+        $loan->status = 'Dibatalkan';
+        $loan->save();
+        $this->log('Membatalkan peminjaman buku');
+
+        return redirect()->back();
     }
 }

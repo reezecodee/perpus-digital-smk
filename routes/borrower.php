@@ -69,6 +69,7 @@ Route::middleware(['auth', 'role:Siswa', 'status_active', 'verified'])->group(fu
         Route::delete('/hapus-e-book/{id}', 'deleteEbook')->name('delete.eBook');
         Route::post('/kirim-komentar/{id}', 'sendComment')->name('store.comment');
         Route::delete('/hapus-komentar/{id}', 'deleteComment')->name('delete.comment');
+        Route::put('/batalkan-peminjaman/{id}', 'cancleLoan')->name('update.cancleLoan');
     });
 
     Route::withoutMiddleware(['auth', 'role:Peminjam', 'status_active', 'verified'])->group(function () {

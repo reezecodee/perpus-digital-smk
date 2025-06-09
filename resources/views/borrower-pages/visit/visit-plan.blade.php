@@ -67,7 +67,7 @@
                                 Ajukan kunjungan
                             </x-borrower.button.confirm-btn>
                         </div>
-                        <x-borrower.modal.confirm-modal question="Apakah Anda yakin ingin mengajukan permohonan?. Maksimal pengajuan kunjungan adalah 2x sehari"
+                        <x-borrower.modal.confirm-modal question="Apakah Anda yakin ingin mengajukan permohonan?"
                             okbtn="Ya, ajukan" nobtn="Batalkan" modalname="visit-modal" />
                     </form>
                 </div>

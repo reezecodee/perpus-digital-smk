@@ -38,14 +38,14 @@
                             @enderror
                         </div>
                         <div class="flex items-center justify-between px-3 py-2 border-t">
-                            <x-peminjam.button.confirm-btn :nomargin="true"
+                            <x-borrower.button.confirm-btn :nomargin="true"
                                 modaltarget="review-modal-{{ $iteration }}">
                                 Berikan komentar
-                            </x-peminjam.button.confirm-btn>
+                            </x-borrower.button.confirm-btn>
                         </div>
                     </div>
 
-                    <x-peminjam.modal.confirm-modal
+                    <x-borrower.modal.confirm-modal
                         question="Apakah Anda yakin ingin memberikan komentar terhadap buku ini?. Komentar yang dikirimkan tidak dapat di ubah lagi"
                         okbtn="Ya, tentu" nobtn="Batalkan" modalname="review-modal-{{ $iteration }}" />
                 </form>

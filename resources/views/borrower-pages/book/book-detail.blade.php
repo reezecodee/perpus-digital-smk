@@ -17,8 +17,8 @@
                         <h1 class="text-3xl font-bold mb-1">{{ $book->judul }}</h1>
                         <p class="text-sm font-semibold"><i class="fas fa-star text-yellow-300"></i>
                             {{ $averageRating }}
-                            Rating | Tersedia
-                            10</p>
+                            Rating | {{ $book->status }}
+                            {{ $stock }}</p>
                         <div class="mt-5">
                             <div class="grid grid-cols-2">
                                 <p class="text-base font-semibold"><span class="text-red-primary">Author:</span>

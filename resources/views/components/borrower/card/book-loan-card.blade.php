@@ -18,7 +18,8 @@
                 </p>
                 <p><span class="font-bold text-red-primary">Tgl pinjam:</span> {{ $item->peminjaman }}
                 </p>
-                <p><span class="font-bold text-red-primary">Kategori:</span> {{ $item->placement->book->category->nama_kategori }}</p>
+                <p><span class="font-bold text-red-primary">Kategori:</span> {{
+                    $item->placement->book->category->nama_kategori }}</p>
                 <p><span class="font-bold text-red-primary">Kode rak:</span> 131231231</p>
                 <p><span class="font-bold text-red-primary">ISBN:</span> {{ $item->placement->book->isbn }}</p>
                 <p><span class="font-bold text-red-primary">Halaman:</span>
@@ -28,19 +29,30 @@
                     {{ $item->jatuh_tempo }}</p>
             </div>
             <div class="flex justify-between mt-4">
-                <div>
+                <div class="flex">
                     <a href="{{ route('show.detailRent', $item->id) }}">
                         <button
                             class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2.5 font-bold mr-2">Lihat
                             detail</button>
                     </a>
+                    @if($item->status === 'Menunggu persetujuan')
+                    <form action="{{ route('update.cancleLoan', $item->id) }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit"
+                            class="bg-red-primary hover:bg-red-500 rounded-md text-white text-sm p-2.5 font-bold mr-2">Batalkan
+                            pinjaman</button>
+
+                    </form>
+                    @endif
                 </div>
                 <div class="flex justify-end text-center">
                     <div class="text-center">
                         <div class="flex justify-center">
                             <p>{!! barcode($item->placement->book->isbn, 1, 40) !!}</p>
                         </div>
-                        <p class="font-medium font-ibm-plex-mono text-center">ISBN {{ $item->placement->book->isbn }}</p>
+                        <p class="font-medium font-ibm-plex-mono text-center">ISBN {{ $item->placement->book->isbn }}
+                        </p>
                     </div>
                 </div>
             </div>

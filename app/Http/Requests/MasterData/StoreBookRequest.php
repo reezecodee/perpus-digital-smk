@@ -32,7 +32,7 @@ class StoreBookRequest extends FormRequest
             'bahasa' => 'required|max:255',
             'cover_buku' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'e_book_file' => 'nullable|file|mimes:pdf',
-            'sinopsis' => 'required|max:600',
+            'sinopsis' => 'required|max:5000',
             'status' => 'required|in:Tersedia,Tidak tersedia',
             'denda_terlambat' => 'nullable|min:5|max:10',
             'denda_rusak' => 'nullable|min:5|max:10',

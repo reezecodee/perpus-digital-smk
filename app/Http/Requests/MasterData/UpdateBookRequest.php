@@ -32,7 +32,7 @@ class UpdateBookRequest extends FormRequest
             'bahasa' => 'required|max:255',
             'cover_buku' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'e_book_file' => 'nullable|file|mimes:pdf',
-            'sinopsis' => 'required|max:600',
+            'sinopsis' => 'required|max:5000',
             'format' => 'required|in:Fisik,Elektronik',
             'status' => 'required|in:Tersedia,Tidak tersedia',
         ];

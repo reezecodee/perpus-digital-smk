@@ -79,14 +79,14 @@
                             <img src="https://www.svgrepo.com/show/382165/book-shelf-books-education-learning-school-study.svg"
                                 class="w-10" alt="">
                         </x-borrower.button.menu-btn>
-                        <x-borrower.button.menu-btn background="bg-orange-100" menuTitle="Informasi denda"
+                        {{-- <x-borrower.button.menu-btn background="bg-orange-100" menuTitle="Informasi denda"
                             :url="route('show.allBooks')">
                             <img src="https://www.svgrepo.com/show/287711/ticket.svg" class="w-10" alt="">
                         </x-borrower.button.menu-btn>
                         <x-borrower.button.menu-btn background="bg-green-100" menuTitle="FAQ" :url="route('show.allBooks')">
                             <img src="https://www.svgrepo.com/show/475413/information.svg" class="w-10"
                                 alt="">
-                        </x-borrower.button.menu-btn>
+                        </x-borrower.button.menu-btn> --}}
                     </div>
                 </div>
                 <div class="mt-5">

@@ -78,6 +78,6 @@ class BookShelfController extends Controller
 
     private function getReviewsByBorrower($userId)
     {
-        return Review::with('borrower')->where('peminjam_id', $userId)->get();
+        return Review::with('borrower_review')->where('peminjam_id', $userId)->get();
     }
 }

@@ -22,7 +22,7 @@ class LoanObserver
     {
         $placement = Placement::find($loan->penempatan_id); 
 
-        if (in_array($loan->status, ['Sudah dikembalikan', 'Ditolak'])) {
+        if (in_array($loan->status, ['Sudah dikembalikan', 'Ditolak', 'Dibatalkan'])) {
             if ($placement) {
                 $placement->increment('buku_saat_ini', 1);  
             }

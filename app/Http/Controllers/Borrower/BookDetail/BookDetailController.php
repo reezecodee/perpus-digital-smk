@@ -31,6 +31,7 @@ class BookDetailController extends Controller
 
         // Ambil data buku rekomendasi dengan kategori serupa.
         $recommendations = $this->getRecommendWithSameCategory($id, $book);
+        $stock = Placement::where('buku_id', $id)->sum('buku_saat_ini');
 
         $title = "Detail buku {$book->judul}";
 
@@ -43,6 +44,7 @@ class BookDetailController extends Controller
                 'reviews',
                 'averageRating',
                 'isLiked',
+                'stock',
                 'recommendations'
             )
         );
