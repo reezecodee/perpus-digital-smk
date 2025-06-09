@@ -49,7 +49,6 @@
                         <th>Peminjam</th>
                         <th>Tanggal Bayar</th>
                         <th>Status Bayar</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
             </table>
@@ -79,12 +78,6 @@
                     {
                         data: 'status_bayar',
                         name: 'status_bayar'
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false, 
-                        searchable: false
                     },
                 ]
             });

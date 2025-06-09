@@ -8,6 +8,7 @@ use App\Http\Requests\Application\CarouselRequest;
 use App\Models\Application;
 use App\Models\Carousel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 

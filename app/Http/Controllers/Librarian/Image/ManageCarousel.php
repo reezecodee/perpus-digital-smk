@@ -46,6 +46,6 @@ class ManageCarousel extends Controller
         $carousel->delete();
 
         $this->log('Menghapus data gambar carousel');
-        return back()->withSuccess('Carousel berhasil dihapus!');
+        return redirect()->back()->withSuccess('Carousel berhasil dihapus!');
     }
 }
