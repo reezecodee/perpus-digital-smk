@@ -39,7 +39,8 @@ class ReturnController extends Controller
                     });
                 })
                 ->addColumn('action', function ($loan) {
-                    $editUrl = '';
+                    $editUrl = route('edit_peminjaman', $loan->id);
+
 
                     return '
                         <div class="dropdown">

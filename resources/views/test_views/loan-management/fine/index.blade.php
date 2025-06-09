@@ -52,7 +52,6 @@
                         <th>Tgl Pinjam</th>
                         <th>Status</th>
                         <th>Keterangan Denda</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
             </table>
@@ -94,12 +93,6 @@
                     {
                         data: 'keterangan_denda',
                         name: 'keterangan_denda'
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false, 
-                        searchable: false
                     },
                 ]
             });

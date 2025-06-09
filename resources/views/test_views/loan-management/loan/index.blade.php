@@ -106,7 +106,7 @@
         });
     </script>
 
-    <form action="" autocomplete="off" method="post">
+    <form action="{{ route('store_peminjaman') }}" autocomplete="off" method="post">
         @csrf
         <div class="modal modal-blur fade" id="modal-report" tabindex="-1" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -226,7 +226,7 @@
                                         <option value="Ditolak" {{ old('status')=='Ditolak' ? 'selected' : '' }}>
                                             Ditolak</option>
                                     </select>
-                                    @error('jk')
+                                    @error('status')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>

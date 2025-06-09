@@ -23,6 +23,7 @@ class PeminjamRequest extends FormRequest
     {
         return [
             'peminjam_id' => 'required|exists:users,id',
+            'penempatan_id' => 'required|exists:placements,id',
             'buku_id' => 'required|exists:books,id',
             'peminjaman' => 'required|date',
             'pengembalian' => 'required|date|after_or_equal:peminjaman',
@@ -37,6 +38,8 @@ class PeminjamRequest extends FormRequest
         return [
             'peminjam_id.required' => 'Peminjam harus dipilih.',
             'peminjam_id.exists' => 'Peminjam yang dipilih tidak valid.',
+            'penempatan_id.required' => 'Penempatan buku harus dipilih.',
+            'penempatan_id.exists' => 'Penempatan buku yang dipilih tidak valid.',
             'buku_id.required' => 'Buku harus dipilih.',
             'buku_id.exists' => 'Buku yang dipilih tidak valid.',
             'peminjaman.required' => 'Tanggal peminjaman harus diisi.',

@@ -26,26 +26,19 @@ class ManageLoan extends Controller
         return view('test_views.loan-management.loan.index', compact('title', 'name', 'pageTitle', 'type', 'btnName', 'students', 'books', 'placements'));
     }
 
-    public function show_add_peminjaman()
-    {
-        return view('librarian-pages.master-data.loan-management.loan.form', [
-            'title' => 'Tambah Peminjam Buku',
-            'heading' => 'Tambah Peminjam Buku',
-            'borrowers' => User::role('Peminjam')->where('status', 'Aktif')->get(),
-            'books' => Book::where('status', 'Tersedia')->get(),
-            'peminjaman' => null
-        ]);
-    }
-
     public function show_edit_peminjaman($id)
     {
-        return view('librarian-pages.master-data.loan-management.loan.form', [
-            'title' => 'Edit Peminjam Buku',
-            'heading' => 'Edit Peminjam Buku',
-            'borrowers' => User::role('Peminjam')->get(),
-            'books' => Book::where('status', 'Tersedia')->get(),
-            'peminjaman' => Loan::where('id', $id)->first()
-        ]);
+        $title = 'Edit Peminjaman';
+        $name = 'Edit';
+        $pageTitle = 'Edit Peminjaman';
+        $type = '';
+        $btnName = 'Kembali';
+        $loan = Loan::findOrFail($id);
+        $students = User::role('Siswa')->where('status', 'Aktif')->get();
+        $books = Book::where('status', 'Tersedia')->where('format', 'Fisik')->get();
+        $placements = Placement::all();
+
+        return view('test_views.loan-management.loan.edit', compact('title', 'name', 'pageTitle', 'type', 'btnName', 'students', 'books', 'placements', 'loan'));
     }
 
     public function show_detail_peminjaman($id)

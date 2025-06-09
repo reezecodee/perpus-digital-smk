@@ -51,6 +51,7 @@ class HandlerLoanConfirmationController extends Controller
 
         $validatedData['peminjam_id'] = auth()->user()->id;
         $validatedData['buku_id'] = $book->id;
+        $validatedData['kode_peminjaman'] = $this->generate_code();
         Loan::create($validatedData);
 
         $this->log("Melakukan pengajuan peminjaman buku berjudul \"{$book->judul}\"");
@@ -64,6 +65,11 @@ class HandlerLoanConfirmationController extends Controller
         return Placement::where('id', $placementId)
             ->lockForUpdate()
             ->first();
+    }
+
+    private function generate_code()
+    {
+        return str_pad(random_int(0, 9999999999), 10, '0', STR_PAD_LEFT);
     }
 
 
