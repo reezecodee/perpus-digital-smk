@@ -104,8 +104,10 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
         Route::controller(ManageShelf::class)->group(function () {
             Route::get('/rak', 'show_data_rak_buku')->name('data-rak');
             Route::get('/edit-rak/{id}', 'show_edit_shelf')->name('edit_shelf');
+            Route::get('/edit-penempatan/{id}', 'show_edit_placement')->name('edit_placement');
             Route::post('/tambah-rak', 'add_shelf')->name('add_shelf');
-            Route::put('/edit-rak/{id}', 'update_shelf')->name('update_shelf');
+            Route::put('/update-rak/{id}', 'update_shelf')->name('update_shelf');
+            Route::put('/update-penempatan/{id}', 'update_placement')->name('update_placement');
             Route::delete('/hapus-rak/{id}', 'delete_shelf')->name('delete_shelf');
 
             Route::get('/detail-rak/{id}', 'show_detail_shelf')->name('detail_shelf');

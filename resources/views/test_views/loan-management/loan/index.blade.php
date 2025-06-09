@@ -189,6 +189,17 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group mb-2">
+                                    <label for="" class="form-label">Jatuh Tempo</label>
+                                    <input type="date" value="{{ old('jatuh_tempo') }}"
+                                        class="form-control @error('jatuh_tempo') is-invalid @enderror"
+                                        name="jatuh_tempo" placeholder="Masukkan tanggal jatuh_tempo">
+                                    @error('jatuh_tempo')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-2">
                                     <label for="" class="form-label">Keterangan</label>
                                     <textarea cols="5" rows="5"
                                         class="form-control @error('keterangan') is-invalid @enderror" name="keterangan"

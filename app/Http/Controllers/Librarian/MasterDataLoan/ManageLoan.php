@@ -68,7 +68,6 @@ class ManageLoan extends Controller
     {
         $validated_data = $request->validated();
         $validated_data['kode_peminjaman'] = $this->generate_code();
-        $validated_data['status'] = 'Masa pinjam';
         $validated_data['keterangan_denda'] = 'Tidak ada';
 
         $loan = Loan::create($validated_data);

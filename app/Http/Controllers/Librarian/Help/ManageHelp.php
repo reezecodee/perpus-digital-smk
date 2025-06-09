@@ -11,11 +11,6 @@ class ManageHelp extends Controller
 {
     public function show_help()
     {
-        // return view('librarian-pages.help-report.index', [
-        //     'title' => 'Pusat Bantuan',
-        //     'heading' => 'Manajemen Bantuan',
-        //     'helps' => Help::with('user')->latest()->limit(100)->get()
-        // ]);
         $title = 'Manajemen Bantuan';
         $name = 'Overview';
         $pageTitle = 'Manajemen Bantuan';
@@ -26,17 +21,10 @@ class ManageHelp extends Controller
 
     public function show_detail_help($id)
     {
-        // $help = Help::findOrFail($id);
-        // return view('librarian-pages.help-report.detail', [
-        //     'title' => 'Detail Laporan Bantuan',
-        //     'heading' => 'Detail Laporan',
-        //     'data' => $help
-        // ]);
-
         $help = Help::findOrFail($id);
-        $title = 'Detail Bantuan';
+        $title = 'Detail Permintaan Bantuan';
         $name = 'Detail';
-        $pageTitle = 'Detail Bantuan';
+        $pageTitle = 'Detail Permintaan Bantuan';
         $type = 'btn-back';
         $btnName = 'Kembali';
         $url = route('help');

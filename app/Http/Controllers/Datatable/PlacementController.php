@@ -35,7 +35,7 @@ class PlacementController extends Controller
                     });
                 })
                 ->addColumn('action', function ($placement) {
-                    $editUrl = '';
+                    $editUrl = route('edit_placement', $placement->id);
 
                     return '
                         <div class="dropdown">

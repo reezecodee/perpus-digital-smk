@@ -30,7 +30,7 @@ class VisitController extends Controller
                     });
                 })
                 ->addColumn('action', function ($visit) {
-                    $editUrl = '';
+                    $editUrl = route('edit_kunjungan', $visit->id);
 
                     return '
                         <div class="dropdown">

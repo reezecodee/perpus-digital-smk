@@ -25,6 +25,7 @@ class PeminjamRequest extends FormRequest
             'peminjam_id' => 'required|exists:users,id',
             'buku_id' => 'required|exists:books,id',
             'peminjaman' => 'required|date',
+            'pengembalian' => 'required|date|after_or_equal:peminjaman',
             'jatuh_tempo' => 'required|date|after_or_equal:peminjaman',
             'keterangan' => 'nullable|string',
             'status' => 'nullable'
@@ -40,6 +41,9 @@ class PeminjamRequest extends FormRequest
             'buku_id.exists' => 'Buku yang dipilih tidak valid.',
             'peminjaman.required' => 'Tanggal peminjaman harus diisi.',
             'peminjaman.date' => 'Tanggal peminjaman harus berupa tanggal yang valid.',
+            'pengembalian.required' => 'Tanggal pengembalian harus diisi.',
+            'pengembalian.date' => 'Tanggal pengembalian harus berupa tanggal yang valid.',
+            'pengembalian.after_or_equal' => 'Tanggal pengembalian harus setelah atau sama dengan tanggal peminjaman.',
             'jatuh_tempo.required' => 'Tanggal jatuh tempo harus diisi.',
             'jatuh_tempo.date' => 'Tanggal jatuh tempo harus berupa tanggal yang valid.',
             'jatuh_tempo.after_or_equal' => 'Tanggal jatuh tempo harus setelah atau sama dengan tanggal peminjaman.',

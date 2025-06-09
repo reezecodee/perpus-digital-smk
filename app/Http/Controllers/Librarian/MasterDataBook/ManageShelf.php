@@ -103,6 +103,20 @@ class ManageShelf extends Controller
         return view('test_views.book-management.shelf.detail', compact('title', 'name', 'pageTitle', 'type', 'btnName', 'url', 'shelf', 'books'));
     }
 
+    public function show_edit_placement($id)
+    {
+        $placement = Placement::findOrFail($id);
+
+        $title = 'Detail Penempatan Buku';
+        $name = 'Detail';
+        $pageTitle = 'Detail Penempatan Buku';
+        $type = 'btn-back';
+        $btnName = 'Kembali';
+        $url = route('detail_shelf', $placement->shelf->id);
+
+        return view('test_views.book-management.shelf.edit-placement', compact('title', 'name', 'pageTitle', 'type', 'btnName', 'url', 'placement'));
+    }
+
     public function store_placement(PlacementRequest $request, $id)
     {
         $shelf = Shelf::findOrFail($id);
@@ -113,5 +127,28 @@ class ManageShelf extends Controller
 
         $this->log("Menambahkan penempatan buku baru di rak {$shelf->nama_rak}");
         return redirect()->back()->withSuccess('Berhasil menambahkan tempat buku baru di rak.');
+    }
+
+    public function update_placement(Request $request, $id)
+    {
+        $validated_data = $request->validate([
+            'jumlah_buku' => 'required|numeric|min:1',
+            'buku_saat_ini' => 'required|numeric|min:1',
+        ], [
+            'jumlah_buku.required' => 'Jumlah buku wajib diisi.',
+            'jumlah_buku.numeric' => 'Jumlah buku harus berupa angka.',
+            'jumlah_buku.min' => 'Jumlah buku minimal 1.',
+
+            'buku_saat_ini.required' => 'Buku saat ini wajib diisi.',
+            'buku_saat_ini.numeric' => 'Buku saat ini harus berupa angka.',
+            'buku_saat_ini.min' => 'Buku saat ini minimal 1.',
+        ]);
+
+        $placement = Placement::findOrFail($id);
+        $placement->update($validated_data);
+
+        $this->log("Memperbarui data penempatan di rak {$placement->shelf->nama_rak}");
+
+        return redirect()->back()->withSuccess("Berhasil memperbarui data penempatan buku di rak {$placement->shelf->nama_rak}.");
     }
 }
