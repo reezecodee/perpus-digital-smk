@@ -68,7 +68,7 @@
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
                         orderable: false,
-                        searchable: false
+                        searchable: false,
                     },
                     {
                         data: 'nama',
@@ -76,25 +76,25 @@
                     },
                     {
                         data: 'judul',
-                        name: 'judul'
+                        name: 'judul',
                     },
                     {
                         data: 'pesan',
-                        name: 'pesan'
+                        name: 'pesan',
                     },
                     {
                         data: 'tgl_pengiriman',
-                        name: 'tgl_pengiriman'
+                        name: 'tgl_pengiriman',
                     },
                     {
                         data: 'status',
-                        name: 'status'
+                        name: 'status',
                     },
                     {
                         data: 'action',
                         name: 'action',
                         orderable: false, 
-                        searchable: false
+                        searchable: false,
                     },
                 ]
             });

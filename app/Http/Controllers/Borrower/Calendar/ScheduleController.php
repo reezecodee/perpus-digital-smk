@@ -47,8 +47,9 @@ class ScheduleController extends Controller
 
     private function getLibrarySchedules()
     {
+        $currentYear = Carbon::now()->year;
         return Calendar::select('tanggal_mulai', 'tanggal_selesai', 'keterangan', 'warna')
-            ->get()
+            ->whereYear('tanggal_mulai', $currentYear)->get()
             ->map(function ($item) {
                 return [
                     'start' => $item->tanggal_mulai,

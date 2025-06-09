@@ -233,11 +233,11 @@
                                     <a class="dropdown-item" href="{{ route('buat_notifikasi') }}">
                                         Notifikasi
                                     </a>
-                                    @role('Admin')
+                                    {{-- @role('Admin')
                                     <a class="dropdown-item" href="{{ route('kirim_email') }}">
                                         Kirim Email
                                     </a>
-                                    @endrole
+                                    @endrole --}}
                                     <a class="dropdown-item" href="{{ route('atur_kalender') }}">
                                         Kalender Perpustakaan
                                     </a>

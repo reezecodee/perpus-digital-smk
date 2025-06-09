@@ -176,6 +176,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
 
         Route::controller(ManageSchedule::class)->group(function () {
             Route::get('/atur-kalender', 'show_set_calendar')->name('atur_kalender');
+            Route::get('/schedule-events', 'get_schedule')->name('jadwal_kalender');
             Route::post('/tambah-jadwal', 'add_schedule')->name('add_schedule');
             Route::delete('/hapus-jadwal/{id}', 'delete_schedule')->name('delete_schedule');
         });

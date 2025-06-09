@@ -55,7 +55,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function receiver()
     {
-        return $this->hasMany(Notification::class, 'penerima', 'id');
+        return $this->hasMany(Notification::class, 'penerima_id', 'id');
     }
 
     public function liked_book()

@@ -49,4 +49,22 @@ class ManageSchedule extends Controller
         $this->log('Menghapus jadwal di kalender perpustakaan');
         return back()->withSuccess('Berhasil menghapus jadwal');
     }
+
+    public function get_schedule()
+    {
+        $currentYear = Carbon::now()->year;
+        $events = Calendar::whereYear('tanggal_mulai', $currentYear)
+            ->latest()
+            ->get()->map(function ($item) {
+                return [
+                    'start' => $item->tanggal_mulai,
+                    'end' => $item->tanggal_selesai,
+                    'title' => $item->keterangan,
+                    'type' => $item->warna
+                ];
+            })
+            ->toArray();
+
+        return response()->json($events);
+    }
 }

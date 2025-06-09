@@ -14,6 +14,7 @@ use App\Http\Controllers\Datatable\CalendarController;
 use App\Http\Controllers\Datatable\FinePaymentController;
 use App\Http\Controllers\Datatable\CarouselController;
 use App\Http\Controllers\Datatable\PlacementController;
+use App\Http\Controllers\Datatable\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/data/log-activity', LogActivityController::class)->name('datatable.logActivity');
@@ -25,7 +26,7 @@ Route::get('/data/loan', LoanController::class)->name('datatable.loan');
 Route::get('/data/return', ReturnController::class)->name('datatable.return');
 Route::get('/data/fine', FineController::class)->name('datatable.fine');
 Route::get('/data/visit', VisitController::class)->name('datatable.visit');
-Route::get('/data/notification', VisitController::class)->name('datatable.notification');
+Route::get('/data/notification', NotificationController::class)->name('datatable.notification');
 Route::get('/data/help', HelpController::class)->name('datatable.help');
 Route::get('/data/calendar', CalendarController::class)->name('datatable.calendar');
 Route::get('/data/fine-payment', FinePaymentController::class)->name('datatable.finePayment');

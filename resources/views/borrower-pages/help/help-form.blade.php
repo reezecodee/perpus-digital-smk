@@ -61,7 +61,7 @@
                             </div>
                         </div>
                         <x-borrower.modal.confirm-modal
-                            question="Apakah Anda yakin ingin mengirimkan laporan ini?. Maksimal pengiriman laporan adalah 2x dalam sehari."
+                            question="Apakah Anda yakin ingin mengirimkan laporan ini?."
                             okbtn="Ya, kirimkan" nobtn="Batalkan" modalname="report-modal" />
                     </form>
                 </div>
