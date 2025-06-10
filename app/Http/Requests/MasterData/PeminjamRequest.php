@@ -28,7 +28,7 @@ class PeminjamRequest extends FormRequest
             'peminjaman' => 'required|date',
             'pengembalian' => 'required|date|after_or_equal:peminjaman',
             'jatuh_tempo' => 'required|date|after_or_equal:peminjaman',
-            'keterangan' => 'nullable|string',
+            'keterangan_denda' => 'nullable|string',
             'status' => 'nullable'
         ];
     }
@@ -50,7 +50,7 @@ class PeminjamRequest extends FormRequest
             'jatuh_tempo.required' => 'Tanggal jatuh tempo harus diisi.',
             'jatuh_tempo.date' => 'Tanggal jatuh tempo harus berupa tanggal yang valid.',
             'jatuh_tempo.after_or_equal' => 'Tanggal jatuh tempo harus setelah atau sama dengan tanggal peminjaman.',
-            'keterangan.string' => 'Keterangan harus berupa teks.',
+            'keterangan_denda.string' => 'Keterangan harus berupa teks.',
         ];
     }
 }
