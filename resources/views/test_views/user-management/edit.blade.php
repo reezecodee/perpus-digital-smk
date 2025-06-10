@@ -44,8 +44,9 @@
                     <div class="col-md-6">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Telepon</label>
-                            <input type="text" value="{{ old('telepon', $user->telepon) }}" class="form-control @error('telepon') is-invalid @enderror"
-                                name="telepon" placeholder="Masukkan telepon">
+                            <input type="text" value="{{ old('telepon', $user->telepon) }}"
+                                class="form-control @error('telepon') is-invalid @enderror" name="telepon"
+                                placeholder="Masukkan telepon">
                             @error('telepon')
                             <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -54,23 +55,27 @@
                     <div class="col-md-6">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Email</label>
-                            <input type="email" value="{{ old('email', $user->email) }}" class="form-control @error('email') is-invalid @enderror" name="email"
+                            <input type="email" value="{{ old('email', $user->email) }}"
+                                class="form-control @error('email') is-invalid @enderror" name="email"
                                 placeholder="Masukkan email">
                             @error('email')
                             <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
+                    @if($role == 'Siswa')
                     <div class="col-md-6">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">NISN</label>
-                            <input type="text" value="{{ old('nisn', $user->nisn) }}" class="form-control @error('nisn') is-invalid @enderror" name="nisn"
+                            <input type="text" value="{{ old('nisn', $user->nisn) }}"
+                                class="form-control @error('nisn') is-invalid @enderror" name="nisn"
                                 placeholder="Masukkan NISN">
                             @error('nisn')
                             <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
+                    @endif
                     <div class="col-md-6">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Jenis Kelamin</label>
@@ -93,7 +98,8 @@
                                 <option value="">-- Pilih Status --</option>
                                 <option value="Aktif" {{ old('status', $user->status) == 'Aktif' ? 'selected' : '' }}>
                                     Aktif</option>
-                                <option value="Nonaktif" {{ old('status', $user->status) == 'Nonaktif' ? 'selected' : '' }}>
+                                <option value="Nonaktif" {{ old('status', $user->status) == 'Nonaktif' ? 'selected' : ''
+                                    }}>
                                     Nonaktif</option>
                             </select>
                             @error('jk')
@@ -105,7 +111,8 @@
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Alamat</label>
                             <textarea cols="5" rows="5" class="form-control @error('alamat') is-invalid @enderror"
-                                name="alamat" placeholder="Masukkan alamat perpustakaan">{{ old('alamat', $user->alamat) }}</textarea>
+                                name="alamat"
+                                placeholder="Masukkan alamat perpustakaan">{{ old('alamat', $user->alamat) }}</textarea>
                             @error('alamat')
                             <span class="invalid-feedback">{{ $message }}</span>
                             @enderror

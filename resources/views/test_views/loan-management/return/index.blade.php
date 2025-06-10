@@ -50,7 +50,6 @@
                         <th>Peminjam</th>
                         <th>Judul Buku</th>
                         <th>Status</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
             </table>
@@ -84,12 +83,6 @@
                     {
                         data: 'status',
                         name: 'status'
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false, 
-                        searchable: false
                     },
                 ]
             });

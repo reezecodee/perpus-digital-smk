@@ -23,7 +23,7 @@ class CarouselController extends Controller
             return DataTables::of($carousels)
                 ->addIndexColumn()
                 ->addColumn('carousel', function ($carousel) {
-                    return '<img src="/storage/img/carousel/' . $carousel->carousel_file . '" width=70 />';
+                    return '<img src="/storage/img/carousel/' . $carousel->carousel_file . '" width="200" />';
                 })
                 ->addColumn('action', function ($carousel) {
                     return '

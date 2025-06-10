@@ -174,6 +174,7 @@
                                     @enderror
                                 </div>
                             </div>
+                            @if($role == 'Siswa')
                             <div class="col-md-6">
                                 <div class="form-group mb-2">
                                     <label for="" class="form-label">NISN</label>
@@ -185,6 +186,7 @@
                                     @enderror
                                 </div>
                             </div>
+                            @endif
                             <div class="col-md-6">
                                 <div class="form-group mb-2">
                                     <label for="" class="form-label">Jenis Kelamin</label>
