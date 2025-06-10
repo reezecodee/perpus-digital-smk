@@ -3,8 +3,8 @@
         <div class="flex justify-between items-center py-3 px-2 lg:px-7">
             <div class="flex gap-5 items-center">
                 <a href="@auth {{ route('show.homepage') }} @else / @endauth" class="hidden lg:inline">
-                    {{-- <img src="{{ $app->logo_perpus ? '/img/'.$app->logo_perpus : '' }}" width="180" alt="" srcset=""> --}}
-                    <img src="{{ $app->logo_perpus ? '/img/'.$app->logo_perpus : '' }}" width="60" alt="" srcset="">
+                    <img src="{{ $app->logo_perpus ? '/img/'.$app->logo_perpus : '' }}" width="180" alt="" srcset="">
+                    {{-- <img src="{{ $app->logo_perpus ? '/img/'.$app->logo_perpus : '' }}" width="60" alt="" srcset=""> --}}
                 </a>
                 <form action="{{ route('show.searchResult') }}" method="get" class="relative">
                     @csrf

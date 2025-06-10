@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title }} - {{ $app->nama_perpustakaan ?? 'Perpustakaan Digital' }}</title>
-    <link rel="shortcut icon" href="{{ $app->favicon ? '/img/'.$app->favicon : '' }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ $app->favicon ?? null ? '/img/'.$app->favicon : '' }}" type="image/x-icon">
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

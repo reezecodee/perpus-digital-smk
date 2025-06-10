@@ -69,7 +69,7 @@ class LogicUserController extends Controller
 
         $role_name = strtolower($role);
         $this->log("Mendaftarkan {$role_name} baru bernama {$user->nama}");
-        return redirect()->route('data-user', $role_name)->withSuccess('Berhasil menambahkan admin baru');
+        return redirect()->route('data-user', $role_name)->withSuccess("Berhasil menambahkan {$role_name} baru");
     }
 
     public function update_user(UpdateUserRequest $request, $id)
@@ -99,7 +99,7 @@ class LogicUserController extends Controller
 
         $role_name = $user->roles->first()->name;
 
-        if($user->id == auth()->user()->id){
+        if ($user->id == auth()->user()->id) {
             $this->log('Memperbarui profile-nya');
             return back()->withSuccess('Berhasil memperbarui profil');
         }

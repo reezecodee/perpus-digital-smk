@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>{{ $title }} - {{ $app->nama_perpustakaan ?? 'Perpustakaan Digital' }}</title>
-  <link rel="shortcut icon" href="{{ $app->favicon ? '/img/'.$app->favicon : '' }}" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ $app->favicon ?? null ? '/img/'.$app->favicon : '' }}" type="image/x-icon">
   <link rel="shortcut icon" href="/images/" type="image/x-icon">
   <link href="{{ asset('librarian/css/tabler.min.css?1684106062') }}" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" rel="stylesheet">

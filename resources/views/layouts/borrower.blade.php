@@ -7,7 +7,7 @@
     <meta name="_token" content="{{ csrf_token() }}">
     <meta name="url" content="{{ request()->path() }}">
     <title>{{ $title }} - {{ $app->nama_perpustakaan ?? 'Perpustakaan Digital' }}</title>
-    <link rel="shortcut icon" href="{{ $app->favicon ? '/img/'.$app->favicon : '' }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ $app->favicon ?? null ? '/img/'.$app->favicon : '' }}" type="image/x-icon">
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
