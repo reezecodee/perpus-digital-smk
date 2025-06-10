@@ -41,7 +41,7 @@ class CategorySeeder extends Seeder
             ],
             [
                 'id' => Str::uuid(),
-                'nama_kategori' => 'Romance'
+                'nama_kategori' => 'Bisnis'
             ],
             [
                 'id' => Str::uuid(),

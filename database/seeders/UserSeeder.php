@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'id' => Str::uuid(),
             'username' => 'elfira205',
             'nip_nis' => '19230825',
-            'nisn' => '23432432423',
+            'nisn' => null,
             'nama' => 'Karina Elfira',
             'email' => 'elfira@elfira.com',
             'telepon' => '081298897305',
@@ -28,11 +28,11 @@ class UserSeeder extends Seeder
         ]);
         $admin->assignRole('Admin');
 
-        $pustakawanWithoutPermission = User::create([
+        $pustakawan = User::create([
             'id' => Str::uuid(),
             'username' => 'Harits25',
             'nip_nis' => '19230827',
-            'nisn' => '23432432424',
+            'nisn' => null,
             'nama' => 'Atyla Azfa Al Harits',
             'email' => 'harits@harits.com',
             'telepon' => '081298897307',
@@ -41,13 +41,13 @@ class UserSeeder extends Seeder
             'status' => 'Aktif',
             'alamat' => 'Jl Raya Banjar - Sidaharja, Tambakreja, Lakbok, Ciamis, Jawa barat. 46385'
         ]);
-        $pustakawanWithoutPermission->assignRole('Pustakawan');
+        $pustakawan->assignRole('Pustakawan');
 
-        $pustakawanWithPermission = User::create([
+        $pustakawan = User::create([
             'id' => Str::uuid(),
             'username' => 'Reeze',
             'nip_nis' => '19230763',
-            'nisn' => '832487324222',
+            'nisn' => null,
             'nama' => 'Atyla Azfa Al Harits',
             'email' => 'reeze@reeze.com',
             'telepon' => '081298896969',
@@ -57,7 +57,7 @@ class UserSeeder extends Seeder
             'alamat' => 'Jl Raya Banjar - Sidaharja, Tambakreja, Lakbok, Ciamis, Jawa barat. 46385'
         ]);
 
-        $pustakawanWithPermission->assignRole('Pustakawan');
+        $pustakawan->assignRole('Pustakawan');
 
         $siswa = User::create([
             'id' => Str::uuid(),
