@@ -11,7 +11,7 @@ use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
-    public function show_dashboard()
+    public function showDashboard()
     {
         $title = 'Dashboard';
         $name = 'Overview';
