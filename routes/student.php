@@ -1,30 +1,30 @@
 <?php
 
-use App\Http\Controllers\Borrower\AllBooks\AllBooksController;
-use App\Http\Controllers\Borrower\BookDetail\BookDetailController;
-use App\Http\Controllers\Borrower\BookDetail\HandlerBookDetailController;
-use App\Http\Controllers\Borrower\BookLiked\BookLikedListController;
-use App\Http\Controllers\Borrower\BookShelf\BookShelfController;
-use App\Http\Controllers\Borrower\BookShelf\HandlerBookShelfController;
-use App\Http\Controllers\Borrower\Calendar\HandlerScheduleController;
-use App\Http\Controllers\Borrower\Calendar\ScheduleController;
-use App\Http\Controllers\Borrower\Category\CategoryController;
-use App\Http\Controllers\Borrower\DetailRent\DetailRentController;
-use App\Http\Controllers\Borrower\Help\HandlerReportProblemController;
-use App\Http\Controllers\Borrower\Help\ReportProblemController;
-use App\Http\Controllers\Borrower\Homepage\HomepageController;
-use App\Http\Controllers\Borrower\LoanConfirmation\HandlerLoanConfirmationController;
-use App\Http\Controllers\Borrower\LoanConfirmation\LoanConfirmationController;
-use App\Http\Controllers\Borrower\Notification\NotificationListController;
-use App\Http\Controllers\Borrower\Payment\FinePaymentController;
-use App\Http\Controllers\Borrower\Payment\HandlerFinePaymentController;
-use App\Http\Controllers\Borrower\Profile\HandlerProfileBorrowerController;
-use App\Http\Controllers\Borrower\Profile\ProfileBorrowerController;
-use App\Http\Controllers\Borrower\ReadEbook\ReadEbookController;
-use App\Http\Controllers\Borrower\SearchResult\SearchResultController;
-use App\Http\Controllers\Borrower\Shelf\ShelfController;
-use App\Http\Controllers\Borrower\Visit\HandlerVisitPlanController;
-use App\Http\Controllers\Borrower\Visit\VisitPlanController;
+use App\Http\Controllers\Student\AllBooks\AllBooksController;
+use App\Http\Controllers\Student\BookDetail\BookDetailController;
+use App\Http\Controllers\Student\BookDetail\HandlerBookDetailController;
+use App\Http\Controllers\Student\BookLiked\BookLikedListController;
+use App\Http\Controllers\Student\BookShelf\BookShelfController;
+use App\Http\Controllers\Student\BookShelf\HandlerBookShelfController;
+use App\Http\Controllers\Student\Calendar\HandlerScheduleController;
+use App\Http\Controllers\Student\Calendar\ScheduleController;
+use App\Http\Controllers\Student\Category\CategoryController;
+use App\Http\Controllers\Student\DetailRent\DetailRentController;
+use App\Http\Controllers\Student\Help\HandlerReportProblemController;
+use App\Http\Controllers\Student\Help\ReportProblemController;
+use App\Http\Controllers\Student\Homepage\HomepageController;
+use App\Http\Controllers\Student\LoanConfirmation\HandlerLoanConfirmationController;
+use App\Http\Controllers\Student\LoanConfirmation\LoanConfirmationController;
+use App\Http\Controllers\Student\Notification\NotificationListController;
+use App\Http\Controllers\Student\Payment\FinePaymentController;
+use App\Http\Controllers\Student\Payment\HandlerFinePaymentController;
+use App\Http\Controllers\Student\Profile\HandlerProfileBorrowerController;
+use App\Http\Controllers\Student\Profile\ProfileBorrowerController;
+use App\Http\Controllers\Student\ReadEbook\ReadEbookController;
+use App\Http\Controllers\Student\SearchResult\SearchResultController;
+use App\Http\Controllers\Student\Shelf\ShelfController;
+use App\Http\Controllers\Student\Visit\HandlerVisitPlanController;
+use App\Http\Controllers\Student\Visit\VisitPlanController;
 use Illuminate\Support\Facades\Route;
 
 /*

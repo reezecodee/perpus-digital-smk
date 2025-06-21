@@ -1,25 +1,25 @@
 <?php
 
 use App\Http\Controllers\Excel\ExcelController;
-use App\Http\Controllers\Librarian\DashboardController;
-use App\Http\Controllers\Librarian\Help\ManageHelp;
-use App\Http\Controllers\Librarian\Image\ManageCarousel;
-use App\Http\Controllers\Librarian\Information\ManageNotification;
-use App\Http\Controllers\Librarian\Information\ManageSchedule;
-use App\Http\Controllers\Librarian\Information\ManageSendEmail;
-use App\Http\Controllers\Librarian\Log\ManageLogActivity;
-use App\Http\Controllers\Librarian\MasterDataBook\ManageBook;
-use App\Http\Controllers\Librarian\MasterDataBook\ManageCategory;
-use App\Http\Controllers\Librarian\MasterDataBook\ManageFineBook;
-use App\Http\Controllers\Librarian\MasterDataBook\ManageShelf;
-use App\Http\Controllers\Librarian\MasterDataLoan\ManageLoan;
-use App\Http\Controllers\Librarian\MasterDataLoan\ManageLoanFined;
-use App\Http\Controllers\Librarian\MasterDataLoan\ManageLoanReturned;
-use App\Http\Controllers\Librarian\MasterDataLoan\ManageVisitor;
-use App\Http\Controllers\Librarian\MasterDataUsers\LogicUserController;
-use App\Http\Controllers\Librarian\MasterDataUsers\UserController;
-use App\Http\Controllers\Librarian\Profile\ManageProfile;
-use App\Http\Controllers\Librarian\Setting\SettingController;
+use App\Http\Controllers\Officer\DashboardController;
+use App\Http\Controllers\Officer\Help\ManageHelp;
+use App\Http\Controllers\Officer\Image\ManageCarousel;
+use App\Http\Controllers\Officer\Information\ManageNotification;
+use App\Http\Controllers\Officer\Information\ManageSchedule;
+use App\Http\Controllers\Officer\Information\ManageSendEmail;
+use App\Http\Controllers\Officer\Log\ManageLogActivity;
+use App\Http\Controllers\Officer\MasterDataBook\ManageBook;
+use App\Http\Controllers\Officer\MasterDataBook\ManageCategory;
+use App\Http\Controllers\Officer\MasterDataBook\ManageFineBook;
+use App\Http\Controllers\Officer\MasterDataBook\ManageShelf;
+use App\Http\Controllers\Officer\MasterDataLoan\ManageLoan;
+use App\Http\Controllers\Officer\MasterDataLoan\ManageLoanFined;
+use App\Http\Controllers\Officer\MasterDataLoan\ManageLoanReturned;
+use App\Http\Controllers\Officer\MasterDataLoan\ManageVisitor;
+use App\Http\Controllers\Officer\MasterDataUsers\LogicUserController;
+use App\Http\Controllers\Officer\MasterDataUsers\UserController;
+use App\Http\Controllers\Officer\Profile\ManageProfile;
+use App\Http\Controllers\Officer\Setting\SettingController;
 use App\Http\Controllers\PDF\PDFController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,10 +47,6 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
         Route::get('/manajemen-bantuan/detail-bantuan/{id}', 'show_detail_help')->name('detail_help');
         Route::delete('/hapus-bantuan/{id}', 'delete_help')->name('delete_help');
         Route::post('/print-bantuan/{id}', 'print_help_report')->name('print_help_report');
-    });
-
-    Route::controller(ManageLogActivity::class)->group(function () {
-        Route::get('/log-aktivitas', 'show_log')->name('log_activity');
     });
 
     Route::controller(ManageProfile::class)->group(function () {

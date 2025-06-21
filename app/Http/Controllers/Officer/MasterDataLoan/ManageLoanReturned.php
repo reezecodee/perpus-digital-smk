@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Http\Controllers\Officer\MasterDataLoan;
+
+use App\Http\Controllers\Controller;
+
+class ManageLoanReturned extends Controller
+{
+    public function show_data_pengembali()
+    {
+        $title = 'Manajemen Pengembalian';
+        $name = 'Overview';
+        $pageTitle = 'Manajemen Pengembalian';
+
+        return view('officer-pages.loan-management.return.index', compact('title', 'name', 'pageTitle'));
+    }
+}
