@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Auth\HandlerAuthController;
+use App\Http\Controllers\Auth\HandlerLoginController;
+use App\Http\Controllers\Auth\HandlerLogoutController;
+use App\Http\Controllers\Auth\HandlerVerifEmailController;
 use App\Http\Controllers\PasswordReset\HandlerPasswordResetController;
 use App\Http\Controllers\PasswordReset\PasswordResetController;
 use Illuminate\Support\Facades\Route;
@@ -17,20 +19,22 @@ use Illuminate\Support\Facades\Route;
 Route::controller(AuthController::class)->group(function () {
     Route::prefix('auth')->middleware('guest')->group(function () {
         Route::get('/login', 'showLoginPage')->name('show.login');
-        Route::get('/register', 'showRegisterPage')->name('show.register');
     });
 
     Route::get('/email/verify', 'showVerifyNoticePage')->middleware(['auth'])->name('verification.notice');
     Route::get('/not-activated', 'showNotActivatedPage')->name('show.notActivated');
 });
 
+Route::controller(HandlerLoginController::class)->group(function (){
+    Route::post('/login', 'loginHandler')->name('login.process');
+});
 
-Route::controller(HandlerAuthController::class)->group(function () {
-    Route::post('/login', 'authLoginHandler')->name('login.process');
+Route::controller(HandlerVerifEmailController::class)->group(function(){
     Route::post('/email/verification-notification', 'resendVerification')->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
     Route::get('/email/verify/{id}/{hash}', 'verifyUserEmail')->middleware(['auth', 'signed'])->name('verification.verify');
-    Route::post('/logout', 'logout')->name('logout');
 });
+
+Route::post('/logout', HandlerLogoutController::class)->name('logout');
 
 
 /*

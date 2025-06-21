@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Password;
 
 class HandlerPasswordResetController extends Controller
 {
-    /**
-     * Function ini berfungsi sebagai pengiriman link reset password via email.
-     *
-     */
-
     public function sendResetLinkEmail(EmailResetPwRequest $request)
     {
         $email = $request->validated()['email'];
@@ -25,12 +20,6 @@ class HandlerPasswordResetController extends Controller
 
         return back()->withErrors(['email' => __($status)]);
     }
-
-
-    /**
-     * Function ini untuk memroses permintaan reset password.
-     *
-     */
 
     public function resetPassword(Request $request)
     {
@@ -48,10 +37,6 @@ class HandlerPasswordResetController extends Controller
         return $this->handleResetResponse($status);
     }
 
-    /**
-     * Validasi permintaan reset password.
-     */
-
     private function validateResetPasswordRequest(Request $request)
     {
         $request->validate([
@@ -64,11 +49,6 @@ class HandlerPasswordResetController extends Controller
             'password.min' => 'Password minimal berisi 8 karakter'
         ]);
     }
-
-
-    /**
-     * Lakukan redirect terhadap jika proses berhasil atau gagal.
-     */
 
     private function handleResetResponse($status)
     {

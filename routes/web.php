@@ -33,7 +33,7 @@ Route::middleware(['global_var'])->group(function () {
 
     require __DIR__ . '/site.php';
     require __DIR__ . '/auth.php';
-    require __DIR__ . '/borrower.php';
-    require __DIR__ . '/librarian.php';
+    require __DIR__ . '/student.php';
+    require __DIR__ . '/officer.php';
     require __DIR__ . '/datatables.php';
 });

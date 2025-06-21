@@ -19,13 +19,13 @@ class Controller extends BaseController
         Carbon::setLocale('id');
 
         $this->middleware(function ($request, $next) {
-            $this->user = auth()->user(); // Inisialisasi user setelah middleware dijalankan
+            $this->user = auth()->user();
 
             return $next($request);
         });
     }
 
-    protected function log($action)
+    public function log($action)
     {
         $credentials = [
             'user_id' => auth()->user()->id,
