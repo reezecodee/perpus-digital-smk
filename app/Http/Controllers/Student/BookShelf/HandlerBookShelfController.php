@@ -108,6 +108,7 @@ class HandlerBookShelfController extends Controller
         $loan = Loan::findOrFail($id);
 
         $loan->status = 'Dibatalkan';
+        $loan->placement->increment('buku_saat_ini');
         $loan->save();
         $this->log('Membatalkan peminjaman buku');
 
