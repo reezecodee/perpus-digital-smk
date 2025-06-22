@@ -20,7 +20,9 @@ use App\Http\Controllers\Officer\MasterDataLoan\ManageLoanFinedController;
 use App\Http\Controllers\Officer\MasterDataLoan\ManageLoanReturnedController;
 use App\Http\Controllers\Officer\MasterDataUsers\LogicUserController;
 use App\Http\Controllers\Officer\MasterDataUsers\UserController;
+use App\Http\Controllers\Officer\Profile\HandlerProfileController;
 use App\Http\Controllers\Officer\Profile\ManageProfileController;
+use App\Http\Controllers\Officer\Setting\HandlerSettingController;
 use App\Http\Controllers\Officer\Setting\SettingController;
 use App\Http\Controllers\Officer\Shelf\HandlerPlacementController;
 use App\Http\Controllers\Officer\Shelf\HandlerShelfController;
@@ -53,6 +55,9 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
 
     Route::controller(ManageProfileController::class)->group(function () {
         Route::get('/profile-petugas', 'showProfile')->name('profile.overview');
+    });
+
+    Route::controller(HandlerProfileController::class)->group(function () {
         Route::put('/update-profile-petugas', 'updateProfile')->name('profile.update_profile');
         Route::put('/ganti-pw-petugas', 'updatePassword')->name('profile.update_pw_petugas');
     });
@@ -166,9 +171,13 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
     });
 
     Route::prefix('pengaturan')->controller(SettingController::class)->group(function () {
-        Route::get('/pengaturan-aplikasi', 'index')->name('setting');
+        Route::get('/pengaturan-aplikasi', 'showSetting')->name('setting');
+    });
+
+    Route::controller(HandlerSettingController::class)->group(function () {
         Route::put('/update-pengaturan', 'updateSettingApp')->name('setting.update');
         Route::post('/store-carousel', 'storeCarousel')->name('setting.storeCarousel');
+        Route::delete('/delete-carousel', 'deleteCarousel')->name('delete_carousel');
     });
 
     Route::prefix('informasi')->group(function () {

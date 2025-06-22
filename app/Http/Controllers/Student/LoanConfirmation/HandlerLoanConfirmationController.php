@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Student\LoanConfirmation;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Loan\LoanRequest;
+use App\Http\Requests\Loan\Student\StudentLoanRequest;
 use App\Models\Loan;
 use App\Models\Placement;
 use Illuminate\Support\Facades\DB;
 
 class HandlerLoanConfirmationController extends Controller
 {
-    public function createLoan(LoanRequest $request)
+    public function createLoan(StudentLoanRequest $request)
     {
         $validatedData = $request->validated();
 

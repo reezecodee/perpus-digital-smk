@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Student\Help;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Help\HelpRequest;
+use App\Http\Requests\Help\Student\StudentHelpRequest;
 use App\Models\Help;
 
 class HandlerReportProblemController extends Controller
 {
-    public function sendReport(HelpRequest $request)
+    public function sendReport(StudentHelpRequest $request)
     {
         $validatedData = $request->validated();
         $user = auth()->user();

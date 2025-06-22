@@ -22,11 +22,7 @@
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Nama Lengkap</label>
                             <input type="text" value="{{ old('nama', auth()->user()->nama) }}"
-                                class="form-control @error('nama') is-invalid @enderror" name="nama"
-                                placeholder="Masukkan nama">
-                            @error('nama')
-                            <span class="invalid-feedback">{{ $message }}</span>
-                            @enderror
+                                class="form-control" readonly disabled>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -47,22 +43,14 @@
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Telepon</label>
                             <input type="text" value="{{ old('telepon', auth()->user()->telepon) }}"
-                                class="form-control @error('telepon') is-invalid @enderror" name="telepon"
-                                placeholder="Masukkan nomor telepon">
-                            @error('telepon')
-                            <span class="invalid-feedback">{{ $message }}</span>
-                            @enderror
+                                class="form-control" readonly disabled>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Email</label>
                             <input type="email" value="{{ old('email', auth()->user()->email) }}"
-                                class="form-control @error('email') is-invalid @enderror" name="email"
-                                placeholder="Masukkan email">
-                            @error('email')
-                            <span class="invalid-feedback">{{ $message }}</span>
-                            @enderror
+                                class="form-control" readonly disabled>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -75,12 +63,7 @@
                     <div class="col-md-12">
                         <div class="form-group mb-2">
                             <label for="" class="form-label">Alamat</label>
-                            <textarea cols="5" rows="5" class="form-control @error('alamat') is-invalid @enderror"
-                                name="alamat"
-                                placeholder="Masukkan alamat perpustakaan">{{ old('alamat', auth()->user()->alamat) }}</textarea>
-                            @error('alamat')
-                            <span class="invalid-feedback">{{ $message }}</span>
-                            @enderror
+                            <textarea cols="5" rows="5" class="form-control" readonly disabled>{{ old('alamat', auth()->user()->alamat) }}</textarea>
                         </div>
                     </div>
                 </div>

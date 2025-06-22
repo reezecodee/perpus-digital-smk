@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Student\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Global\Profile\UpdateProfileRequest;
 use App\Http\Requests\Profile\StoreImageRequest;
 use App\Http\Requests\Profile\UpdatePasswordRequest;
-use App\Http\Requests\Profile\UpdatePeminjamRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -69,10 +69,11 @@ class HandlerProfileBorrowerController extends Controller
         ];
     }
 
-    public function updateProfile(UpdatePeminjamRequest $request)
+    public function updateProfile(UpdateProfileRequest $request)
     {
         try {
             $updateData = $request->validated();
+            /** @var \App\Models\User $user */
             $user = Auth::user();
 
             $user->fill($updateData);
@@ -94,6 +95,7 @@ class HandlerProfileBorrowerController extends Controller
     {
         $validatedData = $request->validated();
 
+        /** @var \App\Models\User $user */
         $user = auth()->user();
         $user->update([
             'password' => Hash::make($validatedData['new_password']),

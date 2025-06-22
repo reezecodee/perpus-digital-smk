@@ -8,6 +8,7 @@ use App\Http\Requests\Setting\SettingRequest;
 use App\Models\Application;
 use App\Models\Carousel;
 use App\Repositories\Logger\ActivityLogger;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class HandlerSettingController extends Controller
@@ -74,5 +75,20 @@ class HandlerSettingController extends Controller
         $file_carousel->storeAs($folder_path, $file_name);
 
         return $file_name;
+    }
+
+    public function deleteCarousel($id)
+    {
+        $carousel = Carousel::findOrFail($id);
+        $file_path = 'public/img/carousel/' . $carousel->carousel_file;
+
+        if (Storage::exists($file_path)) {
+            Storage::delete($file_path);
+        }
+
+        $carousel->delete();
+
+        $this->log('Menghapus data gambar carousel');
+        return redirect()->back()->withSuccess('Carousel berhasil dihapus!');
     }
 }

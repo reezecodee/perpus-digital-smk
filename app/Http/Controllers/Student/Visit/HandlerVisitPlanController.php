@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Student\Visit;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Visit\AddVisitRequest;
+use App\Http\Requests\Visit\Student\StudentVisitRequest;
 use App\Models\Visit;
 
 class HandlerVisitPlanController extends Controller
 {
-    public function addVisit(AddVisitRequest $request)
+    public function addVisit(StudentVisitRequest $request)
     {
         $data = $request->validated();
         $data['pengunjung_id'] = auth()->user()->id;
