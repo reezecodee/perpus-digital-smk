@@ -27,14 +27,14 @@
                 @method('PUT')
                 <div class="grid grid-cols-2 gap-3 mb-2">
                     <x-borrower.input.basic label="Username" name="username" type="text" :value="old('username', auth()->user()->username)" />
-                    <x-borrower.input.basic label="Nama" name="nama" type="text" :value="old('nama', auth()->user()->nama)" />
-                    <x-borrower.input.basic label="NIS" name="nip_nis" type="number" :value="auth()->user()->nip_nis" :readonly="'readonly'" :disabled="'disabled'" />
-                    <x-borrower.input.basic label="NISN" name="nisn" type="number" :value="auth()->user()->nisn" :readonly="'readonly'" :disabled="'disabled'" />
-                    <x-borrower.input.basic label="Email" name="email" type="email" :value="old('email', auth()->user()->email)" />
-                    <x-borrower.input.basic label="Telepon" name="telepon" type="number" :value="auth()->user()->telepon" />
-                    <x-borrower.input.basic label="Jenis kelamin" name="jk" type="text" :value="auth()->user()->jk" :readonly="'readonly'" :disabled="'disabled'" />
+                    <x-borrower.input.basic label="Nama" type="text" :readonly="'readonly'" :disabled="'disabled'" :value="old('nama', auth()->user()->nama)" />
+                    <x-borrower.input.basic label="NIS" type="number" :value="auth()->user()->nip_nis" :readonly="'readonly'" :disabled="'disabled'" />
+                    <x-borrower.input.basic label="NISN" type="number" :readonly="'readonly'" :disabled="'disabled'" :value="auth()->user()->nisn" :readonly="'readonly'" :disabled="'disabled'" />
+                    <x-borrower.input.basic label="Email" type="email" :readonly="'readonly'" :disabled="'disabled'" :value="old('email', auth()->user()->email)" />
+                    <x-borrower.input.basic label="Telepon" type="number" :readonly="'readonly'" :disabled="'disabled'" :value="auth()->user()->telepon" />
+                    <x-borrower.input.basic label="Jenis kelamin" type="text" :readonly="'readonly'" :disabled="'disabled'" :value="auth()->user()->jk" :readonly="'readonly'" :disabled="'disabled'" />
                 </div>
-                <x-borrower.input.textarea label="Alamat" name="alamat" :value="old('alamat', auth()->user()->alamat)" />
+                <x-borrower.input.textarea label="Alamat" :readonly="'readonly'" :disabled="'disabled'" :value="old('alamat', auth()->user()->alamat)" />
                 <x-borrower.button.confirm-btn modaltarget="profile-modal">
                     Simpan
                     perubahan

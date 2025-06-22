@@ -12,9 +12,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // RolePermissionSeeder::run();
-        // UserSeeder::run();
+        RolePermissionSeeder::run();
+        UserSeeder::run();
         CategorySeeder::run();
-        // BookSeeder::run();
+        BookSeeder::run();
+        CarouselSeeder::run();
+        ShelfSeeder::run();
+        PlacementSeeder::run();
+        ApplicationSeeder::run();
+        FineSeeder::run();
     }
 }

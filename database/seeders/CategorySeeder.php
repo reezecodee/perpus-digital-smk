@@ -17,39 +17,57 @@ class CategorySeeder extends Seeder
         Category::insert([
             [
                 'id' => Str::uuid(),
-                'nama_kategori' => 'Tutorial'
+                'nama_kategori' => 'Tutorial',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'id' => Str::uuid(),
                 'nama_kategori' => 'Slice Of Life',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'id' => Str::uuid(),
-                'nama_kategori' => 'Horor'
+                'nama_kategori' => 'Horor',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'id' => Str::uuid(),
-                'nama_kategori' => 'Sains'
+                'nama_kategori' => 'Sains',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'id' => Str::uuid(),
-                'nama_kategori' => 'Matematika'
+                'nama_kategori' => 'Matematika',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'id' => Str::uuid(),
-                'nama_kategori' => 'Komputer'
+                'nama_kategori' => 'Komputer',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'id' => Str::uuid(),
-                'nama_kategori' => 'Bisnis'
+                'nama_kategori' => 'Bisnis',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'id' => Str::uuid(),
-                'nama_kategori' => 'Buku Paket'
+                'nama_kategori' => 'Buku Paket',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'id' => Str::uuid(),
-                'nama_kategori' => 'Kesenian'
+                'nama_kategori' => 'Kesenian',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
     }

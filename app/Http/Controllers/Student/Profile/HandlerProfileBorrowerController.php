@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Student\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Global\Profile\StoreImageRequest;
+use App\Http\Requests\Global\Profile\UpdatePasswordRequest;
 use App\Http\Requests\Global\Profile\UpdateProfileRequest;
-use App\Http\Requests\Profile\StoreImageRequest;
-use App\Http\Requests\Profile\UpdatePasswordRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
