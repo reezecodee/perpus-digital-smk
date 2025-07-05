@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Calendar;
 use Carbon\Carbon;
 
-class ManageSchedule extends Controller
+class ManageScheduleController extends Controller
 {
     public function showCalendar()
     {

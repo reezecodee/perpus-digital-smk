@@ -53,9 +53,9 @@ class ManageShelfController extends Controller
     {
         $placement = Placement::findOrFail($id);
 
-        $title = 'Detail Penempatan Buku';
-        $name = 'Detail';
-        $pageTitle = 'Detail Penempatan Buku';
+        $title = 'Edit Penempatan Buku';
+        $name = 'Edit';
+        $pageTitle = 'Edit Penempatan Buku';
         $type = 'btn-back';
         $btnName = 'Kembali';
         $url = route('detail_shelf', $placement->shelf->id);

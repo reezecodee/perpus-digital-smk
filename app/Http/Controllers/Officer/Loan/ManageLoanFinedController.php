@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Officer\MasterDataLoan;
+namespace App\Http\Controllers\Officer\Loan;
 
 use App\Http\Controllers\Controller;
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Officer\MasterDataUsers;
+namespace App\Http\Controllers\Officer\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 
 class UserController extends Controller
 {
-    public function show_data_user($role)
+    public function showUser($role)
     {
         $validRoles = ['Admin', 'Pustakawan', 'Siswa'];
         $role = ucfirst($role);
@@ -30,7 +30,7 @@ class UserController extends Controller
         return view('officer-pages.user-management.index', compact('title', 'name', 'pageTitle', 'type', 'btnName', 'role', 'roleLowerCase'));
     }
 
-    public function show_edit_user($role_param, $id)
+    public function showUserEdit($role_param, $id)
     {
         $user = User::findOrFail($id);
         $role = $user->getRoleNames()->implode(', ');
@@ -49,7 +49,7 @@ class UserController extends Controller
         return view('officer-pages.user-management.edit', compact('title', 'name', 'pageTitle', 'type', 'btnName', 'role', 'url', 'user'));
     }
 
-    public function show_detail_user($role_param, $id)
+    public function showDetailUser($role_param, $id)
     {
         $user = User::findOrFail($id);
         $role = $user->getRoleNames()->implode(', ');

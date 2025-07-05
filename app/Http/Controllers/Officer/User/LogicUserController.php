@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Officer\MasterDataUsers;
+namespace App\Http\Controllers\Officer\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MasterData\OfficerUserRequest;

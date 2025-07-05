@@ -23,7 +23,7 @@ class OfficerNotificationRequest extends FormRequest
     {
         return [
             'penerima_id' => 'required|exists:users,id',
-            'judul' => 'required|max:50',
+            'judul' => 'required|max:255',
             'pesan' => 'required',
         ];
     }
@@ -34,7 +34,7 @@ class OfficerNotificationRequest extends FormRequest
             'penerima_id.required' => 'Penerima harus dipilih.',
             'penerima_id.exists' => 'Penerima yang dipilih tidak valid.',
             'judul.required' => 'Judul wajib diisi.',
-            'judul.max' => 'Judul tidak boleh lebih dari 50 karakter.',
+            'judul.max' => 'Judul tidak boleh lebih dari 255 karakter.',
             'pesan.required' => 'Pesan wajib diisi.',
         ];
     }

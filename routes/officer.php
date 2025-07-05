@@ -12,14 +12,14 @@ use App\Http\Controllers\Officer\Information\HandlerNotificationController;
 use App\Http\Controllers\Officer\Information\HandlerScheduleController;
 use App\Http\Controllers\Officer\Information\HandlerSendEmailController;
 use App\Http\Controllers\Officer\Information\ManageNotificationController;
-use App\Http\Controllers\Officer\Information\ManageSchedule;
+use App\Http\Controllers\Officer\Information\ManageScheduleController;
 use App\Http\Controllers\Officer\Information\ManageSendEmailController;
 use App\Http\Controllers\Officer\Loan\HandlerLoanController;
 use App\Http\Controllers\Officer\Loan\ManageLoanController;
-use App\Http\Controllers\Officer\MasterDataLoan\ManageLoanFinedController;
-use App\Http\Controllers\Officer\MasterDataLoan\ManageLoanReturnedController;
-use App\Http\Controllers\Officer\MasterDataUsers\LogicUserController;
-use App\Http\Controllers\Officer\MasterDataUsers\UserController;
+use App\Http\Controllers\Officer\Loan\ManageLoanFinedController;
+use App\Http\Controllers\Officer\Loan\ManageLoanReturnedController;
+use App\Http\Controllers\Officer\User\LogicUserController;
+use App\Http\Controllers\Officer\User\UserController;
 use App\Http\Controllers\Officer\Profile\HandlerProfileController;
 use App\Http\Controllers\Officer\Profile\ManageProfileController;
 use App\Http\Controllers\Officer\Setting\HandlerSettingController;
@@ -199,7 +199,7 @@ Route::middleware(['auth', 'role:Admin|Pustakawan', 'status_active', 'verified']
             Route::post('/kirim-email', 'sendEmail')->name('send_email');
         });
 
-        Route::controller(ManageSchedule::class)->group(function () {
+        Route::controller(ManageScheduleController::class)->group(function () {
             Route::get('/atur-kalender', 'showCalendar')->name('atur_kalender');
             Route::get('/schedule-events', 'getSchedule')->name('jadwal_kalender');
         });
